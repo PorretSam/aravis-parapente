@@ -2,56 +2,111 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Aravis Parapente - Galerie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galerie - Aravis Parapente</title>
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
       background-color: #f5f5f5;
-      margin: 0;
+    }
+
+    header, footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
       padding: 20px;
     }
+
+    h1 {
+      margin: 0;
+    }
+
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 15px;
+      padding: 20px;
     }
+
     .gallery-item {
       position: relative;
       overflow: hidden;
       border-radius: 10px;
       cursor: pointer;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
+
     .gallery-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.4s ease;
       display: block;
+      border-radius: 10px;
     }
+
     .gallery-item:hover img {
       transform: scale(1.1);
     }
   </style>
 </head>
 <body>
-  <h1>Galerie Aravis Parapente</h1>
+  <header>
+    <h1>Galerie Aravis Parapente</h1>
+  </header>
+
   <div class="gallery">
     <div class="gallery-item">
-      <img src="image/aravis-parapente-vol-bapteme.jpg" alt="Vol baptême parapente dans les Aravis" />
+      <img src="image/aravis-parapente-bapteme-clusaz-vertical.jpeg" alt="Baptême Parapente La Clusaz" />
     </div>
     <div class="gallery-item">
-      <img src="image/aravis-parapente-vol-bambin.jpg" alt="Vol bambin parapente dans les Aravis" />
+      <img src="image/aravis-parapente-bapteme-aiguille.jpeg" alt="Baptême Parapente Aiguille" />
     </div>
     <div class="gallery-item">
-      <img src="image/aravis-parapente-flyer2025.jpg" alt="Flyer Aravis Parapente 2025" />
+      <img src="image/aravis-parapente-bapteme-giettaz.jpeg" alt="Baptême Parapente Giettaz" />
     </div>
     <div class="gallery-item">
-      <img src="image/aravis-parapente-vol1.jpg" alt="Photo vol parapente 1 dans les Aravis" />
+      <img src="image/aravis-parapente-bapteme-giettaz-mont-blanc.jpeg" alt="Baptême Parapente Giettaz Mont Blanc" />
     </div>
     <div class="gallery-item">
-      <img src="image/aravis-parapente-vol2.jpg" alt="Photo vol parapente 2 dans les Aravis" />
+      <img src="image/aravis-parapente-bapteme-sensation.jpeg" alt="Baptême Parapente Sensation" />
+    </div>
+    <div class="gallery-item">
+      <img src="image/clusaz-parapente.jpeg" alt="Parapente La Clusaz" />
+    </div>
+    <div class="gallery-item">
+      <img src="image/gonflage-col-des-aravis.jpeg" alt="Gonflage Col des Aravis" />
+    </div>
+    <div class="gallery-item">
+      <img src="image/gonflage-parapente2.jpeg" alt="Gonflage Parapente 2" />
+    </div>
+    <div class="gallery-item">
+      <img src="image/nuage-clusaz-parapente-edited.jpeg" alt="Nuage La Clusaz Parapente" />
+    </div>
+    <div class="gallery-item">
+      <img src="image/parapente-cret-du-merle-aravis-parapente.jpeg" alt="Parapente Crêt du Merle Aravis" />
+    </div>
+    <div class="gallery-item">
+      <img src="image/pente-ecole-2023.jpeg" alt="Pente École 2023" />
+    </div>
+    <div class="gallery-item">
+      <img src="image/parapente-hiver-clusaz-aravis-parapente.jpeg" alt="Parapente Hiver La Clusaz Aravis" />
+    </div>
+    <div class="gallery-item">
+      <img src="image/prestige-parapente-aravis-balme.jpeg" alt="Prestige Parapente Aravis Balme" />
+    </div>
+    <div class="gallery-item">
+      <img src="image/samuel-porret-aravis-parapente-4100.jpeg" alt="Samuel Porret Aravis Parapente" />
+    </div>
+    <div class="gallery-item">
+      <img src="image/julien-wirtz.jpeg" alt="Julien Wirtz" />
     </div>
   </div>
+
+  <footer>
+    <p>© 2025 Aravis Parapente</p>
+  </footer>
 </body>
 </html>
