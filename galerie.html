@@ -34,21 +34,22 @@
       overflow: hidden;
       border-radius: 10px;
       cursor: pointer;
-      background: white;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
-    .gallery-item img {
+    .gallery-item img, .gallery-item video {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.4s ease;
       display: block;
-      border-radius: 10px;
     }
 
-    .gallery-item:hover img {
+    .gallery-item:hover img, .gallery-item:hover video {
       transform: scale(1.1);
+    }
+
+    video {
+      border: none;
     }
   </style>
 </head>
@@ -59,49 +60,25 @@
 
   <div class="gallery">
     <div class="gallery-item">
-      <img src="image/aravis-parapente-bapteme-clusaz-vertical.jpeg" alt="Baptême Parapente La Clusaz" />
+      <img src="image/photo1.jpg" alt="Vol Aravis 1" />
     </div>
     <div class="gallery-item">
-      <img src="image/aravis-parapente-bapteme-aiguille.jpeg" alt="Baptême Parapente Aiguille" />
+      <img src="image/photo2.jpg" alt="Vol Aravis 2" />
     </div>
     <div class="gallery-item">
-      <img src="image/aravis-parapente-bapteme-giettaz.jpeg" alt="Baptême Parapente Giettaz" />
+      <img src="image/photo3.jpg" alt="Vol Aravis 3" />
     </div>
     <div class="gallery-item">
-      <img src="image/aravis-parapente-bapteme-giettaz-mont-blanc.jpeg" alt="Baptême Parapente Giettaz Mont Blanc" />
+      <video controls>
+        <source src="video/vol1.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la lecture de vidéos.
+      </video>
     </div>
     <div class="gallery-item">
-      <img src="image/aravis-parapente-bapteme-sensation.jpeg" alt="Baptême Parapente Sensation" />
-    </div>
-    <div class="gallery-item">
-      <img src="image/clusaz-parapente.jpeg" alt="Parapente La Clusaz" />
-    </div>
-    <div class="gallery-item">
-      <img src="image/gonflage-col-des-aravis.jpeg" alt="Gonflage Col des Aravis" />
-    </div>
-    <div class="gallery-item">
-      <img src="image/gonflage-parapente2.jpeg" alt="Gonflage Parapente 2" />
-    </div>
-    <div class="gallery-item">
-      <img src="image/nuage-clusaz-parapente-edited.jpeg" alt="Nuage La Clusaz Parapente" />
-    </div>
-    <div class="gallery-item">
-      <img src="image/parapente-cret-du-merle-aravis-parapente.jpeg" alt="Parapente Crêt du Merle Aravis" />
-    </div>
-    <div class="gallery-item">
-      <img src="image/pente-ecole-2023.jpeg" alt="Pente École 2023" />
-    </div>
-    <div class="gallery-item">
-      <img src="image/parapente-hiver-clusaz-aravis-parapente.jpeg" alt="Parapente Hiver La Clusaz Aravis" />
-    </div>
-    <div class="gallery-item">
-      <img src="image/prestige-parapente-aravis-balme.jpeg" alt="Prestige Parapente Aravis Balme" />
-    </div>
-    <div class="gallery-item">
-      <img src="image/samuel-porret-aravis-parapente-4100.jpeg" alt="Samuel Porret Aravis Parapente" />
-    </div>
-    <div class="gallery-item">
-      <img src="image/julien-wirtz.jpeg" alt="Julien Wirtz" />
+      <video controls>
+        <source src="video/vol2.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la lecture de vidéos.
+      </video>
     </div>
   </div>
 
