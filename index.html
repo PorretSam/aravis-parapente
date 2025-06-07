@@ -1,115 +1,110 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aravis Parapente - Accueil</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .hero-image {
-      background-image: url('image/aravis-parapente.jpg');
-      height: 400px;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      position: relative;
-      margin-bottom: 30px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aravis Parapente - Accueil</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-    .hero-text {
-      text-align: center;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      font-size: 2em;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
-    }
+        header {
+            position: relative;
+            height: 100vh;
+            background-image: url('image/aravis-parapente.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
 
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      margin-top: 20px;
-      background-color: #007BFF;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-    }
+        nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
 
-    .gallery img {
-      width: 45%;
-      margin: 5px;
-    }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
 
-    nav a {
-      margin: 0 10px;
-    }
-  </style>
+        .hero-text {
+            position: absolute;
+            top: 40%;
+            left: 10%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+        }
+
+        .hero-text h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+
+        .hero-text p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .logo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 120px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.6);
+        }
+
+        main {
+            padding: 40px 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Aravis Parapente</h1>
-    <p></p>
-    <a href="baptemes.html" class="btn">Réserver un vol</a>
-  </header>
+    <header>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="vols.html">Vols / Bon cadeau</a>
+            <a href="galerie.html">Galerie</a>
+        </nav>
 
-  <div class="hero-image">
-    <div class="hero-text">
-      <h2>Volez au cœur des Aravis</h2>
-    </div>
-  </div>
+        <div class="hero-text">
+            <h1>Aravis Parapente</h1>
+            <p>Vivez un vol inoubliable dans les montagnes des Aravis</p>
+        </div>
 
-  <nav>
-    <a href="#a-propos">À propos</a>
-    <a href="#vols">Vols & Tarifs</a>
-    <a href="#galerie">Galerie</a>
-    <a href="#contact">Contact</a>
-  </nav>
+        <img src="image/logo-aravis.jpg" alt="Logo Aravis" class="logo">
+    </header>
 
-  <main class="content">
-    <section id="accueil">
-      <h2>Bienvenue</h2>
-      <p>Vivez l’expérience unique du parapente dans les Aravis !</p>
-      <img src="images/accueil.jpg" alt="Perf" />
-    </section>
+    <main>
+        <section>
+            <h2>Bienvenue chez Aravis Parapente</h2>
+            <p>Des baptêmes en parapente au cœur des Alpes ! Nous proposons différents types de vols pour tous les âges et toutes les envies. Découvrez également nos bons cadeaux et notre galerie.</p>
+        </section>
+    </main>
 
-    <section id="a-propos">
-      <h2>À propos</h2>
-      <p>Aravis Parapente vous propose des vols en biplace encadrés par des moniteurs diplômés. Nous volons principalement dans la région des Aravis, entre La Clusaz et le Grand-Bornand.</p>
-    </section>
-
-    <section id="vols">
-      <h2>Vols & Tarifs</h2>
-      <ul>
-        <li>Vol découverte : 90 €</li>
-        <li>Vol performance : 140 €</li>
-        <li>Vol enfant : 70 €</li>
-      </ul>
-    </section>
-
-    <section id="galerie">
-      <h2>Galerie</h2>
-      <div class="gallery">
-        <img src="images/photo1.jpg" alt="beauregard" />
-        <img src="images/photo2.jpg" alt="Photo parapente 2" />
-      </div>
-    </section>
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <form action="https://formspree.io/f/mexample" method="POST">
-        <label>Nom : <input type="text" name="name" required></label><br>
-        <label>Email : <input type="email" name="email" required></label><br>
-        <label>Message :<br><textarea name="message" required></textarea></label><br>
-        <button type="submit">Envoyer</button>
-      </form>
-      <p>Téléphone : 06 88 07 04 72</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2025 Aravis Parapente – La Clusaz</p>
-  </footer>
+    <footer>
+        © 2025 Aravis Parapente – Tous droits réservés
+    </footer>
 </body>
 </html>
