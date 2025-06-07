@@ -1,25 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aravis Parapente - Accueil</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header class="hero">
-        <h1>Aravis Parapente</h1>
-        <p>Des vols inoubliables au cœur des Aravis</p>
-        <a href="baptemes.html" class="btn">Réserver un vol</a>
-    <!DOCTYPE html>
-<html>
-<head>
   <meta charset="UTF-8">
-  <title>Aravis Parapente</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aravis Parapente - Accueil</title>
+  <link rel="stylesheet" href="style.css">
   <style>
     .hero-image {
-      background-image: url('images/aravis-parapente.jpg');
+      background-image: url('images/aravis-parapente.JPG');
       height: 400px;
       background-position: center;
       background-repeat: no-repeat;
@@ -38,98 +26,90 @@
       font-size: 2em;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
     }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 20px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .gallery img {
+      width: 45%;
+      margin: 5px;
+    }
+
+    nav a {
+      margin: 0 10px;
+    }
   </style>
 </head>
 <body>
-  <h1>Aravis Parapente</h1>
+  <header>
+    <h1>Aravis Parapente</h1>
+    <p>Des vols inoubliables au cœur des Aravis</p>
+    <a href="baptemes.html" class="btn">Réserver un vol</a>
+  </header>
 
   <div class="hero-image">
     <div class="hero-text">
       <h2>Volez au cœur des Aravis</h2>
     </div>
   </div>
-</header>
-    <main class="content">
-        <section class="intro">
-            <h2>Bienvenue !</h2>
-            <p>Découvrez nos différentes formules de baptême de l'air, nos bons cadeaux et notre école de parapente en biplace pour progresser dans les airs.</p>
-        </section>
-        <section class="cards">
-            <a href="baptemes.html" class="card">
-                <h3>Baptêmes Parapente</h3>
-                <p>Vol plaisir, vol bambin, vol sensation...</p>
-            </a>
-            <a href="bons-cadeaux.html" class="card">
-                <h3>Bons Cadeaux</h3>
-                <p>Offrez un vol inoubliable à vos proches.</p>
-            </a>
-            <a href="ecole.html" class="card">
-                <h3>École / Progression</h3>
-                <p>Progressez avec nos moniteurs diplômés en vol biplace pédagogique.</p>
-            </a>
-        </section>
-    </main>
-    <footer>
-        <p>© 2025 Aravis Parapente – La Clusaz</p>
-    </footer>
-</body>
-</html>
-dth=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h1>Aravis Parapente</h1>
-        <nav>
-            <a href="#a-propos">À propos</a>
-            <a href="#vols">Vols & Tarifs</a>
-            <a href="#galerie">Galerie</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
 
+  <nav>
+    <a href="#a-propos">À propos</a>
+    <a href="#vols">Vols & Tarifs</a>
+    <a href="#galerie">Galerie</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main class="content">
     <section id="accueil">
-        <h2>Bienvenue</h2>
-        <p>Vivez l’expérience unique du parapente dans les Aravis !</p>
-        <img src="images/accueil.jpg" alt="Perf" />
+      <h2>Bienvenue</h2>
+      <p>Vivez l’expérience unique du parapente dans les Aravis !</p>
+      <img src="images/accueil.jpg" alt="Perf" />
     </section>
 
     <section id="a-propos">
-        <h2>À propos</h2>
-        <p>Aravis Parapente vous propose des vols en biplace encadrés par des moniteurs diplômés. Nous volons principalement dans la région des Aravis, entre La Clusaz et le Grand-Bornand.</p>
+      <h2>À propos</h2>
+      <p>Aravis Parapente vous propose des vols en biplace encadrés par des moniteurs diplômés. Nous volons principalement dans la région des Aravis, entre La Clusaz et le Grand-Bornand.</p>
     </section>
 
     <section id="vols">
-        <h2>Vols & Tarifs</h2>
-        <ul>
-            <li>Vol découverte : 90 €</li>
-            <li>Vol performance : 140 €</li>
-            <li>Vol enfant : 70 €</li>
-        </ul>
+      <h2>Vols & Tarifs</h2>
+      <ul>
+        <li>Vol découverte : 90 €</li>
+        <li>Vol performance : 140 €</li>
+        <li>Vol enfant : 70 €</li>
+      </ul>
     </section>
 
     <section id="galerie">
-        <h2>Galerie</h2>
-        <p>Photos à venir...</p>
-        <div class="gallery">
-            <img src="images/photo1.jpg" alt="beauregard" />
-            <img src="images/photo2.jpg" alt="Photo parapente 2" />
-        </div>
+      <h2>Galerie</h2>
+      <div class="gallery">
+        <img src="images/photo1.jpg" alt="beauregard" />
+        <img src="images/photo2.jpg" alt="Photo parapente 2" />
+      </div>
     </section>
 
     <section id="contact">
-        <h2>Contact</h2>
-        <form action="https://formspree.io/f/mexample" method="POST">
-            <label>Nom : <input type="text" name="name" required></label><br>
-            <label>Email : <input type="email" name="email" required></label><br>
-            <label>Message :<br><textarea name="message" required></textarea></label><br>
-            <button type="submit">Envoyer</button>
-        </form>
-        <p>Téléphone : 06 88 07 04 72 </p>
+      <h2>Contact</h2>
+      <form action="https://formspree.io/f/mexample" method="POST">
+        <label>Nom : <input type="text" name="name" required></label><br>
+        <label>Email : <input type="email" name="email" required></label><br>
+        <label>Message :<br><textarea name="message" required></textarea></label><br>
+        <button type="submit">Envoyer</button>
+      </form>
+      <p>Téléphone : 06 88 07 04 72</p>
     </section>
+  </main>
 
-    <footer>
-        <p>© 2025 Aravis Parapente</p>
-    </footer>
+  <footer>
+    <p>© 2025 Aravis Parapente – La Clusaz</p>
+  </footer>
 </body>
 </html>
