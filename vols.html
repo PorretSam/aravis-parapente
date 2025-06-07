@@ -1,89 +1,41 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vols et Bons Cadeaux - Aravis Parapente</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0; padding: 0;
-      background: #f9f9f9;
-      color: #333;
-    }
-    header, footer {
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 15px 20px;
-    }
-    h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-    main {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-    .offer {
-      background: white;
-      margin-bottom: 30px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      border-radius: 8px;
-      overflow: hidden;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 20px;
-    }
-    .offer img {
-      width: 100%;
-      max-width: 350px;
-      object-fit: cover;
-      border-radius: 0 8px 8px 0;
-      flex-shrink: 0;
-    }
-    .offer-content {
-      flex: 1;
-      padding: 20px;
-    }
-    .offer-content h2 {
-      margin-top: 0;
-      font-size: 1.5rem;
-      color: #005a9c;
-    }
-    .offer-content p {
-      line-height: 1.5;
-      font-size: 1rem;
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 15px;
-      background-color: #005a9c;
-      color: white;
-      text-decoration: none;
-      padding: 10px 18px;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    .btn:hover {
-      background-color: #004080;
-    }
-    @media (max-width: 600px) {
-      .offer {
-        flex-direction: column;
-      }
-      .offer img {
-        border-radius: 8px 8px 0 0;
-        max-width: 100%;
-      }
-      .offer-content {
-        padding: 15px;
-      }
-    }
-  </style>
-</head>
+<style>
+  /* ... ton CSS existant ... */
+
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+  }
+
+  nav a.btn {
+    display: inline-block;
+    background-color: #005a9c;
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  nav a.btn:hover, nav a.btn:focus {
+    background-color: #004080;
+  }
+</style>
+
+<header>
+  <nav>
+    <a href="index.html" class="btn">Accueil</a>
+    <a href="vols.html" class="btn">Vols / Bon cadeau</a>
+    <a href="galerie.html" class="btn">Galerie</a>
+  </nav>
+  <h1>Galerie Aravis Parapente</h1>
+</header>
+
 <body>
   <header>
     <header>
