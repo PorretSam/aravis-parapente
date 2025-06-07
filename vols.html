@@ -8,25 +8,25 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
+      background-color: #f4f4f4;
       color: #333;
     }
+
     header, footer {
       background-color: #333;
       color: white;
       text-align: center;
       padding: 15px 20px;
     }
-    h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
+
     nav {
       display: flex;
       justify-content: center;
       gap: 15px;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
     }
+
     nav a.btn {
       display: inline-block;
       background-color: #005a9c;
@@ -38,64 +38,92 @@
       font-weight: bold;
       font-size: 1rem;
     }
+
     nav a.btn:hover, nav a.btn:focus {
       background-color: #004080;
     }
+
+    h1 {
+      margin: 10px 0;
+      font-size: 2rem;
+    }
+
     main {
-      max-width: 900px;
-      margin: 0 auto 40px;
+      max-width: 1000px;
+      margin: 0 auto;
       padding: 20px;
     }
+
     section.offer {
       background: white;
       border-radius: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       margin-bottom: 25px;
       display: flex;
-      gap: 20px;
+      flex-wrap: wrap;
       align-items: center;
       padding: 15px;
-      flex-wrap: wrap;
+      gap: 20px;
     }
-    section.offer img {
-      max-width: 180px;
-      width: 100%;
-      border-radius: 10px;
+
+    section.offer a.offer-image {
+      display: block;
       flex-shrink: 0;
+      max-width: 200px;
+      border-radius: 10px;
+      overflow: hidden;
     }
+
+    section.offer a.offer-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    section.offer a.offer-image:hover img {
+      transform: scale(1.05);
+    }
+
     .offer-content {
       flex: 1;
     }
+
     .offer-content h2 {
       margin-top: 0;
       font-size: 1.5rem;
       margin-bottom: 8px;
     }
+
     .offer-content p {
-      margin-top: 0;
-      margin-bottom: 12px;
+      margin: 0 0 10px;
       line-height: 1.4;
     }
+
     .offer-content a.btn {
+      margin-top: 5px;
       display: inline-block;
     }
+
     footer p {
       margin: 0;
       font-size: 0.9rem;
     }
+
     @media (max-width: 600px) {
       section.offer {
         flex-direction: column;
         align-items: flex-start;
       }
-      section.offer img {
+      section.offer a.offer-image {
         max-width: 100%;
-        margin-bottom: 12px;
       }
     }
   </style>
 </head>
 <body>
+
   <header>
     <nav>
       <a href="index.html" class="btn">Accueil</a>
@@ -106,56 +134,71 @@
   </header>
 
   <main>
+    <!-- BAPTÊMES -->
     <section class="offer">
-      <img src="image/aravis-parapente-bapteme-clusaz-vertical.jpg" alt="Vol parapente à La Clusaz. Informations : Pour qui : Enfant et Adultes, Quand : Matin et après midi, Poids : De 20 kg à 110 kg sportif, Dénivelé : 380 M à 750 M, Durée : Environ 15 Min" />
+      <a href="https://aravis-parapente.wixsite.com/aravis-parapente/bapteme-clusaz" target="_blank" class="offer-image">
+        <img src="image/aravis-parapente-bapteme-clusaz-vertical.jpg" alt="Vol parapente à La Clusaz" />
+      </a>
       <div class="offer-content">
         <h2>Baptême Parapente Plaisir 90€</h2>
-        <p>Découvrez les sensations inoubliables d’un vol biplace en parapente au-dessus de la magnifique station de La Clusaz.</p>
+        <p>Découvrez les sensations inoubliables d’un vol biplace au-dessus de La Clusaz.</p>
         <a href="https://aravis-parapente.wixsite.com/aravis-parapente/bapteme-clusaz" target="_blank" class="btn">Voir l'offre</a>
       </div>
     </section>
 
     <section class="offer">
-      <img src="image/aravis-parapente-bapteme-aiguille.jpg" alt="Baptême parapente à l’Aiguille" />
+      <a href="https://aravis-parapente.wixsite.com/aravis-parapente/bapteme-aiguille" target="_blank" class="offer-image">
+        <img src="image/aravis-parapente-bapteme-aiguille.jpg" alt="Baptême parapente à l’Aiguille" />
+      </a>
       <div class="offer-content">
         <h2>Baptême Parapente Aiguille</h2>
-        <p>Offrez-vous un vol découverte au départ de l’Aiguille, avec une vue spectaculaire sur les montagnes des Aravis.</p>
+        <p>Vol découverte au départ de l’Aiguille avec vue sur les Aravis.</p>
         <a href="https://aravis-parapente.wixsite.com/aravis-parapente/bapteme-aiguille" target="_blank" class="btn">Voir l'offre</a>
       </div>
     </section>
 
     <section class="offer">
-      <img src="image/aravis-parapente-bapteme-giettaz.jpg" alt="Baptême parapente Giettaz" />
+      <a href="https://aravis-parapente.wixsite.com/aravis-parapente/bapteme-giettaz" target="_blank" class="offer-image">
+        <img src="image/aravis-parapente-bapteme-giettaz.jpg" alt="Baptême parapente Giettaz" />
+      </a>
       <div class="offer-content">
         <h2>Baptême Parapente Giettaz</h2>
-        <p>Vivez une expérience unique au départ de Giettaz, dans un cadre naturel exceptionnel.</p>
+        <p>Expérience unique au départ de Giettaz, cadre naturel exceptionnel.</p>
         <a href="https://aravis-parapente.wixsite.com/aravis-parapente/bapteme-giettaz" target="_blank" class="btn">Voir l'offre</a>
       </div>
     </section>
 
+    <!-- SENSATIONS & PRESTIGE -->
     <section class="offer">
-      <img src="image/aravis-parapente-bapteme-sensation.jpg" alt="Vol sensation parapente" />
+      <a href="https://aravis-parapente.wixsite.com/aravis-parapente/vol-sensation" target="_blank" class="offer-image">
+        <img src="image/aravis-parapente-bapteme-sensation.jpg" alt="Vol sensation parapente" />
+      </a>
       <div class="offer-content">
         <h2>Vol Sensation</h2>
-        <p>Pour les amateurs de sensations fortes, un vol dynamique qui vous fera vibrer au-dessus des montagnes.</p>
+        <p>Vol dynamique pour amateurs de sensations fortes.</p>
         <a href="https://aravis-parapente.wixsite.com/aravis-parapente/vol-sensation" target="_blank" class="btn">Voir l'offre</a>
       </div>
     </section>
 
     <section class="offer">
-      <img src="image/prestige-parapente-aravis-balme.jpg" alt="Vol prestige parapente" />
+      <a href="https://aravis-parapente.wixsite.com/aravis-parapente/vol-prestige" target="_blank" class="offer-image">
+        <img src="image/prestige-parapente-aravis-balme.jpg" alt="Vol prestige parapente" />
+      </a>
       <div class="offer-content">
         <h2>Vol Prestige</h2>
-        <p>Un vol longue durée avec un panorama exceptionnel, pour une expérience aérienne de prestige.</p>
+        <p>Longue durée, panorama exceptionnel pour une expérience inoubliable.</p>
         <a href="https://aravis-parapente.wixsite.com/aravis-parapente/vol-prestige" target="_blank" class="btn">Voir l'offre</a>
       </div>
     </section>
 
+    <!-- BON CADEAU -->
     <section class="offer">
-      <img src="image/bon-cadeau.jpg" alt="Bon cadeau parapente" />
+      <a href="https://aravis-parapente.wixsite.com/aravis-parapente/bon-cadeau" target="_blank" class="offer-image">
+        <img src="image/bon-cadeau.jpg" alt="Bon cadeau parapente" />
+      </a>
       <div class="offer-content">
         <h2>Bon Cadeau Parapente</h2>
-        <p>Offrez un bon cadeau personnalisé pour un vol en parapente, idéal pour faire plaisir à vos proches.</p>
+        <p>Offrez une expérience de vol inoubliable à vos proches.</p>
         <a href="https://aravis-parapente.wixsite.com/aravis-parapente/bon-cadeau" target="_blank" class="btn">Voir les bons cadeaux</a>
       </div>
     </section>
@@ -164,5 +207,6 @@
   <footer>
     <p>© 2025 Aravis Parapente - Tous droits réservés</p>
   </footer>
+
 </body>
 </html>
