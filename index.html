@@ -68,12 +68,12 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.6);
     }
 
- .sous-image {
-  width: 100%;
-  height: auto; /* garde les proportions, pas de coupe */
-  display: block;
-  margin: 0 auto;
-}
+    .sous-image {
+      width: 100%;
+      height: auto; /* garde les proportions, pas de coupe */
+      display: block;
+      margin: 0 auto;
+    }
 
     main {
       padding: 30px 15px;
@@ -84,6 +84,31 @@
       padding: 20px;
       background: #333;
       color: white;
+    }
+
+    #partenaires {
+      padding: 20px;
+      background: #eee;
+      margin: 40px 0;
+      border-radius: 10px;
+    }
+
+    #partenaires ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    #partenaires ul li {
+      margin-bottom: 8px;
+    }
+
+    #partenaires ul li a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    #partenaires ul li a:hover {
+      text-decoration: underline;
     }
 
     @media (min-width: 768px) {
@@ -120,22 +145,18 @@
       <h2>Bienvenue chez Aravis Parapente</h2>
       <p>Des baptêmes en parapente au cœur des Alpes ! Nous proposons différents types de vols pour tous les âges et toutes les envies. Découvrez également nos bons cadeaux et notre galerie.</p>
     </section>
-  </main>
-<main>
-  <section>
-    <h2>Bienvenue chez Aravis Parapente</h2>
-    <p>Des baptêmes en parapente au cœur des Alpes ! Nous proposons différents types de vols pour tous les âges et toutes les envies. Découvrez également nos bons cadeaux et notre galerie.</p>
-  </section>
 
-  <!-- Bloc partenaires -->
-  <section id="partenaires" style="padding: 20px; background: #eee; margin: 40px 0; border-radius: 10px;">
-    <h2>Nos partenaires</h2>
-    <ul style="list-style: none; padding-left: 0;">
-      <li><a href="https://www.laclusaz.com/" target="_blank" rel="noopener noreferrer">Office de tourisme de La Clusaz</a></li>
-      <li><a href="https://www.ffvl.fr/" target="_blank" rel="noopener noreferrer">Fédération Française de Vol Libre</a></li>
-      <li><a href="https://www.parapente-shop.com/" target="_blank" rel="noopener noreferrer">Parapente Shop</a></li>
-    </ul>
-  </section>
+    <!-- Bloc partenaires -->
+    <section id="partenaires">
+      <h2>Nos partenaires</h2>
+      <ul>
+        <li><a href="https://www.laclusaz.com/" target="_blank" rel="noopener noreferrer">Office de tourisme de La Clusaz</a></li>
+        <li><a href="https://www.ffvl.fr/" target="_blank" rel="noopener noreferrer">Fédération Française de Vol Libre</a></li>
+        <li><a href="https://www.parapente-shop.com/" target="_blank" rel="noopener noreferrer">Parapente Shop</a></li>
+      </ul>
+    </section>
+  </main>
+
   <footer>
     © 2025 Aravis Parapente – Tous droits réservés
   </footer>
