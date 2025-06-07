@@ -1,110 +1,100 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aravis Parapente - Accueil</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aravis Parapente - Accueil</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
 
-        header {
-            position: relative;
-            height: 100vh;
-            background-image: url('image/aravis-parapente.jpg');
-            background-size: cover;
-            background-position: center;
-            color: white;
-        }
+    header {
+      position: relative;
+      height: 50vh; /* Réduit à la moitié de l'écran */
+      background-image: url('image/aravis-parapente.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
 
-        nav {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-        }
+    nav {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-right: 20px;
-            font-weight: bold;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 8px 12px;
-            border-radius: 5px;
-        }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-right: 20px;
+      font-weight: bold;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
 
-        .hero-text {
-            position: absolute;
-            top: 40%;
-            left: 10%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 500px;
-        }
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 10%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+    }
 
-        .hero-text h1 {
-            font-size: 3em;
-            margin: 0;
-        }
+    .hero-text h1 {
+      font-size: 2.5em;
+      margin: 0;
+    }
 
-        .hero-text p {
-            font-size: 1.2em;
-            margin-top: 10px;
-        }
+    .hero-text p {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
 
-        .logo {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 120px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.6);
-        }
+    .logo {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 100px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    }
 
-        main {
-            padding: 40px 20px;
-        }
+    .sous-image {
+      width: 100%;
+      height: 50vh;
+      object-fit: cover;
+      display: block;
+    }
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #333;
-            color: white;
-        }
-    </style>
+    main {
+      padding: 40px 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #333;
+      color: white;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="index.html">Accueil</a>
-            <a href="vols.html">Vols / Bon cadeau</a>
-            <a href="galerie.html">Galerie</a>
-        </nav>
+  <header>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="vols.html">Vols / Bon cadeau</a>
+      <a href="galerie.html">Galerie</a>
+    </nav>
 
-        <div class="hero-text">
-            <h1>Aravis Parapente</h1>
-            <p>Vivez un vol inoubliable dans les montagnes des Aravis</p>
-        </div>
-
-        <img src="image/logo-aravis.pnj" alt="Logo Aravis" class="logo">
-    </header>
-
-    <main>
-        <section>
-            <h2>Bienvenue chez Aravis Parapente</h2>
-            <p>Des baptêmes en parapente au cœur des Alpes ! Nous proposons différents types de vols pour tous les âges et toutes les envies. Découvrez également nos bons cadeaux et notre galerie.</p>
-        </section>
-    </main>
-
-    <footer>
-        © 2025 Aravis Parapente – Tous droits réservés
-    </footer>
-</body>
-</html>
+    <div class="hero-text">
+      <h1>Aravis Parapente</h1>
+      <p>Vivez
