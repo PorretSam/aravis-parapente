@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Aravis Parapente - Accueil</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
     body, html {
       margin: 0;
@@ -18,31 +19,16 @@
       background-size: cover;
       background-position: center;
       color: white;
-    }
-
-    .navbar {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .burger {
-      display: none;
       flex-direction: column;
-      cursor: pointer;
-    }
-
-    .burger div {
-      width: 25px;
-      height: 3px;
-      background: white;
-      margin: 4px;
+      justify-content: space-between;
     }
 
     nav {
       display: flex;
-      gap: 15px;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 20px;
     }
 
     nav a {
@@ -55,12 +41,10 @@
     }
 
     .hero-text {
-      position: absolute;
-      bottom: 80px;
-      left: 20px;
       background-color: rgba(0, 0, 0, 0.5);
       padding: 20px;
       border-radius: 10px;
+      margin: 0 20px 20px 20px;
       max-width: 90%;
     }
 
@@ -103,47 +87,24 @@
       color: white;
     }
 
-    @media (max-width: 768px) {
-      nav {
-        display: none;
-        flex-direction: column;
-        background-color: rgba(0, 0, 0, 0.8);
-        position: absolute;
-        top: 60px;
-        left: 0;
-        right: 0;
-        z-index: 100;
-        padding: 10px;
-      }
-
-      nav.active {
-        display: flex;
-      }
-
-      .burger {
-        display: flex;
-      }
-
+    @media (min-width: 768px) {
       .hero-text {
-        bottom: 120px;
+        max-width: 500px;
+      }
+
+      .logo {
+        width: 100px;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="navbar">
-      <div class="burger" onclick="toggleMenu()">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <nav id="menu">
-        <a href="index.html">Accueil</a>
-        <a href="vols.html">Vols / Bon cadeau</a>
-        <a href="galerie.html">Galerie</a>
-      </nav>
-    </div>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="vols.html">Vols / Bon cadeau</a>
+      <a href="galerie.html">Galerie</a>
+    </nav>
 
     <div class="hero-text">
       <h1>Aravis Parapente</h1>
@@ -165,11 +126,5 @@
   <footer>
     © 2025 Aravis Parapente – Tous droits réservés
   </footer>
-
-  <script>
-    function toggleMenu() {
-      document.getElementById("menu").classList.toggle("active");
-    }
-  </script>
 </body>
 </html>
