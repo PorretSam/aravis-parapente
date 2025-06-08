@@ -2,14 +2,23 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Aravis Parapente - Accueil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Vols Parapente La Clusaz - Baptême et Bons Cadeaux - Aravis Parapente</title>
+  <meta name="description" content="Découvrez les vols en parapente à La Clusaz avec Aravis Parapente. Baptêmes, vols sensations, bons cadeaux et plus, au cœur des Alpes." />
+  <meta name="keywords" content="parapente La Clusaz, baptême parapente, vol biplace, bon cadeau parapente, vol sensation, Aravis" />
+  <meta name="author" content="Aravis Parapente" />
+  <link rel="canonical" href="https://aravis-parapente.com/" />
+
   <link rel="stylesheet" href="style.css" />
+
   <style>
     body, html {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #333;
     }
 
     header {
@@ -29,15 +38,22 @@
       flex-wrap: wrap;
       gap: 10px;
       padding: 20px;
+      background: rgba(0, 0, 0, 0.4);
     }
 
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
-      background: rgba(0, 0, 0, 0.4);
       padding: 8px 12px;
       border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      background-color: rgba(255, 255, 255, 0.3);
+      outline: none;
     }
 
     .hero-text {
@@ -54,8 +70,9 @@
     }
 
     .hero-text p {
-      font-size: 1em;
+      font-size: 1.1em;
       margin-top: 10px;
+      line-height: 1.4;
     }
 
     .logo {
@@ -70,13 +87,25 @@
 
     .sous-image {
       width: 100%;
-      height: auto; /* garde les proportions, pas de coupe */
+      height: auto;
       display: block;
-      margin: 0 auto;
+      margin: 30px auto;
     }
 
     main {
+      max-width: 1000px;
+      margin: 0 auto;
       padding: 30px 15px;
+    }
+
+    main section {
+      margin-bottom: 40px;
+    }
+
+    main h2 {
+      font-size: 1.8em;
+      margin-bottom: 15px;
+      color: #0055a5;
     }
 
     footer {
@@ -84,12 +113,12 @@
       padding: 20px;
       background: #333;
       color: white;
+      font-size: 0.9em;
     }
 
     #partenaires {
       padding: 20px;
       background: #eee;
-      margin: 40px 0;
       border-radius: 10px;
     }
 
@@ -103,12 +132,15 @@
     }
 
     #partenaires ul li a {
-      color: #333;
+      color: #0055a5;
       text-decoration: none;
+      transition: text-decoration 0.3s ease;
     }
 
-    #partenaires ul li a:hover {
+    #partenaires ul li a:hover,
+    #partenaires ul li a:focus {
       text-decoration: underline;
+      outline: none;
     }
 
     @media (min-width: 768px) {
@@ -121,11 +153,30 @@
       }
     }
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Aravis Parapente",
+    "url": "https://aravis-parapente.com",
+    "logo": "https://aravis-parapente.com/image/logo-aravis.jpg",
+    "sameAs": [
+      "https://www.facebook.com/aravisparapente",
+      "https://www.instagram.com/aravisparapente"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+33-XXXXXXXXX",
+      "contactType": "Customer Service"
+    }
+  }
+  </script>
 </head>
 <body>
   <header>
-    <nav>
-      <a href="index.html">Accueil</a>
+    <nav aria-label="Menu principal">
+      <a href="index.html" aria-current="page">Accueil</a>
       <a href="vols.html">Vols / Bon cadeau</a>
       <a href="galerie.html">Galerie</a>
     </nav>
@@ -135,10 +186,10 @@
       <p>Vivez un vol inoubliable dans les montagnes des Aravis</p>
     </div>
 
-    <img src="image/logo-aravis.jpg" alt="Logo Aravis" class="logo">
+    <img src="image/logo-aravis.jpg" alt="Logo Aravis Parapente" class="logo" />
   </header>
 
-  <img src="image/flyer2025.png" alt="Vol parapente" class="sous-image" />
+  <img src="image/flyer2025.png" alt="Flyer 2025 des vols en parapente Aravis Parapente" class="sous-image" />
 
   <main>
     <section>
@@ -146,26 +197,25 @@
       <p>Des baptêmes en parapente au cœur des Alpes ! Nous proposons différents types de vols pour tous les âges et toutes les envies. Découvrez également nos bons cadeaux et notre galerie.</p>
     </section>
 
-    <!-- Bloc partenaires -->
-    <section id="partenaires">
-      <h2>Nos partenaires</h2>
+    <section id="partenaires" aria-labelledby="partenaires-title">
+      <h2 id="partenaires-title">Nos partenaires</h2>
       <ul>
         <li><a href="https://www.laclusaz.com/" target="_blank" rel="noopener noreferrer">Office de tourisme de La Clusaz</a></li>
-       <li><a href="https://www.spub-laclusaz.com//" target="_blank" rel="noopener noreferrer">Spub Pizza Roma</a></li>
-       <li><a href="https:/www.valdarly-montblanc.com/villages-stations/la-giettaz-en-aravis//" target="_blank" rel="noopener noreferrer">Office de tourisme la Giettaz</a></li>
-        
-       <h2>Information</h2> 
+        <li><a href="https://www.spub-laclusaz.com/" target="_blank" rel="noopener noreferrer">Spub Pizza Roma</a></li>
+        <li><a href="https://www.valdarly-montblanc.com/villages-stations/la-giettaz-en-aravis/" target="_blank" rel="noopener noreferrer">Office de tourisme la Giettaz</a></li>
+      </ul>
+
+      <h2>Informations utiles</h2>
+      <ul>
         <li><a href="https://www.ffvl.fr/" target="_blank" rel="noopener noreferrer">Fédération Française de Vol Libre</a></li>
         <li><a href="https://niviuk.com/fr/voiles?srsltid=AfmBOor-MrR7md-xjMWEQ7RtUYjUiH_ZXylnzOAAn2Utzg6XP8_5Rshx/" target="_blank" rel="noopener noreferrer">Niviuk</a></li>
         <li><a href="https://g.co/kgs/NqmNKai" target="_blank" rel="noopener noreferrer">Avis Google</a></li>
-
-        
       </ul>
     </section>
   </main>
 
   <footer>
-    © 2022 Aravis Parapente – Tous droits réservés
+    © 2025 Aravis Parapente – Tous droits réservés
   </footer>
 </body>
 </html>
