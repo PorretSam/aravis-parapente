@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vols et Bons Cadeaux - Aravis Parapente</title>
+  <meta name="description" content="Découvrez nos offres de vols en parapente et bons cadeaux à La Clusaz. Baptêmes découverte, sensations, performances et options photo/vidéo." />
+  <meta name="keywords" content="vol parapente, bon cadeau parapente, baptême parapente, La Clusaz, Aravis Parapente" />
+  <link rel="canonical" href="https://aravis-parapente.com/vols.html" />
   <style>
     body {
       margin: 0;
@@ -41,6 +44,7 @@
 
     nav a.btn:hover, nav a.btn:focus {
       background-color: #004080;
+      outline: none;
     }
 
     h1 {
@@ -82,7 +86,8 @@
       transition: transform 0.3s ease;
     }
 
-    section.offer a.offer-image:hover img {
+    section.offer a.offer-image:hover img,
+    section.offer a.offer-image:focus img {
       transform: scale(1.05);
     }
 
@@ -94,6 +99,7 @@
       margin-top: 0;
       font-size: 1.5rem;
       margin-bottom: 8px;
+      color: #005a9c;
     }
 
     .offer-content p {
@@ -125,9 +131,9 @@
 <body>
 
   <header>
-    <nav>
+    <nav aria-label="Navigation principale">
       <a href="index.html" class="btn">Accueil</a>
-      <a href="vols.html" class="btn">Vols / Bon cadeau</a>
+      <a href="vols.html" class="btn" aria-current="page">Vols / Bon cadeau</a>
       <a href="galerie.html" class="btn">Galerie</a>
     </nav>
     <h1>Vols et Bons Cadeaux - Aravis Parapente</h1>
@@ -135,166 +141,88 @@
 
   <main>
     <!-- BAPTÊMES -->
-    <section class="offer">
-      <a href="boncadeau/Bon cadeau Crêt du Merle.pdf" target="_blank" class="offer-image">
-        <img src="image/aravis-parapente.jpg" alt="Vol parapente à La Clusaz" />
+    <section class="offer" aria-labelledby="offre1">
+      <a href="boncadeau/Bon cadeau Crêt du Merle.pdf" target="_blank" rel="noopener" class="offer-image" aria-describedby="desc-offre1">
+        <img src="image/aravis-parapente.jpg" alt="Vol parapente à La Clusaz" loading="lazy" />
       </a>
       <div class="offer-content">
-        <h2>Baptême Parapente vol Découverte - Premières Sensations - 65€</h2>
-        <p>Un tout premier contact avec le parapente, tout en douceur.
-Idéal pour les plus jeunes ou les plus prudents, ce vol court (5 à 6 minutes) vous offre une belle 
-          introduction aux sensations du vol libre.
-En survolant paisiblement les forêts et les reliefs, vous vivez un moment proche de la nature, à faible 
-          altitude, en toute sérénité. </p>
-        <a href="boncadeau/Bon-cadeau-Cret-du-Merle" target="_blank" class="btn">PDF Bon Cadeau</a>
+        <h2 id="offre1">Baptême Parapente vol Découverte - Premières Sensations - 65€</h2>
+        <p id="desc-offre1">Un tout premier contact avec le parapente, tout en douceur. Idéal pour les plus jeunes ou les plus prudents, ce vol court (5 à 6 minutes) vous offre une belle introduction aux sensations du vol libre. En survolant paisiblement les forêts et les reliefs, vous vivez un moment proche de la nature, à faible altitude, en toute sérénité.</p>
+        <a href="boncadeau/Bon-cadeau-Cret-du-Merle.pdf" target="_blank" rel="noopener" class="btn">PDF Bon Cadeau</a>
       </div>
     </section>
 
-     <section class="offer">
-      <a href="boncadeau/Bon-cadeau-Cret-du-Loup.pdf" target="_blank" class="offer-image">
-        <img src="image/aravis-parapente-bapteme-clusaz-vertical.jpg" alt="Baptême parapente Plaisir" />
+    <section class="offer" aria-labelledby="offre2">
+      <a href="boncadeau/Bon-cadeau-Cret-du-Loup.pdf" target="_blank" rel="noopener" class="offer-image" aria-describedby="desc-offre2">
+        <img src="image/aravis-parapente-bapteme-clusaz-vertical.jpg" alt="Baptême parapente Plaisir" loading="lazy" />
       </a>
       <div class="offer-content">
-        <h2>Baptême Parapente Vol Plaisir – Sensations et Altitude - 90€</h2>
-        <p>Envie de prendre un peu plus de hauteur ?
-Le vol plaisir (environ 15 minutes) vous emmène plus haut, pour profiter d’une vue panoramique sur 
-          les montagnes.
-Doux et progressif, il offre davantage de sensations tout en restant accessible à tous. Une belle façon
-          de découvrir la magie du parapente en toute confiance</p>
-        <a href="boncadeau/Bon-cadeau-Cret-du-Loup.pdf" target="_blank" class="btn">PDF Bon Cadeau</a>
-      </div>
-    </section>
-    
-    <section class="offer">
-      <a href="boncadeau/Bon-cadeau-Performance.pdf" target="_blank" class="offer-image">
-        <img src="image/antho.jpg" alt="Baptême parapente à l’Aiguille" />
-      </a>
-      <div class="offer-content">
-        <h2>Baptême Parapente Vol Performance – L’expérience sportive - 125€ </h2>
-        <p>Pour les amateurs de vol longue durée et les curieux de performance.
-Environ 30 minutes de pur plaisir, avec un dénivelé de 750 m et plus, ce vol vous permet 
-          de profiter des ascendances thermiques et de prolonger l’expérience.
-Accessible aux ados et adultes (35 à 110 kg), idéal l’après-midi lorsque les conditions sont 
-          favorables. Disponible au printemps et en été (hors automne/hiver).</p>
-        <a href="boncadeau/Bon-cadeau-Performance.pdf" target="_blank" class="btn">PDF Bon Cadeau</a>
+        <h2 id="offre2">Baptême Parapente Vol Plaisir – Sensations et Altitude - 90€</h2>
+        <p id="desc-offre2">Envie de prendre un peu plus de hauteur ? Le vol plaisir (environ 15 minutes) vous emmène plus haut, pour profiter d’une vue panoramique sur les montagnes. Doux et progressif, il offre davantage de sensations tout en restant accessible à tous. Une belle façon de découvrir la magie du parapente en toute confiance.</p>
+        <a href="boncadeau/Bon-cadeau-Cret-du-Loup.pdf" target="_blank" rel="noopener" class="btn">PDF Bon Cadeau</a>
       </div>
     </section>
 
-     <section class="offer">
-      <a href="boncadeau/Bon-cadeau-Prestige.pdf" target="_blank" class="offer-image">
-        <img src="image/prestige-parapente-aravis-balme.jpg" alt="Baptême parapente Prestige " />
+    <section class="offer" aria-labelledby="offre3">
+      <a href="boncadeau/Bon-cadeau-Performance.pdf" target="_blank" rel="noopener" class="offer-image" aria-describedby="desc-offre3">
+        <img src="image/antho.jpg" alt="Baptême parapente à l’Aiguille" loading="lazy" />
       </a>
       <div class="offer-content">
-        <h2>Baptême Parapente Vol Prestige – L’exception au sommet - 167€ </h2>
-        <p>Une heure de vol environ, pour une expérience aérienne hors du commun.
-Envolez-vous au cœur des Aravis dans les meilleures conditions, avec un dénivelé de 750 m et plus, 
-          et laissez-vous porter longtemps grâce aux ascendances.
-Réservé aux ados et adultes (35 à 100 kg), ce vol a lieu l’après-midi en juillet et août uniquement.
-Durée : Environ 1h idéal l’après-midi lorsque les conditions sont 
-          favorables. .</p>
-        <a href="boncadeau/Bon-cadeau-Prestige.pdf" target="_blank" class="btn">PDF Bon Cadeau</a>
+        <h2 id="offre3">Baptême Parapente Vol Performance – L’expérience sportive - 125€</h2>
+        <p id="desc-offre3">Pour les amateurs de vol longue durée et les curieux de performance. Environ 30 minutes de pur plaisir, avec un dénivelé de 750 m et plus, ce vol vous permet de profiter des ascendances thermiques et de prolonger l’expérience. Accessible aux ados et adultes (35 à 110 kg), idéal l’après-midi lorsque les conditions sont favorables. Disponible au printemps et en été (hors automne/hiver).</p>
+        <a href="boncadeau/Bon-cadeau-Performance.pdf" target="_blank" rel="noopener" class="btn">PDF Bon Cadeau</a>
       </div>
     </section>
 
-     <section class="offer">
-      <a href="boncadeau/Bon-cadeau-Aiguille-hiver.pdf" target="_blank" class="offer-image">
-        <img src="image/aravis-parapente-bapteme-aiguille.jpg" alt="Baptême parapente à l’Aiguille" />
+    <section class="offer" aria-labelledby="offre4">
+      <a href="boncadeau/Bon-cadeau-Prestige.pdf" target="_blank" rel="noopener" class="offer-image" aria-describedby="desc-offre4">
+        <img src="image/prestige-parapente-aravis-balme.jpg" alt="Baptême parapente Prestige " loading="lazy" />
       </a>
       <div class="offer-content">
-        <h2>Baptême Parapente Aiguille -L’hiver au sommet-  145€ </h2>
-        <p>Vivez l’adrénaline d’un vol en parapente au départ d’un sommet enneigé, accessible 
-          uniquement en ski ou snowboard. 
-Ce vol est destiné aux enfants et adultes à l’aise en hors-piste (niveau requis).
-Avec un dénivelé impressionnant de 1200 m, il offre 15 minutes de pur plaisir au cœur des paysages hivernaux.
-Quand : Matin & après-midi, en hiver uniquement</p>
-        <a href="boncadeau/Bon-cadeau-Aiguille.pdf" target="_blank" class="btn">PDF Bon Cadeau</a>
+        <h2 id="offre4">Baptême Parapente Vol Prestige – L’exception au sommet - 167€</h2>
+        <p id="desc-offre4">Une heure de vol environ, pour une expérience aérienne hors du commun. Envolez-vous au cœur des Aravis dans les meilleures conditions, avec un dénivelé de 750 m et plus, et laissez-vous porter longtemps grâce aux ascendances. Réservé aux ados et adultes (35 à 100 kg), ce vol a lieu l’après-midi en juillet et août uniquement.</p>
+        <a href="boncadeau/Bon-cadeau-Prestige.pdf" target="_blank" rel="noopener" class="btn">PDF Bon Cadeau</a>
       </div>
     </section>
 
-      <section class="offer">
-      <a href="boncadeau/Bon-cadeau-loup-hiver.pdf" target="_blank" class="offer-image">
-        <img src="image/aravis-parapente-loup.jpg" alt="Baptême parapente au Crêt du loup" />
+    <section class="offer" aria-labelledby="offre5">
+      <a href="boncadeau/Bon-cadeau-Aiguille-hiver.pdf" target="_blank" rel="noopener" class="offer-image" aria-describedby="desc-offre5">
+        <img src="image/aravis-parapente-bapteme-aiguille.jpg" alt="Baptême parapente à l’Aiguille" loading="lazy" />
       </a>
       <div class="offer-content">
-        <h2>Baptême Parapente Crêt du Loup -L’hiver - 90€ </h2>
-        <p>Vivez l’adrénaline d’un vol en parapente au départ d’un sommet enneigé, accessible 
-          uniquement en ski ou snowboard. Niveau skieur piste rouge.
-Ce vol est destiné aux enfants et adultes à l’aise en piste difficile (niveau requis).
-Avec un dénivelé impressionnant de 1200 m, il offre 15 minutes de pur plaisir au cœur des paysages hivernaux.
-Quand : Matin & après-midi, en hiver uniquement</p>
-        <a href="boncadeau/Bon-cadeau-loup-hiver.pdf" target="_blank" class="btn">PDF Bon Cadeau</a>
+        <h2 id="offre5">Baptême Parapente Aiguille - L’hiver au sommet - 145€</h2>
+        <p id="desc-offre5">Vivez l’adrénaline d’un vol en parapente au départ d’un sommet enneigé, accessible uniquement en ski ou snowboard. Ce vol est destiné aux enfants et adultes à l’aise en hors-piste (niveau requis). Avec un dénivelé impressionnant de 1200 m, il offre 15 minutes de pur plaisir au cœur des paysages hivernaux. Quand : Matin & après-midi, en hiver uniquement.</p>
+        <a href="boncadeau/Bon-cadeau-Aiguille-hiver.pdf" target="_blank" rel="noopener" class="btn">PDF Bon Cadeau</a>
       </div>
     </section>
 
-    
-     <section class="offer">
-      <a href="boncadeau/Bon-cadeau-Beauregard.pdf" target="_blank" class="offer-image">
-        <img src="image/parapente-hiver-clusaz-aravis-parapente.jpg" alt="Baptême parapente du Crêt du Loup" />
+    <section class="offer" aria-labelledby="offre6">
+      <a href="boncadeau/Bon-cadeau-loup-hiver.pdf" target="_blank" rel="noopener" class="offer-image" aria-describedby="desc-offre6">
+        <img src="image/aravis-parapente-loup.jpg" alt="Baptême parapente au Crêt du Loup" loading="lazy" />
       </a>
       <div class="offer-content">
-        <h2>Baptême Parapente Beauregard -L’hiver -Accessible à tous - 65€ </h2>
-        <p>Une belle introduction au parapente hivernal !
-Accessible aux enfants et adultes, que ce soit à pied ou à ski, ce vol tout en douceur
-          offre un superbe panorama enneigé.
-Idéal pour un premier contact avec le vol libre, sans grande exigence physique.
-
-Quand : Matin & après-midi, en hiver uniquement
-Poids : de 20 à 110 kg Dénivelé : 550 m Durée : Environ 7 min</p>
-        <a href="boncadeau/Bon-cadeau-Beauregard.pdf" target="_blank" class="btn">PDF Bon Cadeau</a>
+        <h2 id="offre6">Baptême Parapente Crêt du Loup - L’hiver - 90€</h2>
+        <p id="desc-offre6">Vivez l’adrénaline d’un vol en parapente au départ d’un sommet enneigé, accessible uniquement en ski ou snowboard. Niveau skieur piste rouge. Ce vol est destiné aux enfants et adultes à l’aise en piste difficile (niveau requis). Avec un dénivelé impressionnant de 700 m, il offre 10 minutes de pur plaisir au cœur des paysages hivernaux. Quand : Matin & après-midi, en hiver uniquement.</p>
+        <a href="boncadeau/Bon-cadeau-loup-hiver.pdf" target="_blank" rel="noopener" class="btn">PDF Bon Cadeau</a>
       </div>
     </section>
 
-    
-
-    <section class="offer">
-      <a href="https://aravis-parapente.wixsite.com/aravis-parapente/bapteme-giettaz" target="_blank" class="offer-image">
-        <img src="image/aravis-parapente-bapteme-giettaz.jpg" alt="Baptême parapente Giettaz" />
+    <!-- OPTIONS PHOTO / VIDEO -->
+    <section class="offer" aria-labelledby="option1">
+      <a href="boncadeau/Option-Photo-Video.pdf" target="_blank" rel="noopener" class="offer-image" aria-describedby="desc-option1">
+        <img src="image/option-photo-video.jpg" alt="Options photo et vidéo parapente" loading="lazy" />
       </a>
       <div class="offer-content">
-        <h2>Baptême Parapente La Giettaz</h2>
-        <p>Expérience unique au départ de Giettaz, cadre naturel exceptionnel.
-       Par vent de Sud, printemps - été - automne </p>
+        <h2 id="option1">Options Photo / Vidéo</h2>
+        <p id="desc-option1">Offrez-vous un souvenir unique de votre vol : film ou photos, ou les deux. Profitez des formules à 30€ (photos), 40€ (vidéo), ou 60€ (photos + vidéo). Livraison par mail en HD. Disponible toute l’année sur réservation.</p>
+        <a href="boncadeau/Option-Photo-Video.pdf" target="_blank" rel="noopener" class="btn">PDF Option Photo/Video</a>
       </div>
     </section>
 
-    <!-- SENSATIONS  -->
-    <section class="offer">
-      <a href= target="_blank" class="offer-image">
-        <img src="image/aravis-parapente-bapteme-sensation.jpg" alt="Vol sensation parapente" />
-      </a>
-      <div class="offer-content">
-        <h2>Option Vol Sensation - 15€</h2>
-        <p>Option Vol dynamique pour amateurs de sensations fortes.</p>
-        <a href="video/sensation.mp4" target="_blank" class="btn">Voir l'offre</a>
-      </div>
-    </section>
-
-       <!-- Photo video  -->
-    <section class="offer">
-   
-        <img src="image/photo-video.jpg" alt="Vol sensation parapente" />
-      </a>
-      <div class="offer-content">
-        <h2>Option Photo - Video - 25€</h2>
-        <p>Gardez un souvenir inoubliable de votre vol !
-Le pilote embarque une caméra GoPro pour capturer les meilleurs moments de votre aventure.
-
-✅ Environ 30 photos
-✅ 1 à 2 vidéos en haute qualité
-✅ Remise sur carte SD ou par lien de téléchargement
-
-Tarif : 25 €
-Option disponible sur tous les types de vols.</p>
-          </div>
-    </section>
-
-   
-
-  
   </main>
 
   <footer>
-    <p>© 2025 Aravis Parapente - Tous droits réservés</p>
+    <p>&copy; 2025 Aravis Parapente - Tous droits réservés</p>
   </footer>
 
 </body>
