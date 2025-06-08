@@ -211,38 +211,54 @@
     <li><strong>Julien :</strong> 06 82 95 85 42</li>
     <li><strong>Email :</strong> <a href="mailto:samuelporret@gmail.com">samuelporret@gmail.com</a></li>
   </ul>
- <form action="mailto:samuelporret@gmail.com" method="post" enctype="text/plain" style="max-width: 800px; margin: auto;">
+ <form action="mailto:ton-email@example.com" method="post" enctype="text/plain" onsubmit="return prepareMessage()" style="max-width: 600px; margin:auto;">
+  <!-- Ligne 1 -->
+  <input type="text" id="nom" name="Nom" placeholder="Nom" required style="width: 30%; margin-right: 5px;" />
+  <input type="text" id="prenom" name="Prénom" placeholder="Prénom" required style="width: 30%; margin-right: 5px;" />
+  <input type="tel" id="telephone" name="Téléphone" placeholder="Téléphone" required style="width: 30%;" />
 
-  <!-- Ligne 1 : Contact -->
-  <div style="display: flex; gap: 15px; margin-bottom: 15px;">
-    <input type="text" name="Nom" placeholder="Nom" required style="flex: 1;" />
-    <input type="text" name="Prénom" placeholder="Prénom" required style="flex: 1;" />
-    <input type="tel" name="Téléphone" placeholder="Téléphone" pattern="[0-9+\-\s]+" required style="flex: 1;" />
-  </div>
+  <br><br>
 
-  <!-- Ligne 2 : Passagers -->
-  <div style="display: flex; gap: 15px; margin-bottom: 15px;">
-    <input type="text" name="Passager_Prénom" placeholder="Prénom Passager" required style="flex: 1;" />
-    <input type="number" name="Poids" placeholder="Poids (kg)" min="1" max="150" required style="flex: 1;" />
-    <select name="Vol_Choisi" required style="flex: 1;">
-      <option value="" disabled selected>Vol choisi</option>
-      <option value="Découverte">Découverte</option>
-      <option value="Plaisir">Plaisir</option>
-      <option value="Performance">Performance</option>
-      <option value="Prestige">Prestige</option>
-      <option value="Aiguille_Hiver">Aiguille Hiver</option>
-      <option value="Crêt_du_Loup_Hiver">Crêt du Loup Hiver</option>
-    </select>
-  </div>
+  <!-- Ligne 2 -->
+  <input type="text" id="passagerNom" name="PassagerNom" placeholder="Nom Passager" required style="width: 30%; margin-right: 5px;" />
+  <input type="text" id="passagerPrenom" name="PassagerPrenom" placeholder="Prénom Passager" required style="width: 30%; margin-right: 5px;" />
+  <input type="number" id="poids" name="Poids" placeholder="Poids (kg)" min="1" max="200" required style="width: 30%;" />
 
-  <!-- Ligne 3 : Date disponibilités -->
-  <div style="display: flex; gap: 15px; margin-bottom: 15px;">
-    <input type="date" name="Date_Disponibilité" required style="flex: 1;" />
-  </div>
+  <br><br>
 
-  <button type="submit" style="padding: 10px 20px; font-weight: bold;">Envoyer</button>
+  <!-- Ligne 3 -->
+  <input type="date" id="date" name="DateDisponibilite" required style="width: 100%;" />
 
+  <br><br>
+
+  <input type="hidden" id="messageBody" name="Message" />
+
+  <button type="submit">Envoyer</button>
 </form>
+
+<script>
+function prepareMessage() {
+  const nom = document.getElementById('nom').value.trim();
+  const prenom = document.getElementById('prenom').value.trim();
+  const telephone = document.getElementById('telephone').value.trim();
+
+  const passagerNom = document.getElementById('passagerNom').value.trim();
+  const passagerPrenom = document.getElementById('passagerPrenom').value.trim();
+  const poids = document.getElementById('poids').value.trim();
+
+  const date = document.getElementById('date').value;
+
+  const message = 
+    `${nom} ${prenom} ${telephone}\n` +
+    `${passagerNom} ${passagerPrenom} ${poids}\n` +
+    `Date disponibilité : ${date}`;
+
+  document.getElementById('messageBody').value = message;
+
+  return true;
+}
+</script>
+
 
 </section>
 
