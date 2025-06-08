@@ -125,6 +125,10 @@
       section.offer a.offer-image {
         max-width: 100%;
       }
+      video {
+        max-width: 100%;
+        border-radius: 10px;
+      }
     }
   </style>
 </head>
@@ -215,19 +219,22 @@
       <div class="offer-content">
         <h2 id="option1">Options Photo / Vidéo</h2>
         <p id="desc-option1">Offrez-vous un souvenir unique de votre vol : film ou photos, ou les deux. Profitez des formules à 30€ (photos), 40€ (vidéo), ou 60€ (photos + vidéo). Livraison par mail en HD. Disponible toute l’année sur réservation.</p>
-        <a href="boncadeau/photo-video.jpg" target="_blank" rel="noopener" class="btn">PDF Option Photo/Video</a>
+        <a href="boncadeau/Option-Photo-Video.pdf" target="_blank" rel="noopener" class="btn">PDF Option Photo/Video</a>
       </div>
     </section>
     
-    <!-- OPTIONS sensation -->
+    <!-- OPTION SENSATION avec vidéo -->
     <section class="offer" aria-labelledby="option2">
-    
-        <img src="image/aravis-parapente-bapteme-sensation.jpg" alt="Options sensation parapente" loading="lazy" />
+      <a href="#" class="offer-image" aria-describedby="desc-option2">
+        <img src="image/aravis-parapente-bapteme-sensation.jpg" alt="Option sensation parapente" loading="lazy" />
       </a>
       <div class="offer-content">
-        <h2 id="option1">Option Sensation 15€</h2>
-        <p id="desc-option1">Pour les amateurs de sensations fortes, une option dynamique qui vous fera vibrer au-dessus des montagnes.</p>
-        <a href="boncadeau/photo-video.jpg" target="_blank" rel="noopener" class="btn">PDF Option Photo/Video</a>
+        <h2 id="option2">Option Sensation – 15€</h2>
+        <p id="desc-option2">Pour les amateurs de sensations fortes, une option dynamique qui vous fera vibrer au-dessus des montagnes.</p>
+        <video controls preload="metadata" width="320" height="180" style="border-radius:10px;">
+          <source src="video/sensation.mp4" type="video/mp4" />
+          Votre navigateur ne supporte pas la vidéo.
+        </video>
       </div>
     </section>
   </main>
