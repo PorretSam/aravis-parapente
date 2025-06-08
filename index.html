@@ -197,6 +197,31 @@
       <p>Des baptêmes en parapente au cœur des Alpes ! Nous proposons différents types de vols pour tous les âges et toutes les envies. Découvrez également nos bons cadeaux et notre galerie.</p>
     </section>
 
+
+    <script>
+function prepareMessage() {
+  const nom = document.getElementById('nom').value.trim();
+  const prenom = document.getElementById('prenom').value.trim();
+  const telephone = document.getElementById('telephone').value.trim();
+
+  const passagerNom = document.getElementById('passagerNom').value.trim();
+  const passagerPrenom = document.getElementById('passagerPrenom').value.trim();
+  const poids = document.getElementById('poids').value.trim();
+
+  const date = document.getElementById('date').value;
+
+  const message = 
+    `${nom} ${prenom} ${telephone}\n` +
+    `${passagerNom} ${passagerPrenom} ${poids} kg\n` +
+    `Date disponibilité : ${date}`;
+
+  // Redirige vers un mailto bien formaté
+  window.location.href = `mailto:samuelporret@gmail.com?subject=Réservation Aravis&body=${encodeURIComponent(message)}`;
+  return false;
+}
+</script>
+
+    
     <section id="partenaires" aria-labelledby="partenaires-title">
       <h2 id="partenaires-title">Nos partenaires</h2>
       <ul>
