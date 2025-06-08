@@ -211,7 +211,39 @@
     <li><strong>Julien :</strong> 06 82 95 85 42</li>
     <li><strong>Email :</strong> <a href="mailto:samuelporret@gmail.com">samuelporret@gmail.com</a></li>
   </ul>
-  <p>Ou utilisez notre <a href="mailto:samuelporret@gmail.com?subject=Réservation%20Vol%20Parapente">formulaire de réservation</a>.</p>
+ <form action="mailto:samuelporret@gmail.com" method="post" enctype="text/plain" style="max-width: 800px; margin: auto;">
+
+  <!-- Ligne 1 : Contact -->
+  <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+    <input type="text" name="Nom" placeholder="Nom" required style="flex: 1;" />
+    <input type="text" name="Prénom" placeholder="Prénom" required style="flex: 1;" />
+    <input type="tel" name="Téléphone" placeholder="Téléphone" pattern="[0-9+\-\s]+" required style="flex: 1;" />
+  </div>
+
+  <!-- Ligne 2 : Passagers -->
+  <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+    <input type="text" name="Passager_Prénom" placeholder="Prénom Passager" required style="flex: 1;" />
+    <input type="number" name="Poids" placeholder="Poids (kg)" min="1" max="150" required style="flex: 1;" />
+    <select name="Vol_Choisi" required style="flex: 1;">
+      <option value="" disabled selected>Vol choisi</option>
+      <option value="Découverte">Découverte</option>
+      <option value="Plaisir">Plaisir</option>
+      <option value="Performance">Performance</option>
+      <option value="Prestige">Prestige</option>
+      <option value="Aiguille_Hiver">Aiguille Hiver</option>
+      <option value="Crêt_du_Loup_Hiver">Crêt du Loup Hiver</option>
+    </select>
+  </div>
+
+  <!-- Ligne 3 : Date disponibilités -->
+  <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+    <input type="date" name="Date_Disponibilité" required style="flex: 1;" />
+  </div>
+
+  <button type="submit" style="padding: 10px 20px; font-weight: bold;">Envoyer</button>
+
+</form>
+
 </section>
 
     <section id="partenaires" aria-labelledby="partenaires-title">
