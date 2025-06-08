@@ -31,6 +31,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      margin-bottom: 0;
     }
 
     nav {
@@ -85,11 +86,13 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.6);
     }
 
-    .sous-image {
-      width: 100%;
-      height: auto;
+    .fullwidth-image {
       display: block;
-      margin: 30px auto;
+      width: 100vw;
+      max-width: 100%;
+      height: auto;
+      margin: 0;
+      padding: 0;
     }
 
     main {
@@ -160,133 +163,4 @@
     "@type": "Organization",
     "name": "Aravis Parapente",
     "url": "https://aravis-parapente.com",
-    "logo": "https://aravis-parapente.com/image/logo-aravis.jpg",
-    "sameAs": [
-      "https://www.facebook.com/aravisparapente",
-      "https://www.instagram.com/aravisparapente"
-    ],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+33-XXXXXXXXX",
-      "contactType": "Customer Service"
-    }
-  }
-  </script>
-</head>
-<body>
-  <header>
-    <nav aria-label="Menu principal">
-      <a href="index.html" aria-current="page">Accueil</a>
-      <a href="bapteme-parapente-la-clusaz.html">Vols / Bon cadeau</a>
-      <a href="galerie.html">Galerie</a>
-    </nav>
-
-    <div class="hero-text">
-      <h1>Aravis Parapente</h1>
-      <p>Vivez un vol inoubliable dans les montagnes des Aravis</p>
-    </div>
-
-    <img src="image/logo-aravis.jpg" alt="Logo Aravis Parapente" class="logo" />
-  </header>
-
-<img src="image/flyer2025.png" alt="Flyer 2025..." class="full-width-image" />
-    <section>
-      <h2>Bienvenue chez Aravis Parapente</h2>
-      <p>Envie d’un <strong>baptême de l’air en parapente à La Clusaz</strong> ? Aravis Parapente vous propose des vols biplace au cœur des montagnes des Aravis, entre sensations fortes et paysages exceptionnels. Découvrez nos <strong>bons cadeaux parapente</strong>, idéals pour offrir ou s’offrir une expérience inoubliable dans les Alpes.</p>
-
-    </section>
-
-
-    <script>
-function prepareMessage() {
-  const nom = document.getElementById('nom').value.trim();
-  const prenom = document.getElementById('prenom').value.trim();
-  const telephone = document.getElementById('telephone').value.trim();
-
-  const passagerNom = document.getElementById('passagerNom').value.trim();
-  const passagerPrenom = document.getElementById('passagerPrenom').value.trim();
-  const poids = document.getElementById('poids').value.trim();
-
-  const date = document.getElementById('date').value;
-
-  const message = 
-    `${nom} ${prenom} ${telephone}\n` +
-    `${passagerNom} ${passagerPrenom} ${poids} kg\n` +
-    `Date disponibilité : ${date}`;
-
-  // Redirige vers un mailto bien formaté
-  window.location.href = `mailto:samuelporret@gmail.com?subject=Réservation Aravis&body=${encodeURIComponent(message)}`;
-  return false;
-}
-</script>
-<section id="contact">
-  <h2>Réservation / Contact</h2>
-  <form action="https://formspree.io/f/mzzgepll" method="POST">
-  <fieldset>
-    <legend>Vos coordonnées</legend>
-    <label for="nom">Nom :</label><br>
-    <input type="text" id="nom" name="Nom"><br>
-
-    <label for="prenom">Prénom :</label><br>
-    <input type="text" id="prenom" name="Prénom"><br>
-
-    <label for="telephone">Téléphone :</label><br>
-    <input type="tel" id="telephone" name="Téléphone"><br>
-
-    <label for="email">Email :</label><br>
-    <input type="email" id="email" name="Email"><br>
-  </fieldset>
-
-  <fieldset>
-    <legend>Informations passager</legend>
-    <label for="passagerNom">Nom du passager :</label><br>
-    <input type="text" id="passagerNom" name="Nom passager"><br>
-
-    <label for="passagerPrenom">Prénom du passager :</label><br>
-    <input type="text" id="passagerPrenom" name="Prénom passager"><br>
-
-    <label for="poids">Poids (kg) :</label><br>
-    <input type="number" id="poids" name="Poids"><br>
-  </fieldset>
-
-  <fieldset>
-    <legend>Disponibilités</legend>
-    <label for="dateDebut">Date de début :</label><br>
-    <input type="date" id="dateDebut" name="Date début"><br>
-
-    <label for="dateFin">Date de fin :</label><br>
-    <input type="date" id="dateFin" name="Date fin"><br>
-  </fieldset>
-
-  <input type="hidden" name="_format" value="plain">
-  <input type="hidden" name="_subject" value="Demande de vol Aravis Parapente">
-
-  <button type="submit">Envoyer ma demande</button>
-</form>
-
-
-</section>
-
-    
-    <section id="partenaires" aria-labelledby="partenaires-title">
-      <h2 id="partenaires-title">Nos partenaires</h2>
-      <ul>
-        <li><a href="https://www.laclusaz.com/" target="_blank" rel="noopener noreferrer">Office de tourisme de La Clusaz</a></li>
-        <li><a href="https://www.spub-laclusaz.com/" target="_blank" rel="noopener noreferrer">Spub Pizza Roma</a></li>
-        <li><a href="https://www.valdarly-montblanc.com/villages-stations/la-giettaz-en-aravis/" target="_blank" rel="noopener noreferrer">Office de tourisme la Giettaz</a></li>
-      </ul>
-
-      <h2>Informations utiles</h2>
-      <ul>
-        <li><a href="https://www.ffvl.fr/" target="_blank" rel="noopener noreferrer">Fédération Française de Vol Libre</a></li>
-        <li><a href="https://niviuk.com/fr/voiles?srsltid=AfmBOor-MrR7md-xjMWEQ7RtUYjUiH_ZXylnzOAAn2Utzg6XP8_5Rshx/" target="_blank" rel="noopener noreferrer">Niviuk</a></li>
-        <li><a href="https://g.co/kgs/NqmNKai" target="_blank" rel="noopener noreferrer">Avis Google</a></li>
-      </ul>
-    </section>
-  </main>
-
-  <footer>
-    © 2025 Aravis Parapente – Tous droits réservés
-  </footer>
-</body>
-</html>
+    "logo": "https://aravis-parapente.com/image/logo-arav
