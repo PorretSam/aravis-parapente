@@ -45,3 +45,17 @@ footer {
     background: #222;
     color: white;
 }
+.btn-ubiliz {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+.btn-ubiliz:hover {
+  background-color: #0056b3;
+}
+
