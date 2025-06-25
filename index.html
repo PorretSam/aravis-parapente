@@ -1,225 +1,129 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PCFNSRMR');</script>
+  <!-- End Google Tag Manager -->
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Vols Parapente La Clusaz - Baptême et Bons Cadeaux - Aravis Parapente</title>
-  <meta name="description" content="Découvrez les vols en parapente à La Clusaz avec Aravis Parapente. Baptêmes, vols sensations, bons cadeaux et plus, au cœur des Alpes." />
+  <title>Parapente à La Clusaz - Baptême de l'air avec Aravis Parapente</title>
+  <meta name="description" content="Offrez ou vivez un baptême de l'air en parapente à La Clusaz avec Aravis Parapente. Sensations garanties dans les Alpes !" />
   <meta name="keywords" content="parapente La Clusaz, baptême parapente, vol biplace, bon cadeau parapente, vol sensation, Aravis" />
   <meta name="author" content="Aravis Parapente" />
   <link rel="canonical" href="https://aravis-parapente.com/" />
-
   <link rel="stylesheet" href="style.css" />
 
   <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #fff;
+    /* Tes styles habituels (le CSS complet peut être ajouté ici ou dans style.css) */
+    /* Section actualités */
+    #actualites {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    #actualites h2 {
+      color: #005a9c;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+    #actualites article {
+      margin-bottom: 25px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 15px;
+    }
+    #actualites article:last-child {
+      border-bottom: none;
+    }
+    #actualites h3 {
+      margin-bottom: 5px;
+      font-size: 1.3rem;
       color: #333;
     }
-
-    header {
-      position: relative;
-      height: 60vh; /* un peu plus grand que 50vh */
-      background-image: url('image/aravis-parapente.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    #actualites time {
+      font-size: 0.9rem;
+      color: #666;
     }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.4);
+    #actualites p {
+      margin-top: 8px;
+      line-height: 1.5;
+      color: #444;
     }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 8px 12px;
+    #actualites img {
+      max-width: 100%;
       border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-
-    nav a:hover,
-    nav a:focus {
-      background-color: rgba(255, 255, 255, 0.3);
-      outline: none;
-    }
-
-    .hero-text {
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 20px;
-      border-radius: 10px;
-      margin: 0 20px 20px 20px;
-      max-width: 90%;
-    }
-
-    .hero-text h1 {
-      font-size: 2.2em;
-      margin: 0;
-    }
-
-    .hero-text p {
-      font-size: 1.1em;
       margin-top: 10px;
-      line-height: 1.4;
     }
-
-    .logo {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      width: 80px;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.6);
-    }
-
-    .sous-image {
-      display: block;
-      width: 100%;
-      max-width: 600px; /* limitation de la taille */
-      height: auto;
-      margin: 30px auto;
-      object-fit: contain;
-    }
-
-    main {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 30px 15px;
-    }
-
-    main section {
-      margin-bottom: 40px;
-    }
-
-    main h2 {
-      font-size: 1.8em;
-      margin-bottom: 15px;
-      color: #0055a5;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #333;
-      color: white;
-      font-size: 0.9em;
-    }
-
-    #partenaires {
-      padding: 20px;
-      background: #eee;
-      border-radius: 10px;
-    }
-
-    #partenaires ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    #partenaires ul li {
-      margin-bottom: 8px;
-    }
-
-    #partenaires ul li a {
-      color: #0055a5;
+    #actualites a.voir-plus {
+      display: inline-block;
+      margin-top: 15px;
+      color: #005a9c;
+      font-weight: bold;
       text-decoration: none;
-      transition: text-decoration 0.3s ease;
     }
-
-    #partenaires ul li a:hover,
-    #partenaires ul li a:focus {
+    #actualites a.voir-plus:hover,
+    #actualites a.voir-plus:focus {
       text-decoration: underline;
       outline: none;
     }
-
-    @media (min-width: 768px) {
-      .hero-text {
-        max-width: 500px;
-      }
-
-      .logo {
-        width: 100px;
-      }
-    }
   </style>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Aravis Parapente",
-    "url": "https://aravis-parapente.com",
-    "logo": "https://aravis-parapente.com/image/logo-aravis.jpg",
-    "sameAs": [
-      "https://www.facebook.com/aravisparapente",
-      "https://www.instagram.com/aravisparapente"
-    ],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+33-XXXXXXXXX",
-      "contactType": "Customer Service"
-    }
-  }
-  </script>
 </head>
 <body>
-  <header>
-    <nav aria-label="Menu principal">
-      <a href="index.html" aria-current="page">Accueil</a>
-      <a href="vols.html">Vols / Bon cadeau</a>
-      <a href="galerie.html">Galerie</a>
-    </nav>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PCFNSRMR"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
-    <div class="hero-text">
-      <h1>Aravis Parapente</h1>
-      <p>Vivez un vol inoubliable dans les montagnes des Aravis</p>
-    </div>
+  <!-- Ton header, nav, contenu principal, etc. -->
 
-    <img src="image/logo-aravis.jpg" alt="Logo Aravis Parapente" class="logo" />
-  </header>
+  <!-- Section Actualités -->
+  <section id="actualites" aria-labelledby="actualites-title">
+    <h2 id="actualites-title">Actualités & Infos</h2>
+    <div id="liste-actualites">Chargement des actualités...</div>
+    <a href="actualites.html" class="voir-plus">Voir toutes les actualités →</a>
+  </section>
 
-  <img src="image/flyer2025.png" alt="Flyer 2025 des vols en parapente Aravis Parapente" class="sous-image" />
+  <!-- Footer, etc. -->
 
-  <main>
-    <section>
-      <h2>Bienvenue chez Aravis Parapente</h2>
-      <p>Des baptêmes en parapente au cœur des Alpes ! Nous proposons différents types de vols pour tous les âges et toutes les envies. Découvrez également nos bons cadeaux et notre galerie.</p>
-    </section>
+  <script>
+    // Remplace cette URL par celle de ton JSON Google Sheet ou fichier JSON hébergé
+    const urlActualitesJSON = 'https://ton-domaine.com/actualites.json';
 
-    <section id="partenaires" aria-labelledby="partenaires-title">
-      <h2 id="partenaires-title">Nos partenaires</h2>
-      <ul>
-        <li><a href="https://www.laclusaz.com/" target="_blank" rel="noopener noreferrer">Office de tourisme de La Clusaz</a></li>
-        <li><a href="https://www.spub-laclusaz.com/" target="_blank" rel="noopener noreferrer">Spub Pizza Roma</a></li>
-        <li><a href="https://www.valdarly-montblanc.com/villages-stations/la-giettaz-en-aravis/" target="_blank" rel="noopener noreferrer">Office de tourisme la Giettaz</a></li>
-      </ul>
+    fetch(urlActualitesJSON)
+      .then(response => {
+        if(!response.ok) throw new Error("Erreur réseau");
+        return response.json();
+      })
+      .then(data => {
+        const container = document.getElementById('liste-actualites');
+        container.innerHTML = ''; // Vide le message de chargement
 
-      <h2>Informations utiles</h2>
-      <ul>
-        <li><a href="https://www.ffvl.fr/" target="_blank" rel="noopener noreferrer">Fédération Française de Vol Libre</a></li>
-        <li><a href="https://niviuk.com/fr/voiles?srsltid=AfmBOor-MrR7md-xjMWEQ7RtUYjUiH_ZXylnzOAAn2Utzg6XP8_5Rshx/" target="_blank" rel="noopener noreferrer">Niviuk</a></li>
-        <li><a href="https://g.co/kgs/NqmNKai" target="_blank" rel="noopener noreferrer">Avis Google</a></li>
-      </ul>
-    </section>
-  </main>
+        data.forEach(item => {
+          const article = document.createElement('article');
 
-  <footer>
-    © 2025 Aravis Parapente – Tous droits réservés
-  </footer>
+          // Construit le HTML de chaque actu
+          article.innerHTML = `
+            <h3>${item.titre}</h3>
+            <time datetime="${item.date}">${new Date(item.date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+            ${item.image ? `<img src="${item.image}" alt="${item.titre}">` : ''}
+            <p>${item.texte}</p>
+          `;
+
+          container.appendChild(article);
+        });
+      })
+      .catch(error => {
+        console.error('Erreur chargement actualités:', error);
+        document.getElementById('liste-actualites').textContent = 'Impossible de charger les actualités pour le moment.';
+      });
+  </script>
 </body>
 </html>
