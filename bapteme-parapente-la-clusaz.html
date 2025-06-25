@@ -3,112 +3,381 @@
 <head>
   <!-- Google Tag Manager -->
   <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-PCFNSRMR');
   </script>
   <!-- End Google Tag Manager -->
 
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Parapente La Clusaz – Baptême & Vols Sensation | Aravis Parapente</title>
+  <meta name="description" content="Offrez un baptême parapente à La Clusaz avec moniteurs diplômés. Vols découverte, sensations et photos/vidéos. Réservez en ligne dès maintenant !" />
+  <meta name="keywords" content="vol parapente, bon cadeau parapente, baptême parapente, La Clusaz, Aravis Parapente" />
+  <meta property="og:title" content="Baptême Parapente à La Clusaz - Aravis Parapente" />
+  <meta property="og:description" content="Offrez ou réservez un vol en parapente à La Clusaz. Découverte, sensations fortes, hiver – avec moniteurs diplômés." />
+  <meta property="og:image" content="https://aravis-parapente.com/image/aravis-parapente.jpg" />
+  <meta property="og:url" content="https://aravis-parapente.com/vols.html" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-  <title>Baptême de parapente à La Clusaz - Aravis Parapente</title>
-  <meta name="description" content="Découvrez nos vols biplace en parapente à La Clusaz avec Aravis Parapente. Offrez-vous une expérience sensationnelle dans les Alpes." />
-  <meta name="keywords" content="baptême parapente La Clusaz, vol biplace parapente, Aravis Parapente, bon cadeau parapente" />
-  <meta name="author" content="Aravis Parapente" />
-  <link rel="canonical" href="https://aravis-parapente.com/bapteme-parapente-la-clusaz.html" />
+  <link rel="canonical" href="https://aravis-parapente.com/vols.html" />
 
-  <link rel="stylesheet" href="style.css" />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Aravis Parapente",
-    "url": "https://aravis-parapente.com",
-    "logo": "https://aravis-parapente.com/image/logo-aravis.jpg",
-    "sameAs": [
-      "https://www.facebook.com/aravisparapente",
-      "https://www.instagram.com/aravisparapente"
-    ],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+33-XXXXXXXXX",
-      "contactType": "Customer Service"
+  <style>
+    * {
+      box-sizing: border-box;
     }
-  }
-  </script>
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    header, footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 15px 20px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav a.btn {
+      display: inline-block;
+      background-color: #005a9c;
+      color: white;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    nav a.btn:hover, nav a.btn:focus {
+      background-color: #004080;
+      outline: none;
+    }
+
+    h1 {
+      margin: 10px 0;
+      font-size: 2rem;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    section.offer {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 15px;
+      gap: 20px;
+    }
+
+    section.offer a.offer-image {
+      display: block;
+      flex-shrink: 0;
+      max-width: 200px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    section.offer a.offer-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    section.offer a.offer-image:hover img,
+    section.offer a.offer-image:focus img {
+      transform: scale(1.05);
+    }
+
+    .offer-content {
+      flex: 1;
+    }
+
+   .offer-content h2 {
+  background-color: #005a9c; /* même bleu que les boutons */
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 0;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+    .offer-content p {
+      margin: 0 0 10px;
+      line-height: 1.4;
+    }
+
+    .offer-content a.btn {
+      margin-top: 5px;
+      display: inline-block;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      section.offer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      section.offer a.offer-image {
+        max-width: 100%;
+      }
+      video {
+        max-width: 100%;
+        border-radius: 10px;
+      }
+    }
+
+    /* Styles pour sections spécifiques */
+
+    .offer-centered {
+      text-align: center;
+      padding: 30px;
+    }
+
+    .btn-ubiliz {
+      display: inline-block;
+      background-color: #007bff;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-ubiliz:hover,
+    .btn-ubiliz:focus {
+      background-color: #0056b3;
+      outline: none;
+    }
+
+    dl dt {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    dl dd {
+      margin-left: 1rem;
+      margin-bottom: 10px;
+    }
+
+    blockquote {
+      font-style: italic;
+      margin: 20px auto;
+      max-width: 700px;
+    }
+
+    blockquote cite {
+      display: block;
+      margin-top: 5px;
+      font-style: normal;
+      font-weight: bold;
+      color: #555;
+    }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Quelle est la durée du vol en parapente ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Les vols durent en moyenne entre 5 et 60 minutes selon la météo et le type de vol choisi."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quel est le poids minimum et maximum pour voler ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le poids minimum est de 20 kg, le maximum de 110 kg. Une bonne condition physique est recommandée pour les passagers proches de la limite."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment réserver un vol en parapente à La Clusaz ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vous pouvez réserver directement en ligne sur notre site ou offrir un bon cadeau à imprimer. Le paiement s'effectue sur place ou à distance par chèque."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Peut-on voler en hiver ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui, des vols sont proposés en hiver avec décollage skis aux pieds depuis l'Aiguille ou le Crêt du Loup."
+      }
+    }
+  ]
+}
+</script>
+
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PCFNSRMR"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
-  <!-- End Google Tag Manager (noscript) -->
 
-  <!-- HEADER avec classe 'autres' -->
-  <header class="autres">
-    <nav aria-label="Menu principal">
-      <a href="index.html">Accueil</a>
-      <a href="bapteme-parapente-la-clusaz.html" aria-current="page">Vols / Bon cadeau</a>
-      <a href="galerie.html">Galerie</a>
-      <a href="#reservation" class="btn-reservation">Réservation en ligne</a>
+  <header>
+    <nav aria-label="Navigation principale">
+      <a href="index.html" class="btn">Accueil</a>
+      <a href="bapteme-parapente-la-clusaz.html" class="btn" aria-current="page">Vols / Bon cadeau</a>
+      <a href="galerie.html" class="btn">Galerie</a>
     </nav>
-
-    <div class="hero-text">
-      <h1>Baptême de parapente à La Clusaz</h1>
-      <p>Offrez-vous un vol sensationnel en biplace avec Aravis Parapente</p>
-    </div>
-
-    <img src="image/logo-aravis.jpg" alt="Logo Aravis Parapente" class="logo" />
+    <h1>Parapente à La Clusaz – Baptême & Vols Sensation</h1>
+    <h2>Nos Vols en Parapente – Tarifs & Avantages</h2>
   </header>
 
   <main>
-    <section>
-      <h2>Nos offres de baptême en parapente</h2>
-      <p>Aravis Parapente vous propose plusieurs formules de vol biplace adaptées à tous les niveaux et envies. Que ce soit pour un cadeau ou pour vivre une aventure unique, vous trouverez le vol parfait dans le massif des Aravis.</p>
+
+    <section class="offer offer-centered">
+            <ul style="list-style:none; padding:0; line-height:1.8; max-width: 600px; margin: auto;">
+        <li><strong>Découverte – 65€ :</strong> Vol doux et accessible (5 à 6 min) – idéal enfants / débutants</li>
+        <li><strong>Plaisir – 90€ :</strong> Panorama + sensations (15 min)</li>
+        <li><strong>Performance – 125€ :</strong> Long vol thermique (30 min) – idéal sportifs</li>
+        <li><strong>Prestige – 167€ :</strong> Expérience haut de gamme (60 min), vue exceptionnelle</li>
+        <li><strong>Hiver Aiguille – 145€ :</strong> Départ ski – 1200 m de dénivelé</li>
+        <li><strong>Hiver Crêt du Loup – 90€ :</strong> Plaisir enneigé (10 min) – accès ski</li>
+      </ul>
+      <a href="#capcadeau" class="btn" style="margin-top:20px;">Réserver un vol</a>
     </section>
 
-    <section id="reservation">
-      <h2>Réservation / Contact</h2>
-      <form action="https://formspree.io/f/mzzgepll" method="POST">
-        <fieldset>
-          <legend>Vos coordonnées</legend>
-          <label for="nom">Nom Prénom Téléphone Email :</label><br>
-          <input type="text" id="nom" name="Nom" required><br>
-        </fieldset>
-
-        <fieldset>
-          <legend>Informations passager</legend>
-          <label for="passagerNom">Nom Prénom poids Téléphone passager :</label><br>
-          <input type="text" id="passagerNom" name="Nom passager" required><br>
-
-          <label for="choixVol">Choix du vol :</label><br>
-          <input type="text" id="choixVol" name="Choix du vol" required><br>
-        </fieldset>
-
-        <fieldset>
-          <legend>Disponibilités</legend>
-          <label for="dateDebut">Date de début :</label><br>
-          <input type="date" id="dateDebut" name="Date début" required><br>
-
-          <label for="dateFin">Date de fin :</label><br>
-          <input type="date" id="dateFin" name="Date fin" required><br>
-        </fieldset>
-
-        <input type="hidden" name="_format" value="plain" />
-        <input type="hidden" name="_subject" value="Demande de vol Aravis Parapente" />
-
-        <button type="submit">Envoyer ma demande</button>
-      </form>
+    <!-- Offres de baptêmes -->
+    <section class="offer" aria-labelledby="offre1">
+      <a href="boncadeau/Bon-cadeau-Cret-du-Merle.pdf" target="_blank" rel="noopener" class="offer-image" aria-describedby="desc-offre1">
+        <img src="image/aravis-parapente.jpg" alt="Vol parapente à La Clusaz" loading="lazy" />
+      </a>
+      <div class="offer-content">
+        <h2 id="offre1">Baptême Parapente vol Découverte - Premières Sensations - 65€</h2>
+        <p id="desc-offre1">Un tout premier contact avec le parapente, tout en douceur. Idéal pour les plus jeunes ou les plus prudents, ce vol court (5 à 6 minutes) vous offre une belle introduction aux sensations du vol libre. En survolant paisiblement les forêts et les reliefs, vous vivez un moment proche de la nature, à faible altitude, en toute sérénité.</p>
+        <a href="boncadeau/Bon-cadeau-Cret-du-Merle.pdf" target="_blank" rel="noopener" class="btn">Téléchargez votre Bon Cadeau à imprimer – Paiement sur place ou par chèque (encaissé après le vol)</a>
+      </div>
     </section>
+
+    <section class="offer" aria-labelledby="offre2">
+      <a href="boncadeau/Bon-cadeau-Cret-du-Loup.pdf" target="_blank" rel="noopener" class="offer-image" aria-describedby="desc-offre2">
+        <img src="image/aravis-parapente-bapteme-clusaz-vertical.jpg" alt="Baptême parapente Plaisir" loading="lazy" />
+      </a>
+      <div class="offer-content">
+        <h2 id="offre2">Baptême Parapente Vol Plaisir – Sensations et Altitude - 90€</h2>
+        <p id="desc-offre2">Envie de prendre un peu plus de hauteur ? Le vol plaisir (environ 15 minutes) vous emmène plus haut, pour profiter d’une vue panoramique sur les montagnes. Doux et progressif, il offre davantage de sensations tout en restant accessible à tous. Une belle façon de découvrir la magie du parapente en toute confiance.</p>
+        <a href="boncadeau/Bon-cadeau-Cret-du-Loup.pdf" target="_blank" rel="noopener" class="btn">Téléchargez votre Bon Cadeau à imprimer – Paiement sur place ou par chèque (encaissé après le vol)</a>
+      </div>
+    </section>
+
+    <section class="offer" aria-labelledby="offre3">
+      <a href="boncadeau/Bon-cadeau-Performance.pdf" target="_blank" rel="noopener" class="offer-image" aria-describedby="desc-offre3">
+        <img src="image/antho.jpg" alt="Baptême parapente à l’Aiguille" loading="lazy" />
+      </a>
+      <div class="offer-content">
+        <h2 id="offre3">Baptême Parapente Vol Performance – L’expérience sportive - 125€</h2>
+        <p id="desc-offre3">Pour les amateurs de vol longue durée et les curieux de performance. Environ 30 minutes de pur plaisir, avec un dénivelé de 750 m et plus, ce vol vous permet de profiter des ascendances thermiques et de prolonger l’expérience. Accessible aux ados et adultes (35 à 110 kg), idéal l’après-midi lorsque les conditions sont favorables. Disponible au printemps et en été (hors automne/hiver).</p>
+        <a href="boncadeau/Bon-cadeau-Performance.pdf" target="_blank" rel="noopener" class="btn">Téléchargez votre Bon Cadeau à imprimer – Paiement sur place ou par chèque (encaissé après le vol)</a>
+      </div>
+    </section>
+
+    <section class="offer" aria-labelledby="offre4">
+      <a href="boncadeau/Bon-cadeau-Prestige.pdf" target="_blank" rel="noopener" class="offer-image" aria-describedby="desc-offre4">
+        <img src="image/vol-prestige.jpg" alt="Vol prestige parapente La Clusaz" loading="lazy" />
+      </a>
+      <div class="offer-content">
+        <h2 id="offre4">Baptême Parapente Vol Prestige – Expérience Haut de Gamme - 167€</h2>
+        <p id="desc-offre4">Un vol exceptionnel d’environ 60 minutes avec des vues magnifiques. Ce baptême offre une immersion totale dans le vol libre, avec un confort optimal et une attention personnalisée. Idéal pour une occasion spéciale, anniversaire, ou simplement pour s’offrir un moment inoubliable.</p>
+        <a href="boncadeau/Bon-cadeau-Prestige.pdf" target="_blank" rel="noopener" class="btn">Téléchargez votre Bon Cadeau à imprimer – Paiement sur place ou par chèque (encaissé après le vol)</a>
+      </div>
+    </section>
+
+    <section class="offer" aria-labelledby="offre5">
+      <a href="boncadeau/Bon-cadeau-Hiver-Aiguille.pdf" target="_blank" rel="noopener" class="offer-image" aria-describedby="desc-offre5">
+        <img src="image/hiver-aiguille.jpg" alt="Vol parapente hiver Aiguille" loading="lazy" />
+      </a>
+      <div class="offer-content">
+        <h2 id="offre5">Baptême Parapente Hiver – Départ Ski Aiguille - 145€</h2>
+        <p id="desc-offre5">Un vol hivernal avec décollage skis aux pieds, dénivelé 1200 m. Une expérience unique, mêlant ski et parapente, accessible aux skieurs confirmés. Vol de 15 minutes environ, dans un cadre enneigé magnifique.</p>
+        <a href="boncadeau/Bon-cadeau-Hiver-Aiguille.pdf" target="_blank" rel="noopener" class="btn">Téléchargez votre Bon Cadeau à imprimer – Paiement sur place ou par chèque (encaissé après le vol)</a>
+      </div>
+    </section>
+
+    <section class="offer" aria-labelledby="offre6">
+      <a href="boncadeau/Bon-cadeau-Hiver-Cret-du-Loup.pdf" target="_blank" rel="noopener" class="offer-image" aria-describedby="desc-offre6">
+        <img src="image/hiver-cret-du-loup.jpg" alt="Vol parapente hiver Crêt du Loup" loading="lazy" />
+      </a>
+      <div class="offer-content">
+        <h2 id="offre6">Baptême Parapente Hiver – Crêt du Loup - 90€</h2>
+        <p id="desc-offre6">Un vol hiver plus court (10 minutes), accessible directement depuis la station, idéal pour découvrir le parapente en hiver sans engagement sportif important. Vol en douceur avec vue sur la station.</p>
+        <a href="boncadeau/Bon-cadeau-Hiver-Cret-du-Loup.pdf" target="_blank" rel="noopener" class="btn">Téléchargez votre Bon Cadeau à imprimer – Paiement sur place ou par chèque (encaissé après le vol)</a>
+      </div>
+    </section>
+    
+<section class="offer" style="background-color:#fffbe6; padding:20px; border-radius:10px; margin-top:30px;">
+  <h3>Ils ont volé avec nous ! ⭐⭐⭐⭐⭐</h4>
+  <blockquote style="margin:15px 0; font-style: italic;">
+    "Expérience incroyable, moniteur au top et paysages sublimes ! Je recommande à 100%." – <strong>Claire T.</strong>
+  </blockquote>
+  <blockquote style="margin:15px 0; font-style: italic;">
+    "Une équipe professionnelle et rassurante. Le vol performance était magique !" – <strong>Julien M.</strong>
+  </blockquote>
+  <p style="text-align:center; margin-top: 20px;">
+    <a href="https://www.google.com/search?q=aravis+parapente+avis" target="_blank" class="btn">Voir tous les avis Google</a>
+  </p>
+</section>
+    <section class="offer" style="background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); margin-bottom:30px;">
+  <h4>Questions fréquentes</h4>
+  <dl>
+    <dt><strong>Comment réserver un baptême de parapente à La Clusaz&nbsp;?</strong></dt>
+    <dd>Vous pouvez réserver directement sur notre site via le formulaire ou par téléphone. Vous pouvez aussi imprimer un bon cadeau PDF.</dd>
+
+    <dt><strong>Quel est le poids minimum et maximum pour voler&nbsp;?</strong></dt>
+    <dd>Le poids minimum est de 20&nbsp;kg. Le poids maximum autorisé est de 110 kg. Pour les passagers proches de cette limite, une bonne condition physique est vivement recommandée afin d’assurer confort et sécurité au décollage.</dd>
+
+    <dt><strong>Quelle est la durée du vol en parapente&nbsp;?</strong></dt>
+    <dd>Les vols durent en moyenne entre 5 à 60 minutes selon la météo et le type de vol choisi.</dd>
+  </dl>
+</section>
+
+
+    <section class="offer offer-centered" id="capcadeau">
+      <h3>Réservez votre Baptême Parapente</h3>
+      <p>Contactez-nous pour réserver votre vol, obtenir un bon cadeau, ou poser vos questions.</p>
+      <a href="https://reservation.aravis-parapente.com" class="btn btn-ubiliz" target="_blank" rel="noopener">Réservation en ligne</a>
+    </section>
+
   </main>
 
   <footer>
-    © 2025 Aravis Parapente – Tous droits réservés
+    <p>© 2025 Aravis Parapente - La Clusaz - Tous droits réservés</p>
   </footer>
+
 </body>
 </html>
