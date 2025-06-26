@@ -177,6 +177,7 @@ footer {
   }
 }
 a.btn {
+  display: inline-block;
   background-color: #005a9c;
   color: white;
   text-decoration: none;
@@ -184,10 +185,17 @@ a.btn {
   border-radius: 5px;
   font-weight: bold;
   font-size: 1rem;
-  display: inline-block;
-  transition: background-color 0.3s ease;
-}
+  text-align: center;
 
+  width: 140px; /* fixe la largeur */
+  white-space: normal; /* permet 2 lignes max */
+  line-height: 1.2;
+  height: auto;
+  word-wrap: break-word;
+
+  position: relative;
+  z-index: 1;
+}
 a.btn:hover,
 a.btn:focus {
   background-color: #004080;
