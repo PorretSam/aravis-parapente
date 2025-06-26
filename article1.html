@@ -17,17 +17,35 @@
       margin-right: auto;
       padding: 20px;
     }
-    header, footer {
+    header {
+      position: relative;          /* Pour contenir la vidéo en absolute */
+      height: 40vh;                /* Hauteur fixe */
+      overflow: hidden;            /* Pour éviter que la vidéo déborde */
+      background-color: #005a9c;   /* Couleur de fond au cas où */
       text-align: center;
-      padding: 10px 0;
       color: white;
-      background-color: #005a9c;
       font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    h1 {
-      color: #005a9c;
+    header video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    header h1 {
+      position: relative;         /* Pour être au-dessus de la vidéo */
+      z-index: 1;
+      margin: 0;
       font-size: 2rem;
-      margin-bottom: 10px;
+      text-shadow: 0 0 5px rgba(0,0,0,0.7);
+    }
+    nav {
+      margin-bottom: 20px;
     }
     time {
       color: #666;
@@ -48,22 +66,23 @@
     a:hover, a:focus {
       text-decoration: underline;
     }
-    nav {
-      margin-bottom: 20px;
+    footer {
+      text-align: center;
+      padding: 10px 0;
+      color: white;
+      background-color: #005a9c;
+      font-weight: bold;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
 
-<header style="position: relative; height: 40vh; overflow: hidden; background-color: #005a9c; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">
-  <video autoplay muted loop playsinline
-         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+<header>
+  <video autoplay muted loop playsinline>
     <source src="video/aravis-vol.mp4" type="video/mp4" />
     Votre navigateur ne supporte pas la vidéo.
   </video>
-  <div style="position: absolute; top:0; left:0; right:0; bottom:0; background: rgba(0, 0, 0, 0.3); z-index: 0;"></div>
-  <h1 style="position: relative; z-index: 1; margin: 0; font-size: 2rem;">Conseils pour un premier vol réussi</h1>
-
   <h1>Conseils pour un premier vol réussi</h1>
 </header>
 
