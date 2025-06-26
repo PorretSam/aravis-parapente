@@ -172,6 +172,11 @@ footer {
   overflow: hidden;
 }
 
+/* === RESPONSIVE === */
+@media (min-width: 768px) {
+  .hero-text {
+    max-width: 500px;
+  }
 
   .logo {
     width: 100px;
