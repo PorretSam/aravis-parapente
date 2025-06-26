@@ -16,138 +16,152 @@
  <meta name="keywords" content="vol parapente, bon cadeau parapente, baptême parapente, La Clusaz, Aravis Parapente" />
   <link rel="canonical" href="https://aravis-parapente.com/vols.html" />
   <style>
-    * {
+   * {
   box-sizing: border-box;
 }
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
 
-    header, footer {
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 15px 20px;
-    }
+header, footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 15px 20px;
+}
 
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-    }
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
 
-    nav a.btn {
-      display: inline-block;
-      background-color: #005a9c;
-      color: white;
-      text-decoration: none;
-      padding: 10px 18px;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-      font-weight: bold;
-      font-size: 1rem;
-    }
-
-    nav a.btn:hover, nav a.btn:focus {
-      background-color: #004080;
-      outline: none;
-    }
-
-    h1 {
-      margin: 10px 0;
-      font-size: 2rem;
-    }
-
-    main {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    section.offer {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      margin-bottom: 25px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      padding: 15px;
-      gap: 20px;
-    }
-
-    section.offer a.offer-image {
-      display: block;
-      flex-shrink: 0;
-      max-width: 200px;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    section.offer a.offer-image img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 10px;
-      transition: transform 0.3s ease;
-    }
-
-    section.offer a.offer-image:hover img,
-    section.offer a.offer-image:focus img {
-      transform: scale(1.05);
-    }
-
-    .offer-content {
-      flex: 1;
-    }
-
-    .offer-content h2 {
-      margin-top: 0;
-      font-size: 1.5rem;
-      margin-bottom: 8px;
-      color: #005a9c;
-    }
-
-    .offer-content p {
-      margin: 0 0 10px;
-      line-height: 1.4;
-    }
-
-    .offer-content a.btn {
-      margin-top: 5px;
-      display: inline-block;
-    }
-
-    footer p {
-      margin: 0;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 600px) {
-      section.offer {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      section.offer a.offer-image {
-        max-width: 100%;
-      }
-      video {
-        max-width: 100%;
-        border-radius: 10px;
-      }
-    }
-    h1 {
-  color: #005a9c;
-  font-size: 2rem; /* ou adapte selon besoin */
-  margin: 20px 0;
+nav a.btn {
+  display: inline-block;
+  background-color: #005a9c;
+  color: white;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
   font-weight: bold;
-  text-align: center; /* ou left selon ta préférence */
+  font-size: 1rem;
+
+  position: relative; /* pour le fond semi-transparent */
+  z-index: 1;
+}
+
+nav a.btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* fond noir semi-transparent */
+  border-radius: 5px;
+  z-index: -1;
+  transition: background-color 0.3s ease;
+}
+
+nav a.btn:hover, nav a.btn:focus {
+  background-color: #004080;
+  outline: none;
+}
+
+nav a.btn:hover::before,
+nav a.btn:focus::before {
+  background-color: rgba(0, 0, 0, 0.6); /* fond plus foncé au hover */
+}
+
+h1 {
+  margin: 10px 0;
+  font-size: 2rem;
+  color: #005a9c;
+  font-weight: bold;
+  text-align: center;
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+section.offer {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 15px;
+  gap: 20px;
+}
+
+section.offer a.offer-image {
+  display: block;
+  flex-shrink: 0;
+  max-width: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+section.offer a.offer-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+section.offer a.offer-image:hover img,
+section.offer a.offer-image:focus img {
+  transform: scale(1.05);
+}
+
+.offer-content {
+  flex: 1;
+}
+
+.offer-content h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: #005a9c;
+}
+
+.offer-content p {
+  margin: 0 0 10px;
+  line-height: 1.4;
+}
+
+.offer-content a.btn {
+  margin-top: 5px;
+  display: inline-block;
+}
+
+footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  section.offer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  section.offer a.offer-image {
+    max-width: 100%;
+  }
+  video {
+    max-width: 100%;
+    border-radius: 10px;
+  }
 }
 
   </style>
