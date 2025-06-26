@@ -3,210 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Blog Parapente La Clusaz | Aravis Parapente</title>
-  <meta name="description" content="Découvrez les actualités, conseils et récits de vol en parapente à La Clusaz sur le blog Aravis Parapente." />
-  <link rel="canonical" href="https://aravis-parapente.com/blog.html" />
+  <title>Blog Aravis Parapente</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-    }
-
-    header {
-      padding: 0 20px;
-      background-image: url('image/antho.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      height: 40vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 0;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 1;
-    }
-
-    nav a.btn {
-      background-color: #005a9c;
-      color: white;
-      text-decoration: none;
-      padding: 10px 18px;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-      font-weight: bold;
-      font-size: 1rem;
-      position: relative;
-    }
-
-    nav a.btn:hover {
-      background-color: #004080;
-    }
-
-    main {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      color: #005a9c;
-      margin-bottom: 30px;
-    }
-
-    .blog-post {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      padding: 20px;
-      margin-bottom: 25px;
-    }
-
-    .blog-post h2 {
-      color: #005a9c;
-      margin-top: 0;
-    }
-
-    .blog-post p {
-      line-height: 1.6;
-    }
-
-    .blog-post time {
-      font-size: 0.9rem;
-      color: #777;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      background-color: #eee;
-    }
-
-    form {
-      margin-bottom: 40px;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    form input, form textarea, form button {
-      width: 100%;
-      font-size: 1rem;
-      margin-bottom: 10px;
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    form button {
-      background-color: #005a9c;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    form button:hover {
-      background-color: #003f6d;
-    }
-
-    .blog-post img {
-      max-width: 100%;
-      margin-top: 10px;
-      border-radius: 8px;
-    }
+    body { font-family: Arial; max-width: 800px; margin: auto; padding: 20px; background: #f4f4f4; }
+    form, .post { background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    input, textarea { width: 100%; margin-bottom: 10px; padding: 8px; font-size: 1rem; }
+    img { max-width: 100%; margin-top: 10px; border-radius: 5px; }
+    button { background: #005a9c; color: white; border: none; padding: 10px 15px; font-size: 1rem; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #004080; }
+    h2 { margin: 0 0 10px 0; color: #005a9c; }
+    time { font-size: 0.9rem; color: #666; }
   </style>
 </head>
 <body>
 
-<header>
-  <nav>
-    <a href="index.html" class="btn">Accueil</a>
-    <a href="bapteme-parapente-la-clusaz.html" class="btn">Vols / Bon cadeau</a>
-    <a href="reservation.html" class="btn">Réservation</a>
-    <a href="galerie.html" class="btn">Galerie</a>
-    <a href="blog.html" aria-current="page" class="btn">Blog</a>
-  </nav>
-</header>
+<h1>📸 Blog Aravis Parapente</h1>
 
-<main>
-  <h1>Le Blog d'Aravis Parapente</h1>
+<form id="postForm">
+  <input type="text" id="titre" placeholder="Titre" required>
+  <textarea id="commentaire" placeholder="Commentaire..." required></textarea>
+  <input type="file" id="photo" accept="image/*" required>
+  <input type="password" id="code" placeholder="Code secret" required>
+  <button type="submit">Publier</button>
+</form>
 
-  <form id="formPost">
-    <input type="text" id="titre" placeholder="Titre de l'article" required>
-    <textarea id="commentaire" placeholder="Écris ton commentaire ici..." required></textarea>
-    <input type="file" id="photo" accept="image/*" capture="environment" required>
-    <button type="submit">Publier</button>
-  </form>
-
-  <section id="articles">
-    <article class="blog-post">
-      <h2>🌤️ Conseils pour un premier vol réussi</h2>
-      <time datetime="2025-06-27">27 juin 2025</time>
-      <p>Vous vous apprêtez à voler pour la première fois ? Voici nos conseils pour profiter pleinement de votre baptême en parapente à La Clusaz...</p>
-      <a href="article1.html">Lire l'article →</a>
-    </article>
-
-    <article class="blog-post">
-      <h2>🪂 Retour sur une saison haute en émotions</h2>
-      <time datetime="2025-06-22">22 juin 2025</time>
-      <p>La saison printemps a été marquée par des moments inoubliables avec nos passagers et de beaux vols solo. Revivez avec nous les plus belles envolées !</p>
-      <a href="article2.html">Lire l'article →</a>
-    </article>
-  </section>
-</main>
-
-<footer>
-  © 2025 Aravis Parapente – Tous droits réservés
-</footer>
+<section id="posts"></section>
 
 <script>
-document.getElementById('formPost').addEventListener('submit', function(e) {
-  e.preventDefault();
+function afficherArticles(articles) {
+  const container = document.getElementById('posts');
+  container.innerHTML = '';
+  articles.reverse().forEach(article => {
+    const el = document.createElement('div');
+    el.className = 'post';
+    el.innerHTML = `
+      <h2>${article.titre}</h2>
+      <time>${article.date}</time>
+      <p>${article.commentaire}</p>
+      <img src="${article.image}" alt="photo">
+    `;
+    container.appendChild(el);
+  });
+}
 
+fetch('articles.json')
+  .then(res => res.json())
+  .then(data => afficherArticles(data));
+
+document.getElementById('postForm').addEventListener('submit', function(e) {
+  e.preventDefault();
   const titre = document.getElementById('titre').value.trim();
   const commentaire = document.getElementById('commentaire').value.trim();
   const fichier = document.getElementById('photo').files[0];
+  const code = document.getElementById('code').value.trim();
 
-  if (!titre || !commentaire || !fichier) return;
+  if (!titre || !commentaire || !fichier || !code) return;
 
   const reader = new FileReader();
   reader.onload = function(event) {
     const imageData = event.target.result;
-    const date = new Date().toLocaleDateString('fr-FR');
+    const formData = new FormData();
+    formData.append('titre', titre);
+    formData.append('commentaire', commentaire);
+    formData.append('image', imageData);
+    formData.append('code', code);
 
-    const article = document.createElement('article');
-    article.className = 'blog-post';
-    article.innerHTML = `
-      <h2>${titre}</h2>
-      <time>${date}</time>
-      <p>${commentaire}</p>
-      <img src="${imageData}" alt="Photo publiée">
-    `;
-
-    const container = document.getElementById('articles');
-    container.prepend(article);
-    document.getElementById('formPost').reset();
+    fetch('enregistrer.php', {
+      method: 'POST',
+      body: formData
+    })
+    .then(r => r.json())
+    .then(data => {
+      if (data.success) {
+        afficherArticles(data.articles);
+        document.getElementById('postForm').reset();
+      } else {
+        alert("⛔ " + data.message);
+      }
+    });
   };
 
   reader.readAsDataURL(fichier);
