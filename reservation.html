@@ -1,1 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Réservation Vol Parapente La Clusaz | Contact Aravis Parapente</title>
+  <meta name="description" content="Réservez votre vol en parapente à La Clusaz avec Aravis Parapente. Contactez-nous facilement via notre formulaire dédié." />
+  <link rel="canonical" href="https://aravis-parapente.com/reservation.html" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body, html {
+      margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #fff; color: #333;
+    }
+    header {
+      background-color: #0055a5; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
+    }
+    header a {
+      color: white; text-decoration: none; font-weight: bold; margin-left: 15px;
+    }
+    main {
+      max-width: 700px; margin: 30px auto; padding: 0 15px;
+    }
+    h1 {
+      color: #0055a5; margin-bottom: 20px;
+    }
+    form fieldset {
+      border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 5px;
+    }
+    legend {
+      font-weight: bold;
+      padding: 0 10px;
+      color: #0055a5;
+    }
+    label {
+      display: block; margin-bottom: 5px; margin-top: 10px;
+    }
+    input[type="text"], input[type="email"], input[type="date"] {
+      width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;
+    }
+    button {
+      background-color: #0055a5; color: white; border: none; padding: 12px 25px; border-radius: 5px;
+      font-size: 1em; cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #003f7d;
+    }
+    footer {
+      text-align: center; padding: 20px; background: #333; color: white; font-size: 0.9em; margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div><strong>Aravis Parapente</strong></div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="reservation.html" aria-current="page">Réservation</a>
+    <a href="galerie.html">Galerie</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Réservation & Contact</h1>
+  <p>Vous souhaitez réserver un vol en parapente à La Clusaz ? Remplissez le formulaire ci-dessous, nous vous recontacterons rapidement.</p>
+
+  <form action="https://formspree.io/f/mzzgepll" method="POST" novalidate>
+    <fieldset>
+      <legend>Vos coordonnées</legend>
+      <label for="nom">Nom Prénom téléphone :</label>
+      <input type="text" id="nom" name="Nom" required />
+
+      <label for="email">Email :</label>
+      <input type="email" id="email" name="Email" required />
+    </fieldset>
+
+    <fieldset>
+      <legend>Informations passager</legend>
+      <label for="passagerNom">Nom Prénom Poids Téléphone du passager :</label>
+      <input type="text" id="passagerNom" name="Nom passager" required />
+    </fieldset>
+
+    <fieldset>
+      <legend>Disponibilités</legend>
+      <label for="dateDebut">Date de début :</label>
+      <input type="date" id="dateDebut" name="Date début" required />
+
+      <label for="dateFin">Date de fin :</label>
+      <input type="date" id="dateFin" name="Date fin" required />
+    </fieldset>
+
+    <input type="hidden" name="_format" value="plain" />
+    <input type="hidden" name="_subject" value="Demande de vol Aravis Parapente" />
+
+    <button type="submit">Envoyer ma demande</button>
+  </form>
+</main>
+
+<footer>
+  © 2025 Aravis Parapente – Tous droits réservés
+</footer>
+
+</body>
+</html>
 
