@@ -192,20 +192,46 @@ button[type="submit"]:focus {
   background-color: #004080;
   outline: none;
 }
+header {
+  padding: 0 20px;
+  background-image: url('image/antho.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 0;
+}
+
+nav {
+  position: relative;
+  z-index: 1;
+}
 
   </style>
 </head>
 <body>
 
 <header>
- <nav>
-  <a href="index.html" class="btn">Accueil</a>
-  <a href="bapteme-parapente-la-clusaz.html"  class="btn">Vols / Bon cadeau</a>
-  <a href="reservation.html" aria-current="page" class="btn">Réservation</a>
-  <a href="galerie.html" class="btn">Galerie</a>
-  <a href="blog.html" class="btn">Blog</a>
- </nav>
+  <nav>
+    <a href="index.html" class="btn">Accueil</a>
+    <a href="bapteme-parapente-la-clusaz.html"  class="btn">Vols / Bon cadeau</a>
+    <a href="reservation.html" aria-current="page" class="btn">Réservation</a>
+    <a href="galerie.html" class="btn">Galerie</a>
+    <a href="blog.html" class="btn">Blog</a>
+  </nav>
 </header>
+
 
 <main>
   <h1>Réservation & Contact</h1>
