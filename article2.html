@@ -17,17 +17,36 @@
       margin-right: auto;
       padding: 20px;
     }
-    header, footer {
-      text-align: center;
-      padding: 10px 0;
-      color: white;
+    header {
+      position: relative;
+      height: 40vh;
+      overflow: hidden;
       background-color: #005a9c;
+      text-align: center;
+      color: white;
       font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    h1 {
-      color: #005a9c;
+    header video, header img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    header h1 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
       font-size: 2rem;
-      margin-bottom: 10px;
+      text-shadow: 0 0 5px rgba(0,0,0,0.7);
+      padding: 0 10px;
+    }
+    nav {
+      margin-bottom: 20px;
     }
     time {
       color: #666;
@@ -48,14 +67,28 @@
     a:hover, a:focus {
       text-decoration: underline;
     }
-    nav {
-      margin-bottom: 20px;
+    footer {
+      text-align: center;
+      padding: 10px 0;
+      color: white;
+      background-color: #005a9c;
+      font-weight: bold;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
 
 <header>
+  <!-- Décommente cette ligne pour utiliser une vidéo -->
+  <video autoplay muted loop playsinline>
+    <source src="video/saison-printemps.mp4" type="video/mp4" />
+    Votre navigateur ne supporte pas la vidéo.
+  </video>
+
+  <!-- Ou décommente celle-ci pour utiliser une image -->
+  <!-- <img src="images/saison-printemps.jpg" alt="Retour sur la saison printemps" /> -->
+
   <h1>Retour sur la saison printemps</h1>
 </header>
 
