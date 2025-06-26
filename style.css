@@ -148,6 +148,30 @@ footer {
   .hero-text {
     max-width: 500px;
   }
+  /* === SECTION LOCALISATION === */
+.section-localisation {
+  padding: 60px 20px;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.section-localisation h2 {
+  color: #007bff;
+  font-size: 2em;
+  margin-bottom: 30px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.map-container {
+  width: 100%;
+  max-width: 1000px;
+  height: 450px;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
 
   .logo {
     width: 100px;
