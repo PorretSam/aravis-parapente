@@ -186,16 +186,15 @@ a.btn {
   font-weight: bold;
   font-size: 1rem;
   text-align: center;
+  transition: background-color 0.3s ease;
 
-  width: 140px; /* fixe la largeur */
-  white-space: normal; /* permet 2 lignes max */
-  line-height: 1.2;
-  height: auto;
-  word-wrap: break-word;
-
-  position: relative;
-  z-index: 1;
+  width: 140px;            /* largeur uniforme */
+  white-space: normal;     /* permet de revenir à la ligne */
+  line-height: 1.3;        /* meilleure lisibilité */
+  height: auto;            /* hauteur adaptable */
+  word-wrap: break-word;   /* coupe proprement les mots si besoin */
 }
+
 a.btn:hover,
 a.btn:focus {
   background-color: #004080;
