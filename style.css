@@ -40,16 +40,24 @@ nav {
 }
 
 nav a.btn {
-  flex: 0 1 120px;
-  max-width: 120px;
-  padding: 8px 10px;
-  font-size: 0.9rem;
+  flex: 0 1 130px; /* fixe */
+  min-width: 110px; /* protection anti-casse */
+  max-width: 130px;
+  padding: 10px 12px;
+  font-size: 0.85rem;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   box-sizing: border-box;
+  background-color: #005a9c;
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
+
 
 nav a.btn:hover,
 nav a.btn:focus {
