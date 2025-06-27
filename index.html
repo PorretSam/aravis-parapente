@@ -3,60 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Parapente La Clusaz - Vols biplace avec moniteur | Aravis Parapente </title>
+  <title>Parapente La Clusaz - Vols biplace avec moniteur | Aravis Parapente</title>
   <meta name="description" content="Découvrez les sensations du parapente à La Clusaz avec Aravis Parapente. Vols biplace encadrés par des moniteurs diplômés, bons cadeaux. Réservation simple et rapide." />
   <link rel="canonical" href="https://aravis-parapente.com/" />
   <link rel="stylesheet" href="style.css" />
 
-  
+  <style>
+    header {
+      background-image: url('image/aravis-parapente.jpg');
+    }
+
+    .hero-text {
+      max-width: 600px;
+      font-size: 1.6em;
+      line-height: 1.3;
+      margin: 0 20px 20px;
+    }
+
+    .hero-text h1 {
+      font-size: 1.6em; /* adapte à index, plus petit que global */
+    }
+
+    .logo {
+      position: static; /* on enlève absolute */
+      width: 80px;
+      margin-left: 15px;
+      vertical-align: middle;
+    }
+
+    /* Version desktop pour logo et hero-text */
+    @media (min-width: 768px) {
+      .hero-text {
+        max-width: 500px;
+      }
+      .logo {
+        width: 100px;
+      }
+    }
+  </style>
 </head>
 
-   header {
-  background-image: url('image/aravis-parapente.jpg');
-}
-
-.hero-text {
-  max-width: 600px;
-  font-size: 1.6em;
-  line-height: 1.3;
-  margin: 0 20px 20px;
-}
-
-.hero-text h1 {
-  font-size: 1.6em; /* adapte à index, plus petit que global */
-}
-
-.logo {
-  position: static; /* on enlève absolute */
-  width: 80px;
-  margin-left: 15px;
-  vertical-align: middle;
-}
-
-/* Version desktop pour logo et hero-text */
-@media (min-width: 768px) {
-  .hero-text {
-    max-width: 500px;
-  }
-  .logo {
-    width: 100px;
-  }
-}
-
-  </style>
 <body>
   <header>
-   <nav>
-  <a href="index.html" class="btn">Accueil</a>
-  <a href="bapteme-parapente-la-clusaz.html" class="btn">Vols / Bon cadeau</a>
-  <a href="galerie.html" class="btn">Galerie</a>
-  <a href="reservation.html" class="btn">Réservation</a>
-  <a href="blog.html" class="btn">Blog</a>
-</nav>
-
-   
-
-     </header>
+    <nav>
+      <a href="index.html" class="btn">Accueil</a>
+      <a href="bapteme-parapente-la-clusaz.html" class="btn">Vols / Bon cadeau</a>
+      <a href="galerie.html" class="btn">Galerie</a>
+      <a href="reservation.html" class="btn">Réservation</a>
+      <a href="blog.html" class="btn">Blog</a>
+    </nav>
+  </header>
 
   <img src="image/flyer2025.png" alt="Flyer 2025 Aravis Parapente" class="fullwidth-image" />
  
