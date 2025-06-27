@@ -33,24 +33,36 @@ header.autres {
 /* === NAVIGATION === */
 nav {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap;       /* autorise le retour à la ligne */
   gap: 10px;
   padding: 20px;
   background: rgba(0, 0, 0, 0.5);
+  justify-content: center; /* centre les boutons sur chaque ligne */
+  max-width: 800px;      /* largeur max pour limiter les lignes */
+  margin: 0 auto;        /* centre horizontalement le nav */
 }
 
-nav a {
+nav a.btn {
+  flex: 1 1 140px;       /* boutons flexibles, minimum 140px */
+  max-width: 180px;      /* limite la largeur max des boutons */
   color: white;
   text-decoration: none;
   font-weight: bold;
-  padding: 8px 12px;
+  padding: 10px 0;
   border-radius: 5px;
+  text-align: center;
+  white-space: nowrap;   /* empêche le retour à la ligne dans le bouton */
+  overflow: hidden;
+  text-overflow: ellipsis;
   transition: background-color 0.3s ease;
+  cursor: pointer;
+  box-sizing: border-box;
+  user-select: none;
 }
 
-nav a:hover,
-nav a:focus {
-  background-color: rgba(255, 255, 255, 0.3);
+nav a.btn:hover,
+nav a.btn:focus {
+  background-color: #004080;
   outline: none;
 }
 
@@ -179,30 +191,7 @@ footer {
 
 /* === BOUTONS LIENS NAVIGATION === */
 a.btn {
-  display: inline-block;
-  background-color: #005a9c;
-  color: white;
-  text-decoration: none;
-  padding: 10px 18px;
-  border-radius: 5px;
-  font-weight: bold;
-  font-size: 1rem;
-  text-align: center;
-  transition: background-color 0.3s ease;
-
-  width: auto;           /* largeur automatique */
-  min-width: 140px;      /* largeur minimale uniforme */
-  white-space: nowrap;   /* empêche le retour à la ligne */
-  line-height: normal;   
-  height: auto;
-  overflow: hidden;      /* cache dépassement */
-  text-overflow: ellipsis; /* ajoute ... si trop long */
-}
-
-a.btn:hover,
-a.btn:focus {
-  background-color: #004080;
-  outline: none;
+  /* Styles déjà dans nav a.btn, tu peux retirer cette section si elle est doublon */
 }
 
 /* === BOUTON FORMULAIRE === */
