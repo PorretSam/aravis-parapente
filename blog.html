@@ -95,45 +95,17 @@
       color: #777;
     }
 
+    .blog-post img {
+      max-width: 100%;
+      margin-top: 10px;
+      border-radius: 8px;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
       font-size: 0.9rem;
       background-color: #eee;
-    }
-
-    form {
-      margin-bottom: 40px;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    form input, form textarea, form button {
-      width: 100%;
-      font-size: 1rem;
-      margin-bottom: 10px;
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    form button {
-      background-color: #005a9c;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    form button:hover {
-      background-color: #003f6d;
-    }
-
-    .blog-post img {
-      max-width: 100%;
-      margin-top: 10px;
-      border-radius: 8px;
     }
   </style>
 </head>
@@ -151,13 +123,6 @@
 
 <main>
   <h1>Le Blog d'Aravis Parapente</h1>
-
-  <form id="formPost">
-    <input type="text" id="titre" placeholder="Titre de l'article" required>
-    <textarea id="commentaire" placeholder="Écris ton commentaire ici..." required></textarea>
-    <input type="file" id="photo" accept="image/*" capture="environment" required>
-    <button type="submit">Publier</button>
-  </form>
 
   <section id="articles">
     <article class="blog-post">
@@ -179,39 +144,6 @@
 <footer>
   © 2025 Aravis Parapente – Tous droits réservés
 </footer>
-
-<script>
-document.getElementById('formPost').addEventListener('submit', function(e) {
-  e.preventDefault();
-
-  const titre = document.getElementById('titre').value.trim();
-  const commentaire = document.getElementById('commentaire').value.trim();
-  const fichier = document.getElementById('photo').files[0];
-
-  if (!titre || !commentaire || !fichier) return;
-
-  const reader = new FileReader();
-  reader.onload = function(event) {
-    const imageData = event.target.result;
-    const date = new Date().toLocaleDateString('fr-FR');
-
-    const article = document.createElement('article');
-    article.className = 'blog-post';
-    article.innerHTML = `
-      <h2>${titre}</h2>
-      <time>${date}</time>
-      <p>${commentaire}</p>
-      <img src="${imageData}" alt="Photo publiée">
-    `;
-
-    const container = document.getElementById('articles');
-    container.prepend(article);
-    document.getElementById('formPost').reset();
-  };
-
-  reader.readAsDataURL(fichier);
-});
-</script>
 
 </body>
 </html>
