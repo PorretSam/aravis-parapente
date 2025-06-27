@@ -21,7 +21,7 @@
 
     header {
       padding: 0 20px;
-      background-image: url('image/antho.jpg'); /* Change si le chemin est différent */
+      background-image: url('image/antho.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -30,6 +30,7 @@
       align-items: center;
       justify-content: center;
       position: relative;
+      flex-direction: column;
     }
 
     header::before {
@@ -48,6 +49,10 @@
       flex-wrap: wrap;
       position: relative;
       z-index: 1;
+      width: 100%;
+      padding: 10px 0;
+      background: rgba(255, 255, 255, 0.1);
+      box-sizing: border-box;
     }
 
     nav a.btn {
@@ -91,12 +96,17 @@
       color: #005a9c;
       font-weight: bold;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     main {
       max-width: 1000px;
       margin: 0 auto;
       padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
     section.offer {
@@ -172,7 +182,8 @@
       }
     }
 
-    button[type="submit"] {
+    /* Harmonisation bouton formulaire avec btn du menu */
+    button.btn {
       background-color: #005a9c;
       color: white;
       border: none;
@@ -184,10 +195,12 @@
       transition: background-color 0.3s ease;
       margin-top: 15px;
       display: inline-block;
+      position: relative;
+      z-index: 1;
     }
 
-    button[type="submit"]:hover,
-    button[type="submit"]:focus {
+    button.btn:hover,
+    button.btn:focus {
       background-color: #004080;
       outline: none;
     }
@@ -207,7 +220,7 @@
 
 <main>
   <h1>Réservation & Contact</h1>
-  <p>Sam Porret au 06 88 07 04 72 <Br> Julien Wirtz au 06 82 95 85 42</p>
+  <p>Sam Porret au 06 88 07 04 72 <br> Julien Wirtz au 06 82 95 85 42</p>
   <p>Vous souhaitez réserver un vol en parapente à La Clusaz ? Remplissez le formulaire ci-dessous, nous vous recontacterons rapidement.</p>
 
   <form action="https://formspree.io/f/mzzgepll" method="POST" novalidate>
@@ -238,7 +251,7 @@
     <input type="hidden" name="_format" value="plain" />
     <input type="hidden" name="_subject" value="Demande de vol Aravis Parapente" />
 
-    <button type="submit">Envoyer ma demande</button>
+    <button type="submit" class="btn">Envoyer ma demande</button>
   </form>
 </main>
 
