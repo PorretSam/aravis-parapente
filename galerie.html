@@ -1,90 +1,66 @@
-/* RESET basique */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Galerie Photos – Aravis Parapente</title>
+  <meta name="description" content="Découvrez nos plus belles photos de parapente à La Clusaz, capturées dans les Aravis." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  background-color: #f9f9f9;
-  color: #333;
-  padding: 20px;
-}
+  <header>
+    <nav>
+      <a href="index.html" class="btn">Accueil</a>
+      <a href="bapteme-parapente-la-clusaz.html" class="btn">Vols / Bon cadeau</a>
+      <a href="galerie.html" class="btn active">Galerie</a>
+      <a href="reservation.html" class="btn">Réservation</a>
+      <a href="blog.html" class="btn">Blog</a>
+    </nav>
+    <h1>Galerie Parapente – La Clusaz</h1>
+  </header>
 
-/* NAVIGATION - boutons alignés horizontalement */
-nav {
-  background-color: #0077cc;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
-}
+  <main>
+    <div class="gallery">
+      <div class="gallery-item"><img src="image/aravis-parapente-bapteme-clusaz-vertical.jpg" alt="Baptême Parapente Clusaz" /></div>
+      <div class="gallery-item"><img src="image/hiver-aiguille.jpg" alt="Parapente Aiguille" /></div>
+      <div class="gallery-item"><img src="image/aravis-parapente-bapteme-giettaz.jpg" alt="Giettaz Parapente" /></div>
+      <div class="gallery-item"><img src="image/aravis-parapente-bapteme-giettaz-mont-blanc.jpg" alt="Vue Mont Blanc" /></div>
+      <div class="gallery-item"><img src="image/aravis-parapente-bapteme-sensation.jpg" alt="Sensation Aravis" /></div>
+      <div class="gallery-item"><img src="image/clusaz-parapente.jpg" alt="Parapente La Clusaz" /></div>
+      <div class="gallery-item"><img src="image/gonflage-col-des-aravis.jpg" alt="Gonflage Aravis" /></div>
+      <div class="gallery-item"><img src="image/gonflage-parapente2.JPG" alt="Gonflage" /></div>
+      <div class="gallery-item"><img src="image/nuage_clusaz_parapente_edited.jpg" alt="Nuages Clusaz" /></div>
+      <div class="gallery-item"><img src="image/parapente-cret-du-merle-aravis-parapente.jpg" alt="Crêt du Merle" /></div>
+      <div class="gallery-item"><img src="image/pente-ecole-2023.jpg" alt="Pente école 2023" /></div>
+      <div class="gallery-item"><img src="image/parapente-hiver-beauregard.jpg" alt="Beauregard Hiver" /></div>
+      <div class="gallery-item"><img src="image/prestige-balme.jpg" alt="Prestige Balme" /></div>
+      <div class="gallery-item"><img src="image/samuel-porret-aravis-parapente-4100.jpg" alt="Samuel Porret 4100" /></div>
+      <div class="gallery-item"><img src="image/julien-wirtz.png" alt="Julien Wirtz" /></div>
+      <div class="gallery-item">
+        <video controls>
+          <source src="video/decollage-aiguille.mp4" type="video/mp4" />
+          Votre navigateur ne supporte pas la vidéo.
+        </video>
+      </div>
+      <div class="gallery-item">
+        <video controls>
+          <source src="video/decollage-pessestin.mp4" type="video/mp4" />
+          Votre navigateur ne supporte pas la vidéo.
+        </video>
+      </div>
+      <div class="gallery-item">
+        <video controls>
+          <source src="video/sensation.mp4" type="video/mp4" />
+          Votre navigateur ne supporte pas la vidéo.
+        </video>
+      </div>
+    </div>
+  </main>
 
-nav .btn {
-  color: white;
-  text-decoration: none;
-  padding: 8px 16px;
-  background-color: #0099ff;
-  border-radius: 4px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
+  <footer>
+    <p>© 2025 Aravis Parapente</p>
+  </footer>
 
-nav .btn:hover {
-  background-color: #005fa3;
-}
-
-nav .btn.active {
-  background-color: #003f66;
-  cursor: default;
-}
-
-/* HEADER */
-header h1 {
-  text-align: center;
-  margin: 20px 0 30px;
-  font-weight: 700;
-}
-
-/* GALERIE */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 15px;
-  max-width: 1200px;
-  margin: 0 auto 50px;
-}
-
-.gallery-item {
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  background: white;
-}
-
-.gallery-item img,
-.gallery-item video {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-  border-radius: 8px;
-}
-
-.gallery-item img:hover,
-.gallery-item video:hover {
-  transform: scale(1.05);
-  cursor: pointer;
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #777;
-  margin-top: 40px;
-}
+</body>
+</html>
