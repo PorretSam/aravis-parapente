@@ -1,76 +1,105 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17197907136"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-17197907136');
-  </script>
-
-  <!-- Google Tag Manager -->
-  <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-PCFNSRMR');
-  </script>
-
-  <!-- Meta & Styles -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Réservation Vol Parapente – Aravis Parapente</title>
-  <meta name="description" content="Réservez votre baptême de parapente à La Clusaz avec Aravis Parapente. Choisissez votre date et recevez une confirmation rapidement !" />
+  <title>Réservation Vol Parapente La Clusaz | Contact Aravis Parapente</title>
+  <meta name="description" content="Réservez votre vol en parapente à La Clusaz avec Aravis Parapente. Contactez-nous facilement via notre formulaire dédié." />
+  <link rel="canonical" href="https://aravis-parapente.com/reservation.html" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body, html {
+      margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #fff; color: #333;
+    }
+    header {
+      background-color: #0055a5; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
+    }
+    header a {
+      color: white; text-decoration: none; font-weight: bold; margin-left: 15px;
+    }
+    main {
+      max-width: 700px; margin: 30px auto; padding: 0 15px;
+    }
+    h1 {
+      color: #0055a5; margin-bottom: 20px;
+    }
+    form fieldset {
+      border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 5px;
+    }
+    legend {
+      font-weight: bold;
+      padding: 0 10px;
+      color: #0055a5;
+    }
+    label {
+      display: block; margin-bottom: 5px; margin-top: 10px;
+    }
+    input[type="text"], input[type="email"], input[type="date"] {
+      width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;
+    }
+    button {
+      background-color: #0055a5; color: white; border: none; padding: 12px 25px; border-radius: 5px;
+      font-size: 1em; cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #003f7d;
+    }
+    footer {
+      text-align: center; padding: 20px; background: #333; color: white; font-size: 0.9em; margin-top: 40px;
+    }
+  </style>
 </head>
-
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PCFNSRMR"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-  <!-- Header avec navigation -->
-  <header>
-    <nav>
-      <a href="index.html" class="btn">Accueil</a>
-      <a href="bapteme-parapente-la-clusaz.html" class="btn">Vols / Bon cadeau</a>
-      <a href="galerie.html" class="btn">Galerie</a>
-      <a href="reservation.html" class="btn">Réservation</a>
-      <a href="blog.html" class="btn">Blog</a>
-    </nav>
-    <h1>Réservez votre vol en parapente</h1>
-  </header>
+<header>
+  <div><strong>Aravis Parapente</strong></div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="reservation.html" aria-current="page">Réservation</a>
+    <a href="galerie.html">Galerie</a>
+  </nav>
+</header>
 
-  <!-- Contenu principal -->
-  <main>
-    <section class="reservation-form" style="max-width:600px;margin:40px auto;padding:20px;background:white;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);">
-      <form action="traitement-reservation.php" method="POST">
-        <label for="nom">Nom :</label><br>
-        <input type="text" id="nom" name="nom" required><br><br>
+<main>
+  <h1>Réservation & Contact</h1>
+  <p>Vous souhaitez réserver un vol en parapente à La Clusaz ? Remplissez le formulaire ci-dessous, nous vous recontacterons rapidement.</p>
 
-        <label for="email">Email :</label><br>
-        <input type="email" id="email" name="email" required><br><br>
+  <form action="https://formspree.io/f/mzzgepll" method="POST" novalidate>
+    <fieldset>
+      <legend>Vos coordonnées</legend>
+      <label for="nom">Nom Prénom téléphone :</label>
+      <input type="text" id="nom" name="Nom" required />
 
-        <label for="telephone">Téléphone :</label><br>
-        <input type="tel" id="telephone" name="telephone" required><br><br>
+      <label for="email">Email :</label>
+      <input type="email" id="email" name="Email" required />
+    </fieldset>
 
-        <label for="date">Date souhaitée :</label><br>
-        <input type="date" id="date" name="date" required><br><br>
+    <fieldset>
+      <legend>Informations passager</legend>
+      <label for="passagerNom">Nom Prénom Poids Téléphone du passager :</label>
+      <input type="text" id="passagerNom" name="Nom passager" required />
+    </fieldset>
 
-        <label for="message">Message ou demande particulière :</label><br>
-        <textarea id="message" name="message" rows="5"></textarea><br><br>
+    <fieldset>
+      <legend>Disponibilités</legend>
+      <label for="dateDebut">Date de début :</label>
+      <input type="date" id="dateDebut" name="Date début" required />
 
-        <button type="submit" class="btn">Envoyer la demande</button>
-      </form>
-    </section>
-  </main>
+      <label for="dateFin">Date de fin :</label>
+      <input type="date" id="dateFin" name="Date fin" required />
+    </fieldset>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Aravis Parapente</p>
-  </footer>
+    <input type="hidden" name="_format" value="plain" />
+    <input type="hidden" name="_subject" value="Demande de vol Aravis Parapente" />
+
+    <button type="submit">Envoyer ma demande</button>
+  </form>
+</main>
+
+<footer>
+  © 2025 Aravis Parapente – Tous droits réservés
+</footer>
+
 </body>
 </html>
