@@ -40,12 +40,10 @@ nav {
 }
 
 nav a.btn {
-  flex: 0 1 130px; /* fixe */
-  min-width: 110px; /* protection anti-casse */
+  flex: 0 1 130px;   /* un peu plus large */
   max-width: 130px;
-  padding: 10px 12px;
-  font-size: 0.85rem;
-  text-align: center;
+  min-width: 110px;  /* éviter que ça soit trop petit */
+  padding: 8px 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
