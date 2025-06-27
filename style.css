@@ -14,14 +14,37 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap; /* au cas où sur petit écran */
 }
 
 /* Liens dans header (navigation principale) */
-header a {
+header nav {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+header a.btn {
   color: white;
   text-decoration: none;
   font-weight: bold;
-  margin-left: 15px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: #005a9c;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+header a.btn:hover,
+header a.btn:focus {
+  background-color: #004080;
+  outline: none;
+}
+
+header a.btn.active {
+  background-color: #003060;
+  cursor: default;
+  pointer-events: none;
 }
 
 /* === Pied de page === */
@@ -36,71 +59,15 @@ footer {
 
 /* === Titres === */
 h1 {
-  margin: 0 0 20px 0;
+  margin: 20px 0 20px;
   font-size: 2rem;
   color: #0055a5;
   text-align: center;
+  width: 100%;
 }
 
 /* === Navigation (menu) === */
-nav {
-  display: flex;
-  flex-wrap: wrap;             /* Autorise retour à la ligne */
-  justify-content: center;     /* Centre les boutons */
-  gap: 10px;
-  padding: 20px;
-  max-height: calc(2 * 48px);  /* Limite à 2 lignes environ */
-  overflow: hidden;            /* Cache tout dépassement */
-  background: rgba(0, 0, 0, 0.4);
-  -webkit-overflow-scrolling: touch;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 8px 12px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  white-space: nowrap;        /* Empêche retour à la ligne dans le texte */
-  font-size: 1rem;
-  min-width: 140px;
-  text-align: center;
-}
-
-nav a:hover,
-nav a:focus {
-  background-color: rgba(255, 255, 255, 0.3);
-  outline: none;
-}
-
-/* === Boutons généraux === */
-a.btn,
-button.btn {
-  display: inline-block;
-  background-color: #005a9c;
-  color: white;
-  text-decoration: none;
-  padding: 10px 18px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  font-weight: bold;
-  font-size: 1rem;
-  white-space: nowrap;
-  min-width: 140px;
-  text-align: center;
-  border: none;
-  cursor: pointer;
-  box-sizing: border-box;
-}
-
-a.btn:hover,
-a.btn:focus,
-button.btn:hover,
-button.btn:focus {
-  background-color: #004080;
-  outline: none;
-}
+/* Supprimé ici car géré dans header nav */
 
 /* === Galerie responsive === */
 .gallery {
@@ -138,90 +105,31 @@ button.btn:focus {
 
 /* === Formulaires === */
 main {
-  max-width: 700px;
+  max-width: 1000px;
   margin: 30px auto;
   padding: 0 15px;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-form fieldset {
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-}
-
-legend {
-  font-weight: bold;
-  padding: 0 10px;
-  color: #0055a5;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-  margin-top: 10px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="date"],
-textarea {
-  width: 100%;
-  padding: 8px 10px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-family: Arial, sans-serif;
-}
-
-/* Bouton d’envoi formulaire */
-button.btn {
-  margin-top: 15px;
-  background-color: #005a9c;
-  color: white;
-  padding: 12px 25px;
-  border-radius: 5px;
-  font-size: 1em;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  border: none;
-}
-
-button.btn:hover {
-  background-color: #004080;
-}
-
 /* === Responsive ajustements === */
 @media (max-width: 600px) {
-  nav {
-    flex-wrap: wrap;            /* autorise passage à la ligne */
-    justify-content: center;
-    max-height: calc(2 * 48px); /* limite à 2 lignes environ */
-    overflow: hidden;           /* masque le dépassement */
+  header {
+    flex-direction: column;
+    align-items: center;
   }
 
-  nav a {
-    white-space: normal;        /* autorise retour à la ligne dans le texte */
-    padding: 8px 10px;
-    font-size: 0.9em;
+  header nav {
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+
+  header a.btn {
     min-width: unset;
+    padding: 8px 12px;
+    font-size: 0.9rem;
   }
 
   .gallery {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     padding: 15px;
-  }
-
-  a.btn,
-  button.btn {
-    min-width: unset;
-    width: 100%;
   }
 }
