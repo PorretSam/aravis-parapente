@@ -1,263 +1,76 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17197907136"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17197907136');
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PCFNSRMR');
+  </script>
+
+  <!-- Meta & Styles -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Réservation Vol Parapente La Clusaz | Contact Aravis Parapente</title>
-  <meta name="description" content="Réservez votre vol en parapente à La Clusaz avec Aravis Parapente. Contactez-nous facilement via notre formulaire dédié." />
-  <link rel="canonical" href="https://aravis-parapente.com/reservation.html" />
+  <title>Réservation Vol Parapente – Aravis Parapente</title>
+  <meta name="description" content="Réservez votre baptême de parapente à La Clusaz avec Aravis Parapente. Choisissez votre date et recevez une confirmation rapidement !" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-    }
-
-    header {
-      padding: 0 20px;
-      background-image: url('image/antho.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      height: 40vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      flex-direction: column;
-    }
-
-    header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 0;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      padding: 10px 0;
-      background: rgba(255, 255, 255, 0.1);
-      box-sizing: border-box;
-    }
-
-    nav a.btn {
-      display: inline-block;
-      background-color: #005a9c;
-      color: white;
-      text-decoration: none;
-      padding: 10px 18px;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-      font-weight: bold;
-      font-size: 1rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    nav a.btn::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(0, 0, 0, 0.4);
-      border-radius: 5px;
-      z-index: -1;
-      transition: background-color 0.3s ease;
-    }
-
-    nav a.btn:hover,
-    nav a.btn:focus {
-      background-color: #004080;
-      outline: none;
-    }
-
-    nav a.btn:hover::before,
-    nav a.btn:focus::before {
-      background-color: rgba(0, 0, 0, 0.6);
-    }
-
-    h1 {
-      margin: 2px 0;
-      font-size: 2rem;
-      color: #005a9c;
-      font-weight: bold;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    main {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 20px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
-    section.offer {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      margin-bottom: 25px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      padding: 15px;
-      gap: 20px;
-    }
-
-    section.offer a.offer-image {
-      display: block;
-      flex-shrink: 0;
-      max-width: 200px;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    section.offer a.offer-image img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 10px;
-      transition: transform 0.3s ease;
-    }
-
-    section.offer a.offer-image:hover img,
-    section.offer a.offer-image:focus img {
-      transform: scale(1.05);
-    }
-
-    .offer-content {
-      flex: 1;
-    }
-
-    .offer-content h2 {
-      margin-top: 0;
-      font-size: 1.5rem;
-      margin-bottom: 8px;
-      color: #005a9c;
-    }
-
-    .offer-content p {
-      margin: 0 0 10px;
-      line-height: 1.4;
-    }
-
-    .offer-content a.btn {
-      margin-top: 5px;
-      display: inline-block;
-    }
-
-    footer p {
-      margin: 0;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 600px) {
-      section.offer {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      section.offer a.offer-image {
-        max-width: 100%;
-      }
-      video {
-        max-width: 100%;
-        border-radius: 10px;
-      }
-    }
-
-    /* Harmonisation bouton formulaire avec btn du menu */
-    button.btn {
-      background-color: #005a9c;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 5px;
-      font-weight: bold;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      margin-top: 15px;
-      display: inline-block;
-      position: relative;
-      z-index: 1;
-    }
-
-    button.btn:hover,
-    button.btn:focus {
-      background-color: #004080;
-      outline: none;
-    }
-  </style>
 </head>
+
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PCFNSRMR"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-<header>
-  <nav>
-    <a href="index.html" class="btn">Accueil</a>
-    <a href="bapteme-parapente-la-clusaz.html" class="btn">Vols / Bon cadeau</a>
-    <a href="reservation.html" aria-current="page" class="btn">Réservation</a>
-    <a href="galerie.html" class="btn">Galerie</a>
-    <a href="blog.html" class="btn">Blog</a>
-  </nav>
-</header>
+  <!-- Header avec navigation -->
+  <header>
+    <nav>
+      <a href="index.html" class="btn">Accueil</a>
+      <a href="bapteme-parapente-la-clusaz.html" class="btn">Vols / Bon cadeau</a>
+      <a href="galerie.html" class="btn">Galerie</a>
+      <a href="reservation.html" class="btn">Réservation</a>
+      <a href="blog.html" class="btn">Blog</a>
+    </nav>
+    <h1>Réservez votre vol en parapente</h1>
+  </header>
 
-<main>
-  <h1>Réservation & Contact</h1>
-  <p>Sam Porret au 06 88 07 04 72 <br> Julien Wirtz au 06 82 95 85 42</p>
-  <p>Vous souhaitez réserver un vol en parapente à La Clusaz ? Remplissez le formulaire ci-dessous, nous vous recontacterons rapidement.</p>
+  <!-- Contenu principal -->
+  <main>
+    <section class="reservation-form" style="max-width:600px;margin:40px auto;padding:20px;background:white;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+      <form action="traitement-reservation.php" method="POST">
+        <label for="nom">Nom :</label><br>
+        <input type="text" id="nom" name="nom" required><br><br>
 
-  <form action="https://formspree.io/f/mzzgepll" method="POST" novalidate>
-    <fieldset>
-      <legend>Vos coordonnées</legend>
-      <label for="nom">Nom Prénom téléphone :</label>
-      <input type="text" id="nom" name="Nom" required />
+        <label for="email">Email :</label><br>
+        <input type="email" id="email" name="email" required><br><br>
 
-      <label for="email">Email :</label>
-      <input type="email" id="email" name="Email" required />
-    </fieldset>
+        <label for="telephone">Téléphone :</label><br>
+        <input type="tel" id="telephone" name="telephone" required><br><br>
 
-    <fieldset>
-      <legend>Informations passager</legend>
-      <label for="passagerNom">Nom Prénom Poids Téléphone du passager :</label>
-      <input type="text" id="passagerNom" name="Nom passager" required />
-    </fieldset>
+        <label for="date">Date souhaitée :</label><br>
+        <input type="date" id="date" name="date" required><br><br>
 
-    <fieldset>
-      <legend>Disponibilités</legend>
-      <label for="dateDebut">Date de début :</label>
-      <input type="date" id="dateDebut" name="Date début" required />
+        <label for="message">Message ou demande particulière :</label><br>
+        <textarea id="message" name="message" rows="5"></textarea><br><br>
 
-      <label for="dateFin">Date de fin :</label>
-      <input type="date" id="dateFin" name="Date fin" required />
-    </fieldset>
+        <button type="submit" class="btn">Envoyer la demande</button>
+      </form>
+    </section>
+  </main>
 
-    <input type="hidden" name="_format" value="plain" />
-    <input type="hidden" name="_subject" value="Demande de vol Aravis Parapente" />
-
-    <button type="submit" class="btn">Envoyer ma demande</button>
-  </form>
-</main>
-
-<footer>
-  © 2025 Aravis Parapente – Tous droits réservés
-</footer>
-
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Aravis Parapente</p>
+  </footer>
 </body>
 </html>
