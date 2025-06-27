@@ -1,179 +1,228 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Galerie Photos – Aravis Parapente</title>
-  <meta name="description" content="Découvrez nos plus belles photos de parapente à La Clusaz, capturées dans les Aravis." />
-  <style>
-    /* === Réinitialisation de base === */
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
-      line-height: 1.6;
-    }
+/* === BASE === */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+  color: #333;
+}
 
-    /* === Header === */
-    header {
-      background-color: #0055a5;
-      color: white;
-      padding: 10px 20px;
-    }
+/* === HEADER PAR DÉFAUT === */
+header {
+  position: relative;
+  height: 50vh;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
 
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
+header.accueil {
+  background-image: url('image/aravis-parapente.jpg');
+  text-align: center;
+  padding: 60px 20px;
+}
 
-    nav a.btn {
-      background-color: #005a9c;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 10px 18px;
-      border-radius: 5px;
-      min-width: 120px;
-      text-align: center;
-      transition: background-color 0.3s ease;
-    }
+header.autres {
+  background-image: url('image/aravis-parapente.jpg');
+}
 
-    nav a.btn.active,
-    nav a.btn[aria-current="page"] {
-      background-color: #003f73;
-      pointer-events: none;
-      cursor: default;
-    }
+/* === NAVIGATION === */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5);
+}
 
-    nav a.btn:hover,
-    nav a.btn:focus {
-      background-color: #004080;
-      outline: none;
-    }
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
 
-    header h1 {
-      text-align: center;
-      font-size: 1.8rem;
-      margin: 0;
-      padding-bottom: 10px;
-    }
+nav a:hover,
+nav a:focus {
+  background-color: rgba(255, 255, 255, 0.3);
+  outline: none;
+}
 
-    /* === Galerie === */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      padding: 30px 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+/* === TEXTE HERO === */
+.hero-text {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 0 20px 20px 20px;
+  max-width: 90%;
+}
 
-    .gallery-item {
-      background: white;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      aspect-ratio: 4 / 3;
-    }
+.hero-text h1 {
+  font-size: 2.2em;
+  margin: 0;
+}
 
-    .gallery-item img,
-    .gallery-item video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      border-radius: 8px;
-    }
+.hero-text p {
+  font-size: 1.1em;
+  margin-top: 10px;
+  line-height: 1.4;
+}
 
-    /* === Footer === */
-    footer {
-      text-align: center;
-      background-color: #333;
-      color: white;
-      padding: 15px 20px;
-      font-size: 0.9em;
-      margin-top: 40px;
-    }
+/* === LOGO === */
+.logo {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 80px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
 
-    /* === Responsive === */
-    @media (max-width: 700px) {
-      .gallery {
-        grid-template-columns: 1fr;
-        padding: 20px 15px;
-      }
+/* === BOUTON ACCUEIL === */
+header.accueil .btn {
+  margin-top: 20px;
+  background: #ff6600;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
 
-      header h1 {
-        font-size: 1.4rem;
-      }
+/* === BOUTON UBILIZ === */
+.btn-ubiliz {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
 
-      nav a.btn {
-        min-width: unset;
-        flex: 1 1 auto;
-      }
-    }
-  </style>
-</head>
-<body>
+.btn-ubiliz:hover {
+  background-color: #0056b3;
+}
 
-  <header>
-    <nav>
-      <a href="index.html" class="btn">Accueil</a>
-      <a href="bapteme-parapente-la-clusaz.html" class="btn">Vols / Bon cadeau</a>
-      <a href="galerie.html" class="btn active">Galerie</a>
-      <a href="reservation.html" class="btn">Réservation</a>
-      <a href="blog.html" class="btn">Blog</a>
-    </nav>
-    <h1>Galerie Parapente – La Clusaz</h1>
-  </header>
+/* === CONTENU PRINCIPAL === */
+main.content {
+  padding: 20px;
+}
 
-  <main>
-    <div class="gallery">
-      <div class="gallery-item"><img src="image/aravis-parapente-bapteme-clusaz-vertical.jpg" alt="Baptême Parapente Clusaz" /></div>
-      <div class="gallery-item"><img src="image/hiver-aiguille.jpg" alt="Parapente Aiguille" /></div>
-      <div class="gallery-item"><img src="image/aravis-parapente-bapteme-giettaz.jpg" alt="Giettaz Parapente" /></div>
-      <div class="gallery-item"><img src="image/aravis-parapente-bapteme-giettaz-mont-blanc.jpg" alt="Vue Mont Blanc" /></div>
-      <div class="gallery-item"><img src="image/aravis-parapente-bapteme-sensation.jpg" alt="Sensation Aravis" /></div>
-      <div class="gallery-item"><img src="image/clusaz-parapente.jpg" alt="Parapente La Clusaz" /></div>
-      <div class="gallery-item"><img src="image/gonflage-col-des-aravis.jpg" alt="Gonflage Aravis" /></div>
-      <div class="gallery-item"><img src="image/gonflage-parapente2.JPG" alt="Gonflage" /></div>
-      <div class="gallery-item"><img src="image/nuage_clusaz_parapente_edited.jpg" alt="Nuages Clusaz" /></div>
-      <div class="gallery-item"><img src="image/parapente-cret-du-merle-aravis-parapente.jpg" alt="Crêt du Merle" /></div>
-      <div class="gallery-item"><img src="image/pente-ecole-2023.jpg" alt="Pente école 2023" /></div>
-      <div class="gallery-item"><img src="image/parapente-hiver-beauregard.jpg" alt="Beauregard Hiver" /></div>
-      <div class="gallery-item"><img src="image/prestige-balme.jpg" alt="Prestige Balme" /></div>
-      <div class="gallery-item"><img src="image/samuel-porret-aravis-parapente-4100.jpg" alt="Samuel Porret 4100" /></div>
-      <div class="gallery-item"><img src="image/julien-wirtz.png" alt="Julien Wirtz" /></div>
-      <div class="gallery-item">
-        <video controls>
-          <source src="video/decollage-aiguille.mp4" type="video/mp4" />
-          Votre navigateur ne supporte pas la vidéo.
-        </video>
-      </div>
-      <div class="gallery-item">
-        <video controls>
-          <source src="video/decollage-pessestin.mp4" type="video/mp4" />
-          Votre navigateur ne supporte pas la vidéo.
-        </video>
-      </div>
-      <div class="gallery-item">
-        <video controls>
-          <source src="video/sensation.mp4" type="video/mp4" />
-          Votre navigateur ne supporte pas la vidéo.
-        </video>
-      </div>
-    </div>
-  </main>
+section.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
 
-  <footer>
-    <p>© 2025 Aravis Parapente</p>
-  </footer>
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  width: 280px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+}
 
-</body>
-</html>
+/* === SECTION LOCALISATION === */
+.section-localisation {
+  padding: 60px 20px;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.section-localisation h2 {
+  color: #007bff;
+  font-size: 2em;
+  margin-bottom: 30px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.map-container {
+  width: 100%;
+  max-width: 1000px;
+  height: 450px;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #222;
+  color: white;
+}
+
+/* === RESPONSIVE === */
+@media (min-width: 768px) {
+  .hero-text {
+    max-width: 500px;
+  }
+
+  .logo {
+    width: 100px;
+  }
+}
+
+/* === BOUTONS LIENS NAVIGATION === */
+a.btn {
+  display: inline-block;
+  background-color: #005a9c;
+  color: white;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+  transition: background-color 0.3s ease;
+
+  width: auto;           /* largeur automatique */
+  min-width: 140px;      /* largeur minimale uniforme */
+  white-space: nowrap;   /* empêche le retour à la ligne */
+  line-height: normal;   
+  height: auto;
+  overflow: hidden;      /* cache dépassement */
+  text-overflow: ellipsis; /* ajoute ... si trop long */
+}
+
+a.btn:hover,
+a.btn:focus {
+  background-color: #004080;
+  outline: none;
+}
+
+/* === BOUTON FORMULAIRE === */
+button.btn {
+  background-color: #005a9c;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+  display: inline-block;
+  white-space: nowrap; /* empêche le retour à la ligne */
+}
+
+button.btn:hover,
+button.btn:focus {
+  background-color: #004080;
+  outline: none;
+}
