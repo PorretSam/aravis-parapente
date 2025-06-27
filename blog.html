@@ -1,149 +1,279 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PCFNSRMR');</script>
+  <!-- End Google Tag Manager -->
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Blog Parapente La Clusaz | Aravis Parapente</title>
-  <meta name="description" content="Découvrez les actualités, conseils et récits de vol en parapente à La Clusaz sur le blog Aravis Parapente." />
-  <link rel="canonical" href="https://aravis-parapente.com/blog.html" />
+  <title>Parapente La Clusaz – Baptême & Vols Sensation | Aravis Parapente</title>
+  <meta name="description" content="Vivez un baptême de parapente inoubliable à La Clusaz avec nos moniteurs diplômés. Vols biplace, sensations garanties et panorama exceptionnel sur les Aravis." />
+  <meta name="keywords" content="vol parapente, bon cadeau parapente, baptême parapente, La Clusaz, Aravis Parapente" />
+  <link rel="canonical" href="https://aravis-parapente.com/vols.html" />
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-    }
+   * {
+    box-sizing: border-box;
+  }
 
-    header {
-      padding: 0 20px;
-      background-image: url('image/antho.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      height: 40vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+  }
 
-    header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 0;
-    }
+  header, footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 20px;
+  }
 
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 1;
-    }
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
 
-    nav a.btn {
-      background-color: #005a9c;
-      color: white;
-      text-decoration: none;
-      padding: 10px 18px;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-      font-weight: bold;
-      font-size: 1rem;
-      position: relative;
-    }
+  nav a.btn {
+    display: inline-block;
+    background-color: #005a9c;
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    font-size: 1rem;
 
-    nav a.btn:hover {
-      background-color: #004080;
-    }
+    position: relative;
+    z-index: 1;
+  }
 
-    main {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 20px;
-    }
+  nav a.btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    z-index: -1;
+    transition: background-color 0.3s ease;
+  }
 
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      color: #005a9c;
-      margin-bottom: 30px;
-    }
+  nav a.btn:hover, nav a.btn:focus {
+    background-color: #004080;
+    outline: none;
+  }
 
-    .blog-post {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      padding: 20px;
-      margin-bottom: 25px;
-    }
+  nav a.btn:hover::before,
+  nav a.btn:focus::before {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
 
-    .blog-post h2 {
-      color: #005a9c;
-      margin-top: 0;
-    }
+  h1 {
+    margin: 10px 0;
+    font-size: 2rem;
+    color: #005a9c;
+    font-weight: bold;
+    text-align: center;
+  }
 
-    .blog-post p {
-      line-height: 1.6;
-    }
+  main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+  }
 
-    .blog-post time {
-      font-size: 0.9rem;
-      color: #777;
-    }
+  section.offer {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 15px;
+    gap: 20px;
+  }
 
-    .blog-post img {
+  section.offer a.offer-image {
+    display: block;
+    flex-shrink: 0;
+    max-width: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  section.offer a.offer-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+
+  section.offer a.offer-image:hover img,
+  section.offer a.offer-image:focus img {
+    transform: scale(1.05);
+  }
+
+  .offer-content {
+    flex: 1;
+  }
+
+  .offer-content h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: #005a9c;
+  }
+
+  .offer-content p {
+    margin: 0 0 10px;
+    line-height: 1.4;
+  }
+
+  .offer-content a.btn {
+    margin-top: 5px;
+    display: inline-block;
+  }
+
+  footer p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  /* Section boutons réservation */
+  #capcadeau > div {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  #capcadeau > div > div {
+    max-width: 320px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  #capcadeau img {
+    width: 60px;
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  #capcadeau h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #005a9c;
+  }
+
+  #capcadeau a.btn {
+    margin-top: 10px;
+    display: inline-block;
+  }
+
+  @media (max-width: 600px) {
+    section.offer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    section.offer a.offer-image {
       max-width: 100%;
-      margin-top: 10px;
-      border-radius: 8px;
+    }
+    video {
+      max-width: 100%;
+      border-radius: 10px;
     }
 
-    footer {
+    #capcadeau > div > div {
+      flex-direction: column;
+      align-items: center;
       text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      background-color: #eee;
     }
+
+    #capcadeau img {
+      margin-bottom: 10px;
+    }
+  }
+
   </style>
 </head>
 <body>
 
-<header>
-  <nav>
-    <a href="index.html" class="btn">Accueil</a>
-    <a href="bapteme-parapente-la-clusaz.html" class="btn">Vols / Bon cadeau</a>
-    <a href="reservation.html" class="btn">Réservation</a>
-    <a href="galerie.html" class="btn">Galerie</a>
-    <a href="blog.html" aria-current="page" class="btn">Blog</a>
-  </nav>
-</header>
+  <header>
+    <nav>
+      <a href="index.html" class="btn">Accueil</a>
+      <a href="bapteme-parapente-la-clusaz.html" aria-current="page" class="btn">Vols / Bon cadeau</a>
+      <a href="reservation.html" class="btn">Réservation</a>
+      <a href="galerie.html" class="btn">Galerie</a>
+      <a href="blog.html" class="btn">Blog</a>
+    </nav>
+  </header>
 
-<main>
-  <h1>Le Blog d'Aravis Parapente</h1>
+  <main>
+    <h1>Baptême de parapente à La Clusaz <br> Vols biplace avec moniteur</h1>
 
-  <section id="articles">
-    <article class="blog-post">
-      <h2>🌤️ Conseils pour un premier vol réussi</h2>
-      <time datetime="2025-06-27">27 juin 2025</time>
-      <p>Vous vous apprêtez à voler pour la première fois ? Voici nos conseils pour profiter pleinement de votre baptême en parapente à La Clusaz...</p>
-      <a href="article1.html">Lire l'article →</a>
-    </article>
+    <!-- OFFRES ... (inchangées, à garder comme dans ton code) -->
 
-    <article class="blog-post">
-      <h2>🪂 Retour sur une saison haute en émotions</h2>
-      <time datetime="2025-06-22">22 juin 2025</time>
-      <p>La saison printemps a été marquée par des moments inoubliables avec nos passagers et de beaux vols solo. Revivez avec nous les plus belles envolées !</p>
-      <a href="article2.html">Lire l'article →</a>
-    </article>
-  </section>
-</main>
+    <!-- Réservation / Cap Cadeau -->
+    <section class="offer" id="capcadeau" style="padding: 30px; text-align: center;">
+      <h2>Réservez ou offrez un vol en ligne</h2>
+      <p>Choisissez la formule qui vous convient le mieux pour vivre ou offrir une expérience inoubliable en parapente à La Clusaz :</p>
 
-<footer>
-  © 2025 Aravis Parapente – Tous droits réservés
-</footer>
+      <div>
+        <!-- Option 1 : Réservation avec Aravis Parapente -->
+        <div>
+          <img src="image/logo-aravis.jpg" alt="Logo Aravis Parapente" loading="lazy" />
+          <div>
+            <h3>Réservez directement avec nous</h3>
+            <p>Effectuez votre réservation par <a href="index.html#reservation" style="color:#005a9c; text-decoration: underline;">formulaire en ligne</a> ou contactez-nous par téléphone pour un accompagnement personnalisé.</p>
+          </div>
+        </div>
+
+        <!-- Option 2 : Réservation via Cap Cadeau -->
+        <div>
+          <img src="image/logo-capcadeau.png" alt="Logo Cap Cadeau" loading="lazy" />
+          <div>
+            <h3>Réservez via Cap Cadeau</h3>
+            <p>Paiement sécurisé par carte bancaire, réception immédiate de votre bon cadeau. Vous pouvez également l’envoyer directement à la personne de votre choix.</p>
+            <a href="https://www.capcadeau.com/aravisparapente" target="_blank" rel="noopener noreferrer" class="btn">Réserver via Cap Cadeau</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CGV -->
+    <section class="offer" id="cgv" style="padding: 30px; text-align: center;">
+      <h2>Conditions Générales de Vente (CGV)</h2>
+      <a href="boncadeau/condition-generales-de-ventes-01052022.pdf" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="btn">
+        Télécharger les CGV (PDF)
+      </a>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Aravis Parapente - Tous droits réservés</p>
+  </footer>
 
 </body>
 </html>
