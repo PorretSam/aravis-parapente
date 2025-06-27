@@ -42,18 +42,12 @@ nav {
 nav a.btn {
   flex: 0 1 120px;
   max-width: 120px;
-  background-color: #005a9c;
-  color: white;
-  text-decoration: none;
   padding: 8px 10px;
-  border-radius: 5px;
-  font-weight: bold;
   font-size: 0.9rem;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: background-color 0.3s ease;
   box-sizing: border-box;
 }
 
