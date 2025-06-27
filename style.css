@@ -54,8 +54,8 @@ nav a.btn {
   font-weight: bold;
   text-decoration: none;
   transition: background-color 0.3s ease;
+  cursor: pointer;
 }
-
 
 nav a.btn:hover,
 nav a.btn:focus {
@@ -203,13 +203,6 @@ button.btn:focus {
     flex: 1 1 45%;
     max-width: 48%;
     min-width: 100px;
-  }
-}
-
-
-  nav a.btn {
-    flex: 1 1 45%;
-    max-width: 45%;
   }
 
   .hero-text h1 {
