@@ -20,35 +20,32 @@ header {
   margin-bottom: 0;
 }
 
-header.accueil {
+header.accueil,
+header.autres {
   background-image: url('image/aravis-parapente.jpg');
   text-align: center;
   padding: 60px 20px;
-}
-
-header.autres {
-  background-image: url('image/aravis-parapente.jpg');
 }
 
 /* === NAVIGATION === */
 nav {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
   padding: 20px;
   background: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  max-width: 850px; /* élargir un peu pour 2 lignes */
+  max-width: 800px;
   margin: 0 auto;
 }
 
 nav a.btn {
-  flex: 0 1 120px;      /* bouton plus étroit */
+  flex: 0 1 120px;
   max-width: 120px;
   background-color: #005a9c;
   color: white;
   text-decoration: none;
-  padding: 8px 0;
+  padding: 8px 10px;
   border-radius: 5px;
   font-weight: bold;
   font-size: 0.9rem;
@@ -57,7 +54,6 @@ nav a.btn {
   overflow: hidden;
   text-overflow: ellipsis;
   transition: background-color 0.3s ease;
-  cursor: pointer;
   box-sizing: border-box;
 }
 
@@ -67,7 +63,119 @@ nav a.btn:focus {
   outline: none;
 }
 
-/* === BOUTON FORMULAIRE === */
+/* === TEXTE HERO === */
+.hero-text {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 0 20px 20px 20px;
+  max-width: 90%;
+}
+
+.hero-text h1 {
+  font-size: 2.2em;
+  margin: 0;
+}
+
+.hero-text p {
+  font-size: 1.1em;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+/* === LOGO === */
+.logo {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 80px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
+
+/* === BOUTON ACCUEIL === */
+header.accueil .btn {
+  margin-top: 20px;
+  background: #ff6600;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* === BOUTON UBILIZ === */
+.btn-ubiliz {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.btn-ubiliz:hover {
+  background-color: #0056b3;
+}
+
+/* === CONTENU PRINCIPAL === */
+main.content {
+  padding: 20px;
+}
+
+section.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  width: 280px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* === SECTION LOCALISATION === */
+.section-localisation {
+  padding: 60px 20px;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.section-localisation h2 {
+  color: #007bff;
+  font-size: 2em;
+  margin-bottom: 30px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.map-container {
+  width: 100%;
+  max-width: 1000px;
+  height: 450px;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #222;
+  color: white;
+}
+
+/* === FORM BOUTON === */
 button.btn {
   background-color: #005a9c;
   color: white;
@@ -87,4 +195,21 @@ button.btn:hover,
 button.btn:focus {
   background-color: #004080;
   outline: none;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+  nav {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  nav a.btn {
+    flex: 1 1 45%;
+    max-width: 45%;
+  }
+
+  .hero-text h1 {
+    font-size: 1.5em;
+  }
 }
