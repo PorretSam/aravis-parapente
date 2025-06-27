@@ -45,11 +45,35 @@ h1 {
 /* === Navigation (menu) === */
 nav {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  margin: 10px auto;
-  padding: 10px 0;
+  flex-wrap: nowrap; /* interdit le passage à la ligne */
+  gap: 10px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  overflow-x: auto; /* autorise le scroll horizontal si besoin */
+  -webkit-overflow-scrolling: touch; /* scroll fluide sur iOS */
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 10px; /* réduit un peu le padding */
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  white-space: nowrap; /* empêche le retour à la ligne dans le texte du lien */
+  font-size: 0.9em; /* réduit un peu la taille sur mobile */
+}
+
+/* Optionnel: masque la scrollbar sur desktop */
+@media (min-width: 768px) {
+  nav {
+    overflow-x: visible;
+    flex-wrap: wrap; /* ici on peut wrap si large */
+  }
+  nav a {
+    padding: 8px 12px;
+    font-size: 1em;
+  }
 }
 
 /* Boutons de navigation et boutons généraux */
