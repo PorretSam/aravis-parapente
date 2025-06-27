@@ -6,7 +6,143 @@
   <title>Blog Parapente La Clusaz | Aravis Parapente</title>
   <meta name="description" content="Découvrez les actualités, conseils et récits de vol en parapente à La Clusaz sur le blog Aravis Parapente." />
   <link rel="canonical" href="https://aravis-parapente.com/blog.html" />
-  
+  <style>
+    body {
+      margin: 0; 
+      font-family: Arial, sans-serif; 
+      background-color: #f9f9f9; 
+      color: #333; 
+      line-height: 1.6;
+      padding-bottom: 40px;
+    }
+    header {
+      background-color: #0055a5;
+      padding: 15px 20px;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    nav a.btn {
+      background-color: #005a9c;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 18px;
+      border-radius: 5px;
+      min-width: 140px;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+    nav a.btn[aria-current="page"] {
+      background-color: #004080;
+    }
+    nav a.btn:hover,
+    nav a.btn:focus {
+      background-color: #004080;
+      outline: none;
+    }
+    main {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+    h1 {
+      color: #0055a5;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+    form#formPost {
+      background: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    form#formPost input[type="text"],
+    form#formPost textarea,
+    form#formPost input[type="file"] {
+      font-size: 1rem;
+      padding: 8px 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+    form#formPost textarea {
+      min-height: 100px;
+    }
+    form#formPost button {
+      background-color: #005a9c;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 1rem;
+    }
+    form#formPost button:hover {
+      background-color: #004080;
+    }
+    section#articles article.blog-post {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    section#articles article.blog-post h2 {
+      margin-top: 0;
+      color: #0055a5;
+      font-size: 1.5rem;
+    }
+    section#articles article.blog-post time {
+      display: block;
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    section#articles article.blog-post p {
+      margin-bottom: 15px;
+    }
+    section#articles article.blog-post a {
+      font-weight: bold;
+      color: #0055a5;
+      text-decoration: none;
+    }
+    section#articles article.blog-post a:hover {
+      text-decoration: underline;
+    }
+    section#articles article.blog-post img {
+      max-width: 100%;
+      border-radius: 6px;
+      display: block;
+      margin-top: 15px;
+    }
+    footer {
+      text-align: center;
+      background-color: #333;
+      color: white;
+      padding: 15px 20px;
+      margin-top: 40px;
+      font-size: 0.9em;
+    }
+    @media (max-width: 600px) {
+      nav a.btn {
+        min-width: unset;
+        flex: 1 1 auto;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -24,9 +160,9 @@
   <h1>Le Blog d'Aravis Parapente</h1>
 
   <form id="formPost">
-    <input type="text" id="titre" placeholder="Titre de l'article" required>
+    <input type="text" id="titre" placeholder="Titre de l'article" required />
     <textarea id="commentaire" placeholder="Écris ton commentaire ici..." required></textarea>
-    <input type="file" id="photo" accept="image/*" capture="environment" required>
+    <input type="file" id="photo" accept="image/*" capture="environment" required />
     <button type="submit">Publier</button>
   </form>
 
@@ -72,7 +208,7 @@ document.getElementById('formPost').addEventListener('submit', function(e) {
       <h2>${titre}</h2>
       <time>${date}</time>
       <p>${commentaire}</p>
-      <img src="${imageData}" alt="Photo publiée">
+      <img src="${imageData}" alt="Photo publiée" />
     `;
 
     const container = document.getElementById('articles');
