@@ -31,30 +31,25 @@ header.autres {
 nav {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 10px;
   padding: 20px;
-  background: rgba(0, 0, 0, 0.5);
-  max-width: 800px;
-  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center; /* centrer les boutons */
 }
 
 nav a.btn {
-  flex: 0 1 130px;   /* un peu plus large */
-  max-width: 130px;
-  min-width: 110px;  /* éviter que ça soit trop petit */
-  padding: 8px 12px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  box-sizing: border-box;
+  flex: none; /* largeur selon contenu */
+  padding: 8px 16px; /* padding suffisant */
+  white-space: nowrap; /* empêcher retour à la ligne dans un bouton */
+  border-radius: 5px;
   background-color: #005a9c;
   color: white;
-  border-radius: 5px;
   font-weight: bold;
   text-decoration: none;
   transition: background-color 0.3s ease;
   cursor: pointer;
+  box-sizing: border-box;
+  max-width: 100%; /* éviter débordement */
 }
 
 nav a.btn:hover,
