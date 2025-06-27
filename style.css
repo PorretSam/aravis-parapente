@@ -45,41 +45,33 @@ h1 {
 /* === Navigation (menu) === */
 nav {
   display: flex;
-  flex-wrap: nowrap; /* interdit le passage à la ligne par défaut */
+  flex-wrap: wrap;             /* Autorise retour à la ligne */
+  justify-content: center;     /* Centre les boutons */
   gap: 10px;
   padding: 20px;
+  max-height: calc(2 * 48px);  /* Limite à 2 lignes environ */
+  overflow: hidden;            /* Cache tout dépassement */
   background: rgba(0, 0, 0, 0.4);
-  overflow-x: auto; /* scroll horizontal si besoin */
-  -webkit-overflow-scrolling: touch; /* scroll fluide sur iOS */
+  -webkit-overflow-scrolling: touch;
 }
 
 nav a {
   color: white;
   text-decoration: none;
   font-weight: bold;
-  padding: 8px 10px;
+  padding: 8px 12px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
-  white-space: nowrap; /* empêche le retour à la ligne dans le texte du lien */
-  font-size: 0.9em;
+  white-space: nowrap;        /* Empêche retour à la ligne dans le texte */
+  font-size: 1rem;
+  min-width: 140px;
+  text-align: center;
 }
 
 nav a:hover,
 nav a:focus {
   background-color: rgba(255, 255, 255, 0.3);
   outline: none;
-}
-
-/* Optionnel: masque la scrollbar sur desktop */
-@media (min-width: 768px) {
-  nav {
-    overflow-x: visible;
-    flex-wrap: wrap; /* autorise wrap sur grand écran */
-  }
-  nav a {
-    padding: 8px 12px;
-    font-size: 1em;
-  }
 }
 
 /* === Boutons généraux === */
@@ -209,16 +201,17 @@ button.btn:hover {
 /* === Responsive ajustements === */
 @media (max-width: 600px) {
   nav {
-    flex-wrap: wrap;       /* autorise passage à la ligne */
+    flex-wrap: wrap;            /* autorise passage à la ligne */
     justify-content: center;
     max-height: calc(2 * 48px); /* limite à 2 lignes environ */
-    overflow: hidden;      /* masque le dépassement */
+    overflow: hidden;           /* masque le dépassement */
   }
 
   nav a {
-    white-space: normal;   /* autorise le retour à la ligne dans le texte */
+    white-space: normal;        /* autorise retour à la ligne dans le texte */
     padding: 8px 10px;
     font-size: 0.9em;
+    min-width: unset;
   }
 
   .gallery {
