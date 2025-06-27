@@ -1,136 +1,179 @@
-/* === Réinitialisation de base === */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Galerie Photos – Aravis Parapente</title>
+  <meta name="description" content="Découvrez nos plus belles photos de parapente à La Clusaz, capturées dans les Aravis." />
+  <style>
+    /* === Réinitialisation de base === */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
 
-/* === En-tête === */
-header {
-  background-color: #0055a5;
-  color: white;
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap; /* au cas où sur petit écran */
-}
+    /* === Header === */
+    header {
+      background-color: #0055a5;
+      color: white;
+      padding: 10px 20px;
+    }
 
-/* Liens dans header (navigation principale) */
-header nav {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center; 
-}
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
 
-header a.btn {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 10px 15px;
-  border-radius: 5px;
-  background-color: #005a9c;
-  transition: background-color 0.3s ease;
-  white-space: nowrap;
-}
+    nav a.btn {
+      background-color: #005a9c;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 18px;
+      border-radius: 5px;
+      min-width: 120px;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
 
-header a.btn:hover,
-header a.btn:focus {
-  background-color: #004080;
-  outline: none;
-}
+    nav a.btn.active,
+    nav a.btn[aria-current="page"] {
+      background-color: #003f73;
+      pointer-events: none;
+      cursor: default;
+    }
 
-header a.btn.active {
-  background-color: #003060;
-  cursor: default;
-  pointer-events: none;
-}
+    nav a.btn:hover,
+    nav a.btn:focus {
+      background-color: #004080;
+      outline: none;
+    }
 
-/* === Pied de page === */
-footer {
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 15px 20px;
-  font-size: 0.9em;
-  margin-top: 40px;
-}
+    header h1 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin: 0;
+      padding-bottom: 10px;
+    }
 
-/* === Titres === */
-h1 {
-  margin: 20px 0 20px;
-  font-size: 2rem;
-  color: #0055a5;
-  text-align: center;
-  width: 100%;
-}
+    /* === Galerie === */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 30px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
 
-/* === Navigation (menu) === */
-/* Supprimé ici car géré dans header nav */
+    .gallery-item {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 4 / 3;
+    }
 
-/* === Galerie responsive === */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-  padding: 20px;
-  max-width: 1000px;
-  margin: 0 auto 40px;
-}
+    .gallery-item img,
+    .gallery-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 8px;
+    }
 
-.gallery-item {
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
-  cursor: pointer;
-  background: white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
+    /* === Footer === */
+    footer {
+      text-align: center;
+      background-color: #333;
+      color: white;
+      padding: 15px 20px;
+      font-size: 0.9em;
+      margin-top: 40px;
+    }
 
-.gallery-item img,
-.gallery-item video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-  display: block;
-  border-radius: 10px;
-}
+    /* === Responsive === */
+    @media (max-width: 700px) {
+      .gallery {
+        grid-template-columns: 1fr;
+        padding: 20px 15px;
+      }
 
-.gallery-item:hover img,
-.gallery-item:hover video {
-  transform: scale(1.1);
-}
+      header h1 {
+        font-size: 1.4rem;
+      }
 
-/* === Formulaires === */
-main {
-  max-width: 1000px;
-  margin: 30px auto;
-  padding: 0 15px;
-}
+      nav a.btn {
+        min-width: unset;
+        flex: 1 1 auto;
+      }
+    }
+  </style>
+</head>
+<body>
 
-/* === Responsive ajustements === */
-@media (max-width: 600px) {
-  header {
-    flex-direction: column;
-    align-items: center;
-  }
+  <header>
+    <nav>
+      <a href="index.html" class="btn">Accueil</a>
+      <a href="bapteme-parapente-la-clusaz.html" class="btn">Vols / Bon cadeau</a>
+      <a href="galerie.html" class="btn active">Galerie</a>
+      <a href="reservation.html" class="btn">Réservation</a>
+      <a href="blog.html" class="btn">Blog</a>
+    </nav>
+    <h1>Galerie Parapente – La Clusaz</h1>
+  </header>
 
-  header nav {
-    justify-content: center;
-    margin-bottom: 15px;
-  }
+  <main>
+    <div class="gallery">
+      <div class="gallery-item"><img src="image/aravis-parapente-bapteme-clusaz-vertical.jpg" alt="Baptême Parapente Clusaz" /></div>
+      <div class="gallery-item"><img src="image/hiver-aiguille.jpg" alt="Parapente Aiguille" /></div>
+      <div class="gallery-item"><img src="image/aravis-parapente-bapteme-giettaz.jpg" alt="Giettaz Parapente" /></div>
+      <div class="gallery-item"><img src="image/aravis-parapente-bapteme-giettaz-mont-blanc.jpg" alt="Vue Mont Blanc" /></div>
+      <div class="gallery-item"><img src="image/aravis-parapente-bapteme-sensation.jpg" alt="Sensation Aravis" /></div>
+      <div class="gallery-item"><img src="image/clusaz-parapente.jpg" alt="Parapente La Clusaz" /></div>
+      <div class="gallery-item"><img src="image/gonflage-col-des-aravis.jpg" alt="Gonflage Aravis" /></div>
+      <div class="gallery-item"><img src="image/gonflage-parapente2.JPG" alt="Gonflage" /></div>
+      <div class="gallery-item"><img src="image/nuage_clusaz_parapente_edited.jpg" alt="Nuages Clusaz" /></div>
+      <div class="gallery-item"><img src="image/parapente-cret-du-merle-aravis-parapente.jpg" alt="Crêt du Merle" /></div>
+      <div class="gallery-item"><img src="image/pente-ecole-2023.jpg" alt="Pente école 2023" /></div>
+      <div class="gallery-item"><img src="image/parapente-hiver-beauregard.jpg" alt="Beauregard Hiver" /></div>
+      <div class="gallery-item"><img src="image/prestige-balme.jpg" alt="Prestige Balme" /></div>
+      <div class="gallery-item"><img src="image/samuel-porret-aravis-parapente-4100.jpg" alt="Samuel Porret 4100" /></div>
+      <div class="gallery-item"><img src="image/julien-wirtz.png" alt="Julien Wirtz" /></div>
+      <div class="gallery-item">
+        <video controls>
+          <source src="video/decollage-aiguille.mp4" type="video/mp4" />
+          Votre navigateur ne supporte pas la vidéo.
+        </video>
+      </div>
+      <div class="gallery-item">
+        <video controls>
+          <source src="video/decollage-pessestin.mp4" type="video/mp4" />
+          Votre navigateur ne supporte pas la vidéo.
+        </video>
+      </div>
+      <div class="gallery-item">
+        <video controls>
+          <source src="video/sensation.mp4" type="video/mp4" />
+          Votre navigateur ne supporte pas la vidéo.
+        </video>
+      </div>
+    </div>
+  </main>
 
-  header a.btn {
-    min-width: unset;
-    padding: 8px 12px;
-    font-size: 0.9rem;
-  }
+  <footer>
+    <p>© 2025 Aravis Parapente</p>
+  </footer>
 
-  .gallery {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    padding: 15px;
-  }
-}
+</body>
+</html>
