@@ -1,78 +1,38 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17197907136"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-17197907136');
-</script>
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PCFNSRMR');</script>
-<!-- End Google Tag Manager -->
-  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Galerie Photos Parapente La Clusaz – Aravis Parapente</title>
-
-<meta name="description" content="Découvrez les plus beaux moments capturés lors de nos vols en parapente à La Clusaz avec Aravis Parapente. Photos authentiques et paysages à couper le souffle." />
-
-  <!DOCTYPE html>
-<html lang="fr">
-<head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17197907136"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-17197907136');
-</script>
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PCFNSRMR');</script>
-<!-- End Google Tag Manager -->
-  
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Galerie Photos Parapente La Clusaz – Aravis Parapente</title>
-
-<meta name="description" content="Découvrez les plus beaux moments capturés lors de nos vols en parapente à La Clusaz avec Aravis Parapente. Photos authentiques et paysages à couper le souffle." />
+  <title>Galerie Photos Parapente La Clusaz – Aravis Parapente</title>
+  <meta name="description" content="Découvrez les plus beaux moments capturés lors de nos vols en parapente à La Clusaz avec Aravis Parapente. Photos authentiques et paysages à couper le souffle." />
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
+      background-color: #f4f4f4;
       color: #333;
     }
+
     header, footer {
       background-color: #333;
       color: white;
       text-align: center;
       padding: 15px 20px;
     }
-    h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
+
     nav {
       display: flex;
       justify-content: center;
       gap: 15px;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
     }
+
     nav a.btn {
       display: inline-block;
       background-color: #005a9c;
@@ -83,28 +43,61 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       transition: background-color 0.3s ease;
       font-weight: bold;
       font-size: 1rem;
+      position: relative;
+      z-index: 1;
     }
+
+    nav a.btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      border-radius: 5px;
+      z-index: -1;
+      transition: background-color 0.3s ease;
+    }
+
     nav a.btn:hover, nav a.btn:focus {
       background-color: #004080;
+      outline: none;
+    }
+
+    nav a.btn:hover::before,
+    nav a.btn:focus::before {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    h1 {
+      margin: 10px 0;
+      font-size: 2rem;
+      color: #005a9c;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
     }
 
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 15px;
-      padding: 20px;
-      max-width: 900px;
-      margin: 0 auto 40px;
+      padding: 20px 0;
     }
+
     .gallery-item {
       position: relative;
       overflow: hidden;
       border-radius: 10px;
-      cursor: pointer;
       background: white;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    .gallery-item img, .gallery-item video {
+
+    .gallery-item img,
+    .gallery-item video {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -112,210 +105,5 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display: block;
       border-radius: 10px;
     }
-    .gallery-item:hover img, .gallery-item:hover video {
-      transform: scale(1.1);
-    }
-    video {
-      border: none;
-    }
 
-    footer p {
-      margin: 0;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 600px) {
-      nav {
-        flex-direction: column;
-        gap: 10px;
-      }
-      .gallery {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        padding: 15px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PCFNSRMR"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-  
-  <header>
-    <nav>
-      <a href="index.html" class="btn">Accueil</a>
-      <a href="bapteme-parapente-la-clusaz.html" class="btn">Vols / Bon cadeau</a>
-      <a href="galerie.html" class="btn">Galerie</a>
-      <a href="reservation.html"class="btn">Réservation</a>
-      <a href="blog.html"class="btn"">Blog</a>
-    </nav>
-   <h1>Galerie Photos – Parapente à La Clusaz</h1>
-
-  </header>
-
-  <main>
-    <div class="gallery">
-      <div class="gallery-item">
-        <img src="image/aravis-parapente-bapteme-clusaz-vertical.jpg" alt="Baptême Parapente Clusaz Vertical" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/hiver-aiguille.jpg" alt="Baptême Parapente Aiguille" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/aravis-parapente-bapteme-giettaz.jpg" alt="Baptême Parapente Giettaz" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/aravis-parapente-bapteme-giettaz-mont-blanc.jpg" alt="Baptême Giettaz Mont Blanc" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/aravis-parapente-bapteme-sensation.jpg" alt="Vol Sensation Aravis" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/clusaz-parapente.jpg" alt="Clusaz Parapente" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/gonflage-col-des-aravis.jpg" alt="Gonflage au col des Aravis" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/gonflage-parapente2.JPG" alt="Gonflage parapente 2" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/nuage_clusaz_parapente_edited.jpg" alt="Nuage Clusaz Parapente" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/parapente-cret-du-merle-aravis-parapente.jpg" alt="Crêt du Merle Aravis Parapente" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/pente-ecole-2023.jpg" alt="Pente école 2023" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/parapente-hiver-beauregard.jpg" alt="Parapente hiver Clusaz Aravis" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/prestige-balme.jpg" alt="Prestige Parapente Balme" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/samuel-porret-aravis-parapente-4100.jpg" alt="Samuel Porret 4100" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/julien-wirtz.png" alt="Julien Wirtz" />
-      </div>
-      <div class="gallery-item">
-        <video controls>
-          <source src="video/decollage-aiguille.mp4" type="video/mp4" />
-          Votre navigateur ne supporte pas la lecture de vidéos.
-        </video>
-      </div>
-      <div class="gallery-item">
-        <video controls>
-          <source src="video/decollage-pessestin.mp4" type="video/mp4" />
-          Votre navigateur ne supporte pas la lecture de vidéos.
-        </video>
-      </div>
-      <div class="gallery-item">
-        <video controls>
-          <source src="video/sensation.mp4" type="video/mp4" />
-          Votre navigateur ne supporte pas la lecture de vidéos.
-        </video>
-      </div>
-    </div>
-  </main>
-
-  <footer>
-    <p>© 2025 Aravis Parapente</p>
-  </footer>
-</body>
-</html>
-</head>
-<body>
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PCFNSRMR"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-  
-  <header>
-    <nav>
-      <a href="index.html" class="btn">Accueil</a>
-      <a href="bapteme-parapente-la-clusaz.html" class="btn">Vols / Bon cadeau</a>
-      <a href="galerie.html" class="btn">Galerie</a>
-      <a href="reservation.html"class="btn">Réservation</a>
-      <a href="blog.html"class="btn"">Blog</a>
-    </nav>
-   <h1>Galerie Photos – Parapente à La Clusaz</h1>
-
-  </header>
-
-  <main>
-    <div class="gallery">
-      <div class="gallery-item">
-        <img src="image/aravis-parapente-bapteme-clusaz-vertical.jpg" alt="Baptême Parapente Clusaz Vertical" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/hiver-aiguille.jpg" alt="Baptême Parapente Aiguille" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/aravis-parapente-bapteme-giettaz.jpg" alt="Baptême Parapente Giettaz" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/aravis-parapente-bapteme-giettaz-mont-blanc.jpg" alt="Baptême Giettaz Mont Blanc" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/aravis-parapente-bapteme-sensation.jpg" alt="Vol Sensation Aravis" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/clusaz-parapente.jpg" alt="Clusaz Parapente" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/gonflage-col-des-aravis.jpg" alt="Gonflage au col des Aravis" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/gonflage-parapente2.JPG" alt="Gonflage parapente 2" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/nuage_clusaz_parapente_edited.jpg" alt="Nuage Clusaz Parapente" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/parapente-cret-du-merle-aravis-parapente.jpg" alt="Crêt du Merle Aravis Parapente" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/pente-ecole-2023.jpg" alt="Pente école 2023" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/parapente-hiver-beauregard.jpg" alt="Parapente hiver Clusaz Aravis" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/prestige-balme.jpg" alt="Prestige Parapente Balme" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/samuel-porret-aravis-parapente-4100.jpg" alt="Samuel Porret 4100" />
-      </div>
-      <div class="gallery-item">
-        <img src="image/julien-wirtz.png" alt="Julien Wirtz" />
-      </div>
-      <div class="gallery-item">
-        <video controls>
-          <source src="video/decollage-aiguille.mp4" type="video/mp4" />
-          Votre navigateur ne supporte pas la lecture de vidéos.
-        </video>
-      </div>
-      <div class="gallery-item">
-        <video controls>
-          <source src="video/decollage-pessestin.mp4" type="video/mp4" />
-          Votre navigateur ne supporte pas la lecture de vidéos.
-        </video>
-      </div>
-      <div class="gallery-item">
-        <video controls>
-          <source src="video/sensation.mp4" type="video/mp4" />
-          Votre navigateur ne supporte pas la lecture de vidéos.
-        </video>
-      </div>
-    </div>
-  </main>
-
-  <footer>
-    <p>© 2025 Aravis Parapente</p>
-  </footer>
-</body>
-</html>
+    .gallery-item:hover img,
