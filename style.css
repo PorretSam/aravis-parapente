@@ -201,10 +201,13 @@ button.btn:focus {
 
 /* === RESPONSIVE === */
 @media (max-width: 600px) {
-  nav {
-    max-width: 100%;
-    padding: 10px;
+  nav a.btn {
+    flex: 1 1 45%;
+    max-width: 48%;
+    min-width: 100px;
   }
+}
+
 
   nav a.btn {
     flex: 1 1 45%;
