@@ -60,49 +60,6 @@
       font-size: 2rem;
     }
 
-    form#formPost {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-      margin-bottom: 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    form#formPost input[type="text"],
-    form#formPost textarea,
-    form#formPost input[type="file"] {
-      font-size: 1rem;
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      width: 100%;
-      box-sizing: border-box;
-      resize: vertical;
-    }
-
-    form#formPost textarea {
-      min-height: 100px;
-    }
-
-    form#formPost button {
-      background-color: #005a9c;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      font-weight: bold;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      font-size: 1rem;
-    }
-
-    form#formPost button:hover {
-      background-color: #004080;
-    }
-
     section#articles article.blog-post {
       background: white;
       border-radius: 8px;
@@ -177,13 +134,6 @@
   <main>
     <h1>Le Blog d'Aravis Parapente</h1>
 
-    <form id="formPost">
-      <input type="text" id="titre" placeholder="Titre de l'article" required />
-      <textarea id="commentaire" placeholder="Votre texte..." required></textarea>
-      <input type="file" id="photo" accept="image/*" required />
-      <button type="submit">Publier l'article</button>
-    </form>
-
     <section id="articles">
       <article class="blog-post">
         <h2>🌤️ Conseils pour un premier vol réussi</h2>
@@ -198,45 +148,19 @@
         <p>La saison printemps a été marquée par des moments inoubliables avec nos passagers et de beaux vols solo. Revivez avec nous les plus belles envolées !</p>
         <a href="article2.html">Lire l'article →</a>
       </article>
+
+      <article class="blog-post">
+        <h2>🏆 Aravis Parapente au Championnat de France !</h2>
+        <time datetime="2025-06-15">15 juin 2025</time>
+        <p>Notre équipe a fièrement représenté La Clusaz lors des Championnats de France de parapente à Annecy. De superbes performances et une ambiance incroyable étaient au rendez-vous !</p>
+        <img src="images/championnat-france-parapente.jpg" alt="Championnat de France de parapente à Annecy" />
+      </article>
     </section>
   </main>
 
   <footer>
     © 2025 Aravis Parapente – Tous droits réservés
   </footer>
-
-  <script>
-    document.getElementById('formPost').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const titre = document.getElementById('titre').value.trim();
-      const commentaire = document.getElementById('commentaire').value.trim();
-      const fichier = document.getElementById('photo').files[0];
-
-      if (!titre || !commentaire || !fichier) return;
-
-      const reader = new FileReader();
-      reader.onload = function(event) {
-        const imageData = event.target.result;
-        const date = new Date().toLocaleDateString('fr-FR');
-
-        const article = document.createElement('article');
-        article.className = 'blog-post';
-        article.innerHTML = `
-          <h2>${titre}</h2>
-          <time>${date}</time>
-          <p>${commentaire}</p>
-          <img src="${imageData}" alt="Photo publiée" />
-        `;
-
-        const container = document.getElementById('articles');
-        container.prepend(article);
-        document.getElementById('formPost').reset();
-      };
-
-      reader.readAsDataURL(fichier);
-    });
-  </script>
 
 </body>
 </html>
