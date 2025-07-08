@@ -189,17 +189,7 @@ footer {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-}
-.nav-overlay::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4); /* Ombre légère sur l’image */
-  z-index: 0;
-}
-
-.nav-overlay a {
-  position: relative;
-  z-index: 1;
-  color: white;
+  min-height: 250px; /* ✅ ajouté : pour forcer l’affichage de l’image */
+  align-items: center; /* centrer le contenu verticalement */
+  justify-content: center; /* centrer le contenu horizontalement */
 }
