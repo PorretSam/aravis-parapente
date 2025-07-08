@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="fr">
-<header>
-  <nav class="nav-overlay">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Réservation Vol Parapente La Clusaz | Contact Aravis Parapente</title>
+  <meta name="description" content="Réservez votre vol en parapente à La Clusaz avec Aravis Parapente. Contactez-nous facilement via notre formulaire dédié." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="nav-overlay">
+  <nav>
     <a href="index.html" class="btn">Accueil</a>
     <a href="bapteme-parapente-la-clusaz.html" class="btn">Vols / Bon cadeau</a>
     <a href="galerie.html" class="btn">Galerie</a>
-    <a href="reservation.html" class="btn">Réservation</a>
+    <a href="reservation.html" class="btn" aria-current="page">Réservation</a>
     <a href="blog.html" class="btn">Blog</a>
   </nav>
 </header>
-    <nav>
-  <a href="index.html" class="btn">Accueil</a>
-  <a href="bapteme-parapente-la-clusaz.html" class="btn">Vols / Bon cadeau</a>
-  <a href="galerie.html" class="btn">Galerie</a>
-  <a href="reservation.html" class="btn">Réservation</a>
-  <a href="blog.html" class="btn">Blog</a>
-</nav>
-  </header>
+
 <main>
   <h1>Réservation & Contact</h1>
   <p>Vous souhaitez réserver un vol en parapente à La Clusaz ? <br>Remplissez le formulaire ci-dessous <br> ou par téléphone<br><br>Sam Porret 06 88 07 04 72<br>Julien Wirtz 06 82 95 85 42.</p>
@@ -26,31 +28,29 @@
       <legend>Vos coordonnées</legend>
       <label for="nom">Nom Prénom téléphone :</label>
       <input type="text" id="nom" name="Nom" required />
-<br>
+      <br>
       <label for="email">Email :</label>
       <input type="email" id="email" name="Email" required />
     </fieldset>
 
-      <fieldset>
-  <legend>Informations passager</legend>
-  
-  <label for="passagerNom">Nom Prénom Poids Téléphone du passager :</label><br>
-  <input type="text" id="passagerNom" name="Nom passager"><br><br>
-
-  <label for="typeVol">Choix du vol :</label><br>
-  <select id="typeVol" name="typeVol">
-    <option value="decouverte">Découverte - 65€</option>
-    <option value="plaisir">Plaisir - 90€</option>
-    <option value="performance">Performance - 125€</option>
-    <option value="prestige">Prestige - 167€</option>
-  </select>
-</fieldset>
+    <fieldset>
+      <legend>Informations passager</legend>
+      <label for="passagerNom">Nom Prénom Poids Téléphone du passager :</label><br>
+      <input type="text" id="passagerNom" name="Nom passager"><br><br>
+      <label for="typeVol">Choix du vol :</label><br>
+      <select id="typeVol" name="typeVol">
+        <option value="decouverte">Découverte - 65€</option>
+        <option value="plaisir">Plaisir - 90€</option>
+        <option value="performance">Performance - 125€</option>
+        <option value="prestige">Prestige - 167€</option>
+      </select>
+    </fieldset>
 
     <fieldset>
       <legend>Disponibilités</legend>
       <label for="dateDebut">Date de début :</label>
       <input type="date" id="dateDebut" name="Date début" required />
-<br>
+      <br>
       <label for="dateFin">Date de fin :</label>
       <input type="date" id="dateFin" name="Date fin" required />
     </fieldset>
