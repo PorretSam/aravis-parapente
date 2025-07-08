@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Parapente La Clusaz - Vols biplace avec moniteur | Aravis Parapente</title>
+  <title>Parapente La Clusaz - Vols biplace avec moniteur | Aravis Parapente </title>
   <meta name="description" content="Découvrez les sensations du parapente à La Clusaz avec Aravis Parapente. Vols biplace encadrés par des moniteurs diplômés, bons cadeaux. Réservation simple et rapide." />
   <link rel="canonical" href="https://aravis-parapente.com/" />
   <link rel="stylesheet" href="style.css" />
+
+  
+</head>
   <style>
     body, html {
       margin: 0;
@@ -31,41 +34,43 @@
     nav {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
       gap: 10px;
       padding: 20px;
       background: rgba(0, 0, 0, 0.4);
     }
 
     nav a.btn {
-      background-color: #005a9c;
+  background-color: #005a9c;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 18px;
+  border-radius: 5px;
+  min-width: 140px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+nav a.btn:hover,
+nav a.btn:focus {
+  background-color: #004080;
+  outline: none;
+}nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
-      padding: 10px 18px;
+      padding: 8px 12px;
       border-radius: 5px;
-      min-width: 140px;
-      text-align: center;
       transition: background-color 0.3s ease;
-      flex: 1 1 30%;
-      max-width: 30%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
     }
 
-    nav a.btn:hover,
-    nav a.btn:focus {
-      background-color: #004080;
+    nav a:hover,
+    nav a:focus {
+      background-color: rgba(255, 255, 255, 0.3);
       outline: none;
-    }
-
-    @media (max-width: 500px) {
-      nav a.btn {
-        flex: 1 1 45%;
-        max-width: 45%;
-      }
     }
 
     .hero-text {
@@ -73,14 +78,17 @@
       padding: 20px;
       border-radius: 10px;
       margin: 0 20px 20px;
-      max-width: 600px;
     }
 
     .hero-text h1 {
-      font-size: 1.6em;
-      line-height: 1.3;
-      margin: 0;
-    }
+  font-size: 1.6em;
+  line-height: 1.3;
+  margin: 0;
+}
+    .hero-text {
+  max-width: 600px;
+}
+
 
     .hero-text p {
       font-size: 1.1em;
@@ -88,13 +96,15 @@
       line-height: 1.4;
     }
 
-    .logo {
-      width: 80px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.6);
-      margin-left: 15px;
-      vertical-align: middle;
-    }
+  .logo {
+    position: static; /* ou supprimer cette ligne */
+  width: 80px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  margin-left: 15px; /* pour un peu d’espace à gauche */
+  vertical-align: middle; /* pour l’aligner avec les autres icônes */
+}
+
 
     .fullwidth-image {
       display: block;
@@ -177,29 +187,122 @@
       }
     }
   </style>
-</head>
 <body>
   <header>
-    <nav>
-      <a href="index.html" class="btn">Accueil</a>
-      <a href="bapteme-parapente-la-clusaz.html" class="btn">Vols / Bon cadeau</a>
-      <a href="galerie.html" class="btn">Galerie</a>
-      <a href="reservation.html" class="btn">Réservation</a>
-      <a href="blog.html" class="btn">Blog</a>
-    </nav>
-  </header>
+   <nav>
+  <a href="index.html" class="btn">Accueil</a>
+  <a href="bapteme-parapente-la-clusaz.html" class="btn">Vols / Bon cadeau</a>
+  <a href="galerie.html" class="btn">Galerie</a>
+  <a href="reservation.html" class="btn">Réservation</a>
+  <a href="blog.html" class="btn">Blog</a>
+</nav>
+
+   
+
+     </header>
 
   <img src="image/flyer2025.png" alt="Flyer 2025 Aravis Parapente" class="fullwidth-image" />
-
+ 
   <div class="hero-text">
-    <h1>Baptême de parapente à La Clusaz avec Aravis Parapente <br> Vols biplace dans les Aravis</h1>
-  </div>
-
+      <h1>Baptême de parapente à La Clusaz avec Aravis Parapente <br> Vols biplace dans les Aravis</h1>
+    </div>
+  
   <main>
-    <!-- ... (le reste du contenu reste inchangé) ... -->
-    <!-- Je ne le répète pas ici car tu n'as rien demandé à corriger dans la suite -->
+    <section>
+      <h2>Bienvenue chez Aravis Parapente</h2>
+      <p>Envie d’un <strong>baptême de l’air en parapente à La Clusaz</strong> ? Aravis Parapente vous propose des vols biplace au cœur des montagnes des Aravis, entre sensations fortes et paysages exceptionnels. Découvrez nos <strong>bons cadeaux parapente</strong>, idéals pour offrir ou s’offrir une expérience inoubliable dans les Alpes.</p>
+    </section>
+
+    <section id="reservation">
+      <h2>Réservation / Contact</h2>
+        <p>Par téléphone ou formulaire <Br> Sam Porret au 06 88 07 04 72 <Br> Julien Wirtz au 06 82 95 85 42</p>
+      <form action="https://formspree.io/f/mzzgepll" method="POST">
+        <fieldset>
+          <legend>Vos coordonnées</legend>
+          <label for="nom">Nom Prénom téléphone :</label><br>
+          <input type="text" id="nom" name="Nom"><br>
+
+          <label for="email">Email :</label><br>
+          <input type="email" id="email" name="Email"><br>
+        </fieldset>
+
+      <fieldset>
+  <legend>Informations passager</legend>
+  
+  <label for="passagerNom">Nom Prénom Poids Téléphone du passager :</label><br>
+  <input type="text" id="passagerNom" name="Nom passager"><br><br>
+
+  <label for="typeVol">Choix du vol :</label><br>
+  <select id="typeVol" name="typeVol">
+    <option value="decouverte">Découverte - 65€</option>
+    <option value="plaisir">Plaisir - 90€</option>
+    <option value="performance">Performance - 125€</option>
+    <option value="prestige">Prestige - 167€</option>
+  </select>
+</fieldset>
+
+        <fieldset>
+          <legend>Disponibilités</legend>
+          <label for="dateDebut">Date de début :</label><br>
+          <input type="date" id="dateDebut" name="Date début"><br>
+
+          <label for="dateFin">Date de fin :</label><br>
+          <input type="date" id="dateFin" name="Date fin"><br>
+        </fieldset>
+
+        <input type="hidden" name="_format" value="plain">
+        <input type="hidden" name="_subject" value="Demande de vol Aravis Parapente">
+
+        <button type="submit" class="btn">Envoyer ma demande</button>
+
+      </form>
+    </section>
+
+    <section id="partenaires" aria-labelledby="partenaires-title">
+      <h2 id="partenaires-title">Nos partenaires</h2>
+      <ul>
+        <li><a href="https://www.laclusaz.com/" target="_blank" rel="noopener noreferrer">Office de tourisme de La Clusaz</a></li>
+        <li><a href="https://www.spub-laclusaz.com/" target="_blank" rel="noopener noreferrer">Spub Pizza Roma</a></li>
+        <li><a href="https://www.valdarly-montblanc.com/villages-stations/la-giettaz-en-aravis/" target="_blank" rel="noopener noreferrer">Office de tourisme la Giettaz</a></li>
+      </ul>
+
+      <h2>Informations utiles</h2>
+      <ul>
+        <li><a href="https://www.ffvl.fr/" target="_blank" rel="noopener noreferrer">Fédération Française de Vol Libre</a></li>
+        <li><a href="https://niviuk.com/fr/voiles?srsltid=AfmBOor-MrR7md-xjMWEQ7RtUYjUiH_ZXylnzOAAn2Utzg6XP8_5Rshx/" target="_blank" rel="noopener noreferrer">Niviuk</a></li>
+        <li><a href="https://g.co/kgs/NqmNKai" target="_blank" rel="noopener noreferrer">Avis Google</a></li>
+      </ul>
+    </section>
   </main>
 
-  <!-- ... Localisation + Footer restent inchangés ... -->
+  <section class="section-localisation">
+    <h2>Nous trouver chez notre partenaire Le S'Pub</h2>
+    <div class="map-container">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2776.383415988334!2d6.42416230157471!3d45.903643557618786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478bf1ae18f5ce25%3A0x325c2bcbdb97a45b!2sAravis%20Parapente%20Clusaz%20Vol%20biplace!5e0!3m2!1sfr!2sfr!4v1749387900483!5m2!1sfr!2sfr"
+        width="100%"
+        height="100%"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </section>
+
+  <footer>
+    <div id="social-links" style="margin: 20px 0;">
+      <p>Suivez-nous :</p>
+      <a href="https://www.instagram.com/aravisparapente" target="_blank" rel="noopener noreferrer" style="margin-right: 15px;">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" style="width: 40px; height: 50px; filter: invert(100%);" />
+      </a>
+      <a href="https://g.co/kgs/NqmNKai" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/google.svg" alt="Google Avis" style="width: 40px; height: 50px; filter: invert(100%);" />
+      </a>
+       <img src="image/logo-aravis.jpg" alt="Logo Aravis Parapente" class="logo" />
+    </div>
+    © 2025 Aravis Parapente – Tous droits réservés
+  </footer>
 </body>
+
 </html>
