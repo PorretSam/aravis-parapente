@@ -226,11 +226,20 @@ nav a.btn:focus {
           <input type="email" id="email" name="Email"><br>
         </fieldset>
 
-        <fieldset>
-          <legend>Informations passager</legend>
-          <label for="passagerNom">Nom Prénom Poids Téléphone du passager :</label><br>
-          <input type="text" id="passagerNom" name="Nom passager"><br>
-        </fieldset>
+      <fieldset>
+  <legend>Informations passager</legend>
+  
+  <label for="passagerNom">Nom Prénom Poids Téléphone du passager :</label><br>
+  <input type="text" id="passagerNom" name="Nom passager"><br><br>
+
+  <label for="typeVol">Choix du vol :</label><br>
+  <select id="typeVol" name="typeVol">
+    <option value="decouverte">Découverte - 65€</option>
+    <option value="plaisir">Plaisir - 90€</option>
+    <option value="performance">Performance - 125€</option>
+    <option value="prestige">Prestige - 167€</option>
+  </select>
+</fieldset>
 
         <fieldset>
           <legend>Disponibilités</legend>
