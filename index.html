@@ -1,45 +1,249 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Parapente La Clusaz - Vols biplace avec moniteur | Aravis Parapente </title>
-  <meta name="description" content="Découvrez les sensations du parapente à La Clusaz avec Aravis Parapente. Vols biplace encadrés par des moniteurs diplômés, bons cadeaux. Réservation simple et rapide." />
-  <link rel="canonical" href="https://aravis-parapente.com/" />
-  <link rel="stylesheet" href="style.css" />
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LS6K6Q3WMB">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-LS6K6Q3WMB');
-</script>
-   <style>
+  <title>Parapente La Clusaz - Vols biplace avec moniteur | Aravis Parapente</title>
+  <meta name="description" content="Découvrez le parapente à La Clusaz avec Aravis Parapente. Vols biplace encadrés par des moniteurs diplômés, bons cadeaux et réservation simple." />
+  <link rel="canonical" href="https://aravis-parapente.com/" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS6K6Q3WMB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LS6K6Q3WMB');
+  </script>
+
+  <!-- JSON-LD LOCAL BUSINESS -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Aravis Parapente",
+    "url": "https://aravis-parapente.com/",
+    "image": "https://aravis-parapente.com/image/aravis-parapente.jpg",
+    "telephone": "+33688070472",
+    "priceRange": "€€",
+
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "La Clusaz",
+      "postalCode": "74220",
+      "addressCountry": "FR"
+    },
+
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 45.905,
+      "longitude": 6.424
+    },
+
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "249"
+    },
+
+    "review": [
+      {
+        "@type": "Review",
+        "author": "Sonia Julie Hamelin",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+        "reviewBody": "Nous avons volé avec Sam et Julien, très accueillants et sympathiques."
+      },
+      {
+        "@type": "Review",
+        "author": "Cécile Griveau",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+        "reviewBody": "Premier vol avec Léo, très professionnel et rassurant."
+      },
+      {
+        "@type": "Review",
+        "author": "C L",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+        "reviewBody": "Super moment au-dessus de La Clusaz, magique et apaisant."
+      }
+    ],
+
+    "sameAs": [
+      "https://www.instagram.com/aravisparapente"
+    ]
+  }
+  </script>
+
+  <style>
     body, html {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background-color: #fff;
+      background: #fff;
       color: #333;
     }
 
     header {
-      position: relative;
       height: 50vh;
-      background-image: url('image/aravis-parapente.jpg');
-      background-size: cover;
-      background-position: center;
-      color: white;
+      background: url('image/aravis-parapente.jpg') center/cover no-repeat;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      color: white;
     }
 
     nav {
       display: flex;
       flex-wrap: wrap;
+      gap: 10px;
+      padding: 20px;
+      background: rgba(0,0,0,0.4);
+    }
 
+    nav a.btn {
+      background: #005a9c;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a.btn:hover {
+      background: #004080;
+    }
+
+    .hero-text {
+      background: #005a9c;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+    }
+
+    .fullwidth-image {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 15px;
+    }
+
+    h2 {
+      color: #0055a5;
+    }
+
+    #avis, #partenaires {
+      background: #f9f9f9;
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 10px;
+    }
+
+    .map-container {
+      height: 400px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <nav>
+    <a class="btn" href="index.html">Accueil</a>
+    <a class="btn" href="bapteme-parapente-la-clusaz.html">Vols / Bon cadeau</a>
+    <a class="btn" href="galerie.html">Galerie</a>
+    <a class="btn" href="reservation.html">Réservation</a>
+    <a class="btn" href="blog.html">Blog</a>
+  </nav>
+</header>
+
+<img src="image/flyer2025.png" class="fullwidth-image" alt="Aravis Parapente" />
+
+<div class="hero-text">
+  <h1>Baptême de parapente à La Clusaz</h1>
+</div>
+
+<main>
+
+<section>
+  <h2>Bienvenue chez Aravis Parapente</h2>
+  <p>Vols biplace à La Clusaz avec moniteurs diplômés.</p>
+</section>
+
+<section>
+  <h2>Pourquoi nous choisir</h2>
+  <p>Expérience, sécurité, paysages des Aravis et du Mont-Blanc.</p>
+</section>
+
+<section>
+  <h2>Expérience</h2>
+  <p>Décollage facile et vol inoubliable.</p>
+</section>
+
+<section id="avis">
+  <h2>Avis clients Google</h2>
+  <p>⭐⭐⭐⭐⭐ Excellent vol à La Clusaz</p>
+  <p>⭐⭐⭐⭐⭐ Super expérience rassurante</p>
+  <p>⭐⭐⭐⭐⭐ Moment magique</p>
+</section>
+
+<section id="reservation">
+  <h2>Réservation / Contact</h2>
+  <p>Sam : 06 88 07 04 72<br>Julien : 06 82 95 85 42</p>
+
+  <form action="https://formspree.io/f/mzzgepll" method="POST">
+    <input type="text" name="nom" placeholder="Nom">
+    <input type="email" name="email" placeholder="Email">
+
+    <select name="vol">
+      <option>Plaisir - 90€</option>
+      <option>Découverte - 65€</option>
+      <option>Performance - 125€</option>
+      <option>Prestige - 167€</option>
+    </select>
+
+    <button type="submit">Envoyer</button>
+  </form>
+</section>
+
+<section id="partenaires">
+  <h2>Partenaires</h2>
+  <ul>
+    <li><a href="https://www.laclusaz.com/">Office de tourisme La Clusaz</a></li>
+    <li><a href="https://www.spub-laclusaz.com/">S’Pub</a></li>
+    <li><a href="https://www.ffvl.fr/">FFVL</a></li>
+  </ul>
+</section>
+
+<section class="section-localisation">
+  <h2>Localisation</h2>
+  <div class="map-container">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2776.383415988334!2d6.42416230157471!3d45.903643557618786"
+      width="100%" height="100%" style="border:0;" allowfullscreen></iframe>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  © 2025 Aravis Parapente
+</footer>
+
+</body>
+</html>
