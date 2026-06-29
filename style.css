@@ -174,3 +174,29 @@ header {
   flex-direction: column;
   justify-content: space-between;
 }
+.fixed-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  z-index: 9999;
+}
+
+.fixed-cta a {
+  flex: 1;
+  text-align: center;
+  padding: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  background: #005a9c;
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+.fixed-cta a:first-child {
+  background: #ff6600;
+}
+body {
+  padding-bottom: 60px;
+}
