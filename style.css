@@ -2,10 +2,12 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
+  padding: 0 15px 60px 15px;
+  box-sizing: border-box;
   background: #f4f4f4;
   color: #333;
 }
+
 
 /* === HEADER PAR DÉFAUT === */
 
@@ -161,10 +163,6 @@ footer {
   color: white;
 }
 
-body {
-  padding: 0 15px;
-  box-sizing: border-box;
-}
 header {
   position: relative;
   height: 50vh;
@@ -197,6 +195,4 @@ header {
 .fixed-cta a:first-child {
   background: #ff6600;
 }
-body {
-  padding-bottom: 60px;
-}
+
