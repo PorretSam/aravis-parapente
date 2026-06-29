@@ -8,17 +8,7 @@ body {
 }
 
 /* === HEADER PAR DÉFAUT === */
-header {
-  position: relative;
-  height: 50vh;
-  background-size: cover;
-  background-position: center;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: 0;
-}
+
 
 header.accueil {
   background-image: url('image/aravis-parapente.jpg');
@@ -174,4 +164,13 @@ footer {
 body {
   padding: 0 15px;
   box-sizing: border-box;
+}
+header {
+  position: relative;
+  height: 50vh;
+  background: url('image/gonflage-col-des-aravis.jpg') center/cover no-repeat;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
