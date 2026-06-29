@@ -171,41 +171,7 @@ footer {
   color: white;
 }
 
-/* === RESPONSIVE === */
-@media (min-width: 768px) {
-  .hero-text {
-    max-width: 500px;
-  }
-
-  .logo {
-    width: 100px;
-  }
+body {
+  padding: 0 15px;
+  box-sizing: border-box;
 }
-.nav-overlay {
-  position: relative;
-  background: url('image/gonflage-col-des-aravis.jpg') no-repeat center center;
-  background-size: cover;
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  min-height: 250px; /* ✅ ajouté : pour forcer l’affichage de l’image */
-  align-items: center; /* centrer le contenu verticalement */
-  justify-content: center; /* centrer le contenu horizontalement */
-}
-main {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-@media (max-width: 768px) {
-  main {
-    padding: 20px 15px;
-  }
-
-  p, h1, h2, h3 {
-    line-height: 1.5;
-  }
-}
-
