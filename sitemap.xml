@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+
   <url>
     <loc>https://aravis-parapente.com/</loc>
-    <lastmod>2025-06-08</lastmod>
-    <priority>1.00</priority>
+    <lastmod>2026-06-30</lastmod>
   </url>
+
   <url>
     <loc>https://aravis-parapente.com/bapteme-parapente-la-clusaz.html</loc>
-    <lastmod>2025-06-08</lastmod>
-    <priority>0.90</priority>
+    <lastmod>2026-06-30</lastmod>
   </url>
+
+  <url>
+    <loc>https://aravis-parapente.com/reservation.html</loc>
+    <lastmod>2026-06-30</lastmod>
+  </url>
+
   <url>
     <loc>https://aravis-parapente.com/galerie.html</loc>
-    <lastmod>2025-06-08</lastmod>
-    <priority>0.80</priority>
+    <lastmod>2026-06-30</lastmod>
   </url>
-</urlset>
 
+  <url>
+    <loc>https://aravis-parapente.com/blog.html</loc>
+    <lastmod>2026-06-30</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aravis-parapente.com/article1.html</loc>
+    <lastmod>2026-06-30</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aravis-parapente.com/article2.html</loc>
+    <lastmod>2026-06-30</lastmod>
+  </url>
+
+</urlset>
