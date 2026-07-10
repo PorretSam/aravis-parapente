@@ -1,329 +1,347 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Blog Parapente La Clusaz | Aravis Parapente</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Actualités parapente à La Clusaz : compétitions, conseils de vol et récits avec Aravis Parapente.">
-<link rel="canonical" href="https://aravis-parapente.com/blog.html">
+  <title>Blog Parapente La Clusaz | Aravis Parapente</title>
+  <meta
+    name="description"
+    content="Actualités parapente à La Clusaz : compétitions, conseils de vol et récits avec Aravis Parapente."
+  >
+  <link rel="canonical" href="https://aravis-parapente.com/blog.html">
+  <link rel="stylesheet" href="style.css">
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f9f9f9;
-    color: #333;
-    line-height: 1.6;
-}
-
-header {
-    background: #0055a5;
-    padding: 15px 20px;
-}
-
-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-}
-
-nav a.btn {
-    background: #005a9c;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 10px 18px;
-    border-radius: 5px;
-    min-width: 140px;
-    text-align: center;
-}
-
-nav a.btn:hover {
-    background: #004080;
-}
-
-main {
-    max-width: 800px;
-    margin: 30px auto;
-    padding: 0 15px;
-}
-
-h1 {
-    text-align: center;
-    color: #0055a5;
-    margin-bottom: 30px;
-}
-
-.blog-post {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 25px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.1);
-    position: relative;
-}
-
-.blog-post h2 {
-    color: #0055a5;
-    margin-top: 0;
-}
-
-.blog-post time {
-    color: #666;
-    font-size: 0.9em;
-}
-
-.blog-post img {
-    max-width: 100%;
-    border-radius: 6px;
-    margin-top: 15px;
-}
-
-.featured {
-    border: 3px solid #f5b400;
-}
-
-.featured::before {
-    content: "À LA UNE";
-    position: absolute;
-    top: -12px;
-    right: 15px;
-    background: #f5b400;
-    color: white;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
-footer {
-    text-align: center;
-    background: #333;
-    color: white;
-    padding: 15px;
-    margin-top: 40px;
-}
-</style
-
-    <!-- Données structurées SEO LocalBusiness - Aravis Parapente -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SportsActivityLocation",
-  "@id": "https://aravis-parapente.com/#localbusiness",
-  "name": "Aravis Parapente",
-  "url": "https://aravis-parapente.com/",
-  "logo": "https://aravis-parapente.com/image/logo-aravis.jpg",
-  "image": "https://aravis-parapente.com/image/aravis-parapente.jpg",
-  "description": "Aravis Parapente propose des baptêmes de parapente biplace à La Clusaz et dans le massif des Aravis, notamment autour de La Giettaz, avec des moniteurs diplômés.",
-  "telephone": "+33688070472",
-  "priceRange": "€€",
-  "address": {
-    "@type": "PostalAddress",
-    "name": "S'Pub/Pizza Roma - Aravis Parapente",
-    "streetAddress": "91 Chemin de la Croix",
-    "addressLocality": "La Clusaz",
-    "postalCode": "74220",
-    "addressCountry": "FR"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 45.903643557618786,
-    "longitude": 6.42416230157471
-  },
-  "areaServed": [
-    {
-      "@type": "Place",
-      "name": "La Clusaz"
+  <!-- Données structurées SEO LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsActivityLocation",
+    "@id": "https://aravis-parapente.com/#localbusiness",
+    "name": "Aravis Parapente",
+    "url": "https://aravis-parapente.com/",
+    "logo": "https://aravis-parapente.com/image/logo-aravis.jpg",
+    "image": "https://aravis-parapente.com/image/aravis-parapente.jpg",
+    "description": "Aravis Parapente propose des baptêmes de parapente biplace à La Clusaz et dans le massif des Aravis avec des moniteurs diplômés.",
+    "telephone": "+33688070472",
+    "priceRange": "€€",
+    "address": {
+      "@type": "PostalAddress",
+      "name": "S'Pub / Pizza Roma - Aravis Parapente",
+      "streetAddress": "91 Chemin de la Croix",
+      "addressLocality": "La Clusaz",
+      "postalCode": "74220",
+      "addressCountry": "FR"
     },
-    {
-      "@type": "Place",
-      "name": "La Giettaz"
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 45.903643557618786,
+      "longitude": 6.42416230157471
     },
-    {
-      "@type": "Place",
-      "name": "Massif des Aravis"
-    },
-    {
-      "@type": "Place",
-      "name": "Haute-Savoie"
-    },
-    {
-      "@type": "Place",
-      "name": "Savoie"
-    }
-  ],
-  "knowsAbout": [
-    "Baptême de parapente à La Clusaz",
-    "Vol biplace en parapente dans les Aravis",
-    "Parapente à La Giettaz",
-    "Bon cadeau parapente La Clusaz",
-    "Vol parapente avec vue sur le Mont-Blanc"
-  ],
-  "contactPoint": [
-    {
-      "@type": "ContactPoint",
-      "name": "Sam Porret",
-      "telephone": "+33688070472",
-      "contactType": "Réservation",
-      "areaServed": "FR",
-      "availableLanguage": ["fr"]
-    },
-    {
-      "@type": "ContactPoint",
-      "name": "Julien Wirtz",
-      "telephone": "+33682958542",
-      "contactType": "Réservation",
-      "areaServed": "FR",
-      "availableLanguage": ["fr"]
-    }
-  ],
-  "sameAs": [
-    "https://www.instagram.com/aravisparapente",
-    "https://g.page/r/CVukl9vLK1wyEBM"
-  ]
-}
-</script>
-        
+    "areaServed": [
+      "La Clusaz",
+      "La Giettaz",
+      "Massif des Aravis",
+      "Haute-Savoie",
+      "Savoie"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "name": "Sam Porret",
+        "telephone": "+33688070472",
+        "contactType": "Réservation",
+        "areaServed": "FR",
+        "availableLanguage": ["fr", "en"]
+      },
+      {
+        "@type": "ContactPoint",
+        "name": "Julien Wirtz",
+        "telephone": "+33682958542",
+        "contactType": "Réservation",
+        "areaServed": "FR",
+        "availableLanguage": ["fr", "en"]
+      }
+    ],
+    "sameAs": [
+      "https://www.instagram.com/aravisparapente",
+      "https://g.page/r/CVukl9vLK1wyEBM"
+    ]
+  }
+  </script>
 </head>
 
-<body>
+<body id="top">
 
-<header>
-<nav>
-    <a href="index.html" class="btn">Accueil</a>
-    <a href="bapteme-parapente-la-clusaz.html" class="btn">Vols / Bon cadeau</a>
-    <a href="galerie.html" class="btn">Galerie</a>
-    <a href="reservation.html" class="btn">Réservation</a>
-    <a href="blog.html" class="btn">Blog</a>
-</nav>
-</header>
+  <header class="site-header autres blog-header">
+    <nav class="site-nav" aria-label="Navigation principale">
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="menu-principal"
+      >
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span>Menu</span>
+      </button>
 
-<main>
+      <div class="nav-links" id="menu-principal">
+        <a href="index.html" class="nav-btn">Accueil</a>
+        <a href="bapteme-parapente-la-clusaz.html" class="nav-btn">
+          Vols / Bon cadeau
+        </a>
+        <a href="galerie.html" class="nav-btn">Galerie</a>
+        <a href="reservation.html" class="nav-btn">Réservation</a>
+        <a href="blog.html" class="nav-btn" aria-current="page">Blog</a>
+        <a href="index.html#english-version" class="nav-btn">English</a>
+      </div>
+    </nav>
 
-<h1>Le Blog d'Aravis Parapente</h1>
+    <div class="page-header-content">
+      <div class="page-header-box">
+        <h1>Le blog d’Aravis Parapente</h1>
+        <p>Actualités, compétitions et conseils pour découvrir le parapente à La Clusaz.</p>
+      </div>
+    </div>
+  </header>
 
-<article class="blog-post featured">
+  <main class="blog-main">
 
-<h2>🪂 Saison estivale 2026 : Aravis Parapente vous accueille tout l'été !</h2>
+    <article class="blog-post featured">
+      <p class="featured-label">À la une</p>
 
-<time datetime="2026-06-27">27 juin 2026</time>
+      <h2>Saison estivale 2026 : Aravis Parapente vous accueille tout l’été</h2>
 
-<img src="image/sam-julien.jpg" alt="Sam et Julien, pilotes Aravis Parapente à La Clusaz">
+      <p class="post-date">
+        Publié le
+        <time datetime="2026-06-27">27 juin 2026</time>
+      </p>
 
-<p>
-La saison d'été démarre à La Clusaz ! Toute l'équipe d'Aravis Parapente est prête à vous faire découvrir les magnifiques paysages des Aravis vus du ciel.
-</p>
+      <img
+        src="image/sam-julien.jpg"
+        alt="Sam et Julien, pilotes d’Aravis Parapente à La Clusaz"
+        loading="lazy"
+      >
 
-<p>
-Jusqu'à la fin du mois de juin, nous vous accueillons <strong>les week-ends</strong>. À partir du <strong>1er juillet et jusqu'au 30 août</strong>, nous volons <strong>tous les jours</strong>, sous réserve de conditions météorologiques favorables.
-</p>
+      <p>
+        La saison d’été démarre à La Clusaz ! Toute l’équipe d’Aravis Parapente
+        est prête à vous faire découvrir les magnifiques paysages des Aravis vus
+        du ciel.
+      </p>
 
-<p>
-Que ce soit pour un baptême découverte, un vol sensation ou pour offrir un bon cadeau, c'est le moment idéal pour vivre une expérience inoubliable en parapente au-dessus de La Clusaz.
-</p>
+      <p>
+        Jusqu’à la fin du mois de juin, nous vous accueillons
+        <strong>les week-ends</strong>. À partir du <strong>1er juillet</strong>
+        et jusqu’au <strong>30 août</strong>, nous volons
+        <strong>tous les jours</strong>, sous réserve de conditions
+        météorologiques favorables.
+      </p>
 
-<img src="photo/sam-julien.jpg" alt="Les pilotes Sam et Julien d'Aravis Parapente">
+      <p>
+        Que ce soit pour un baptême découverte, un vol sensation ou pour offrir
+        un bon cadeau, c’est le moment idéal pour vivre une expérience
+        inoubliable en parapente au-dessus de La Clusaz.
+      </p>
 
-<h3>✈️ Une équipe passionnée</h3>
+      <h3>Une équipe passionnée</h3>
 
-<p>
-Sam et Julien seront heureux de vous accueillir tout au long de l'été et de partager avec vous leur passion du vol libre dans une ambiance conviviale et sécurisée.
-</p>
+      <p>
+        Sam et Julien seront heureux de vous accueillir tout au long de l’été et
+        de partager avec vous leur passion du vol libre dans une ambiance
+        conviviale et sécurisée.
+      </p>
 
-<p>
-À très bientôt dans les airs avec <strong>Aravis Parapente</strong> !
-</p>
+      <p>
+        À très bientôt dans les airs avec
+        <strong>Aravis Parapente</strong> !
+      </p>
+    </article>
 
-</article>
-    
-<article class="blog-post featured">
-    <h2>🏆 Championnats de France 2026 : Michel Cervelin 3e, Julien Wirtz 6e</h2>
+    <article class="blog-post featured">
+      <p class="featured-label">À la une</p>
 
-    <time datetime="2026-06-23">23 juin 2026</time>
+      <h2>Championnats de France 2026 : Michel Cervelin 3e, Julien Wirtz 6e</h2>
 
-    <img src="image/podium2026.jpg" alt="Podium Championnats de France 2026">
+      <p class="post-date">
+        Publié le
+        <time datetime="2026-06-23">23 juin 2026</time>
+      </p>
 
-    <p>
-        Les Championnats de France 2026 ont réuni les meilleurs pilotes français dans des conditions exigeantes et techniques.
-    </p>
+      <img
+        src="image/podium2026.jpg"
+        alt="Podium des Championnats de France de parapente 2026"
+        loading="lazy"
+      >
 
-    <p>
-        Les pilotes signent une très belle performance avec deux résultats remarquables.
-    </p>
+      <p>
+        Les Championnats de France 2026 ont réuni les meilleurs pilotes français
+        dans des conditions exigeantes et techniques.
+      </p>
 
-    <h3>🥉 Michel Cervelin</h3>
+      <p>
+        Les pilotes signent une très belle performance avec deux résultats
+        remarquables.
+      </p>
 
-    <p>
-        Michel Cervelin décroche une superbe 3e place nationale et monte sur le podium du championnat.
-    </p>
+      <h3>Michel Cervelin</h3>
 
-    <h3>✈️ Julien Wirtz</h3>
+      <p>
+        Michel Cervelin décroche une superbe troisième place nationale et monte
+        sur le podium du championnat.
+      </p>
 
-    <p>
-        Julien Wirtz termine à une excellente 6e place et confirme son niveau parmi l'élite française.
-    </p>
+      <h3>Julien Wirtz</h3>
 
-    <p>
+      <p>
+        Julien Wirtz termine à une excellente sixième place et confirme son
+        niveau parmi l’élite française.
+      </p>
+
+      <p>
         Félicitations à eux pour ces performances exceptionnelles.
-    </p>
-</article>
+      </p>
+    </article>
 
-<article class="blog-post">
-    <h2>🏆 Championnat de France de Parapente 2025 : Résultats et bilan</h2>
+    <article class="blog-post">
+      <h2>Championnat de France de parapente 2025 : résultats et bilan</h2>
 
-    <time datetime="2025-06-27">27 juin 2025</time>
+      <p class="post-date">
+        Publié le
+        <time datetime="2025-06-27">27 juin 2025</time>
+      </p>
 
-    <p>
-        Le Championnat de France 2025 s'est déroulé à Millau dans le cadre des Natural Games. Les pilotes ont bénéficié de conditions exceptionnelles avec plusieurs manches rapides et techniques.
-    </p>
+      <p>
+        Le Championnat de France 2025 s’est déroulé à Millau dans le cadre des
+        Natural Games. Les pilotes ont bénéficié de conditions exceptionnelles,
+        avec plusieurs manches rapides et techniques.
+      </p>
 
-    <h3>🥇 Classement hommes</h3>
+      <h3>Classement hommes</h3>
 
-    <ul>
+      <ol>
         <li>Luc Armant</li>
         <li>Honorin Hamard</li>
         <li>Clément Latour</li>
         <li>Baptiste Lambert</li>
         <li>Julien Wirtz</li>
-    </ul>
+      </ol>
 
-    <h3>👩 Classement femmes</h3>
+      <h3>Classement femmes</h3>
 
-    <ul>
+      <ol>
         <li>Constance Mettetal</li>
         <li>Victoria Chevallier</li>
         <li>Pauline Machabert</li>
-    </ul>
-</article>
+      </ol>
+    </article>
 
-<article class="blog-post">
-    <h2>🌤️ Conseils pour un premier vol réussi</h2>
+    <article class="blog-post">
+      <h2>Conseils pour un premier vol réussi</h2>
 
-    <time datetime="2025-06-27">27 juin 2025</time>
+      <p class="post-date">
+        Publié le
+        <time datetime="2025-06-27">27 juin 2025</time>
+      </p>
 
+      <p>
+        Vous préparez votre premier baptême de parapente à La Clusaz ? Portez
+        des chaussures de sport, une veste adaptée à la saison et venez avec
+        l’envie de profiter pleinement du paysage.
+      </p>
+
+      <a href="bapteme-parapente-la-clusaz.html" class="content-btn">
+        Découvrir nos formules de vol
+      </a>
+    </article>
+
+    <article class="blog-post">
+      <h2>Retour sur une saison haute en émotions</h2>
+
+      <p class="post-date">
+        Publié le
+        <time datetime="2025-06-22">22 juin 2025</time>
+      </p>
+
+      <p>
+        La saison a été marquée par de magnifiques conditions de vol, de
+        nombreux sourires et des souvenirs inoubliables partagés avec nos
+        passagers.
+      </p>
+
+      <a href="galerie.html" class="content-btn">
+        Voir la galerie
+      </a>
+    </article>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Aravis Parapente — Tous droits réservés</p>
     <p>
-        Vous préparez votre premier baptême parapente à La Clusaz ? Portez des chaussures de sport, une veste adaptée à la saison et venez avec l'envie de profiter pleinement du paysage.
+      <a href="#top">Retour en haut</a>
+      ·
+      <a
+        href="https://www.instagram.com/aravisparapente"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Instagram
+      </a>
     </p>
-</article>
+  </footer>
 
-<article class="blog-post">
-    <h2>🪂 Retour sur une saison haute en émotions</h2>
+  <div class="fixed-cta" aria-label="Actions rapides">
+    <a href="tel:+33688070472" class="call-btn">Appeler</a>
+    <a href="reservation.html" class="book-btn">Réserver</a>
+  </div>
 
-    <time datetime="2025-06-22">22 juin 2025</time>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const navigation = document.querySelector(".site-nav");
+      const menuButton = document.querySelector(".menu-toggle");
+      const menuLinks = document.querySelectorAll(".nav-links a");
 
-    <p>
-        La saison a été marquée par de magnifiques conditions de vol, de nombreux sourires et des souvenirs inoubliables partagés avec nos passagers.
-    </p>
-</article>
+      if (!navigation || !menuButton) {
+        return;
+      }
 
-</main>
+      function closeMenu() {
+        navigation.classList.remove("is-open");
+        menuButton.setAttribute("aria-expanded", "false");
+      }
 
-<footer>
-© 2026 Aravis Parapente – Tous droits réservés
-</footer>
+      menuButton.addEventListener("click", function () {
+        const isOpen = navigation.classList.toggle("is-open");
+        menuButton.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      menuLinks.forEach(function (link) {
+        link.addEventListener("click", closeMenu);
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closeMenu();
+          menuButton.focus();
+        }
+      });
+
+      document.addEventListener("click", function (event) {
+        if (
+          navigation.classList.contains("is-open") &&
+          !navigation.contains(event.target)
+        ) {
+          closeMenu();
+        }
+      });
+
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 768) {
+          closeMenu();
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
