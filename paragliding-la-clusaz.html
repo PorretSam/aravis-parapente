@@ -1,3 +1,165 @@
+
+aujourd’hui 14:37
+aujourd’hui 16:39
+
+Texte collé(9).txt
+Document
+j'ai pas fait de dossier en
+
+Dans le fichier anglais :
+
+paragliding-la-clusaz.html
+insérez l’étape 4 dans le menu de navigation, à l’intérieur de :
+
+<div class="nav-links" id="menu-principal">
+Votre menu anglais peut être organisé ainsi :
+
+<div class="nav-links" id="menu-principal">
+  <a href="index.html" class="nav-btn">Home</a>
+
+  <a
+    href="bapteme-parapente-la-clusaz.html"
+    class="nav-btn"
+  >
+    Flights / Gift vouchers
+  </a>
+
+  <a href="galerie.html" class="nav-btn">Gallery</a>
+
+  <a href="reservation.html" class="nav-btn">
+    Booking
+  </a>
+
+  <a href="blog.html" class="nav-btn">Blog</a>
+
+  <a
+    href="/"
+    class="nav-btn"
+    lang="fr"
+  >
+    Français
+  </a>
+</div>
+Dans votre site actuel, le menu se trouve juste après la balise <nav class="site-nav">. 
+
+
+Le lien important est :
+
+<a href="/" class="nav-btn" lang="fr">Français</a>
+Il ramènera l’utilisateur anglais vers :
+
+https://aravis-parapente.com/
+Ne mettez pas aria-current="page" sur le bouton Français. Sur la page anglaise, vous pouvez le placer sur Home :
+
+<a href="paragliding-la-clusaz.html" class="nav-btn" aria-current="page">
+  Home
+</a>
+
+
+Texte collé(10).txt
+Document
+je trouve pas recrit le complet corriger 
+
+Réfléchi pendant 57s
+J’ai réécrit et corrigé le fichier complet.
+
+Pour copier-coller tout le code
+paragliding-la-clusaz-code-source.txt
+
+Sélectionnez tout, puis remplacez entièrement le contenu actuel de votre fichier :
+
+paragliding-la-clusaz.html
+Fichier HTML directement prêt à envoyer sur le serveur
+paragliding-la-clusaz.html
+
+Les corrections principales sont :
+
+suppression de /en/ dans toutes les URL de la page anglaise ;
+
+correction de og:url, qui contenait encore l’ancien chemin /en/ ; 
+
+
+ajout de Home dans le menu anglais ;
+
+lien Français vers la page d’accueil française ;
+
+logo renvoyant vers la page anglaise ;
+
+URL canonique correcte :
+
+https://aravis-parapente.com/paragliding-la-clusaz.html
+Votre menu contient maintenant :
+
+<nav
+  class="main-nav"
+  id="main-navigation"
+  aria-label="Main navigation"
+>
+  <a
+    href="/paragliding-la-clusaz.html"
+    aria-current="page"
+  >
+    Home
+  </a>
+
+  <a href="#flights">Flights</a>
+  <a href="#discovery">Discovery session</a>
+  <a href="#gift-vouchers">Gift vouchers</a>
+  <a href="#faq">FAQ</a>
+
+  <a
+    href="/"
+    lang="fr"
+    aria-label="Voir la version française"
+  >
+    Français
+  </a>
+
+  <a class="nav-cta" href="/reservation.html">
+    Book a flight
+  </a>
+</nav>
+
+
+
+
+les image logo crées sont pas top inclue les images existante dans le site
+
+Réfléchi pendant 1m 3s
+J’ai remplacé les illustrations créées par les images existantes de votre site et de votre galerie. La page utilise maintenant notamment la vraie photo de vol au-dessus de La Clusaz, les photos été/hiver, la pente école, le flyer et les images de Sam et Julien. 
+
+Code complet à copier-coller
+paragliding-la-clusaz-images-existantes-code.txt
+
+Remplacez entièrement le contenu de votre fichier actuel :
+
+paragliding-la-clusaz.html
+Fichier directement prêt à envoyer
+paragliding-la-clusaz-images-existantes.html
+
+Les images appelées sont :
+
+image/logo-aravis.jpg
+image/aravis-parapente-bapteme-clusaz-vertical.jpg
+image/gonflage-col-des-aravis.jpg
+image/clusaz-parapente.jpg
+image/parapente-hiver-beauregard.jpg
+image/flyer2025.png
+image/samuel-porret-aravis-parapente-4100.jpg
+image/julien-wirtz.png
+Le logo image/logo-aravis.jpg est déjà référencé dans le code source de votre site actuel. 
+
+
+Vous n’avez pas besoin de transférer à nouveau ces images si elles sont déjà présentes dans le dossier image de votre hébergement. 
+
+
+
+
+Bibliothèque
+/
+paragliding-la-clusaz-images-existantes-code.txt
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -37,9 +199,12 @@
   <meta property="og:site_name" content="Aravis Parapente">
   <meta property="og:title" content="Paragliding La Clusaz | Tandem Flights – Aravis Parapente">
   <meta property="og:description" content="Tandem paragliding flights above La Clusaz and the Aravis mountains, from €65.">
-  <meta property="og:url" content="https://aravis-parapente.com/en/paragliding-la-clusaz.html">
+  <meta property="og:url" content="https://aravis-parapente.com/paragliding-la-clusaz.html">
+  <meta property="og:image" content="https://aravis-parapente.com/image/aravis-parapente-bapteme-clusaz-vertical.jpg">
+  <meta property="og:image:alt" content="Tandem paragliding flight above La Clusaz">
 
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://aravis-parapente.com/image/aravis-parapente-bapteme-clusaz-vertical.jpg">
 
   <style>
     :root {
@@ -1102,6 +1267,219 @@
         font-size: .88rem;
       }
     }
+
+    /* Existing Aravis Parapente photographs */
+    .brand-mark {
+      width: 58px;
+      height: 58px;
+      flex: 0 0 58px;
+      padding: 3px;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .flight-visual {
+      min-height: 510px;
+      overflow: hidden;
+      background: var(--mountain-dark);
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: 28px;
+      box-shadow: 0 24px 54px rgba(4, 24, 33, .32);
+    }
+
+    .flight-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(180deg, transparent 42%, rgba(5, 28, 38, .7) 100%);
+      pointer-events: none;
+    }
+
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-card {
+      z-index: 2;
+      right: 22px;
+      bottom: 22px;
+      left: 22px;
+      width: auto;
+      max-width: 390px;
+    }
+
+    .mountain-art {
+      position: relative;
+      min-height: 510px;
+      padding: 0;
+      overflow: hidden;
+      background: var(--mountain-dark);
+    }
+
+    .mountain-art img {
+      width: 100%;
+      height: 100%;
+      min-height: 510px;
+      object-fit: cover;
+    }
+
+    .season-card {
+      background-position: center;
+      background-size: cover;
+    }
+
+    .season-card.summer {
+      background-image:
+        linear-gradient(180deg, rgba(8, 35, 28, .05), rgba(6, 36, 30, .78)),
+        url("image/clusaz-parapente.jpg");
+    }
+
+    .season-card.winter {
+      background-image:
+        linear-gradient(180deg, rgba(10, 41, 59, .04), rgba(8, 37, 54, .8)),
+        url("image/parapente-hiver-beauregard.jpg");
+    }
+
+    .season-card::after {
+      display: none;
+    }
+
+    .team-section {
+      padding-top: 20px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .team-card {
+      position: relative;
+      min-height: 440px;
+      margin: 0;
+      overflow: hidden;
+      background: var(--mountain-dark);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .team-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 50%, rgba(5, 27, 37, .9) 100%);
+      pointer-events: none;
+    }
+
+    .team-card img {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+    }
+
+    .team-card figcaption {
+      position: absolute;
+      right: 25px;
+      bottom: 22px;
+      left: 25px;
+      z-index: 1;
+      color: #fff;
+    }
+
+    .team-card strong {
+      display: block;
+      font-size: 1.35rem;
+    }
+
+    .team-card span {
+      color: #dcecf1;
+      font-size: .94rem;
+    }
+
+    .gift-visual {
+      margin: 0;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .gift-visual img {
+      width: 100%;
+      height: auto;
+    }
+
+    .gift-visual figcaption {
+      padding: 14px 18px;
+      color: var(--muted);
+      background: #fff;
+      font-size: .88rem;
+    }
+
+    @media (max-width: 940px) {
+      .flight-visual {
+        min-height: 470px;
+      }
+
+      .team-card,
+      .team-card img {
+        min-height: 380px;
+        height: 380px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .brand-mark {
+        width: 48px;
+        height: 48px;
+        flex-basis: 48px;
+      }
+
+      .flight-visual {
+        min-height: 430px;
+      }
+
+      .hero-card {
+        right: 12px;
+        bottom: 12px;
+        left: 12px;
+      }
+
+      .mountain-art,
+      .mountain-art img {
+        min-height: 360px;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-card,
+      .team-card img {
+        min-height: 390px;
+        height: 390px;
+      }
+    }
+
   </style>
 
   <script type="application/ld+json">
@@ -1111,6 +1489,8 @@
     "@id": "https://aravis-parapente.com/#business",
     "name": "Aravis Parapente",
     "url": "https://aravis-parapente.com/",
+    "logo": "https://aravis-parapente.com/image/logo-aravis.jpg",
+    "image": "https://aravis-parapente.com/image/aravis-parapente-bapteme-clusaz-vertical.jpg",
     "telephone": [
       "+33688070472",
       "+33682958542"
@@ -1198,21 +1578,14 @@
   <header class="site-header">
     <div class="container nav-wrap">
 
-      <a class="brand" href="/" aria-label="Aravis Parapente home page">
+      <a class="brand" href="/paragliding-la-clusaz.html" aria-label="Aravis Parapente English home page">
         <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 48 48" width="31" height="31" fill="none">
-            <path
-              d="M5 18c7-10 31-10 38 0-9-5-29-5-38 0Z"
-              fill="currentColor"
-              opacity=".95"
-            />
-            <path
-              d="M7 18c3 2 8 4 17 4s14-2 17-4M24 22v10m0 0-5 7m5-7 5 7"
-              stroke="#fff"
-              stroke-width="2"
-              stroke-linecap="round"
-            />
-          </svg>
+          <img
+            src="image/logo-aravis.jpg"
+            alt=""
+            width="56"
+            height="56"
+          >
         </span>
 
         <span>
@@ -1236,11 +1609,12 @@
         id="main-navigation"
         aria-label="Main navigation"
       >
+        <a href="/paragliding-la-clusaz.html" aria-current="page">Home</a>
         <a href="#flights">Flights</a>
         <a href="#discovery">Discovery session</a>
         <a href="#gift-vouchers">Gift vouchers</a>
         <a href="#faq">FAQ</a>
-        <a href="/" lang="fr">Français</a>
+        <a href="/" lang="fr" aria-label="Voir la version française">Français</a>
         <a class="nav-cta" href="/reservation.html">Book a flight</a>
       </nav>
     </div>
@@ -1280,38 +1654,15 @@
           </div>
         </div>
 
-        <div class="flight-visual" aria-hidden="true">
-          <div class="sun-disc"></div>
-
-          <svg
-            class="paraglider"
-            viewBox="0 0 520 350"
-            fill="none"
+        <div class="flight-visual">
+          <img
+            class="hero-photo"
+            src="image/aravis-parapente-bapteme-clusaz-vertical.jpg"
+            alt="Tandem paragliding flight above La Clusaz"
+            width="1000"
+            height="750"
+            fetchpriority="high"
           >
-            <path
-              d="M34 103C123 3 402 3 488 103c-50-31-121-50-227-50-105 0-177 19-227 50Z"
-              fill="#f6b443"
-            />
-            <path
-              d="M34 103c73-21 148-31 227-31s154 10 227 31"
-              stroke="#fff"
-              stroke-opacity=".5"
-              stroke-width="4"
-            />
-            <path
-              d="M55 101 220 238m247-137L300 238M169 72l65 166m117-166-65 166M261 53v185"
-              stroke="#eaf7fa"
-              stroke-opacity=".85"
-              stroke-width="2"
-            />
-            <circle cx="260" cy="244" r="11" fill="#fff"/>
-            <path
-              d="m260 255-7 39m7-39 15 35m-22 4-21 25m43-29 19 23"
-              stroke="#fff"
-              stroke-width="7"
-              stroke-linecap="round"
-            />
-          </svg>
 
           <div class="hero-card">
             <span class="price-chip">From €65</span>
@@ -1381,6 +1732,51 @@
             </p>
           </article>
 
+        </div>
+      </div>
+    </section>
+
+
+    <section class="team-section" aria-labelledby="team-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Meet your instructors</span>
+          <h2 id="team-title">Sam and Julien, flying in the Aravis</h2>
+          <p>
+            Two qualified local instructors who know the mountain flying
+            sites around La Clusaz and adapt each experience to the passenger
+            and the day’s conditions.
+          </p>
+        </div>
+
+        <div class="team-grid">
+          <figure class="team-card">
+            <img
+              src="image/samuel-porret-aravis-parapente-4100.jpg"
+              alt="Samuel Porret flying a paraglider above the Aravis mountains"
+              width="787"
+              height="800"
+              loading="lazy"
+            >
+            <figcaption>
+              <strong>Sam Porret</strong>
+              <span>Qualified paragliding instructor</span>
+            </figcaption>
+          </figure>
+
+          <figure class="team-card">
+            <img
+              src="image/julien-wirtz.png"
+              alt="Julien Wirtz flying a paraglider"
+              width="920"
+              height="761"
+              loading="lazy"
+            >
+            <figcaption>
+              <strong>Julien Wirtz</strong>
+              <span>Qualified paragliding instructor</span>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -1576,48 +1972,14 @@
     >
       <div class="container split">
 
-        <div class="mountain-art" aria-hidden="true">
-          <svg viewBox="0 0 600 520" fill="none">
-            <circle cx="450" cy="112" r="62" fill="#F2A83B"/>
-
-            <path
-              d="M-30 441 173 154l92 124 63-89 242 252H-30Z"
-              fill="#E4F1F4"
-              opacity=".9"
-            />
-
-            <path
-              d="m173 154 42 56-27-3-19 29-31-9 35-73Zm155 35 53 55-34-4-28 38-22-25 31-64Z"
-              fill="#fff"
-            />
-
-            <path
-              d="M-25 464 131 288l86 94 65-70 168 152H-25Z"
-              fill="#6E9CAD"
-              opacity=".9"
-            />
-
-            <path
-              d="M73 96c66-68 236-68 303 0-45-26-98-39-151-39S118 70 73 96Z"
-              fill="#F2A83B"
-            />
-
-            <path
-              d="M85 96 201 222m163-126L249 222M225 57v165"
-              stroke="#fff"
-              stroke-width="2"
-              opacity=".85"
-            />
-
-            <circle cx="225" cy="230" r="10" fill="#fff"/>
-
-            <path
-              d="m225 240-6 34m6-34 14 31m-20 3-18 23m38-26 17 21"
-              stroke="#fff"
-              stroke-width="6"
-              stroke-linecap="round"
-            />
-          </svg>
+        <div class="mountain-art">
+          <img
+            src="image/gonflage-col-des-aravis.jpg"
+            alt="Paragliding wing inflation training at the Col des Aravis"
+            width="1000"
+            height="750"
+            loading="lazy"
+          >
         </div>
 
         <div class="panel">
@@ -1672,22 +2034,6 @@
         <div class="season-grid">
 
           <article class="season-card summer">
-            <svg
-              class="season-shape"
-              viewBox="0 0 700 430"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <circle cx="560" cy="90" r="58" fill="#FFD16A"/>
-              <path
-                d="M0 430 185 195l90 96 68-78 165 217H0Z"
-                fill="#D3E8B9"
-              />
-              <path
-                d="M125 430 355 180l226 250H125Z"
-                fill="#79A96F"
-              />
-            </svg>
 
             <h3>Summer flights</h3>
 
@@ -1698,22 +2044,6 @@
           </article>
 
           <article class="season-card winter">
-            <svg
-              class="season-shape"
-              viewBox="0 0 700 430"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <circle cx="540" cy="88" r="52" fill="#F7E4AC"/>
-              <path
-                d="M0 430 175 190l95 105 65-90 190 225H0Z"
-                fill="#F6FAFC"
-              />
-              <path
-                d="M90 430 345 165l240 265H90Z"
-                fill="#BDD6E1"
-              />
-            </svg>
 
             <h3>Winter flights</h3>
 
@@ -1840,24 +2170,2310 @@
           </div>
         </div>
 
-        <div class="panel">
-          <h3 style="font-size:1.5rem;">
-            A gift that becomes a story
-          </h3>
+        <figure class="gift-visual">
+          <img
+            src="image/flyer2025.png"
+            alt="Aravis Parapente summer and winter tandem flight prices"
+            width="1000"
+            height="707"
+            loading="lazy"
+          >
+          <figcaption>
+            Current summer and winter flight options from Aravis Parapente.
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <section
+      id="faq"
+      aria-labelledby="faq-title"
+    >
+      <div class="container">
+
+        <div class="section-head">
+          <span class="kicker">Practical information</span>
+
+          <h2 id="faq-title">
+            Frequently asked questions
+          </h2>
+        </div>
+
+        <div class="faq">
+
+          <details>
+            <summary>
+              Do I need previous paragliding experience?
+            </summary>
+            <p>
+              No. Tandem flights are designed for beginners and no previous
+              experience is required.
+            </p>
+          </details>
+
+          <details>
+            <summary>
+              Is paragliding suitable for children?
+            </summary>
+            <p>
+              Children can fly from approximately 20 kg, depending on their
+              motivation, weight and weather conditions. Contact us before
+              booking so that we can recommend the most suitable flight.
+            </p>
+          </details>
+
+          <details>
+            <summary>
+              Will I feel vertigo?
+            </summary>
+            <p>
+              Vertigo is generally associated with standing at a fixed height
+              while still connected to the ground. This sensation is usually
+              absent during a paragliding flight.
+            </p>
+          </details>
+
+          <details>
+            <summary>
+              How much time should I allow?
+            </summary>
+            <p>
+              Allow approximately one to one and a half hours for the full
+              activity, depending on the selected flight, access to the
+              take-off site and conditions.
+            </p>
+          </details>
+
+          <details>
+            <summary>
+              What should I wear?
+            </summary>
+            <p>
+              Wear comfortable sports clothing, a warm or windproof jacket
+              and closed shoes. In winter, bring gloves and ski goggles or
+              sunglasses.
+            </p>
+          </details>
+
+          <details>
+            <summary>
+              What happens if the weather is unsuitable?
+            </summary>
+            <p>
+              Paragliding is weather-dependent. When the conditions are not
+              safe or suitable, your flight is postponed or cancelled.
+            </p>
+          </details>
+
+          <details>
+            <summary>
+              Can I bring a camera or telephone?
+            </summary>
+            <p>
+              Speak to your instructor before take-off. Loose objects must be
+              properly secured and must never interfere with the equipment or
+              flight safety.
+            </p>
+          </details>
+
+          <details>
+            <summary>
+              How do I book?
+            </summary>
+            <p>
+              Use the booking page and send your preferred dates, passenger
+              name, weight and selected flight. We will contact you to confirm
+              availability and conditions.
+            </p>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="booking-title">
+      <div class="container">
+
+        <div class="contact-box">
+
+          <div>
+            <span class="kicker" style="color:#f8c15e;">
+              Ready to fly?
+            </span>
+
+            <h2 id="booking-title">
+              Book your paragliding flight in La Clusaz
+            </h2>
+
+            <p>
+              Contact Sam or Julien to organise a tandem flight, a half-day
+              discovery session or a gift voucher. Visitors staying in
+              Le Grand-Bornand, Manigod, Thônes, La Giettaz and the Annecy
+              area are welcome.
+            </p>
+
+            <div class="address">
+              Meeting office: 91 chemin de la Croix, 74220 La Clusaz, France
+            </div>
+          </div>
+
+          <div class="contact-actions">
+            <a class="btn btn-primary" href="/reservation.html">
+              Open the booking form
+            </a>
+
+            <a class="btn btn-secondary" href="tel:+33688070472">
+              Call Sam
+            </a>
+
+            <a class="btn btn-secondary" href="tel:+33682958542">
+              Call Julien
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div>
+          <h3>Aravis Parapente</h3>
 
           <p>
-            Choose a gentle discovery flight, a panoramic experience or a
-            longer mountain adventure. We can advise you when you are unsure
-            which voucher is best.
+            Tandem paragliding flights, gift vouchers and half-day discovery
+            sessions in La Clusaz and the Aravis mountains.
+          </p>
+        </div>
+
+        <div>
+          <h3>Explore</h3>
+
+          <div class="footer-links">
+            <a href="/bapteme-parapente-la-clusaz.html">
+              Flights and gift vouchers
+            </a>
+
+            <a href="/ecole-parapente-la-clusaz.html">
+              Paragliding school
+            </a>
+
+            <a href="/galerie.html">
+              Gallery
+            </a>
+
+            <a href="/blog.html">
+              Blog
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3>Contact</h3>
+
+          <div class="footer-links">
+            <a href="tel:+33688070472">
+              Sam: +33 6 88 07 04 72
+            </a>
+
+            <a href="tel:+33682958542">
+              Julien: +33 6 82 95 85 42
+            </a>
+
+            <a href="/reservation.html">
+              Booking form
+            </a>
+
+            <a
+              href="https://www.instagram.com/aravisparapente"
+              rel="noopener noreferrer"
+            >
+              Instagram
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="copyright">
+        © 2026 Aravis Parapente · La Clusaz ·
+        <a href="/" lang="fr">Version française</a>
+      </div>
+
+    </div>
+  </footer>
+
+  <div class="mobile-bar" aria-label="Quick contact">
+    <a class="btn btn-secondary" href="tel:+33688070472">
+      Call
+    </a>
+
+    <a class="btn btn-primary" href="/reservation.html">
+      Book a flight
+    </a>
+  </div>
+
+  <script>
+    const menuButton = document.querySelector(".menu-toggle");
+    const navigation = document.querySelector(".main-nav");
+
+    menuButton?.addEventListener("click", () => {
+      const isOpen = navigation.classList.toggle("open");
+
+      menuButton.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+
+      menuButton.setAttribute(
+        "aria-label",
+        isOpen ? "Close navigation" : "Open navigation"
+      );
+    });
+
+    navigation?.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navigation.classList.remove("open");
+        menuButton?.setAttribute("aria-expanded", "false");
+        menuButton?.setAttribute("aria-label", "Open navigation");
+      });
+    });
+  </script>
+</body>
+</html>
+Bibliothèque
+/
+paragliding-la-clusaz-images-existantes-code.txt
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Paragliding La Clusaz | Tandem Flights – Aravis Parapente</title>
+  <meta name="description" content="Discover tandem paragliding in La Clusaz with qualified local instructors. Summer and winter flights from €65, gift vouchers and half-day discovery sessions.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#143f52">
+
+<link
+  rel="canonical"
+  href="https://aravis-parapente.com/paragliding-la-clusaz.html"
+>
+
+<link
+  rel="alternate"
+  hreflang="en"
+  href="https://aravis-parapente.com/paragliding-la-clusaz.html"
+>
+
+<link
+  rel="alternate"
+  hreflang="fr"
+  href="https://aravis-parapente.com/"
+>
+
+<link
+  rel="alternate"
+  hreflang="x-default"
+  href="https://aravis-parapente.com/"
+>
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:site_name" content="Aravis Parapente">
+  <meta property="og:title" content="Paragliding La Clusaz | Tandem Flights – Aravis Parapente">
+  <meta property="og:description" content="Tandem paragliding flights above La Clusaz and the Aravis mountains, from €65.">
+  <meta property="og:url" content="https://aravis-parapente.com/paragliding-la-clusaz.html">
+  <meta property="og:image" content="https://aravis-parapente.com/image/aravis-parapente-bapteme-clusaz-vertical.jpg">
+  <meta property="og:image:alt" content="Tandem paragliding flight above La Clusaz">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://aravis-parapente.com/image/aravis-parapente-bapteme-clusaz-vertical.jpg">
+
+  <style>
+    :root {
+      --ink: #14242b;
+      --muted: #53656c;
+      --paper: #ffffff;
+      --mist: #f3f7f8;
+      --line: #dbe6e9;
+      --mountain: #143f52;
+      --mountain-dark: #0d2d3a;
+      --sky: #2b8198;
+      --sun: #f2a83b;
+      --sun-dark: #d78a1f;
+      --radius: 18px;
+      --shadow: 0 14px 38px rgba(13, 45, 58, .13);
+      --max: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(242, 168, 59, .55);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -80px;
+      left: 16px;
+      z-index: 1000;
+      padding: 10px 14px;
+      color: #fff;
+      background: var(--mountain-dark);
+      border-radius: 8px;
+    }
+
+    .skip-link:focus {
+      top: 12px;
+    }
+
+    .container {
+      width: min(calc(100% - 36px), var(--max));
+      margin-inline: auto;
+    }
+
+    .topbar {
+      color: #d9ebf0;
+      background: var(--mountain-dark);
+      font-size: .88rem;
+    }
+
+    .topbar .container {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .topbar a {
+      text-decoration: none;
+    }
+
+    .topbar a:hover {
+      color: #fff;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, .96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(219, 230, 233, .9);
+    }
+
+    .nav-wrap {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--mountain-dark);
+      font-weight: 850;
+      letter-spacing: -.02em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: var(--mountain);
+      border-radius: 13px;
+      box-shadow: 0 8px 22px rgba(20, 63, 82, .2);
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: .7rem;
+      font-weight: 650;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 23px;
+    }
+
+    .main-nav a {
+      color: #233c46;
+      font-size: .94rem;
+      font-weight: 720;
+      text-decoration: none;
+    }
+
+    .main-nav a:hover {
+      color: var(--sky);
+    }
+
+    .nav-cta {
+      padding: 11px 17px;
+      color: #fff !important;
+      background: var(--sun);
+      border-radius: 999px;
+      box-shadow: 0 8px 20px rgba(242, 168, 59, .25);
+    }
+
+    .nav-cta:hover {
+      background: var(--sun-dark);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      color: var(--mountain-dark);
+      background: #fff;
+      border-radius: 11px;
+      cursor: pointer;
+    }
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      min-height: 690px;
+      overflow: hidden;
+      color: #fff;
+      background:
+        radial-gradient(circle at 75% 25%, rgba(242, 168, 59, .28), transparent 18%),
+        linear-gradient(130deg, #0d2d3a 0%, #174f63 47%, #2c8097 100%);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      z-index: -1;
+      height: 43%;
+      background: #f3f7f8;
+      clip-path: polygon(
+        0 100%,
+        0 66%,
+        13% 48%,
+        24% 69%,
+        39% 27%,
+        50% 62%,
+        64% 20%,
+        75% 50%,
+        88% 14%,
+        100% 52%,
+        100% 100%
+      );
+    }
+
+    .hero-inner {
+      min-height: 690px;
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      align-items: center;
+      gap: 58px;
+      padding: 84px 0 150px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 20px;
+      padding: 7px 12px;
+      color: #effbff;
+      background: rgba(255, 255, 255, .11);
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: 999px;
+      font-size: .83rem;
+      font-weight: 780;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: var(--sun);
+      border-radius: 50%;
+      box-shadow: 0 0 0 5px rgba(242, 168, 59, .16);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-top: 0;
+      line-height: 1.13;
+      letter-spacing: -.035em;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin-bottom: 22px;
+      font-size: clamp(2.65rem, 6vw, 5.15rem);
+    }
+
+    .hero-lead {
+      max-width: 670px;
+      margin: 0 0 29px;
+      color: #e2f0f4;
+      font-size: clamp(1.06rem, 2vw, 1.27rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 12px 19px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-weight: 800;
+      text-decoration: none;
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: #172b32;
+      background: var(--sun);
+      box-shadow: 0 12px 28px rgba(242, 168, 59, .28);
+    }
+
+    .btn-primary:hover {
+      background: #ffc35f;
+    }
+
+    .btn-secondary {
+      color: #fff;
+      background: rgba(255, 255, 255, .08);
+      border-color: rgba(255, 255, 255, .4);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, .16);
+    }
+
+    .hero-notes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 25px;
+      color: #d9ebef;
+      font-size: .91rem;
+    }
+
+    .hero-notes span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .hero-notes span::before {
+      content: "✓";
+      color: #ffd47c;
+      font-weight: 900;
+    }
+
+    .flight-visual {
+      position: relative;
+      min-height: 440px;
+      align-self: center;
+    }
+
+    .sun-disc {
+      position: absolute;
+      top: 8px;
+      right: 32px;
+      width: 118px;
+      height: 118px;
+      background: rgba(242, 168, 59, .95);
+      border-radius: 50%;
+      box-shadow: 0 0 0 22px rgba(242, 168, 59, .08);
+    }
+
+    .paraglider {
+      position: absolute;
+      top: 68px;
+      right: 28px;
+      width: min(92%, 470px);
+      filter: drop-shadow(0 22px 28px rgba(0, 0, 0, .22));
+    }
+
+    .hero-card {
+      position: absolute;
+      right: 4px;
+      bottom: 10px;
+      width: min(100%, 388px);
+      padding: 25px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, .95);
+      border: 1px solid rgba(255, 255, 255, .55);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--mountain);
+      font-size: 1.16rem;
+    }
+
+    .hero-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    .price-chip {
+      position: absolute;
+      top: -17px;
+      left: 22px;
+      padding: 8px 13px;
+      color: #fff;
+      background: var(--mountain-dark);
+      border-radius: 999px;
+      font-size: .8rem;
+      font-weight: 850;
+    }
+
+    section {
+      padding: 92px 0;
+    }
+
+    .section-soft {
+      background: var(--mist);
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 40px;
+    }
+
+    .kicker {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--sky);
+      font-size: .8rem;
+      font-weight: 850;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+      color: var(--mountain-dark);
+      font-size: clamp(2rem, 4vw, 3.25rem);
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .trust-item {
+      padding: 25px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .trust-icon {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 17px;
+      color: #fff;
+      background: var(--mountain);
+      border-radius: 12px;
+      font-size: 1.25rem;
+    }
+
+    .trust-item h3 {
+      margin-bottom: 8px;
+      font-size: 1.08rem;
+    }
+
+    .trust-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .flight-card {
+      position: relative;
+      display: flex;
+      min-height: 100%;
+      flex-direction: column;
+      padding: 28px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 9px 25px rgba(13, 45, 58, .06);
+    }
+
+    .flight-card.featured {
+      color: #fff;
+      background: var(--mountain);
+      border-color: transparent;
+      box-shadow: var(--shadow);
+    }
+
+    .flight-card.featured .card-copy,
+    .flight-card.featured li {
+      color: #dcecf1;
+    }
+
+    .flight-card.featured .price {
+      color: #fff;
+    }
+
+    .flight-card.featured .duration {
+      color: #f9c665;
+    }
+
+    .tag {
+      align-self: flex-start;
+      margin-bottom: 18px;
+      padding: 6px 10px;
+      color: var(--mountain);
+      background: #e5f1f4;
+      border-radius: 999px;
+      font-size: .75rem;
+      font-weight: 850;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .featured .tag {
+      color: #fff;
+      background: rgba(255, 255, 255, .14);
+    }
+
+    .flight-card h3 {
+      margin-bottom: 7px;
+      color: inherit;
+      font-size: 1.4rem;
+    }
+
+    .price {
+      margin-bottom: 13px;
+      color: var(--mountain-dark);
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: -.05em;
+    }
+
+    .duration {
+      margin-left: 5px;
+      color: var(--sky);
+      font-size: .85rem;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .card-copy {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .flight-card ul {
+      margin: 0 0 23px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .flight-card li {
+      position: relative;
+      margin: 8px 0;
+      padding-left: 21px;
+      color: #41565e;
+      font-size: .93rem;
+    }
+
+    .flight-card li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--sun-dark);
+      font-weight: 900;
+    }
+
+    .card-link {
+      margin-top: auto;
+      color: var(--sky);
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    .featured .card-link {
+      color: #ffd47c;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 64px;
+    }
+
+    .panel {
+      padding: clamp(28px, 5vw, 54px);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 25px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel p {
+      color: var(--muted);
+    }
+
+    .check-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 20px;
+      margin: 25px 0 30px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .check-list li {
+      position: relative;
+      padding-left: 25px;
+      color: #374e57;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--sun-dark);
+      font-weight: 900;
+    }
+
+    .mountain-art {
+      min-height: 490px;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      overflow: hidden;
+      color: #fff;
+      background: linear-gradient(145deg, var(--mountain-dark), var(--sky));
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .mountain-art svg {
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .season-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 23px;
+    }
+
+    .season-card {
+      position: relative;
+      min-height: 330px;
+      overflow: hidden;
+      padding: 36px;
+      color: #fff;
+      border-radius: 23px;
+    }
+
+    .season-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(4, 25, 34, .79) 92%);
+    }
+
+    .season-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .summer {
+      background: linear-gradient(140deg, #287e6d, #78a85d);
+    }
+
+    .winter {
+      background: linear-gradient(140deg, #326983, #8eb7c8);
+    }
+
+    .season-card h3 {
+      margin-top: 150px;
+      margin-bottom: 10px;
+      font-size: 1.85rem;
+    }
+
+    .season-card p {
+      margin: 0;
+      color: #edf8fa;
+    }
+
+    .season-shape {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: .48;
+    }
+
+    .steps {
+      counter-reset: steps;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .step {
+      counter-increment: steps;
+      padding: 28px;
+      border-left: 3px solid var(--sun);
+      background: #fff;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      box-shadow: 0 8px 24px rgba(13, 45, 58, .06);
+    }
+
+    .step::before {
+      content: counter(steps, decimal-leading-zero);
+      display: block;
+      margin-bottom: 15px;
+      color: var(--sky);
+      font-size: .82rem;
+      font-weight: 900;
+      letter-spacing: .14em;
+    }
+
+    .step h3 {
+      margin-bottom: 8px;
+      font-size: 1.15rem;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    .faq {
+      display: grid;
+      gap: 12px;
+      max-width: 900px;
+    }
+
+    details {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+
+    summary {
+      padding: 19px 22px;
+      cursor: pointer;
+      color: var(--mountain-dark);
+      font-weight: 800;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      float: right;
+      color: var(--sky);
+      font-size: 1.35rem;
+      line-height: 1;
+    }
+
+    details[open] summary::after {
+      content: "–";
+    }
+
+    details p {
+      margin: 0;
+      padding: 0 22px 21px;
+      color: var(--muted);
+    }
+
+    .contact-box {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 35px;
+      padding: clamp(32px, 6vw, 64px);
+      color: #fff;
+      background: var(--mountain-dark);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-box::before {
+      content: "";
+      position: absolute;
+      right: -90px;
+      bottom: -115px;
+      width: 330px;
+      height: 330px;
+      background: rgba(242, 168, 59, .13);
+      border-radius: 50%;
+    }
+
+    .contact-box h2 {
+      color: #fff;
+    }
+
+    .contact-box p {
+      max-width: 720px;
+      margin-bottom: 0;
+      color: #dcecf1;
+    }
+
+    .contact-actions {
+      position: relative;
+      display: grid;
+      gap: 10px;
+      min-width: 240px;
+    }
+
+    .contact-actions .btn {
+      width: 100%;
+    }
+
+    .contact-actions .btn-secondary {
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .address {
+      margin-top: 22px;
+      color: #c8dde3;
+      font-size: .92rem;
+    }
+
+    footer {
+      padding: 45px 0 90px;
+      color: #bed0d6;
+      background: #081f28;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr .8fr;
+      gap: 35px;
+    }
+
+    footer h3 {
+      color: #fff;
+      font-size: 1rem;
+      letter-spacing: 0;
+    }
+
+    footer p,
+    footer a {
+      color: #bed0d6;
+      font-size: .92rem;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #fff;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 8px;
+    }
+
+    .copyright {
+      margin-top: 38px;
+      padding-top: 23px;
+      border-top: 1px solid rgba(255, 255, 255, .12);
+      font-size: .85rem;
+    }
+
+    .mobile-bar {
+      display: none;
+    }
+
+    @media (max-width: 940px) {
+      .menu-toggle {
+        display: inline-grid;
+        place-items: center;
+      }
+
+      .main-nav {
+        position: absolute;
+        top: calc(100% + 1px);
+        left: 0;
+        right: 0;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0;
+        padding: 12px 18px 20px;
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+        box-shadow: 0 14px 26px rgba(13, 45, 58, .1);
+      }
+
+      .main-nav.open {
+        display: flex;
+      }
+
+      .main-nav a {
+        padding: 11px 8px;
+      }
+
+      .nav-cta {
+        margin-top: 6px;
+        text-align: center;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding-top: 65px;
+      }
+
+      .flight-visual {
+        min-height: 365px;
+      }
+
+      .trust-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cards {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .split {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .steps {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-actions {
+        min-width: 0;
+        width: min(100%, 420px);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .topbar .container {
+        justify-content: center;
+      }
+
+      .topbar .location {
+        display: none;
+      }
+
+      .brand small {
+        display: none;
+      }
+
+      .brand {
+        font-size: .96rem;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-inner {
+        min-height: auto;
+        padding: 55px 0 145px;
+      }
+
+      h1 {
+        font-size: clamp(2.42rem, 14vw, 3.5rem);
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .flight-visual {
+        min-height: 310px;
+      }
+
+      .sun-disc {
+        width: 84px;
+        height: 84px;
+      }
+
+      .hero-card {
+        left: 0;
+        right: 0;
+        bottom: 5px;
+        width: 100%;
+      }
+
+      section {
+        padding: 70px 0;
+      }
+
+      .trust-grid,
+      .cards,
+      .season-grid,
+      .steps,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .check-list {
+        grid-template-columns: 1fr;
+      }
+
+      .mountain-art {
+        min-height: 340px;
+      }
+
+      .contact-box {
+        padding: 34px 24px;
+      }
+
+      footer {
+        padding-bottom: 100px;
+      }
+
+      .mobile-bar {
+        position: fixed;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        z-index: 110;
+        display: grid;
+        grid-template-columns: 1fr 1.4fr;
+        gap: 8px;
+        padding: 8px;
+        background: rgba(8, 31, 40, .94);
+        border: 1px solid rgba(255, 255, 255, .13);
+        border-radius: 16px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, .3);
+        backdrop-filter: blur(12px);
+      }
+
+      .mobile-bar a {
+        min-height: 44px;
+        padding: 9px 12px;
+        font-size: .88rem;
+      }
+    }
+
+    /* Existing Aravis Parapente photographs */
+    .brand-mark {
+      width: 58px;
+      height: 58px;
+      flex: 0 0 58px;
+      padding: 3px;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .flight-visual {
+      min-height: 510px;
+      overflow: hidden;
+      background: var(--mountain-dark);
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: 28px;
+      box-shadow: 0 24px 54px rgba(4, 24, 33, .32);
+    }
+
+    .flight-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(180deg, transparent 42%, rgba(5, 28, 38, .7) 100%);
+      pointer-events: none;
+    }
+
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-card {
+      z-index: 2;
+      right: 22px;
+      bottom: 22px;
+      left: 22px;
+      width: auto;
+      max-width: 390px;
+    }
+
+    .mountain-art {
+      position: relative;
+      min-height: 510px;
+      padding: 0;
+      overflow: hidden;
+      background: var(--mountain-dark);
+    }
+
+    .mountain-art img {
+      width: 100%;
+      height: 100%;
+      min-height: 510px;
+      object-fit: cover;
+    }
+
+    .season-card {
+      background-position: center;
+      background-size: cover;
+    }
+
+    .season-card.summer {
+      background-image:
+        linear-gradient(180deg, rgba(8, 35, 28, .05), rgba(6, 36, 30, .78)),
+        url("image/clusaz-parapente.jpg");
+    }
+
+    .season-card.winter {
+      background-image:
+        linear-gradient(180deg, rgba(10, 41, 59, .04), rgba(8, 37, 54, .8)),
+        url("image/parapente-hiver-beauregard.jpg");
+    }
+
+    .season-card::after {
+      display: none;
+    }
+
+    .team-section {
+      padding-top: 20px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .team-card {
+      position: relative;
+      min-height: 440px;
+      margin: 0;
+      overflow: hidden;
+      background: var(--mountain-dark);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .team-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 50%, rgba(5, 27, 37, .9) 100%);
+      pointer-events: none;
+    }
+
+    .team-card img {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+    }
+
+    .team-card figcaption {
+      position: absolute;
+      right: 25px;
+      bottom: 22px;
+      left: 25px;
+      z-index: 1;
+      color: #fff;
+    }
+
+    .team-card strong {
+      display: block;
+      font-size: 1.35rem;
+    }
+
+    .team-card span {
+      color: #dcecf1;
+      font-size: .94rem;
+    }
+
+    .gift-visual {
+      margin: 0;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .gift-visual img {
+      width: 100%;
+      height: auto;
+    }
+
+    .gift-visual figcaption {
+      padding: 14px 18px;
+      color: var(--muted);
+      background: #fff;
+      font-size: .88rem;
+    }
+
+    @media (max-width: 940px) {
+      .flight-visual {
+        min-height: 470px;
+      }
+
+      .team-card,
+      .team-card img {
+        min-height: 380px;
+        height: 380px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .brand-mark {
+        width: 48px;
+        height: 48px;
+        flex-basis: 48px;
+      }
+
+      .flight-visual {
+        min-height: 430px;
+      }
+
+      .hero-card {
+        right: 12px;
+        bottom: 12px;
+        left: 12px;
+      }
+
+      .mountain-art,
+      .mountain-art img {
+        min-height: 360px;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-card,
+      .team-card img {
+        min-height: 390px;
+        height: 390px;
+      }
+    }
+
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "SportsActivityLocation"],
+    "@id": "https://aravis-parapente.com/#business",
+    "name": "Aravis Parapente",
+    "url": "https://aravis-parapente.com/",
+    "logo": "https://aravis-parapente.com/image/logo-aravis.jpg",
+    "image": "https://aravis-parapente.com/image/aravis-parapente-bapteme-clusaz-vertical.jpg",
+    "telephone": [
+      "+33688070472",
+      "+33682958542"
+    ],
+    "priceRange": "€€",
+    "description": "Tandem paragliding flights, gift vouchers and half-day discovery sessions in La Clusaz and the Aravis mountains.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "91 chemin de la Croix",
+      "postalCode": "74220",
+      "addressLocality": "La Clusaz",
+      "addressCountry": "FR"
+    },
+    "areaServed": [
+      "La Clusaz",
+      "Le Grand-Bornand",
+      "Manigod",
+      "Thônes",
+      "La Giettaz",
+      "Annecy"
+    ],
+    "sameAs": [
+      "https://www.instagram.com/aravisparapente"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do I need previous paragliding experience?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Tandem flights are designed for beginners and no previous experience is required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is paragliding suitable for children?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Children can fly from approximately 20 kg, depending on their motivation, weight and weather conditions. Contact Aravis Parapente before booking so the team can recommend the right flight."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if the weather is unsuitable?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Paragliding is weather-dependent. When conditions are not safe or suitable, the flight is postponed or cancelled."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I wear?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Wear comfortable sports clothing, a warm or windproof jacket and closed shoes. In winter, bring gloves and ski goggles or sunglasses."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <div class="topbar">
+    <div class="container">
+      <span class="location">La Clusaz · French Alps</span>
+
+      <span>
+        <a href="tel:+33688070472">Sam: +33 6 88 07 04 72</a>
+        &nbsp;·&nbsp;
+        <a href="tel:+33682958542">Julien: +33 6 82 95 85 42</a>
+      </span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+
+      <a class="brand" href="/paragliding-la-clusaz.html" aria-label="Aravis Parapente English home page">
+        <span class="brand-mark" aria-hidden="true">
+          <img
+            src="image/logo-aravis.jpg"
+            alt=""
+            width="56"
+            height="56"
+          >
+        </span>
+
+        <span>
+          Aravis Parapente
+          <small>Tandem flights · La Clusaz</small>
+        </span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Open navigation"
+        aria-expanded="false"
+        aria-controls="main-navigation"
+      >
+        ☰
+      </button>
+
+      <nav
+        class="main-nav"
+        id="main-navigation"
+        aria-label="Main navigation"
+      >
+        <a href="/paragliding-la-clusaz.html" aria-current="page">Home</a>
+        <a href="#flights">Flights</a>
+        <a href="#discovery">Discovery session</a>
+        <a href="#gift-vouchers">Gift vouchers</a>
+        <a href="#faq">FAQ</a>
+        <a href="/" lang="fr" aria-label="Voir la version française">Français</a>
+        <a class="nav-cta" href="/reservation.html">Book a flight</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <section class="hero">
+      <div class="container hero-inner">
+
+        <div>
+          <span class="eyebrow">Qualified local instructors</span>
+
+          <h1>Tandem Paragliding in La Clusaz</h1>
+
+          <p class="hero-lead">
+            Fly above La Clusaz and the Aravis mountains in summer or winter.
+            No previous experience is required—just a few steps before the
+            mountain opens beneath you.
           </p>
 
-          <ul class="check-list" style="grid-template-columns:1fr;">
-            <li>Several flight formats and prices</li>
-            <li>Summer and winter possibilities</li>
-            <li>Date arranged later with the passenger</li>
-            <li>Weather-dependent activity</li>
-          </ul>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="/reservation.html">
+              Book your flight
+              <span aria-hidden="true">→</span>
+            </a>
+
+            <a class="btn btn-secondary" href="#flights">
+              Explore the flights
+            </a>
+          </div>
+
+          <div class="hero-notes" aria-label="Key information">
+            <span>Flights from €65</span>
+            <span>Adults and children</span>
+            <span>English briefings</span>
+          </div>
         </div>
+
+        <div class="flight-visual">
+          <img
+            class="hero-photo"
+            src="image/aravis-parapente-bapteme-clusaz-vertical.jpg"
+            alt="Tandem paragliding flight above La Clusaz"
+            width="1000"
+            height="750"
+            fetchpriority="high"
+          >
+
+          <div class="hero-card">
+            <span class="price-chip">From €65</span>
+            <strong>Your first flight, made simple</strong>
+            <p>
+              Equipment, helmet and a clear safety briefing are included.
+              The exact take-off site is chosen according to the weather.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section aria-labelledby="why-title">
+      <div class="container">
+
+        <div class="section-head">
+          <span class="kicker">Why fly with us?</span>
+
+          <h2 id="why-title">
+            A local team, an unforgettable view
+          </h2>
+
+          <p>
+            Sam and Julien welcome first-time passengers and experienced
+            adventurers with the same priorities: clear guidance, suitable
+            conditions and a memorable flight.
+          </p>
+        </div>
+
+        <div class="trust-grid">
+
+          <article class="trust-item">
+            <div class="trust-icon" aria-hidden="true">✓</div>
+            <h3>Qualified instructors</h3>
+            <p>
+              Your flight is supervised by a fully qualified, experienced
+              paragliding instructor.
+            </p>
+          </article>
+
+          <article class="trust-item">
+            <div class="trust-icon" aria-hidden="true">⌁</div>
+            <h3>Local knowledge</h3>
+            <p>
+              We know the La Clusaz and Aravis take-off sites and select the
+              best option for the day.
+            </p>
+          </article>
+
+          <article class="trust-item">
+            <div class="trust-icon" aria-hidden="true">☀</div>
+            <h3>Summer and winter</h3>
+            <p>
+              Discover green mountain scenery, snowy summits or thermal
+              flying, depending on the season.
+            </p>
+          </article>
+
+          <article class="trust-item">
+            <div class="trust-icon" aria-hidden="true">EN</div>
+            <h3>English welcome</h3>
+            <p>
+              Safety instructions and the pre-flight briefing can be provided
+              in English.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section class="team-section" aria-labelledby="team-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Meet your instructors</span>
+          <h2 id="team-title">Sam and Julien, flying in the Aravis</h2>
+          <p>
+            Two qualified local instructors who know the mountain flying
+            sites around La Clusaz and adapt each experience to the passenger
+            and the day’s conditions.
+          </p>
+        </div>
+
+        <div class="team-grid">
+          <figure class="team-card">
+            <img
+              src="image/samuel-porret-aravis-parapente-4100.jpg"
+              alt="Samuel Porret flying a paraglider above the Aravis mountains"
+              width="787"
+              height="800"
+              loading="lazy"
+            >
+            <figcaption>
+              <strong>Sam Porret</strong>
+              <span>Qualified paragliding instructor</span>
+            </figcaption>
+          </figure>
+
+          <figure class="team-card">
+            <img
+              src="image/julien-wirtz.png"
+              alt="Julien Wirtz flying a paraglider"
+              width="920"
+              height="761"
+              loading="lazy"
+            >
+            <figcaption>
+              <strong>Julien Wirtz</strong>
+              <span>Qualified paragliding instructor</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="section-soft"
+      id="flights"
+      aria-labelledby="flights-title"
+    >
+      <div class="container">
+
+        <div class="section-head">
+          <span class="kicker">Choose your experience</span>
+
+          <h2 id="flights-title">
+            Tandem paragliding flights
+          </h2>
+
+          <p>
+            Flight duration is indicative and varies with weather, passenger
+            weight and rising air currents. We will help you select the most
+            suitable option.
+          </p>
+        </div>
+
+        <div class="cards">
+
+          <article class="flight-card">
+            <span class="tag">First flight</span>
+            <h3>Discovery</h3>
+
+            <div class="price">
+              €65
+              <span class="duration">5–6 min</span>
+            </div>
+
+            <p class="card-copy">
+              A gentle and reassuring introduction to free flight, especially
+              suited to younger or cautious passengers.
+            </p>
+
+            <ul>
+              <li>Beginner friendly</li>
+              <li>Adults and children, subject to conditions</li>
+              <li>Smooth scenic flight</li>
+            </ul>
+
+            <a class="card-link" href="/reservation.html">
+              Request this flight →
+            </a>
+          </article>
+
+          <article class="flight-card featured">
+            <span class="tag">Most popular</span>
+            <h3>Pleasure</h3>
+
+            <div class="price">
+              €90
+              <span class="duration">about 15 min</span>
+            </div>
+
+            <p class="card-copy">
+              Gain more height and enjoy a panoramic view of La Clusaz,
+              Le Grand-Bornand and the Aravis mountains.
+            </p>
+
+            <ul>
+              <li>Accessible to beginners</li>
+              <li>More altitude and flying sensations</li>
+              <li>Excellent all-round experience</li>
+            </ul>
+
+            <a class="card-link" href="/reservation.html">
+              Request this flight →
+            </a>
+          </article>
+
+          <article class="flight-card">
+            <span class="tag">Thermal flight</span>
+            <h3>Performance</h3>
+
+            <div class="price">
+              €125
+              <span class="duration">about 30 min</span>
+            </div>
+
+            <p class="card-copy">
+              Use rising air currents for a longer, more active flight over
+              the mountain landscape.
+            </p>
+
+            <ul>
+              <li>Spring and summer afternoons</li>
+              <li>Passengers from 35 to 110 kg</li>
+              <li>Weather dependent</li>
+            </ul>
+
+            <a class="card-link" href="/reservation.html">
+              Request this flight →
+            </a>
+          </article>
+
+          <article class="flight-card">
+            <span class="tag">Long flight</span>
+            <h3>Prestige</h3>
+
+            <div class="price">
+              €167
+              <span class="duration">about 1 hour</span>
+            </div>
+
+            <p class="card-copy">
+              Our longest summer experience for passengers who want to stay
+              in the air and explore the Aravis from above.
+            </p>
+
+            <ul>
+              <li>July and August afternoons</li>
+              <li>Passengers from 35 to 100 kg</li>
+              <li>Requires favourable thermal conditions</li>
+            </ul>
+
+            <a class="card-link" href="/reservation.html">
+              Request this flight →
+            </a>
+          </article>
+
+          <article class="flight-card">
+            <span class="tag">Winter</span>
+            <h3>Beauregard</h3>
+
+            <div class="price">
+              €65
+              <span class="duration">5–10 min</span>
+            </div>
+
+            <p class="card-copy">
+              A winter discovery flight accessible on foot, skis or snowboard,
+              subject to snow and flying conditions.
+            </p>
+
+            <ul>
+              <li>Suitable for beginner skiers</li>
+              <li>Adults and children</li>
+              <li>Morning or afternoon</li>
+            </ul>
+
+            <a class="card-link" href="/reservation.html">
+              Request this flight →
+            </a>
+          </article>
+
+          <article class="flight-card">
+            <span class="tag">Winter summit</span>
+            <h3>Aiguille</h3>
+
+            <div class="price">
+              €145
+              <span class="duration">about 15 min</span>
+            </div>
+
+            <p class="card-copy">
+              Take off from a snow-covered summit for approximately
+              1,200 metres of vertical descent.
+            </p>
+
+            <ul>
+              <li>Ski access required</li>
+              <li>Confident off-piste skiing level</li>
+              <li>Adults and children meeting requirements</li>
+            </ul>
+
+            <a class="card-link" href="/reservation.html">
+              Request this flight →
+            </a>
+          </article>
+
+        </div>
+
+        <p style="margin:28px 0 0;color:var(--muted);font-size:.92rem;">
+          A Crêt du Loup winter flight is also available for €90
+          (approximately 10 minutes), requiring red-run skiing or
+          snowboarding ability. Photo and video options are available for
+          €25, and a dynamic sensation option is available for €15.
+        </p>
+
+      </div>
+    </section>
+
+    <section
+      id="discovery"
+      aria-labelledby="discovery-title"
+    >
+      <div class="container split">
+
+        <div class="mountain-art">
+          <img
+            src="image/gonflage-col-des-aravis.jpg"
+            alt="Paragliding wing inflation training at the Col des Aravis"
+            width="1000"
+            height="750"
+            loading="lazy"
+          >
+        </div>
+
+        <div class="panel">
+          <span class="kicker">Go beyond a tandem flight</span>
+
+          <h2 id="discovery-title">
+            Half-day paragliding discovery sessions
+          </h2>
+
+          <p>
+            Learn how a paraglider works in a friendly and progressive
+            environment. The content is adapted to the weather, the season
+            and the group.
+          </p>
+
+          <ul class="check-list">
+            <li>Equipment introduction</li>
+            <li>Basic safety principles</li>
+            <li>Wing inflation and control</li>
+            <li>Training-slope exercises</li>
+            <li>Advice from an instructor</li>
+            <li>Instructional tandem flight when appropriate</li>
+          </ul>
+
+          <a class="btn btn-primary" href="/reservation.html">
+            Ask about a discovery session
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <section
+      class="section-soft"
+      aria-labelledby="seasons-title"
+    >
+      <div class="container">
+
+        <div class="section-head">
+          <span class="kicker">All year round</span>
+
+          <h2 id="seasons-title">
+            Paragliding in every season
+          </h2>
+
+          <p>
+            Each season offers a different atmosphere. We choose the flight
+            and take-off site according to the day’s conditions.
+          </p>
+        </div>
+
+        <div class="season-grid">
+
+          <article class="season-card summer">
+
+            <h3>Summer flights</h3>
+
+            <p>
+              Foot-launched flights, green valleys and—when thermal currents
+              are suitable—longer experiences above the Aravis peaks.
+            </p>
+          </article>
+
+          <article class="season-card winter">
+
+            <h3>Winter flights</h3>
+
+            <p>
+              Snow-covered summits and take-offs on foot, skis or snowboard,
+              depending on the selected flight and the passenger’s ability.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="process-title">
+      <div class="container">
+
+        <div class="section-head">
+          <span class="kicker">Your experience</span>
+
+          <h2 id="process-title">
+            How a tandem flight works
+          </h2>
+
+          <p>
+            You do not jump from a cliff. After a clear briefing, a few steps
+            are enough for the paraglider to lift you smoothly into the air.
+          </p>
+        </div>
+
+        <div class="steps">
+
+          <article class="step">
+            <h3>Choose and request</h3>
+            <p>
+              Send your preferred dates, passenger details and flight choice
+              through the booking page.
+            </p>
+          </article>
+
+          <article class="step">
+            <h3>Confirmation</h3>
+            <p>
+              We confirm the time and meeting point according to availability
+              and the latest weather forecast.
+            </p>
+          </article>
+
+          <article class="step">
+            <h3>Meet your instructor</h3>
+            <p>
+              Meet Sam or Julien at the agreed location in La Clusaz and
+              travel to the take-off site.
+            </p>
+          </article>
+
+          <article class="step">
+            <h3>Equipment and briefing</h3>
+            <p>
+              We provide the wing, harness and helmet, then explain the simple
+              take-off procedure.
+            </p>
+          </article>
+
+          <article class="step">
+            <h3>Enjoy the flight</h3>
+            <p>
+              Sit comfortably, admire the landscape and, when appropriate,
+              try steering under supervision.
+            </p>
+          </article>
+
+          <article class="step">
+            <h3>Smooth landing</h3>
+            <p>
+              Your instructor manages the approach and gives you simple
+              instructions before landing.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="section-soft"
+      id="gift-vouchers"
+      aria-labelledby="gift-title"
+    >
+      <div class="container split">
+
+        <div>
+          <span class="kicker">Give an experience</span>
+
+          <h2 id="gift-title">
+            Paragliding gift vouchers
+          </h2>
+
+          <p>
+            Offer an unforgettable experience in the French Alps. Gift
+            vouchers are available for the different tandem flights and suit
+            birthdays, Christmas, holidays and special occasions.
+          </p>
+
+          <p>
+            The final flight date is arranged with the passenger according to
+            availability and suitable weather conditions.
+          </p>
+
+          <div class="hero-actions" style="margin-top:25px;">
+            <a
+              class="btn btn-primary"
+              href="/bapteme-parapente-la-clusaz.html"
+            >
+              View gift voucher options
+            </a>
+
+            <a
+              class="btn"
+              style="border-color:var(--line);"
+              href="/reservation.html"
+            >
+              Contact the team
+            </a>
+          </div>
+        </div>
+
+        <figure class="gift-visual">
+          <img
+            src="image/flyer2025.png"
+            alt="Aravis Parapente summer and winter tandem flight prices"
+            width="1000"
+            height="707"
+            loading="lazy"
+          >
+          <figcaption>
+            Current summer and winter flight options from Aravis Parapente.
+          </figcaption>
+        </figure>
 
       </div>
     </section>
