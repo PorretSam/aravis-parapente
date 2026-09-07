@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vols biplace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#dff0fb;
+    --sky-bottom:#f7fbfe;
+    --ink:#132a3e;
+    --ink-soft:#4c6478;
+    --line:#c9dbe6;
+    --accent:#e8592b;
+    --accent-dark:#c94a20;
+    --open-bg:#2f7d52;
+    --open-bg-soft:#e4f3ea;
+    --closed-bg:#eef2f4;
+    --closed-ink:#9aa9b3;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Work Sans', sans-serif;
+    color:var(--ink);
+    background:linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 55%);
+    min-height:100vh;
+    padding:0 0 4rem 0;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:2.5rem 1.5rem 0;}
+  .wrap.wide{max-width:960px;}
+
+  header h1{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(1.8rem, 5.5vw, 2.6rem);
+    line-height:1.1;
+    margin:0 0 0.5rem 0;
+    letter-spacing:-0.01em;
+  }
+  header p{
+    color:var(--ink-soft);
+    font-size:1.02rem;
+    line-height:1.5;
+    max-width:46ch;
+    margin:0 0 2rem 0;
+  }
+  .kicker{
+    display:inline-flex;
+    align-items:center;
+    gap:0.5rem;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    margin-bottom:0.9rem;
+  }
+
+  .panel{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:1.5rem;
+    margin-bottom:1.25rem;
+  }
+
+  label.field-label{display:block; font-size:0.92rem; font-weight:600; margin-bottom:0.6rem;}
+
+  select#dateSelect{
+    width:100%;
+    font-family:'Work Sans', sans-serif;
+    font-size:1.05rem;
+    padding:0.85rem 1rem;
+    border-radius:10px;
+    border:1.5px solid var(--line);
+    background:#fff;
+    color:var(--ink);
+    appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none'%3E%3Cpath d='M1 1L7 7L13 1' stroke='%234c6478' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 1rem center;
+  }
+  select#dateSelect:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  .slots{display:grid; grid-template-columns:repeat(auto-fill, minmax(84px, 1fr)); gap:0.6rem; margin-top:1.1rem;}
+  .slot{
+    padding:0.65rem 0.4rem; text-align:center; border-radius:9px; font-size:0.95rem; font-weight:500;
+    border:1.5px solid transparent; cursor:pointer; background:var(--open-bg-soft); color:var(--open-bg);
+    transition:transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .slot:hover{transform:translateY(-1px); box-shadow:0 3px 10px rgba(47,125,82,0.18);}
+  .slot.selected{background:var(--open-bg); color:#fff; border-color:var(--open-bg);}
+  .slot:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  .empty-state, .no-date{color:var(--ink-soft); font-size:0.95rem; padding:0.5rem 0;}
+
+  .request-form{display:none;}
+  .request-form.open{display:block;}
+  .chosen{font-size:0.98rem; margin-bottom:1.1rem; padding-bottom:1.1rem; border-bottom:1px solid var(--line);}
+  .chosen strong{font-family:'Fraunces', serif; font-weight:600;}
+
+  .field{margin-bottom:1rem;}
+  .field label{display:block; font-size:0.85rem; color:var(--ink-soft); margin-bottom:0.35rem;}
+  .field input, .field textarea{
+    width:100%; font-family:'Work Sans', sans-serif; font-size:1rem; padding:0.7rem 0.85rem;
+    border-radius:9px; border:1.5px solid var(--line); background:#fbfdfe; color:var(--ink);
+  }
+  .field textarea{resize:vertical; min-height:70px;}
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:0.8rem;}
+
+  .submit-btn{
+    width:100%; background:var(--accent); color:#fff; border:none; border-radius:10px;
+    padding:0.95rem 1rem; font-family:'Work Sans', sans-serif; font-size:1.02rem; font-weight:600; cursor:pointer; margin-top:0.4rem;
+  }
+  .submit-btn:hover{background:var(--accent-dark);}
+  .fine-print{font-size:0.82rem; color:var(--ink-soft); margin-top:0.7rem; line-height:1.5;}
+
+  footer{text-align:center; color:var(--ink-soft); font-size:0.85rem; margin-top:2rem;}
+  .pilot-link{
+    display:block; text-align:center; margin-top:2.2rem; font-size:0.8rem; color:var(--closed-ink);
+    text-decoration:none;
+  }
+  .pilot-link:hover{color:var(--ink-soft);}
+
+  /* ---- Admin ---- */
+  .gate{max-width:360px; margin:4rem auto; text-align:center;}
+  .gate h2{font-family:'Fraunces', serif; font-weight:500; font-size:1.6rem; margin-bottom:0.4rem;}
+  .gate p{color:var(--ink-soft); font-size:0.95rem; margin-bottom:1.4rem;}
+  .gate input{
+    width:100%; text-align:center; letter-spacing:0.1em; font-size:1.1rem; padding:0.8rem;
+    border-radius:10px; border:1.5px solid var(--line); margin-bottom:0.8rem;
+  }
+  .gate button{
+    width:100%; background:var(--accent); color:#fff; border:none; border-radius:10px;
+    padding:0.8rem; font-size:1rem; font-weight:600; cursor:pointer;
+  }
+  .gate .err{color:var(--accent-dark); font-size:0.85rem; margin-top:0.6rem; min-height:1.2em;}
+
+  .weekbar{
+    display:flex; align-items:center; justify-content:space-between; gap:0.75rem;
+    background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1rem 1.1rem;
+    margin-bottom:1rem; flex-wrap:wrap;
+  }
+  .weekbar .nav{display:flex; align-items:center; gap:0.6rem;}
+  .navbtn{
+    border:1.5px solid var(--line); background:#fff; border-radius:8px; width:36px; height:36px;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.1rem; color:var(--ink);
+  }
+  .navbtn:hover{border-color:var(--accent); color:var(--accent);}
+  .weeklabel{font-weight:600; font-size:1.02rem; min-width:190px; text-align:center;}
+  .seasontag{
+    font-size:0.72rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft);
+    background:var(--closed-bg); border-radius:6px; padding:0.15rem 0.5rem; margin-left:0.5rem;
+  }
+  .weekstatus{font-size:0.85rem; color:var(--ink-soft);}
+  .bulk{display:flex; gap:0.5rem;}
+  .bulkbtn{
+    border:1.5px solid var(--line); background:#fff; border-radius:8px; padding:0.55rem 0.85rem;
+    font-size:0.88rem; font-weight:500; cursor:pointer; color:var(--ink); white-space:nowrap;
+  }
+  .bulkbtn.open{color:var(--open-bg); border-color:var(--open-bg);}
+  .bulkbtn.close{color:var(--closed-ink); border-color:var(--line);}
+
+  .grid-panel{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.1rem; overflow-x:auto;}
+  table.grid{border-collapse:collapse; width:100%; min-width:760px;}
+  table.grid th, table.grid td{padding:0; text-align:center;}
+  .day-head{font-size:0.82rem; font-weight:600; padding:0.4rem 0.2rem; border-bottom:1px solid var(--line);}
+  .pilot-head{font-size:0.72rem; color:var(--ink-soft); font-weight:500; padding:0.2rem 0.1rem 0.5rem; border-bottom:1px solid var(--line);}
+  .time-cell{font-size:0.85rem; font-weight:600; color:var(--ink-soft); padding:0.35rem 0.6rem 0.35rem 0.1rem; white-space:nowrap; text-align:right;}
+  .slotcell{padding:3px;}
+  .slotbtn{width:100%; min-width:46px; height:32px; border-radius:7px; border:none; cursor:pointer; background:var(--closed-bg); color:var(--closed-ink); font-size:0;}
+  .slotbtn.is-open{background:var(--open-bg-soft); box-shadow:inset 0 0 0 1.5px var(--open-bg);}
+  .slotbtn:hover{filter:brightness(0.95);}
+  .legend{display:flex; gap:1.2rem; align-items:center; margin-top:1rem; font-size:0.85rem; color:var(--ink-soft);}
+  .legend .dot{width:12px; height:12px; border-radius:3px; display:inline-block; margin-right:0.4rem; vertical-align:-1px;}
+  .legend .dot.open{background:var(--open-bg);}
+  .legend .dot.closed{background:var(--closed-bg); box-shadow:inset 0 0 0 1px var(--line);}
+  .savehint{font-size:0.82rem; color:var(--ink-soft); margin-top:0.8rem;}
+  .savehint.saving{color:var(--accent);}
+  .backlink{display:inline-block; margin-bottom:1rem; font-size:0.85rem; color:var(--ink-soft); text-decoration:none;}
+  .backlink:hover{color:var(--accent);}
+</style>
+</head>
+<body>
+
+<!-- ===================== VUE CLIENTE ===================== -->
+<div class="wrap" id="clientView">
+  <header>
+    <div class="kicker">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M2 12c4-5 8-6 10-6s6 1 10 6c-4 5-8 6-10 6s-6-1-10-6z" stroke="#e8592b" stroke-width="1.6"/><circle cx="12" cy="12" r="2" fill="#e8592b"/></svg>
+      Vols biplace dans les Aravis
+    </div>
+    <h1>Choisissez votre jour, on vous propose un créneau.</h1>
+    <p>Sélectionnez une date qui vous arrange pendant votre séjour : les horaires encore ouverts à la réservation s'affichent juste en dessous.</p>
+  </header>
+
+  <div class="panel">
+    <label class="field-label" for="dateSelect">Votre date de séjour</label>
+    <select id="dateSelect"><option value="">— Chargement des dates —</option></select>
+    <div id="slotArea"></div>
+  </div>
+
+  <div class="panel request-form" id="requestPanel">
+    <div class="chosen">Vous demandez un vol le <strong id="chosenDate"></strong> à <strong id="chosenTime"></strong>.</div>
+    <div class="field"><label for="fname">Nom</label><input id="fname" type="text" autocomplete="name"></div>
+    <div class="row2">
+      <div class="field"><label for="fphone">Téléphone</label><input id="fphone" type="tel" autocomplete="tel"></div>
+      <div class="field"><label for="fpax">Nombre de personnes</label><input id="fpax" type="number" min="1" value="1"></div>
+    </div>
+    <div class="field"><label for="fmsg">Message (poids, formule souhaitée, questions...)</label><textarea id="fmsg"></textarea></div>
+    <button class="submit-btn" id="sendBtn">Envoyer la demande</button>
+    <p class="fine-print">Ceci ouvre votre application email avec un message pré-rempli. Il vous suffit de l'envoyer — nous confirmons le créneau par retour.</p>
+  </div>
+
+  <footer>Demande non engageante — la réservation est confirmée par nos soins après échange.</footer>
+  <a href="#pilotes" class="pilot-link" id="gotoAdmin">Espace pilotes</a>
+</div>
+
+<!-- ===================== PORTE D'ACCÈS PILOTES ===================== -->
+<div class="gate" id="gateView" style="display:none;">
+  <h2>Espace pilotes</h2>
+  <p>Entrez le code pour gérer le planning.</p>
+  <input type="password" id="gateCode" placeholder="Code" autocomplete="off">
+  <button id="gateSubmit">Entrer</button>
+  <div class="err" id="gateErr"></div>
+  <a href="#" class="backlink" id="gateBack">← Retour à la page client</a>
+</div>
+
+<!-- ===================== VUE ADMIN (PLANNING) ===================== -->
+<div class="wrap wide" id="adminView" style="display:none;">
+  <a href="#" class="backlink" id="adminBack">← Retour à la page client</a>
+  <header>
+    <h1>Planning des vols</h1>
+    <p>Ouvrez les créneaux où vous êtes disponibles. C'est ce planning qui alimente en direct la page de réservation des clients.</p>
+  </header>
+
+  <div class="weekbar">
+    <div class="nav">
+      <button class="navbtn" id="prevWeek" aria-label="Semaine précédente">‹</button>
+      <div class="weeklabel" id="weekLabel"></div>
+      <span class="seasontag" id="seasonTag"></span>
+      <button class="navbtn" id="nextWeek" aria-label="Semaine suivante">›</button>
+    </div>
+    <div class="weekstatus" id="weekStatus"></div>
+    <div class="bulk">
+      <button class="bulkbtn open" id="openWeekBtn">Ouvrir la semaine</button>
+      <button class="bulkbtn close" id="closeWeekBtn">Tout fermer</button>
+    </div>
+  </div>
+
+  <div class="grid-panel">
+    <table class="grid" id="gridTable"></table>
+    <div class="legend">
+      <span><span class="dot open"></span>Ouvert (visible des clients)</span>
+      <span><span class="dot closed"></span>Fermé</span>
+    </div>
+  </div>
+  <p class="savehint" id="saveHint">Les changements sont enregistrés automatiquement.</p>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-database-compat.js"></script>
+<script>
+  // ================== FIREBASE ==================
+  const firebaseConfig = {
+    apiKey: "AIzaSyARBIZfRDAp-iPkoZ34DfpXr5QfYQRqWdc",
+    authDomain: "planning-aravis-parapente.firebaseapp.com",
+    databaseURL: "https://planning-aravis-parapente-default-rtdb.europe-west1.firebasedatabase.app/",
+    projectId: "planning-aravis-parapente",
+    storageBucket: "planning-aravis-parapente.firebasestorage.app",
+    messagingSenderId: "771431496922",
+    appId: "1:771431496922:web:66d6e393ad6709fc3cb9e3"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+</script>
+<script>
+  // ================== CONFIG ==================
+  const ADMIN_CODE = 'jusam'; // saisi sans respect de la casse
+  const PILOTS = ['Julien', 'Sam'];
+  const ETE_TIMES   = ['8:45','9:25','10:05','11:10','12:10','13:10','14:25','15:30','16:35','17:30','18:15'];
+  const HIVER_TIMES = ['9:20','10:00','10:40','11:20','12:00','12:40','13:20','14:00','14:40','15:20','16:00'];
+  // Créneaux fermés par défaut quand on clique "Ouvrir la semaine" (à ouvrir à la main si besoin)
+  const DEFAULT_CLOSED_ETE = ['8:45','17:30','18:15']; // note : le dernier créneau réel est 18:15, pas 18:30
+  const DEFAULT_CLOSED_HIVER = [];
+  const CLIENT_WEEKS_AHEAD = 8; // nb de semaines affichées côté client
+  const OWNER_EMAIL = 'samuelporret@gmail.com';
+  const CC_EMAIL = ''; // à compléter avec l'adresse de Julien
+
+  const DAY_NAMES = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
+  const dateFormatter = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+  const weekFmt = new Intl.DateTimeFormat('fr-FR', {day:'numeric', month:'short'});
+
+  function mondayOf(d){
+    const date = new Date(d);
+    const day = date.getDay();
+    const diff = (day === 0 ? -6 : 1) - day;
+    date.setDate(date.getDate() + diff);
+    date.setHours(0,0,0,0);
+    return date;
+  }
+  function isoDate(d){ return d.toISOString().slice(0,10); }
+  function addDays(d, n){ const nd = new Date(d); nd.setDate(nd.getDate()+n); return nd; }
+  function seasonOf(d){
+    const m = d.getMonth()+1; // 1-12
+    return (m>=6 && m<=9) ? 'ete' : 'hiver';
+  }
+  function timesFor(season){ return season==='ete' ? ETE_TIMES : HIVER_TIMES; }
+  function defaultClosedFor(season){ return season==='ete' ? DEFAULT_CLOSED_ETE : DEFAULT_CLOSED_HIVER; }
+  function weekKey(monday){ return 'week:' + isoDate(monday); }
+
+  async function loadWeekData(monday){
+    try{
+      const snap = await db.ref('weeks/' + weekKey(monday)).get();
+      return snap.exists() ? snap.val() : null;
+    }catch(e){ return null; }
+  }
+  function emptyWeekData(monday){
+    const data = {};
+    for(let i=0;i<7;i++){
+      const dayIso = isoDate(addDays(monday, i));
+      data[dayIso] = {};
+      PILOTS.forEach(p => { data[dayIso][p] = {}; });
+    }
+    return data;
+  }
+
+  // ================== VUE CLIENTE ==================
+  const dateSelect = document.getElementById('dateSelect');
+  const slotArea = document.getElementById('slotArea');
+  const requestPanel = document.getElementById('requestPanel');
+  const chosenDateEl = document.getElementById('chosenDate');
+  const chosenTimeEl = document.getElementById('chosenTime');
+  const sendBtn = document.getElementById('sendBtn');
+
+  let clientAvailability = {}; // dateIso -> [times]
+  let selectedDate = null, selectedTime = null;
+
+  async function buildClientAvailability(){
+    const today = new Date(); today.setHours(0,0,0,0);
+    const firstMonday = mondayOf(today);
+    const weeks = [];
+    for(let w=0; w<CLIENT_WEEKS_AHEAD; w++){
+      weeks.push(addDays(firstMonday, w*7));
+    }
+    const weekDatas = await Promise.all(weeks.map(loadWeekData));
+    const avail = {};
+    weeks.forEach((monday, idx) => {
+      const data = weekDatas[idx];
+      if(!data) return;
+      for(let i=0;i<7;i++){
+        const day = addDays(monday, i);
+        if(day < today) continue;
+        const dayIso = isoDate(day);
+        const season = seasonOf(day);
+        const times = timesFor(season);
+        const dayObj = data[dayIso];
+        if(!dayObj) continue;
+        const openTimes = new Set();
+        PILOTS.forEach(p => {
+          const pilotObj = dayObj[p];
+          if(!pilotObj) return;
+          times.forEach(t => { if(pilotObj[t]) openTimes.add(t); });
+        });
+        if(openTimes.size > 0){
+          avail[dayIso] = times.filter(t => openTimes.has(t));
+        }
+      }
+    });
+    return avail;
+  }
+
+  function renderSlots(date){
+    slotArea.innerHTML = '';
+    requestPanel.classList.remove('open');
+    selectedTime = null;
+    if(!date) return;
+    const times = clientAvailability[date] || [];
+    if(times.length === 0){
+      const p = document.createElement('p');
+      p.className = 'empty-state';
+      p.textContent = "Plus aucun créneau ouvert ce jour-là. Essayez une autre date de votre séjour.";
+      slotArea.appendChild(p);
+      return;
+    }
+    const grid = document.createElement('div');
+    grid.className = 'slots';
+    times.forEach(t => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'slot';
+      btn.textContent = t;
+      btn.addEventListener('click', () => selectTime(date, t, btn));
+      grid.appendChild(btn);
+    });
+    slotArea.appendChild(grid);
+  }
+
+  function selectTime(date, time, btn){
+    document.querySelectorAll('.slot.selected').forEach(el => el.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedDate = date; selectedTime = time;
+    const dt = new Date(date + 'T00:00:00');
+    chosenDateEl.textContent = dateFormatter.format(dt);
+    chosenTimeEl.textContent = time;
+    requestPanel.classList.add('open');
+    requestPanel.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+
+  async function initClientView(){
+    clientAvailability = await buildClientAvailability();
+    const dates = Object.keys(clientAvailability).sort();
+    dateSelect.innerHTML = '<option value="">— Choisir une date —</option>';
+    dates.forEach(d => {
+      const opt = document.createElement('option');
+      opt.value = d;
+      opt.textContent = dateFormatter.format(new Date(d + 'T00:00:00'));
+      dateSelect.appendChild(opt);
+    });
+    if(dates.length === 0){
+      dateSelect.innerHTML = '<option value="">— Aucune date ouverte pour le moment —</option>';
+    }
+  }
+
+  dateSelect.addEventListener('change', (e) => renderSlots(e.target.value));
+
+  sendBtn.addEventListener('click', () => {
+    if(!selectedDate || !selectedTime) return;
+    const name = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const pax = document.getElementById('fpax').value.trim();
+    const msg = document.getElementById('fmsg').value.trim();
+    const prettyDate = dateFormatter.format(new Date(selectedDate + 'T00:00:00'));
+    const subject = `Demande de vol le ${prettyDate} à ${selectedTime}`;
+    const bodyLines = [
+      `Bonjour,`, ``,
+      `Je souhaite réserver un vol biplace :`,
+      `- Date : ${prettyDate}`,
+      `- Heure souhaitée : ${selectedTime}`,
+      `- Nombre de personnes : ${pax || '1'}`,
+      `- Nom : ${name || '(non renseigné)'}`,
+      `- Téléphone : ${phone || '(non renseigné)'}`,
+      msg ? `- Message : ${msg}` : null,
+      ``, `Merci de me confirmer la disponibilité.`
+    ].filter(Boolean).join('\n');
+    let mailto = `mailto:${OWNER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines)}`;
+    if(CC_EMAIL) mailto += `&cc=${encodeURIComponent(CC_EMAIL)}`;
+    window.location.href = mailto;
+  });
+
+  // ================== NAVIGATION ENTRE VUES ==================
+  const clientView = document.getElementById('clientView');
+  const gateView = document.getElementById('gateView');
+  const adminView = document.getElementById('adminView');
+
+  function showClient(){
+    clientView.style.display = ''; gateView.style.display = 'none'; adminView.style.display = 'none';
+    history.replaceState(null,'',' ');
+  }
+  function showGate(){
+    clientView.style.display = 'none'; adminView.style.display = 'none'; gateView.style.display = '';
+    document.getElementById('gateCode').value = '';
+    document.getElementById('gateErr').textContent = '';
+    document.getElementById('gateCode').focus();
+  }
+  function showAdmin(){
+    clientView.style.display = 'none'; gateView.style.display = 'none'; adminView.style.display = '';
+    if(!adminInited){ adminInited = true; renderWeekLabel(); loadWeek(); }
+  }
+
+  document.getElementById('gotoAdmin').addEventListener('click', (e) => { e.preventDefault(); showGate(); });
+  document.getElementById('gateBack').addEventListener('click', (e) => { e.preventDefault(); showClient(); });
+  document.getElementById('adminBack').addEventListener('click', (e) => { e.preventDefault(); initClientView(); showClient(); });
+  document.getElementById('gateSubmit').addEventListener('click', checkCode);
+  document.getElementById('gateCode').addEventListener('keydown', (e) => { if(e.key === 'Enter') checkCode(); });
+  function checkCode(){
+    const val = document.getElementById('gateCode').value.trim().toLowerCase();
+    if(val === ADMIN_CODE){ showAdmin(); }
+    else{ document.getElementById('gateErr').textContent = 'Code incorrect.'; }
+  }
+
+  // ================== VUE ADMIN ==================
+  let adminInited = false;
+  let currentMonday = mondayOf(new Date());
+  let currentData = null;
+  const weekLabel = document.getElementById('weekLabel');
+  const seasonTag = document.getElementById('seasonTag');
+  const weekStatus = document.getElementById('weekStatus');
+  const gridTable = document.getElementById('gridTable');
+  const saveHint = document.getElementById('saveHint');
+
+  function currentSeason(){ return seasonOf(currentMonday); }
+  function currentTimes(){ return timesFor(currentSeason()); }
+
+  async function loadWeek(){
+    saveHint.textContent = 'Chargement...'; saveHint.classList.add('saving');
+    const data = await loadWeekData(currentMonday);
+    currentData = data || emptyWeekData(currentMonday);
+    saveHint.textContent = 'Les changements sont enregistrés automatiquement.'; saveHint.classList.remove('saving');
+    renderGrid(); renderStatus();
+  }
+  async function saveWeek(){
+    saveHint.textContent = 'Enregistrement...'; saveHint.classList.add('saving');
+    try{
+      await db.ref('weeks/' + weekKey(currentMonday)).set(currentData);
+      saveHint.textContent = 'Enregistré.';
+    }catch(e){ saveHint.textContent = "Échec de l'enregistrement — réessayez."; }
+    saveHint.classList.remove('saving');
+    renderStatus();
+  }
+  function countOpen(){
+    let open = 0, total = 0;
+    const times = currentTimes();
+    Object.values(currentData).forEach(dayObj => {
+      PILOTS.forEach(p => { times.forEach(t => { total++; if(dayObj[p] && dayObj[p][t]) open++; }); });
+    });
+    return {open, total};
+  }
+  function renderStatus(){
+    const {open, total} = countOpen();
+    if(open === 0) weekStatus.textContent = 'Semaine fermée';
+    else if(open === total) weekStatus.textContent = 'Semaine entièrement ouverte';
+    else weekStatus.textContent = `${open} créneau${open>1?'x':''} ouvert${open>1?'s':''} sur ${total}`;
+  }
+  function renderWeekLabel(){
+    const sunday = addDays(currentMonday, 6);
+    weekLabel.textContent = `${weekFmt.format(currentMonday)} – ${weekFmt.format(sunday)} ${sunday.getFullYear()}`;
+    seasonTag.textContent = currentSeason() === 'ete' ? 'Été' : 'Hiver';
+  }
+  function toggleSlot(dayIso, pilot, time, btn){
+    const cur = !!(currentData[dayIso][pilot] && currentData[dayIso][pilot][time]);
+    if(!currentData[dayIso][pilot]) currentData[dayIso][pilot] = {};
+    currentData[dayIso][pilot][time] = !cur;
+    btn.classList.toggle('is-open', !cur);
+    saveWeek();
+  }
+  function renderGrid(){
+    gridTable.innerHTML = '';
+    const times = currentTimes();
+    const thead = document.createElement('thead');
+    const dayRow = document.createElement('tr');
+    dayRow.appendChild(document.createElement('th'));
+    for(let i=0;i<7;i++){
+      const d = addDays(currentMonday, i);
+      const th = document.createElement('th');
+      th.className = 'day-head'; th.colSpan = PILOTS.length;
+      th.textContent = `${DAY_NAMES[i]} ${d.getDate()}`;
+      dayRow.appendChild(th);
+    }
+    thead.appendChild(dayRow);
+    const pilotRow = document.createElement('tr');
+    pilotRow.appendChild(document.createElement('th'));
+    for(let i=0;i<7;i++){
+      PILOTS.forEach(p => { const th = document.createElement('th'); th.className='pilot-head'; th.textContent=p; pilotRow.appendChild(th); });
+    }
+    thead.appendChild(pilotRow);
+    gridTable.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    times.forEach(time => {
+      const tr = document.createElement('tr');
+      const timeTd = document.createElement('td'); timeTd.className='time-cell'; timeTd.textContent=time;
+      tr.appendChild(timeTd);
+      for(let i=0;i<7;i++){
+        const dayIso = isoDate(addDays(currentMonday, i));
+        PILOTS.forEach(p => {
+          const td = document.createElement('td'); td.className='slotcell';
+          const btn = document.createElement('button'); btn.type='button'; btn.className='slotbtn';
+          const isOpen = !!(currentData[dayIso][p] && currentData[dayIso][p][time]);
+          if(isOpen) btn.classList.add('is-open');
+          btn.setAttribute('aria-label', `${p} ${DAY_NAMES[i]} ${time}`);
+          btn.addEventListener('click', () => toggleSlot(dayIso, p, time, btn));
+          td.appendChild(btn); tr.appendChild(td);
+        });
+      }
+      tbody.appendChild(tr);
+    });
+    gridTable.appendChild(tbody);
+  }
+  document.getElementById('prevWeek').addEventListener('click', () => { currentMonday = addDays(currentMonday, -7); renderWeekLabel(); loadWeek(); });
+  document.getElementById('nextWeek').addEventListener('click', () => { currentMonday = addDays(currentMonday, 7); renderWeekLabel(); loadWeek(); });
+  document.getElementById('openWeekBtn').addEventListener('click', () => {
+    const times = currentTimes();
+    const skip = new Set(defaultClosedFor(currentSeason()));
+    for(let i=0;i<7;i++){
+      const dayIso = isoDate(addDays(currentMonday, i));
+      PILOTS.forEach(p => {
+        currentData[dayIso][p] = {};
+        times.forEach(t => { currentData[dayIso][p][t] = !skip.has(t); });
+      });
+    }
+    renderGrid(); renderStatus(); saveWeek();
+  });
+  document.getElementById('closeWeekBtn').addEventListener('click', () => {
+    currentData = emptyWeekData(currentMonday);
+    renderGrid(); renderStatus(); saveWeek();
+  });
+
+  // ================== DÉMARRAGE ==================
+  initClientView();
+</script>
+</body>
+</html>
