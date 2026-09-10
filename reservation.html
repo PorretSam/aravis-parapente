@@ -237,6 +237,7 @@
                 min="20"
                 max="140"
               >
+              <p id="poidsMsg" style="font-size:0.85rem; color:#b3261e; margin:0.4rem 0 0; min-height:0;"></p>
             </div>
 
             <div class="form-group">
@@ -428,20 +429,58 @@
       const API_BASE = "https://api.parabooking.app/api/public/aravis";
       const CLIENT_WEEKS_AHEAD = 8;
 
-      // Durée (en minutes) de chaque formule -> espace les créneaux proposés.
+      // Durée (en minutes) de chaque formule -> espace les créneaux proposés côté API.
       // ⚠️ HYPOTHÈSE À VALIDER : l'endpoint /slots ne documentait pas de paramètre
-      // de durée. On lui envoie ici "&duration=20" ou "&duration=40" en supposant
-      // qu'il en tient compte pour proposer des créneaux plus rapprochés sur
-      // l'Aiglon (20 min) que sur les autres vols (40 min). Si l'API ignore ce
-      // paramètre, tous les vols recevront les mêmes créneaux espacés de 40 min —
-      // à corriger avec qui gère parabooking.app le cas échéant.
+      // de durée. On lui envoie ici "&duration=20/40/180" en supposant qu'il en
+      // tient compte pour proposer des créneaux plus ou moins rapprochés selon
+      // la formule (20 min Aiglon, 40 min vols classiques, 180 min École = 3h).
+      // Si l'API ignore ce paramètre, tous les vols recevront les mêmes créneaux
+      // espacés de 40 min — à corriger avec qui gère parabooking.app.
       const DURATION_BY_TYPE = {
-        "L'Aiglon hiver - 35 €": 20
+        "L'Aiglon hiver - 35 €": 20,
+        "École initiation - 170 €": 180,
+        "École progression - 180 €": 180,
+        "École performance - 190 €": 180
       };
       const DEFAULT_DURATION = 40;
 
+      // Règles horaires et de poids par formule.
+      // minTime : aucun créneau avant cette heure pour cette formule.
+      // maxTime : aucun créneau après cette heure (École).
+      // maxWeight : formule réservée aux passagers strictement en dessous de ce poids.
+      // doubleSlot : la formule occupe 2 créneaux consécutifs de 40 min (1h20 au total) —
+      //   on ne propose donc un départ que si le créneau suivant (+40 min) est lui aussi libre.
+      const FLIGHT_RULES = {
+        "Découverte - 65 €":        { minTime: "09:25", maxWeight: 70 },
+        "Plaisir - 90 €":           { minTime: "10:05" },
+        "Performance - 130 €":      { minTime: "13:10" },
+        "Prestige - 170 €":         { minTime: "16:35" },
+        "Beauregard hiver - 70 €":  { minTime: "09:00" },
+        "Loup hiver - 90 €":        { minTime: "09:00" },
+        "Aiguille hiver - 160 €":   { minTime: "09:00", doubleSlot: true },
+        "L'Aiglon hiver - 35 €":    { minTime: "09:00" },
+        "École initiation - 170 €":   { minTime: "09:00", maxTime: "12:00" },
+        "École progression - 180 €":  { minTime: "09:00", maxTime: "12:00" },
+        "École performance - 190 €":  { minTime: "09:00", maxTime: "12:00" }
+      };
+
+      const MAX_WEIGHT = 115;         // au-delà : vol impossible, quelle que soit la date/formule
+      const HEAVY_WEIGHT_LIMIT = 80;  // à partir de ce poids, pas de créneau avant 11h en été
+      const HEAVY_WEIGHT_MIN_TIME = "11:00";
+
       function isoDate(d){ return d.toISOString().slice(0,10); }
       function addDays(d, n){ const nd = new Date(d); nd.setDate(nd.getDate()+n); return nd; }
+      function addMinutes(hhmm, mins){
+        const parts = hhmm.split(":");
+        const total = parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10) + mins;
+        const h = Math.floor(total / 60) % 24;
+        const m = total % 60;
+        return String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0");
+      }
+      function isSummer(dateIso){
+        const month = parseInt(dateIso.split("-")[1], 10);
+        return month >= 6 && month <= 9;
+      }
       const dateFormatter = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
 
       const form = document.getElementById("bookingForm");
@@ -452,10 +491,25 @@
       const slotGroup = document.getElementById("slotGroup");
       const slotArea = document.getElementById("slotArea");
       const slotHint = document.getElementById("slotHint");
+      const poidsEl = document.getElementById("poids");
+      const poidsMsgEl = document.getElementById("poidsMsg");
       if (!form) return;
+
+      poidsEl.addEventListener("input", function(){
+        const w = parseFloat(poidsEl.value);
+        if(!isNaN(w) && w > MAX_WEIGHT){
+          poidsMsgEl.textContent = "Pour des raisons de sécurité liées au poids maximal admissible sous la voile, nous ne pouvons malheureusement pas accueillir de passager au-delà de " + MAX_WEIGHT + " kg. N'hésitez pas à nous appeler directement pour échanger sur d'autres solutions.";
+        } else {
+          poidsMsgEl.textContent = "";
+        }
+        // Le poids peut changer après qu'une date ait déjà été choisie : on réévalue les créneaux affichés.
+        if(volDateEl.value){ renderSlots(volDateEl.value); }
+      });
 
       let currentAvailability = {}; // { "YYYY-MM-DD": ["HH:MM", ...] }
       let selectedTime = null;
+      let noPreference = false;
+      let waitlist = false;
 
       async function fetchAvailability(duration){
         const today = new Date(); today.setHours(0,0,0,0);
@@ -471,35 +525,103 @@
       }
 
       function resetSlotPicker(){
-        selectedTime = null;
+        selectedTime = null; noPreference = false; waitlist = false;
         slotGroup.style.display = "none";
         slotArea.innerHTML = "";
         slotHint.textContent = "";
       }
 
+      function styleChoiceBtn(btn){
+        btn.type = "button";
+        btn.style.cssText = "padding:0.5rem 0.9rem; border-radius:8px; border:1.5px solid #c9dbe6; background:#eef6fb; cursor:pointer; font-size:0.95rem;";
+        return btn;
+      }
+      function selectChoiceBtn(btn){
+        slotArea.querySelectorAll("button").forEach(function(b){
+          b.style.background = "#eef6fb"; b.style.borderColor = "#c9dbe6"; b.style.color = "";
+        });
+        btn.style.background = "#2f7d52"; btn.style.borderColor = "#2f7d52"; btn.style.color = "#fff";
+      }
+
       function renderSlots(dateIso){
         slotArea.innerHTML = "";
-        selectedTime = null;
-        const times = currentAvailability[dateIso] || [];
-        if(times.length === 0){
-          slotHint.textContent = "Plus aucun créneau ouvert ce jour-là. Essayez une autre date.";
+        selectedTime = null; noPreference = false; waitlist = false;
+
+        const type = typeVolEl.value;
+        const rule = FLIGHT_RULES[type] || {};
+        const w = parseFloat(poidsEl.value);
+        const summer = isSummer(dateIso);
+        const notes = [];
+
+        let times = (currentAvailability[dateIso] || []).slice();
+
+        // Hiver : rien avant 9h, toutes formules confondues.
+        if(!summer){
+          times = times.filter(function(t){ return t >= "09:00"; });
+        }
+        // Heure minimale propre à la formule (et fenêtre École 9h-12h).
+        if(rule.minTime){
+          times = times.filter(function(t){ return t >= rule.minTime; });
+        }
+        if(rule.maxTime){
+          times = times.filter(function(t){ return t <= rule.maxTime; });
+        }
+        // Aiguille : besoin de 2 créneaux consécutifs de 40 min (1h20).
+        if(rule.doubleSlot){
+          const set = new Set(currentAvailability[dateIso] || []);
+          times = times.filter(function(t){ return set.has(addMinutes(t, 40)); });
+        }
+        // Découverte : réservée aux moins de 70 kg.
+        if(rule.maxWeight && !isNaN(w) && w >= rule.maxWeight){
+          slotHint.textContent = "La formule Découverte est réservée aux passagers de moins de " + rule.maxWeight + " kg. Merci de choisir une autre formule ou de nous contacter directement.";
+          renderExtraChoices(dateIso, true);
           return;
         }
-        slotHint.textContent = "";
+        // 80 kg et plus : pas de créneau avant 11h en été (toutes formules).
+        if(!isNaN(w) && w >= HEAVY_WEIGHT_LIMIT && summer){
+          const before = times.length;
+          times = times.filter(function(t){ return t >= HEAVY_WEIGHT_MIN_TIME; });
+          if(times.length < before){
+            notes.push("Pas de créneau avant 11h l'été à partir de " + HEAVY_WEIGHT_LIMIT + " kg.");
+          }
+        }
+
         times.forEach(function(t){
-          const btn = document.createElement("button");
-          btn.type = "button";
+          const btn = styleChoiceBtn(document.createElement("button"));
           btn.textContent = t;
-          btn.style.cssText = "padding:0.5rem 0.9rem; border-radius:8px; border:1.5px solid #c9dbe6; background:#eef6fb; cursor:pointer; font-size:0.95rem;";
           btn.addEventListener("click", function(){
-            slotArea.querySelectorAll("button").forEach(function(b){
-              b.style.background = "#eef6fb"; b.style.borderColor = "#c9dbe6"; b.style.color = "";
-            });
-            btn.style.background = "#2f7d52"; btn.style.borderColor = "#2f7d52"; btn.style.color = "#fff";
-            selectedTime = t;
+            selectChoiceBtn(btn);
+            selectedTime = t; noPreference = false; waitlist = false;
           });
           slotArea.appendChild(btn);
         });
+
+        slotHint.textContent = notes.join(" ");
+        renderExtraChoices(dateIso, times.length === 0);
+      }
+
+      // Ajoute l'option "sans préférence horaire", et la liste d'attente si aucun créneau.
+      function renderExtraChoices(dateIso, noSlotsAvailable){
+        const prefBtn = styleChoiceBtn(document.createElement("button"));
+        prefBtn.textContent = "Aucune préférence horaire";
+        prefBtn.addEventListener("click", function(){
+          selectChoiceBtn(prefBtn);
+          selectedTime = null; noPreference = true; waitlist = false;
+        });
+        slotArea.appendChild(prefBtn);
+
+        if(noSlotsAvailable){
+          const waitBtn = styleChoiceBtn(document.createElement("button"));
+          waitBtn.textContent = "Rejoindre la liste d'attente pour cette date";
+          waitBtn.addEventListener("click", function(){
+            selectChoiceBtn(waitBtn);
+            selectedTime = null; noPreference = false; waitlist = true;
+          });
+          slotArea.appendChild(waitBtn);
+          if(!slotHint.textContent){
+            slotHint.textContent = "Plus aucun créneau ouvert ce jour-là pour cette formule.";
+          }
+        }
       }
 
       typeVolEl.addEventListener("change", async function(){
@@ -560,8 +682,8 @@
           errorEl.textContent = "Merci de choisir une formule de vol.";
           return;
         }
-        if (!volDate || !selectedTime) {
-          errorEl.textContent = "Merci de choisir une date et un créneau horaire.";
+        if (!volDate || (!selectedTime && !noPreference && !waitlist)) {
+          errorEl.textContent = "Merci de choisir une date, puis un créneau horaire (ou \u00ab aucune préférence \u00bb / liste d'attente).";
           return;
         }
         if (!consentement) {
@@ -569,9 +691,27 @@
           return;
         }
 
+        const weightVal = parseFloat(poidsEl.value);
+        if (!isNaN(weightVal) && weightVal > MAX_WEIGHT) {
+          errorEl.textContent = "Pour des raisons de sécurité liées au poids maximal admissible sous la voile, nous ne pouvons malheureusement pas accueillir de passager au-delà de " + MAX_WEIGHT + " kg. N'hésitez pas à nous appeler directement pour échanger sur d'autres solutions.";
+          poidsEl.focus();
+          return;
+        }
+        if (selectedTime && !isNaN(weightVal) && weightVal >= HEAVY_WEIGHT_LIMIT && isSummer(volDate) && selectedTime < HEAVY_WEIGHT_MIN_TIME) {
+          errorEl.textContent = "Pour des raisons de sécurité liées au poids, ce créneau n'est plus disponible à partir de " + HEAVY_WEIGHT_LIMIT + " kg en été. Merci de choisir un créneau à partir de 11h.";
+          return;
+        }
+        const rule = FLIGHT_RULES[typeVol] || {};
+        if (rule.maxWeight && !isNaN(weightVal) && weightVal >= rule.maxWeight) {
+          errorEl.textContent = "La formule Découverte est réservée aux passagers de moins de " + rule.maxWeight + " kg. Merci de choisir une autre formule ou de nous contacter directement.";
+          return;
+        }
+
         const notesParts = [];
         if (passagerNom) notesParts.push(`Passager : ${passagerNom}`);
         if (telPassager) notesParts.push(`Téléphone passager : ${telPassager}`);
+        if (waitlist) notesParts.push("LISTE D'ATTENTE pour cette date — aucun créneau libre au moment de la demande");
+        if (noPreference) notesParts.push("Sans préférence horaire");
         if (message) notesParts.push(message);
 
         const payload = {
@@ -582,7 +722,7 @@
           weight_info: poids || undefined,
           flight_type: typeVol,
           requested_date: volDate,
-          requested_time: selectedTime,
+          requested_time: selectedTime || undefined,
           notes: notesParts.length ? notesParts.join(" — ") : undefined
         };
 
@@ -604,8 +744,17 @@
 
           const section = document.getElementById("reservation-form");
           const prettyDate = dateFormatter.format(new Date(volDate + "T00:00:00"));
+          const whenLabel = waitlist
+            ? "en liste d'attente pour le " + prettyDate
+            : (noPreference ? "pour le " + prettyDate + " (sans préférence horaire)" : "pour le " + prettyDate + " à " + selectedTime);
           section.querySelector("form").outerHTML =
-            '<p style="color:#2f7d52; font-weight:600;">Demande envoyée pour le ' + prettyDate + ' à ' + selectedTime + ' ! Nous vous recontactons rapidement pour confirmer votre vol.</p>';
+            '<div>' +
+            '<p style="color:#2f7d52; font-weight:600;">Demande envoyée ' + whenLabel + ' ! Nous vous recontactons rapidement pour confirmer votre vol.</p>' +
+            '<button type="button" id="newRequestBtn" class="submit-btn">Faire une nouvelle demande</button>' +
+            '</div>';
+          document.getElementById("newRequestBtn").addEventListener("click", function(){
+            window.location.reload();
+          });
         } catch (err) {
           submitBtn.disabled = false;
           submitBtn.textContent = originalLabel;
