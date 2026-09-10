@@ -173,8 +173,7 @@
       <h2>Formulaire de réservation</h2>
 
       <form
-        action="https://formspree.io/f/mzzgepll"
-        method="POST"
+        id="bookingForm"
         class="booking-form"
       >
         <fieldset>
@@ -266,6 +265,9 @@
               <option value="Aiguille hiver - 160 €">
                 Aiguille hiver - 160 €
               </option>
+              <option value="L'Aiglon hiver - 35 €">
+                L'Aiglon hiver - 35 €
+              </option>
               <option value="École initiation - 170 €">
                 École initiation - 170 €
               </option>
@@ -282,26 +284,17 @@
         <fieldset>
           <legend>Disponibilités</legend>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label for="dateDebut">Date de début</label>
-              <input
-                type="date"
-                id="dateDebut"
-                name="Date de début"
-                required
-              >
-            </div>
+          <div class="form-group">
+            <label for="volDate">Date de vol souhaitée</label>
+            <select id="volDate" name="Date de vol" required disabled>
+              <option value="">— Choisissez d'abord une formule de vol —</option>
+            </select>
+          </div>
 
-            <div class="form-group">
-              <label for="dateFin">Date de fin</label>
-              <input
-                type="date"
-                id="dateFin"
-                name="Date de fin"
-                required
-              >
-            </div>
+          <div class="form-group" id="slotGroup" style="display:none;">
+            <label>Créneau horaire</label>
+            <div id="slotArea" style="display:flex; flex-wrap:wrap; gap:0.5rem;"></div>
+            <p id="slotHint" style="font-size:0.85rem; color:#666; margin-top:0.4rem;"></p>
           </div>
 
           <div class="form-group">
@@ -310,7 +303,7 @@
               id="message"
               name="Message"
               rows="5"
-              placeholder="Nombre de passagers, préférences horaires, questions particulières…"
+              placeholder="Nombre de passagers, questions particulières…"
             ></textarea>
           </div>
         </fieldset>
@@ -329,14 +322,9 @@
           </label>
         </div>
 
-        <input type="hidden" name="_format" value="plain">
-        <input
-          type="hidden"
-          name="_subject"
-          value="Demande de vol Aravis Parapente"
-        >
+        <p id="bookingFormError" role="alert" style="color:#b3261e; min-height:1.2em; margin:0.75rem 0 0;"></p>
 
-        <button type="submit" class="submit-btn">
+        <button type="submit" class="submit-btn" id="bookingSubmitBtn">
           Envoyer ma demande
         </button>
       </form>
@@ -429,6 +417,199 @@
       window.addEventListener("resize", function () {
         if (window.innerWidth > 768) {
           closeMenu();
+        }
+      });
+    });
+  </script>
+
+  <!-- ================== DISPONIBILITÉS + ENVOI DU FORMULAIRE VERS L'API ================== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const API_BASE = "https://api.parabooking.app/api/public/aravis";
+      const CLIENT_WEEKS_AHEAD = 8;
+
+      // Durée (en minutes) de chaque formule -> espace les créneaux proposés.
+      // ⚠️ HYPOTHÈSE À VALIDER : l'endpoint /slots ne documentait pas de paramètre
+      // de durée. On lui envoie ici "&duration=20" ou "&duration=40" en supposant
+      // qu'il en tient compte pour proposer des créneaux plus rapprochés sur
+      // l'Aiglon (20 min) que sur les autres vols (40 min). Si l'API ignore ce
+      // paramètre, tous les vols recevront les mêmes créneaux espacés de 40 min —
+      // à corriger avec qui gère parabooking.app le cas échéant.
+      const DURATION_BY_TYPE = {
+        "L'Aiglon hiver - 35 €": 20
+      };
+      const DEFAULT_DURATION = 40;
+
+      function isoDate(d){ return d.toISOString().slice(0,10); }
+      function addDays(d, n){ const nd = new Date(d); nd.setDate(nd.getDate()+n); return nd; }
+      const dateFormatter = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+
+      const form = document.getElementById("bookingForm");
+      const submitBtn = document.getElementById("bookingSubmitBtn");
+      const errorEl = document.getElementById("bookingFormError");
+      const typeVolEl = document.getElementById("typeVol");
+      const volDateEl = document.getElementById("volDate");
+      const slotGroup = document.getElementById("slotGroup");
+      const slotArea = document.getElementById("slotArea");
+      const slotHint = document.getElementById("slotHint");
+      if (!form) return;
+
+      let currentAvailability = {}; // { "YYYY-MM-DD": ["HH:MM", ...] }
+      let selectedTime = null;
+
+      async function fetchAvailability(duration){
+        const today = new Date(); today.setHours(0,0,0,0);
+        const from = isoDate(today);
+        const to = isoDate(addDays(today, CLIENT_WEEKS_AHEAD * 7));
+        try{
+          const res = await fetch(`${API_BASE}/slots?from=${from}&to=${to}&duration=${duration}`);
+          if(!res.ok) return {};
+          return await res.json();
+        }catch(e){
+          return {};
+        }
+      }
+
+      function resetSlotPicker(){
+        selectedTime = null;
+        slotGroup.style.display = "none";
+        slotArea.innerHTML = "";
+        slotHint.textContent = "";
+      }
+
+      function renderSlots(dateIso){
+        slotArea.innerHTML = "";
+        selectedTime = null;
+        const times = currentAvailability[dateIso] || [];
+        if(times.length === 0){
+          slotHint.textContent = "Plus aucun créneau ouvert ce jour-là. Essayez une autre date.";
+          return;
+        }
+        slotHint.textContent = "";
+        times.forEach(function(t){
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.textContent = t;
+          btn.style.cssText = "padding:0.5rem 0.9rem; border-radius:8px; border:1.5px solid #c9dbe6; background:#eef6fb; cursor:pointer; font-size:0.95rem;";
+          btn.addEventListener("click", function(){
+            slotArea.querySelectorAll("button").forEach(function(b){
+              b.style.background = "#eef6fb"; b.style.borderColor = "#c9dbe6"; b.style.color = "";
+            });
+            btn.style.background = "#2f7d52"; btn.style.borderColor = "#2f7d52"; btn.style.color = "#fff";
+            selectedTime = t;
+          });
+          slotArea.appendChild(btn);
+        });
+      }
+
+      typeVolEl.addEventListener("change", async function(){
+        const type = typeVolEl.value;
+        resetSlotPicker();
+        volDateEl.innerHTML = '<option value="">— Chargement des dates —</option>';
+        volDateEl.disabled = true;
+
+        if(!type){
+          volDateEl.innerHTML = '<option value="">— Choisissez d\'abord une formule de vol —</option>';
+          return;
+        }
+
+        const duration = DURATION_BY_TYPE[type] || DEFAULT_DURATION;
+        currentAvailability = await fetchAvailability(duration);
+        const dates = Object.keys(currentAvailability).sort();
+
+        volDateEl.innerHTML = '<option value="">— Choisir une date —</option>';
+        dates.forEach(function(d){
+          const opt = document.createElement("option");
+          opt.value = d;
+          opt.textContent = dateFormatter.format(new Date(d + "T00:00:00"));
+          volDateEl.appendChild(opt);
+        });
+        if(dates.length === 0){
+          volDateEl.innerHTML = '<option value="">— Aucune date ouverte pour le moment —</option>';
+        }
+        volDateEl.disabled = false;
+      });
+
+      volDateEl.addEventListener("change", function(){
+        const dateIso = volDateEl.value;
+        if(!dateIso){ resetSlotPicker(); return; }
+        slotGroup.style.display = "";
+        renderSlots(dateIso);
+      });
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        errorEl.textContent = "";
+
+        const name = document.getElementById("nom").value.trim();
+        const phone = document.getElementById("telephone").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const passagerNom = document.getElementById("passagerNom").value.trim();
+        const poids = document.getElementById("poids").value.trim();
+        const telPassager = document.getElementById("telephonePassager").value.trim();
+        const typeVol = typeVolEl.value;
+        const volDate = volDateEl.value;
+        const message = document.getElementById("message").value.trim();
+        const consentement = document.getElementById("consentement").checked;
+
+        if (!name || !phone) {
+          errorEl.textContent = "Merci de renseigner votre nom et votre téléphone.";
+          return;
+        }
+        if (!typeVol) {
+          errorEl.textContent = "Merci de choisir une formule de vol.";
+          return;
+        }
+        if (!volDate || !selectedTime) {
+          errorEl.textContent = "Merci de choisir une date et un créneau horaire.";
+          return;
+        }
+        if (!consentement) {
+          errorEl.textContent = "Merci de cocher la case de consentement pour continuer.";
+          return;
+        }
+
+        const notesParts = [];
+        if (passagerNom) notesParts.push(`Passager : ${passagerNom}`);
+        if (telPassager) notesParts.push(`Téléphone passager : ${telPassager}`);
+        if (message) notesParts.push(message);
+
+        const payload = {
+          name: name,
+          phone: phone,
+          email: email || undefined,
+          nb_passengers: 1,
+          weight_info: poids || undefined,
+          flight_type: typeVol,
+          requested_date: volDate,
+          requested_time: selectedTime,
+          notes: notesParts.length ? notesParts.join(" — ") : undefined
+        };
+
+        submitBtn.disabled = true;
+        const originalLabel = submitBtn.textContent;
+        submitBtn.textContent = "Envoi en cours…";
+
+        try {
+          const res = await fetch(`${API_BASE}/request`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json().catch(function () { return {}; });
+
+          if (!res.ok || !data.success) {
+            throw new Error(data.error || "request_failed");
+          }
+
+          const section = document.getElementById("reservation-form");
+          const prettyDate = dateFormatter.format(new Date(volDate + "T00:00:00"));
+          section.querySelector("form").outerHTML =
+            '<p style="color:#2f7d52; font-weight:600;">Demande envoyée pour le ' + prettyDate + ' à ' + selectedTime + ' ! Nous vous recontactons rapidement pour confirmer votre vol.</p>';
+        } catch (err) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalLabel;
+          errorEl.textContent = "Une erreur est survenue. Réessayez ou contactez-nous directement par téléphone.";
         }
       });
     });
