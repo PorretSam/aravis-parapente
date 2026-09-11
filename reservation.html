@@ -14,6 +14,135 @@
   <link rel="canonical" href="https://aravis-parapente.com/reservation.html">
   <link rel="stylesheet" href="style.css">
 
+  <style>
+    /* Amélioration esthétique du formulaire de réservation — scopé à #reservation-form
+       pour ne rien modifier ailleurs sur le site (style.css reste la source principale). */
+    #reservation-form .booking-form fieldset{
+      border: 1px solid #e1e8ec;
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem 1.5rem;
+      margin: 0 0 1.5rem;
+      background: #fbfdfe;
+    }
+    #reservation-form .booking-form legend{
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0 0.5rem;
+      color: #1f4e3d;
+    }
+    #reservation-form .booking-form .form-group{
+      margin-bottom: 1rem;
+    }
+    #reservation-form .booking-form label{
+      display: block;
+      font-weight: 600;
+      font-size: 0.92rem;
+      margin-bottom: 0.35rem;
+      color: #2c3a3f;
+    }
+    #reservation-form .booking-form .form-row{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    #reservation-form .booking-form .form-row .form-group{
+      flex: 1 1 220px;
+    }
+    #reservation-form .booking-form input[type="text"],
+    #reservation-form .booking-form input[type="tel"],
+    #reservation-form .booking-form input[type="email"],
+    #reservation-form .booking-form input[type="number"],
+    #reservation-form .booking-form input[type="date"],
+    #reservation-form .booking-form select,
+    #reservation-form .booking-form textarea{
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.6rem 0.75rem;
+      border: 1.5px solid #c9dbe6;
+      border-radius: 9px;
+      font-size: 0.98rem;
+      font-family: inherit;
+      background: #fff;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    #reservation-form .booking-form input:disabled,
+    #reservation-form .booking-form select:disabled{
+      background: #f1f4f5;
+      color: #93a1a6;
+      cursor: not-allowed;
+    }
+    #reservation-form .booking-form input:focus,
+    #reservation-form .booking-form select:focus,
+    #reservation-form .booking-form textarea:focus{
+      outline: none;
+      border-color: #2f7d52;
+      box-shadow: 0 0 0 3px rgba(47,125,82,0.15);
+    }
+    #reservation-form .booking-form optgroup{
+      font-weight: 700;
+      font-style: normal;
+      color: #1f4e3d;
+    }
+    #reservation-form .booking-form .form-consent,
+    #reservation-form .booking-form .form-checkbox{
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+      font-size: 0.92rem;
+      color: #2c3a3f;
+      margin: 0.75rem 0;
+    }
+    #reservation-form .booking-form .form-consent input,
+    #reservation-form .booking-form .form-checkbox input{
+      margin-top: 0.2rem;
+      width: auto;
+      flex-shrink: 0;
+    }
+    #reservation-form .booking-form .submit-btn{
+      display: block;
+      width: 100%;
+      max-width: 340px;
+      margin: 1.5rem auto 0;
+      padding: 0.85rem 1.5rem;
+      background: #2f7d52;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.02rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    #reservation-form .booking-form .submit-btn:hover:not(:disabled){
+      background: #26663f;
+    }
+    #reservation-form .booking-form .submit-btn:disabled{
+      background: #9cc4ad;
+      cursor: not-allowed;
+    }
+    #reservation-form .slot-btn{
+      padding: 0.5rem 0.95rem;
+      border-radius: 8px;
+      border: 1.5px solid #c9dbe6;
+      background: #eef6fb;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+    #reservation-form .slot-btn:hover{
+      border-color: #2f7d52;
+    }
+    #reservation-form .slot-btn.is-selected{
+      background: #2f7d52;
+      border-color: #2f7d52;
+      color: #fff;
+    }
+    #reservation-form #slotArea{
+      gap: 0.6rem;
+    }
+  </style>
+
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS6K6Q3WMB"></script>
   <script>
@@ -252,34 +381,52 @@
           </div>
 
           <div class="form-group">
+            <label for="adressePassager">Adresse du passager</label>
+            <input
+              type="text"
+              id="adressePassager"
+              name="Adresse du passager"
+              autocomplete="street-address"
+              placeholder="Rue, code postal, ville"
+            >
+            <div class="form-checkbox">
+              <input type="checkbox" id="refusAdresse" name="Refus adresse" value="Oui">
+              <label for="refusAdresse" style="display:inline; font-weight:normal;">Je préfère ne pas communiquer l'adresse du passager</label>
+            </div>
+          </div>
+
+          <div class="form-group">
             <label for="typeVol">Choix du vol</label>
             <select id="typeVol" name="Type de vol" required>
               <option value="">Sélectionnez une formule</option>
-              <option value="Découverte - 65 €">Découverte - 65 €</option>
-              <option value="Plaisir - 90 €">Plaisir - 90 €</option>
-              <option value="Performance - 130 €">Performance - 130 €</option>
-              <option value="Prestige - 170 €">Prestige - 170 €</option>
-              <option value="Beauregard hiver - 70 €">
-                Beauregard hiver - 70 €
-              </option>
-              <option value="Loup hiver - 90 €">Loup hiver - 90 €</option>
-              <option value="Aiguille hiver - 160 €">
-                Aiguille hiver - 160 €
-              </option>
-              <option value="L'Aiglon hiver - 35 €">
-                L'Aiglon hiver - 35 €
-              </option>
-              <option value="École initiation - 170 €">
-                École initiation - 170 €
-              </option>
-              <option value="École progression - 180 €">
-                École progression - 180 €
-              </option>
-              <option value="École performance - 190 €">
-                École performance - 190 €
-              </option>
+              <optgroup label="Vols d'hiver">
+                <option value="L'Aiglon (vidéo incluse) hiver - 35 €">
+                  L'Aiglon (vidéo incluse) hiver - 35 €
+                </option>
+                <option value="Beauregard hiver - 70 €">
+                  Beauregard hiver - 70 €
+                </option>
+                <option value="Loup hiver - 90 €">Loup hiver - 90 €</option>
+                <option value="Aiguille hiver - 160 €">
+                  Aiguille hiver - 160 €
+                </option>
+              </optgroup>
+              <optgroup label="Vols d'été">
+                <option value="Découverte - 65 €">Découverte - 65 €</option>
+                <option value="Plaisir - 90 €">Plaisir - 90 €</option>
+                <option value="Performance - 130 €">Performance - 130 €</option>
+                <option value="Prestige - 170 €">Prestige - 170 €</option>
+              </optgroup>
             </select>
           </div>
+
+          <div class="form-group" id="photoVideoGroup" style="display:none;">
+            <div class="form-checkbox">
+              <input type="checkbox" id="optionPhotoVideo" name="Option Photo Vidéo" value="Oui">
+              <label for="optionPhotoVideo" style="display:inline; font-weight:normal;">Ajouter Photo / Vidéo du vol (+25 €)</label>
+            </div>
+          </div>
+          <p id="photoVideoIncluseMsg" style="display:none; font-size:0.85rem; color:#2f7d52; margin:-0.5rem 0 1rem;">📷 Photo/vidéo déjà incluse dans cette formule.</p>
         </fieldset>
 
         <fieldset>
@@ -431,22 +578,18 @@
 
       // Durée (en minutes) de chaque formule -> espace les créneaux proposés côté API.
       // ⚠️ HYPOTHÈSE À VALIDER : l'endpoint /slots ne documentait pas de paramètre
-      // de durée. On lui envoie ici "&duration=20/40/180" en supposant qu'il en
+      // de durée. On lui envoie ici "&duration=20/40" en supposant qu'il en
       // tient compte pour proposer des créneaux plus ou moins rapprochés selon
-      // la formule (20 min Aiglon, 40 min vols classiques, 180 min École = 3h).
-      // Si l'API ignore ce paramètre, tous les vols recevront les mêmes créneaux
-      // espacés de 40 min — à corriger avec qui gère parabooking.app.
+      // la formule (20 min Aiglon, 40 min vols classiques). Si l'API ignore ce
+      // paramètre, tous les vols recevront les mêmes créneaux espacés de 40 min —
+      // à corriger avec qui gère parabooking.app.
       const DURATION_BY_TYPE = {
-        "L'Aiglon hiver - 35 €": 20,
-        "École initiation - 170 €": 180,
-        "École progression - 180 €": 180,
-        "École performance - 190 €": 180
+        "L'Aiglon (vidéo incluse) hiver - 35 €": 20
       };
       const DEFAULT_DURATION = 40;
 
       // Règles horaires et de poids par formule.
       // minTime : aucun créneau avant cette heure pour cette formule.
-      // maxTime : aucun créneau après cette heure (École).
       // maxWeight : formule réservée aux passagers strictement en dessous de ce poids.
       // doubleSlot : la formule occupe 2 créneaux consécutifs de 40 min (1h20 au total) —
       //   on ne propose donc un départ que si le créneau suivant (+40 min) est lui aussi libre.
@@ -458,10 +601,7 @@
         "Beauregard hiver - 70 €":  { minTime: "09:00" },
         "Loup hiver - 90 €":        { minTime: "09:00" },
         "Aiguille hiver - 160 €":   { minTime: "09:00", doubleSlot: true },
-        "L'Aiglon hiver - 35 €":    { minTime: "09:00" },
-        "École initiation - 170 €":   { minTime: "09:00", maxTime: "12:00" },
-        "École progression - 180 €":  { minTime: "09:00", maxTime: "12:00" },
-        "École performance - 190 €":  { minTime: "09:00", maxTime: "12:00" }
+        "L'Aiglon (vidéo incluse) hiver - 35 €": { minTime: "09:00" }
       };
 
       const MAX_WEIGHT = 115;         // au-delà : vol impossible, quelle que soit la date/formule
@@ -493,7 +633,32 @@
       const slotHint = document.getElementById("slotHint");
       const poidsEl = document.getElementById("poids");
       const poidsMsgEl = document.getElementById("poidsMsg");
+      const adresseEl = document.getElementById("adressePassager");
+      const refusAdresseEl = document.getElementById("refusAdresse");
+      const photoVideoGroup = document.getElementById("photoVideoGroup");
+      const photoVideoEl = document.getElementById("optionPhotoVideo");
+      const photoVideoIncluseMsg = document.getElementById("photoVideoIncluseMsg");
+      const AIGLON_VALUE = "L'Aiglon (vidéo incluse) hiver - 35 €";
       if (!form) return;
+
+      refusAdresseEl.addEventListener("change", function(){
+        adresseEl.disabled = refusAdresseEl.checked;
+        if(refusAdresseEl.checked) adresseEl.value = "";
+      });
+
+      typeVolEl.addEventListener("change", function(){
+        if(typeVolEl.value === AIGLON_VALUE){
+          photoVideoGroup.style.display = "none";
+          photoVideoIncluseMsg.style.display = "";
+          photoVideoEl.checked = false;
+        } else if(typeVolEl.value){
+          photoVideoGroup.style.display = "";
+          photoVideoIncluseMsg.style.display = "none";
+        } else {
+          photoVideoGroup.style.display = "none";
+          photoVideoIncluseMsg.style.display = "none";
+        }
+      });
 
       poidsEl.addEventListener("input", function(){
         const w = parseFloat(poidsEl.value);
@@ -533,14 +698,14 @@
 
       function styleChoiceBtn(btn){
         btn.type = "button";
-        btn.style.cssText = "padding:0.5rem 0.9rem; border-radius:8px; border:1.5px solid #c9dbe6; background:#eef6fb; cursor:pointer; font-size:0.95rem;";
+        btn.className = "slot-btn";
         return btn;
       }
       function selectChoiceBtn(btn){
         slotArea.querySelectorAll("button").forEach(function(b){
-          b.style.background = "#eef6fb"; b.style.borderColor = "#c9dbe6"; b.style.color = "";
+          b.classList.remove("is-selected");
         });
-        btn.style.background = "#2f7d52"; btn.style.borderColor = "#2f7d52"; btn.style.color = "#fff";
+        btn.classList.add("is-selected");
       }
 
       function renderSlots(dateIso){
@@ -559,12 +724,9 @@
         if(!summer){
           times = times.filter(function(t){ return t >= "09:00"; });
         }
-        // Heure minimale propre à la formule (et fenêtre École 9h-12h).
+        // Heure minimale propre à la formule.
         if(rule.minTime){
           times = times.filter(function(t){ return t >= rule.minTime; });
-        }
-        if(rule.maxTime){
-          times = times.filter(function(t){ return t <= rule.maxTime; });
         }
         // Aiguille : besoin de 2 créneaux consécutifs de 40 min (1h20).
         if(rule.doubleSlot){
@@ -716,6 +878,14 @@
         const notesParts = [];
         if (passagerNom) notesParts.push(`Passager : ${passagerNom}`);
         if (telPassager) notesParts.push(`Téléphone passager : ${telPassager}`);
+        if (refusAdresseEl.checked) {
+          notesParts.push("Adresse passager : non communiquée (refus)");
+        } else if (adresseEl.value.trim()) {
+          notesParts.push(`Adresse passager : ${adresseEl.value.trim()}`);
+        }
+        if (photoVideoEl && !photoVideoEl.disabled && photoVideoEl.checked) {
+          notesParts.push("Option ajoutée : Photo/Vidéo du vol (+25 €)");
+        }
         if (waitlist) notesParts.push("LISTE D'ATTENTE pour cette date — aucun créneau libre au moment de la demande");
         if (isFlexibleDate) notesParts.push("Le client laisse le choix de la date et du créneau — à recontacter.");
         if (message) notesParts.push(message);
