@@ -170,7 +170,7 @@
     </section>
 
     <section class="content-section" id="reservation-form">
-      <h2>Formulaire de réservation EN PHASE DE TEST ESSAI merci de votre compréhension</h2>
+      <h2>Formulaire de réservation</h2>
 
       <form
         id="bookingForm"
@@ -454,7 +454,7 @@
         "Découverte - 65 €":        { minTime: "09:25", maxWeight: 70 },
         "Plaisir - 90 €":           { minTime: "10:05" },
         "Performance - 130 €":      { minTime: "13:10" },
-        "Prestige - 170 €":         { minTime: "16:35" },
+        "Prestige - 170 €":         { minTime: "16:30" },
         "Beauregard hiver - 70 €":  { minTime: "09:00" },
         "Loup hiver - 90 €":        { minTime: "09:00" },
         "Aiguille hiver - 160 €":   { minTime: "09:00", doubleSlot: true },
@@ -639,22 +639,23 @@
         currentAvailability = await fetchAvailability(duration);
         const dates = Object.keys(currentAvailability).sort();
 
-        volDateEl.innerHTML = '<option value="">— Choisir une date —</option>';
+        volDateEl.innerHTML = '<option value="">— Choisir une date —</option><option value="__flexible__">Je vous laisse me recontacter</option>';
         dates.forEach(function(d){
           const opt = document.createElement("option");
           opt.value = d;
           opt.textContent = dateFormatter.format(new Date(d + "T00:00:00"));
           volDateEl.appendChild(opt);
         });
-        if(dates.length === 0){
-          volDateEl.innerHTML = '<option value="">— Aucune date ouverte pour le moment —</option>';
-        }
         volDateEl.disabled = false;
       });
 
       volDateEl.addEventListener("change", function(){
         const dateIso = volDateEl.value;
         if(!dateIso){ resetSlotPicker(); return; }
+        if(dateIso === "__flexible__"){
+          resetSlotPicker(); // pas de date précise -> pas de créneau à choisir
+          return;
+        }
         slotGroup.style.display = "";
         renderSlots(dateIso);
       });
@@ -682,7 +683,12 @@
           errorEl.textContent = "Merci de choisir une formule de vol.";
           return;
         }
-        if (!volDate || (!selectedTime && !noPreference && !waitlist)) {
+        const isFlexibleDate = volDate === "__flexible__";
+        if (!volDate) {
+          errorEl.textContent = "Merci de choisir une date, ou l'option \u00ab je vous laisse me recontacter \u00bb.";
+          return;
+        }
+        if (!isFlexibleDate && (!selectedTime && !noPreference && !waitlist)) {
           errorEl.textContent = "Merci de choisir une date, puis un créneau horaire (ou \u00ab aucune préférence \u00bb / liste d'attente).";
           return;
         }
@@ -711,18 +717,18 @@
         if (passagerNom) notesParts.push(`Passager : ${passagerNom}`);
         if (telPassager) notesParts.push(`Téléphone passager : ${telPassager}`);
         if (waitlist) notesParts.push("LISTE D'ATTENTE pour cette date — aucun créneau libre au moment de la demande");
-        if (noPreference) notesParts.push("Sans préférence horaire");
+        if (isFlexibleDate) notesParts.push("Le client laisse le choix de la date et du créneau — à recontacter.");
         if (message) notesParts.push(message);
 
         const payload = {
-          name: name,
+          name: "Aravis - " + name,
           phone: phone,
           email: email || undefined,
           nb_passengers: 1,
           weight_info: poids || undefined,
           flight_type: typeVol,
-          requested_date: volDate,
-          requested_time: selectedTime || undefined,
+          requested_date: isFlexibleDate ? undefined : volDate,
+          requested_time: isFlexibleDate ? undefined : (selectedTime || undefined),
           notes: notesParts.length ? notesParts.join(" — ") : undefined
         };
 
@@ -743,10 +749,14 @@
           }
 
           const section = document.getElementById("reservation-form");
-          const prettyDate = dateFormatter.format(new Date(volDate + "T00:00:00"));
-          const whenLabel = waitlist
-            ? "en liste d'attente pour le " + prettyDate
-            : (noPreference ? "pour le " + prettyDate + " (sans préférence horaire)" : "pour le " + prettyDate + " à " + selectedTime);
+          const whenLabel = isFlexibleDate
+            ? "— vous nous laissez le choix de la date, nous vous recontactons pour convenir d'un créneau"
+            : (function(){
+                const prettyDate = dateFormatter.format(new Date(volDate + "T00:00:00"));
+                if(waitlist) return "en liste d'attente pour le " + prettyDate;
+                if(noPreference) return "pour le " + prettyDate + " (sans préférence horaire)";
+                return "pour le " + prettyDate + " à " + selectedTime;
+              })();
           section.querySelector("form").outerHTML =
             '<div>' +
             '<p style="color:#2f7d52; font-weight:600;">Demande envoyée ' + whenLabel + ' ! Nous vous recontactons rapidement pour confirmer votre vol.</p>' +
