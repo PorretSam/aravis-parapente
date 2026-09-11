@@ -525,7 +525,10 @@
     </p>
   </footer>
 
-
+  <div class="fixed-cta" aria-label="Actions rapides">
+    <a href="tel:+33688070472" class="call-btn">Appeler</a>
+    <a href="#reservation-form" class="book-btn">Réserver</a>
+  </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -579,7 +582,7 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const API_BASE = "https://api.parabooking.app/api/public/aravis";
-      const CLIENT_WEEKS_AHEAD = 8;
+      const CLIENT_WEEKS_AHEAD = 26; // ~6 mois, pour couvrir toute une saison (utile pour les réservations hiver faites en avance)
 
       // Durée (en minutes) de chaque formule -> espace les créneaux proposés côté API.
       // ⚠️ HYPOTHÈSE À VALIDER : l'endpoint /slots ne documentait pas de paramètre
