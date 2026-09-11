@@ -141,6 +141,37 @@
     #reservation-form #slotArea{
       gap: 0.6rem;
     }
+    #reservation-form .passenger-row{
+      border: 1px solid #e1e8ec;
+      border-radius: 10px;
+      padding: 0.9rem 1rem 0.4rem;
+      margin-bottom: 0.9rem;
+      background: #fff;
+    }
+    #reservation-form .passenger-row .passenger-title{
+      font-weight: 700;
+      color: #1f4e3d;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    #reservation-form .passenger-slot-block{
+      border: 1px solid #e1e8ec;
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      margin-bottom: 0.9rem;
+      background: #fbfdfe;
+    }
+    #reservation-form .passenger-slot-block .passenger-title{
+      font-weight: 700;
+      color: #1f4e3d;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+    #reservation-form .passenger-slot-area{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
   </style>
 
   <!-- Google Analytics -->
@@ -363,49 +394,18 @@
           <legend>Informations sur le passager</legend>
 
           <div class="form-group">
-            <label for="passagerNom">Nom et prénom du passager</label>
+            <label for="nbPassagers">Nombre de passagers</label>
             <input
-              type="text"
-              id="passagerNom"
-              name="Nom du passager"
+              type="number"
+              id="nbPassagers"
+              name="Nombre de passagers"
+              min="1"
+              max="10"
+              value="1"
             >
           </div>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label for="nbPassagers">Nombre de passagers</label>
-              <input
-                type="number"
-                id="nbPassagers"
-                name="Nombre de passagers"
-                min="1"
-                max="10"
-                value="1"
-              >
-            </div>
-
-            <div class="form-group">
-              <label for="poids">Poids du passager en kg</label>
-              <input
-                type="number"
-                id="poids"
-                name="Poids du passager"
-                min="20"
-                max="140"
-              >
-              <p id="poidsMsg" style="font-size:0.85rem; color:#b3261e; margin:0.4rem 0 0; min-height:0;"></p>
-            </div>
-
-            <div class="form-group">
-              <label for="telephonePassager">Téléphone du passager</label>
-              <input
-                type="tel"
-                id="telephonePassager"
-                name="Téléphone du passager"
-                autocomplete="tel"
-              >
-            </div>
-          </div>
+          <div id="passengersContainer"></div>
 
           <div class="form-group">
             <label for="typeVol">Choix du vol</label>
@@ -451,12 +451,7 @@
             </select>
           </div>
 
-          <div class="form-group" id="slotGroup" style="display:none;">
-            <label>Créneau horaire</label>
-            <div id="slotArea" style="display:flex; flex-wrap:wrap; gap:0.5rem;"></div>
-            <p id="slotHint" style="font-size:0.85rem; color:#666; margin-top:0.4rem;"></p>
-            <p id="groupPlan" style="font-size:0.85rem; color:#2c3a3f; margin-top:0.4rem; font-style:italic;"></p>
-          </div>
+          <div id="passengerSlotsContainer"></div>
 
           <div class="form-group">
             <label for="message">Message ou précision</label>
@@ -641,12 +636,8 @@
       const errorEl = document.getElementById("bookingFormError");
       const typeVolEl = document.getElementById("typeVol");
       const volDateEl = document.getElementById("volDate");
-      const slotGroup = document.getElementById("slotGroup");
-      const slotArea = document.getElementById("slotArea");
-      const slotHint = document.getElementById("slotHint");
-      const groupPlanEl = document.getElementById("groupPlan");
-      const poidsEl = document.getElementById("poids");
-      const poidsMsgEl = document.getElementById("poidsMsg");
+      const passengerSlotsContainer = document.getElementById("passengerSlotsContainer");
+      const passengersContainer = document.getElementById("passengersContainer");
       const adresseEl = document.getElementById("adresse");
       const refusAdresseEl = document.getElementById("refusAdresse");
       const nbPassagersEl = document.getElementById("nbPassagers");
@@ -659,23 +650,6 @@
       refusAdresseEl.addEventListener("change", function(){
         adresseEl.disabled = refusAdresseEl.checked;
         if(refusAdresseEl.checked) adresseEl.value = "";
-      });
-
-      nbPassagersEl.addEventListener("input", function(){
-        if(selectedTime && volDateEl.value){
-          const dateIso = volDateEl.value;
-          const type = typeVolEl.value;
-          const rule = FLIGHT_RULES[type] || {};
-          let times = (currentAvailability[dateIso] || []).slice();
-          if(!isSummer(dateIso)) times = times.filter(function(t){ return t >= "09:00"; });
-          if(rule.minTime) times = times.filter(function(t){ return t >= rule.minTime; });
-          const idx = times.indexOf(selectedTime);
-          if(idx !== -1){
-            const nb = parseInt(nbPassagersEl.value, 10) || 1;
-            groupPlanText = describeGroupPlan(times.slice(idx), nb);
-            groupPlanEl.textContent = groupPlanText;
-          }
-        }
       });
 
       typeVolEl.addEventListener("change", function(){
@@ -692,48 +666,71 @@
         }
       });
 
-      poidsEl.addEventListener("input", function(){
-        const w = parseFloat(poidsEl.value);
-        if(!isNaN(w) && w > MAX_WEIGHT){
-          poidsMsgEl.textContent = "Pour des raisons de sécurité liées au poids maximal admissible sous la voile, nous ne pouvons malheureusement pas accueillir de passager au-delà de " + MAX_WEIGHT + " kg. N'hésitez pas à nous appeler directement pour échanger sur d'autres solutions.";
-        } else {
-          poidsMsgEl.textContent = "";
-        }
-        // Le poids peut changer après qu'une date ait déjà été choisie : on réévalue les créneaux affichés.
-        if(volDateEl.value){ renderSlots(volDateEl.value); }
-      });
-
       let currentAvailability = {}; // { "YYYY-MM-DD": ["HH:MM", ...] }
-      let selectedTime = null;
-      let noPreference = false;
+      let selectedTimes = [null];   // une entrée par passager : "HH:MM" | "no_preference" | null
       let waitlist = false;
-      let groupPlanText = "";
 
-      // Répartit un groupe de passagers par paires de 2 sur les créneaux disponibles,
-      // en partant du créneau choisi puis en enchaînant sur les suivants.
-      // ⚠️ HYPOTHÈSE : l'API ne renvoie pas le nombre de moniteurs libres par créneau,
-      // donc cette répartition est indicative (elle suppose 2 moniteurs max en simultané,
-      // comme Sam + Julien) — à confirmer par téléphone pour les groupes de 3 et plus,
-      // sauf si l'API peut un jour exposer une capacité réelle par créneau.
-      function describeGroupPlan(timesFromSelection, nb){
-        if(nb <= 1) return "";
-        const chunks = [];
-        let remaining = nb;
-        let idx = 0;
-        while(remaining > 0 && idx < timesFromSelection.length){
-          const size = Math.min(2, remaining);
-          chunks.push(size + " passager" + (size > 1 ? "s" : "") + " à " + timesFromSelection[idx]);
-          remaining -= size;
-          idx++;
-        }
-        let desc = "Répartition indicative pour " + nb + " passagers : " + chunks.join(", ") + ".";
-        if(remaining > 0){
-          desc += " Il manque des créneaux libres pour " + remaining + " passager(s) supplémentaire(s) — nous vous recontactons pour ajuster.";
-        } else if(chunks.length > 1){
-          desc += " À confirmer selon le nombre de moniteurs réellement disponibles à ces horaires.";
-        }
-        return desc;
+      // ---------- Lignes passager dynamiques (nom + poids par passager) ----------
+      function getPassengerRows(){
+        return Array.from(passengersContainer.querySelectorAll(".passenger-row"));
       }
+      function getPassengerData(i){
+        const row = passengersContainer.querySelector('.passenger-row[data-index="' + i + '"]');
+        if(!row) return { name: "", weight: NaN };
+        const name = row.querySelector(".passenger-name").value.trim();
+        const weight = parseFloat(row.querySelector(".passenger-weight").value);
+        return { name: name, weight: weight };
+      }
+
+      function renderPassengerRows(){
+        const nb = Math.max(1, Math.min(10, parseInt(nbPassagersEl.value, 10) || 1));
+        // On conserve les valeurs déjà saisies quand on ajoute/retire des lignes.
+        const previous = getPassengerRows().map(function(row){
+          return {
+            name: row.querySelector(".passenger-name").value,
+            weight: row.querySelector(".passenger-weight").value
+          };
+        });
+        passengersContainer.innerHTML = "";
+        for(let i = 0; i < nb; i++){
+          const row = document.createElement("div");
+          row.className = "passenger-row";
+          row.setAttribute("data-index", i);
+          row.innerHTML =
+            '<span class="passenger-title">Passager ' + (i + 1) + '</span>' +
+            '<div class="form-row">' +
+              '<div class="form-group">' +
+                '<label>Nom et prénom</label>' +
+                '<input type="text" class="passenger-name" autocomplete="off">' +
+              '</div>' +
+              '<div class="form-group">' +
+                '<label>Poids (kg)</label>' +
+                '<input type="number" class="passenger-weight" min="20" max="140">' +
+              '</div>' +
+            '</div>' +
+            '<p class="passenger-weight-msg" style="font-size:0.85rem; color:#b3261e; margin:0.2rem 0 0.4rem; min-height:0;"></p>';
+          if(previous[i]){
+            row.querySelector(".passenger-name").value = previous[i].name;
+            row.querySelector(".passenger-weight").value = previous[i].weight;
+          }
+          const weightInput = row.querySelector(".passenger-weight");
+          const weightMsg = row.querySelector(".passenger-weight-msg");
+          weightInput.addEventListener("input", function(){
+            const w = parseFloat(weightInput.value);
+            weightMsg.textContent = (!isNaN(w) && w > MAX_WEIGHT)
+              ? "Pour des raisons de sécurité liées au poids maximal admissible sous la voile, nous ne pouvons malheureusement pas accueillir ce passager au-delà de " + MAX_WEIGHT + " kg. N'hésitez pas à nous appeler directement."
+              : "";
+            if(volDateEl.value && volDateEl.value !== "__flexible__"){ renderPassengerSlots(volDateEl.value); }
+          });
+          passengersContainer.appendChild(row);
+        }
+        selectedTimes = new Array(nb).fill(null);
+      }
+      nbPassagersEl.addEventListener("input", function(){
+        renderPassengerRows();
+        if(volDateEl.value && volDateEl.value !== "__flexible__"){ renderPassengerSlots(volDateEl.value); }
+      });
+      renderPassengerRows(); // 1 ligne au chargement
 
       async function fetchAvailability(duration){
         const today = new Date(); today.setHours(0,0,0,0);
@@ -749,11 +746,9 @@
       }
 
       function resetSlotPicker(){
-        selectedTime = null; noPreference = false; waitlist = false; groupPlanText = "";
-        slotGroup.style.display = "none";
-        slotArea.innerHTML = "";
-        slotHint.textContent = "";
-        groupPlanEl.textContent = "";
+        waitlist = false;
+        selectedTimes = new Array(getPassengerRows().length || 1).fill(null);
+        passengerSlotsContainer.innerHTML = "";
       }
 
       function styleChoiceBtn(btn){
@@ -761,95 +756,116 @@
         btn.className = "slot-btn";
         return btn;
       }
-      function selectChoiceBtn(btn){
-        slotArea.querySelectorAll("button").forEach(function(b){
+      function selectChoiceBtn(container, btn){
+        container.querySelectorAll("button").forEach(function(b){
           b.classList.remove("is-selected");
         });
         btn.classList.add("is-selected");
       }
 
-      function renderSlots(dateIso){
-        slotArea.innerHTML = "";
-        selectedTime = null; noPreference = false; waitlist = false; groupPlanText = "";
-        groupPlanEl.textContent = "";
-
+      // Calcule, pour UN passager donné (son propre poids), la liste de créneaux valides
+      // pour la date et la formule choisies.
+      function computeTimesForPassenger(dateIso, weight){
         const type = typeVolEl.value;
         const rule = FLIGHT_RULES[type] || {};
-        const w = parseFloat(poidsEl.value);
         const summer = isSummer(dateIso);
-        const notes = [];
-
         let times = (currentAvailability[dateIso] || []).slice();
+        let blocked = null;
 
-        // Hiver : rien avant 9h, toutes formules confondues.
         if(!summer){
           times = times.filter(function(t){ return t >= "09:00"; });
         }
-        // Heure minimale propre à la formule.
         if(rule.minTime){
           times = times.filter(function(t){ return t >= rule.minTime; });
         }
-        // Aiguille : besoin de 2 créneaux consécutifs de 40 min (1h20).
         if(rule.doubleSlot){
           const set = new Set(currentAvailability[dateIso] || []);
           times = times.filter(function(t){ return set.has(addMinutes(t, 40)); });
         }
-        // Découverte : réservée aux moins de 70 kg.
-        if(rule.maxWeight && !isNaN(w) && w >= rule.maxWeight){
-          slotHint.textContent = "La formule Découverte est réservée aux passagers de moins de " + rule.maxWeight + " kg. Merci de choisir une autre formule ou de nous contacter directement.";
-          renderExtraChoices(dateIso, true);
-          return;
+        if(rule.maxWeight && !isNaN(weight) && weight >= rule.maxWeight){
+          blocked = "La formule Découverte est réservée aux passagers de moins de " + rule.maxWeight + " kg.";
+          return { times: [], blocked: blocked };
         }
-        // 80 kg et plus : pas de créneau avant 11h en été (toutes formules).
-        if(!isNaN(w) && w >= HEAVY_WEIGHT_LIMIT && summer){
-          const before = times.length;
+        if(!isNaN(weight) && weight >= HEAVY_WEIGHT_LIMIT && summer){
           times = times.filter(function(t){ return t >= HEAVY_WEIGHT_MIN_TIME; });
-          if(times.length < before){
-            notes.push("Pas de créneau avant 11h l'été à partir de " + HEAVY_WEIGHT_LIMIT + " kg.");
-          }
         }
-
-        times.forEach(function(t){
-          const btn = styleChoiceBtn(document.createElement("button"));
-          btn.textContent = t;
-          btn.addEventListener("click", function(){
-            selectChoiceBtn(btn);
-            selectedTime = t; noPreference = false; waitlist = false;
-            const idx = times.indexOf(t);
-            const nb = parseInt(nbPassagersEl.value, 10) || 1;
-            groupPlanText = describeGroupPlan(times.slice(idx), nb);
-            groupPlanEl.textContent = groupPlanText;
-          });
-          slotArea.appendChild(btn);
-        });
-
-        slotHint.textContent = notes.join(" ");
-        renderExtraChoices(dateIso, times.length === 0);
+        return { times: times, blocked: blocked };
       }
 
-      // Ajoute l'option "sans préférence horaire", et la liste d'attente si aucun créneau.
-      function renderExtraChoices(dateIso, noSlotsAvailable){
-        const prefBtn = styleChoiceBtn(document.createElement("button"));
-        prefBtn.textContent = "Aucune préférence horaire";
-        prefBtn.addEventListener("click", function(){
-          selectChoiceBtn(prefBtn);
-          selectedTime = null; noPreference = true; waitlist = false;
-          groupPlanText = ""; groupPlanEl.textContent = "";
-        });
-        slotArea.appendChild(prefBtn);
+      // Rend un bloc de sélection de créneau par passager. Le client choisit un horaire
+      // pour chacun indépendamment — il peut choisir le même horaire pour plusieurs
+      // passagers (2 vols en parallèle si 2 moniteurs sont libres) ou des horaires différents.
+      // ⚠️ HYPOTHÈSE : l'API renvoie une liste d'horaires par date, sans indiquer combien de
+      // moniteurs sont libres à chaque horaire. Choisir deux fois le même horaire pour deux
+      // passagers reste donc une demande à confirmer par téléphone, pas une garantie.
+      function renderPassengerSlots(dateIso){
+        passengerSlotsContainer.innerHTML = "";
+        const nb = getPassengerRows().length || 1;
+        selectedTimes = new Array(nb).fill(null);
+        waitlist = false;
+        let anySlotAnywhere = false;
 
-        if(noSlotsAvailable){
-          const waitBtn = styleChoiceBtn(document.createElement("button"));
-          waitBtn.textContent = "Rejoindre la liste d'attente pour cette date";
-          waitBtn.addEventListener("click", function(){
-            selectChoiceBtn(waitBtn);
-            selectedTime = null; noPreference = false; waitlist = true;
-            groupPlanText = ""; groupPlanEl.textContent = "";
-          });
-          slotArea.appendChild(waitBtn);
-          if(!slotHint.textContent){
-            slotHint.textContent = "Plus aucun créneau ouvert ce jour-là pour cette formule.";
+        for(let i = 0; i < nb; i++){
+          const pdata = getPassengerData(i);
+          const result = computeTimesForPassenger(dateIso, pdata.weight);
+
+          const block = document.createElement("div");
+          block.className = "passenger-slot-block";
+          const title = document.createElement("span");
+          title.className = "passenger-title";
+          title.textContent = "Créneau — Passager " + (i + 1) + (pdata.name ? " (" + pdata.name + ")" : "");
+          block.appendChild(title);
+
+          const area = document.createElement("div");
+          area.className = "passenger-slot-area";
+          block.appendChild(area);
+
+          const hint = document.createElement("p");
+          hint.style.cssText = "font-size:0.85rem; color:#666; margin-top:0.4rem;";
+          block.appendChild(hint);
+
+          if(result.blocked){
+            hint.textContent = result.blocked;
+          } else {
+            if(result.times.length > 0) anySlotAnywhere = true;
+            result.times.forEach(function(t){
+              const btn = styleChoiceBtn(document.createElement("button"));
+              btn.textContent = t;
+              btn.addEventListener("click", function(){
+                selectChoiceBtn(area, btn);
+                selectedTimes[i] = t;
+              });
+              area.appendChild(btn);
+            });
+
+            const prefBtn = styleChoiceBtn(document.createElement("button"));
+            prefBtn.textContent = "Aucune préférence horaire";
+            prefBtn.addEventListener("click", function(){
+              selectChoiceBtn(area, prefBtn);
+              selectedTimes[i] = "no_preference";
+            });
+            area.appendChild(prefBtn);
+
+            if(result.times.length === 0){
+              hint.textContent = "Plus aucun créneau ouvert ce jour-là pour cette formule.";
+            }
           }
+
+          passengerSlotsContainer.appendChild(block);
+        }
+
+        if(!anySlotAnywhere){
+          const waitWrap = document.createElement("div");
+          waitWrap.className = "passenger-slot-block";
+          const waitBtn = styleChoiceBtn(document.createElement("button"));
+          waitBtn.textContent = "Rejoindre la liste d'attente pour cette date (tout le groupe)";
+          waitBtn.addEventListener("click", function(){
+            selectChoiceBtn(waitWrap, waitBtn);
+            waitlist = true;
+            selectedTimes = new Array(nb).fill(null);
+          });
+          waitWrap.appendChild(waitBtn);
+          passengerSlotsContainer.appendChild(waitWrap);
         }
       }
 
@@ -885,8 +901,7 @@
           resetSlotPicker(); // pas de date précise -> pas de créneau à choisir
           return;
         }
-        slotGroup.style.display = "";
-        renderSlots(dateIso);
+        renderPassengerSlots(dateIso);
       });
 
       form.addEventListener("submit", async function (e) {
@@ -896,13 +911,13 @@
         const name = document.getElementById("nom").value.trim();
         const phone = document.getElementById("telephone").value.trim();
         const email = document.getElementById("email").value.trim();
-        const passagerNom = document.getElementById("passagerNom").value.trim();
-        const poids = document.getElementById("poids").value.trim();
-        const telPassager = document.getElementById("telephonePassager").value.trim();
         const typeVol = typeVolEl.value;
         const volDate = volDateEl.value;
         const message = document.getElementById("message").value.trim();
         const consentement = document.getElementById("consentement").checked;
+        const nbPassagers = getPassengerRows().length || 1;
+        const passengers = [];
+        for(let i = 0; i < nbPassagers; i++){ passengers.push(getPassengerData(i)); }
 
         if (!name || !phone) {
           errorEl.textContent = "Merci de renseigner votre nom et votre téléphone.";
@@ -917,8 +932,8 @@
           errorEl.textContent = "Merci de choisir une date, ou l'option \u00ab je vous laisse me recontacter \u00bb.";
           return;
         }
-        if (!isFlexibleDate && (!selectedTime && !noPreference && !waitlist)) {
-          errorEl.textContent = "Merci de choisir une date, puis un créneau horaire (ou \u00ab aucune préférence \u00bb / liste d'attente).";
+        if (!isFlexibleDate && !waitlist && selectedTimes.some(function(t){ return !t; })) {
+          errorEl.textContent = "Merci de choisir un créneau horaire (ou \u00ab aucune préférence \u00bb) pour chaque passager.";
           return;
         }
         if (!consentement) {
@@ -926,26 +941,34 @@
           return;
         }
 
-        const weightVal = parseFloat(poidsEl.value);
-        if (!isNaN(weightVal) && weightVal > MAX_WEIGHT) {
-          errorEl.textContent = "Pour des raisons de sécurité liées au poids maximal admissible sous la voile, nous ne pouvons malheureusement pas accueillir de passager au-delà de " + MAX_WEIGHT + " kg. N'hésitez pas à nous appeler directement pour échanger sur d'autres solutions.";
-          poidsEl.focus();
-          return;
-        }
-        if (selectedTime && !isNaN(weightVal) && weightVal >= HEAVY_WEIGHT_LIMIT && isSummer(volDate) && selectedTime < HEAVY_WEIGHT_MIN_TIME) {
-          errorEl.textContent = "Pour des raisons de sécurité liées au poids, ce créneau n'est plus disponible à partir de " + HEAVY_WEIGHT_LIMIT + " kg en été. Merci de choisir un créneau à partir de 11h.";
-          return;
+        // Contrôle de sécurité final, passager par passager.
+        for(let i = 0; i < passengers.length; i++){
+          const p = passengers[i];
+          if(!isNaN(p.weight) && p.weight > MAX_WEIGHT){
+            errorEl.textContent = "Le passager " + (i + 1) + (p.name ? " (" + p.name + ")" : "") + " dépasse " + MAX_WEIGHT + " kg. Pour des raisons de sécurité liées au poids maximal admissible sous la voile, nous ne pouvons malheureusement pas l'accueillir. N'hésitez pas à nous appeler directement.";
+            return;
+          }
+          const t = selectedTimes[i];
+          if(!isFlexibleDate && t && t !== "no_preference" && !isNaN(p.weight) && p.weight >= HEAVY_WEIGHT_LIMIT && isSummer(volDate) && t < HEAVY_WEIGHT_MIN_TIME){
+            errorEl.textContent = "Le créneau choisi pour le passager " + (i + 1) + " n'est plus disponible à partir de " + HEAVY_WEIGHT_LIMIT + " kg en été. Merci de choisir un créneau à partir de 11h.";
+            return;
+          }
         }
         const rule = FLIGHT_RULES[typeVol] || {};
-        if (rule.maxWeight && !isNaN(weightVal) && weightVal >= rule.maxWeight) {
-          errorEl.textContent = "La formule Découverte est réservée aux passagers de moins de " + rule.maxWeight + " kg. Merci de choisir une autre formule ou de nous contacter directement.";
-          return;
+        if (rule.maxWeight){
+          const tooHeavy = passengers.findIndex(function(p){ return !isNaN(p.weight) && p.weight >= rule.maxWeight; });
+          if(tooHeavy !== -1){
+            errorEl.textContent = "La formule Découverte est réservée aux passagers de moins de " + rule.maxWeight + " kg (passager " + (tooHeavy + 1) + "). Merci de choisir une autre formule ou de nous contacter directement.";
+            return;
+          }
         }
 
         const notesParts = [];
-        const nbPassagers = parseInt(nbPassagersEl.value, 10) || 1;
-        if (passagerNom) notesParts.push(`Passager : ${passagerNom}`);
-        if (telPassager) notesParts.push(`Téléphone passager : ${telPassager}`);
+        passengers.forEach(function(p, i){
+          const w = !isNaN(p.weight) ? p.weight + " kg" : "poids non précisé";
+          const t = isFlexibleDate ? "date flexible" : (waitlist ? "liste d'attente" : (selectedTimes[i] === "no_preference" ? "sans préférence horaire" : selectedTimes[i]));
+          notesParts.push("Passager " + (i + 1) + (p.name ? " : " + p.name : "") + " (" + w + ") → " + t);
+        });
         if (refusAdresseEl.checked) {
           notesParts.push("Adresse : non communiquée (refus)");
         } else if (adresseEl.value.trim()) {
@@ -954,20 +977,23 @@
         if (photoVideoEl && !photoVideoEl.disabled && photoVideoEl.checked) {
           notesParts.push("Option ajoutée : Photo/Vidéo du vol (+25 €)");
         }
-        if (groupPlanText) notesParts.push(groupPlanText);
         if (waitlist) notesParts.push("LISTE D'ATTENTE pour cette date — aucun créneau libre au moment de la demande");
         if (isFlexibleDate) notesParts.push("Le client laisse le choix de la date et du créneau — à recontacter.");
         if (message) notesParts.push(message);
+
+        // L'API n'a qu'un seul champ requested_time : on y met le créneau du 1er passager
+        // (s'il en a un précis) ; le détail complet par passager part dans les notes.
+        const firstRealTime = selectedTimes.find(function(t){ return t && t !== "no_preference"; });
 
         const payload = {
           name: "Aravis - " + name,
           phone: phone,
           email: email || undefined,
           nb_passengers: nbPassagers,
-          weight_info: poids || undefined,
+          weight_info: passengers.map(function(p){ return !isNaN(p.weight) ? p.weight : "?"; }).join("/"),
           flight_type: typeVol,
           requested_date: isFlexibleDate ? undefined : volDate,
-          requested_time: isFlexibleDate ? undefined : (selectedTime || undefined),
+          requested_time: isFlexibleDate ? undefined : (firstRealTime || undefined),
           notes: notesParts.length ? notesParts.join(" — ") : undefined
         };
 
@@ -989,13 +1015,10 @@
 
           const section = document.getElementById("reservation-form");
           const whenLabel = isFlexibleDate
-            ? "— vous nous laissez le choix de la date, nous vous recontactons pour convenir d'un créneau"
-            : (function(){
-                const prettyDate = dateFormatter.format(new Date(volDate + "T00:00:00"));
-                if(waitlist) return "en liste d'attente pour le " + prettyDate;
-                if(noPreference) return "pour le " + prettyDate + " (sans préférence horaire)";
-                return "pour le " + prettyDate + " à " + selectedTime;
-              })();
+            ? "— vous nous laissez le choix de la date, nous vous recontactons pour convenir des créneaux"
+            : (waitlist
+                ? "en liste d'attente pour le " + dateFormatter.format(new Date(volDate + "T00:00:00"))
+                : "pour le " + dateFormatter.format(new Date(volDate + "T00:00:00")));
           section.querySelector("form").outerHTML =
             '<div>' +
             '<p style="color:#2f7d52; font-weight:600;">Demande envoyée ' + whenLabel + ' ! Nous vous recontactons rapidement pour confirmer votre vol.</p>' +
