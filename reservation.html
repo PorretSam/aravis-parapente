@@ -342,6 +342,21 @@
               >
             </div>
           </div>
+
+          <div class="form-group">
+            <label for="adresse">Adresse postale</label>
+            <input
+              type="text"
+              id="adresse"
+              name="Adresse"
+              autocomplete="street-address"
+              placeholder="Rue, code postal, ville"
+            >
+            <div class="form-checkbox">
+              <input type="checkbox" id="refusAdresse" name="Refus adresse" value="Oui">
+              <label for="refusAdresse" style="display:inline; font-weight:normal;">Je préfère ne pas communiquer mon adresse</label>
+            </div>
+          </div>
         </fieldset>
 
         <fieldset>
@@ -357,6 +372,18 @@
           </div>
 
           <div class="form-row">
+            <div class="form-group">
+              <label for="nbPassagers">Nombre de passagers</label>
+              <input
+                type="number"
+                id="nbPassagers"
+                name="Nombre de passagers"
+                min="1"
+                max="10"
+                value="1"
+              >
+            </div>
+
             <div class="form-group">
               <label for="poids">Poids du passager en kg</label>
               <input
@@ -381,24 +408,9 @@
           </div>
 
           <div class="form-group">
-            <label for="adressePassager">Adresse du passager</label>
-            <input
-              type="text"
-              id="adressePassager"
-              name="Adresse du passager"
-              autocomplete="street-address"
-              placeholder="Rue, code postal, ville"
-            >
-            <div class="form-checkbox">
-              <input type="checkbox" id="refusAdresse" name="Refus adresse" value="Oui">
-              <label for="refusAdresse" style="display:inline; font-weight:normal;">Je préfère ne pas communiquer l'adresse du passager</label>
-            </div>
-          </div>
-
-          <div class="form-group">
             <label for="typeVol">Choix du vol</label>
             <select id="typeVol" name="Type de vol" required>
-              <option value="">Sélectionnez une formule</option>
+              <option value="" selected disabled hidden>Sélectionnez une formule</option>
               <optgroup label="Vols d'hiver">
                 <option value="L'Aiglon (vidéo incluse) hiver - 35 €">
                   L'Aiglon (vidéo incluse) hiver - 35 €
@@ -443,6 +455,7 @@
             <label>Créneau horaire</label>
             <div id="slotArea" style="display:flex; flex-wrap:wrap; gap:0.5rem;"></div>
             <p id="slotHint" style="font-size:0.85rem; color:#666; margin-top:0.4rem;"></p>
+            <p id="groupPlan" style="font-size:0.85rem; color:#2c3a3f; margin-top:0.4rem; font-style:italic;"></p>
           </div>
 
           <div class="form-group">
@@ -631,10 +644,12 @@
       const slotGroup = document.getElementById("slotGroup");
       const slotArea = document.getElementById("slotArea");
       const slotHint = document.getElementById("slotHint");
+      const groupPlanEl = document.getElementById("groupPlan");
       const poidsEl = document.getElementById("poids");
       const poidsMsgEl = document.getElementById("poidsMsg");
-      const adresseEl = document.getElementById("adressePassager");
+      const adresseEl = document.getElementById("adresse");
       const refusAdresseEl = document.getElementById("refusAdresse");
+      const nbPassagersEl = document.getElementById("nbPassagers");
       const photoVideoGroup = document.getElementById("photoVideoGroup");
       const photoVideoEl = document.getElementById("optionPhotoVideo");
       const photoVideoIncluseMsg = document.getElementById("photoVideoIncluseMsg");
@@ -644,6 +659,23 @@
       refusAdresseEl.addEventListener("change", function(){
         adresseEl.disabled = refusAdresseEl.checked;
         if(refusAdresseEl.checked) adresseEl.value = "";
+      });
+
+      nbPassagersEl.addEventListener("input", function(){
+        if(selectedTime && volDateEl.value){
+          const dateIso = volDateEl.value;
+          const type = typeVolEl.value;
+          const rule = FLIGHT_RULES[type] || {};
+          let times = (currentAvailability[dateIso] || []).slice();
+          if(!isSummer(dateIso)) times = times.filter(function(t){ return t >= "09:00"; });
+          if(rule.minTime) times = times.filter(function(t){ return t >= rule.minTime; });
+          const idx = times.indexOf(selectedTime);
+          if(idx !== -1){
+            const nb = parseInt(nbPassagersEl.value, 10) || 1;
+            groupPlanText = describeGroupPlan(times.slice(idx), nb);
+            groupPlanEl.textContent = groupPlanText;
+          }
+        }
       });
 
       typeVolEl.addEventListener("change", function(){
@@ -675,6 +707,33 @@
       let selectedTime = null;
       let noPreference = false;
       let waitlist = false;
+      let groupPlanText = "";
+
+      // Répartit un groupe de passagers par paires de 2 sur les créneaux disponibles,
+      // en partant du créneau choisi puis en enchaînant sur les suivants.
+      // ⚠️ HYPOTHÈSE : l'API ne renvoie pas le nombre de moniteurs libres par créneau,
+      // donc cette répartition est indicative (elle suppose 2 moniteurs max en simultané,
+      // comme Sam + Julien) — à confirmer par téléphone pour les groupes de 3 et plus,
+      // sauf si l'API peut un jour exposer une capacité réelle par créneau.
+      function describeGroupPlan(timesFromSelection, nb){
+        if(nb <= 1) return "";
+        const chunks = [];
+        let remaining = nb;
+        let idx = 0;
+        while(remaining > 0 && idx < timesFromSelection.length){
+          const size = Math.min(2, remaining);
+          chunks.push(size + " passager" + (size > 1 ? "s" : "") + " à " + timesFromSelection[idx]);
+          remaining -= size;
+          idx++;
+        }
+        let desc = "Répartition indicative pour " + nb + " passagers : " + chunks.join(", ") + ".";
+        if(remaining > 0){
+          desc += " Il manque des créneaux libres pour " + remaining + " passager(s) supplémentaire(s) — nous vous recontactons pour ajuster.";
+        } else if(chunks.length > 1){
+          desc += " À confirmer selon le nombre de moniteurs réellement disponibles à ces horaires.";
+        }
+        return desc;
+      }
 
       async function fetchAvailability(duration){
         const today = new Date(); today.setHours(0,0,0,0);
@@ -690,10 +749,11 @@
       }
 
       function resetSlotPicker(){
-        selectedTime = null; noPreference = false; waitlist = false;
+        selectedTime = null; noPreference = false; waitlist = false; groupPlanText = "";
         slotGroup.style.display = "none";
         slotArea.innerHTML = "";
         slotHint.textContent = "";
+        groupPlanEl.textContent = "";
       }
 
       function styleChoiceBtn(btn){
@@ -710,7 +770,8 @@
 
       function renderSlots(dateIso){
         slotArea.innerHTML = "";
-        selectedTime = null; noPreference = false; waitlist = false;
+        selectedTime = null; noPreference = false; waitlist = false; groupPlanText = "";
+        groupPlanEl.textContent = "";
 
         const type = typeVolEl.value;
         const rule = FLIGHT_RULES[type] || {};
@@ -754,6 +815,10 @@
           btn.addEventListener("click", function(){
             selectChoiceBtn(btn);
             selectedTime = t; noPreference = false; waitlist = false;
+            const idx = times.indexOf(t);
+            const nb = parseInt(nbPassagersEl.value, 10) || 1;
+            groupPlanText = describeGroupPlan(times.slice(idx), nb);
+            groupPlanEl.textContent = groupPlanText;
           });
           slotArea.appendChild(btn);
         });
@@ -769,6 +834,7 @@
         prefBtn.addEventListener("click", function(){
           selectChoiceBtn(prefBtn);
           selectedTime = null; noPreference = true; waitlist = false;
+          groupPlanText = ""; groupPlanEl.textContent = "";
         });
         slotArea.appendChild(prefBtn);
 
@@ -778,6 +844,7 @@
           waitBtn.addEventListener("click", function(){
             selectChoiceBtn(waitBtn);
             selectedTime = null; noPreference = false; waitlist = true;
+            groupPlanText = ""; groupPlanEl.textContent = "";
           });
           slotArea.appendChild(waitBtn);
           if(!slotHint.textContent){
@@ -876,16 +943,18 @@
         }
 
         const notesParts = [];
+        const nbPassagers = parseInt(nbPassagersEl.value, 10) || 1;
         if (passagerNom) notesParts.push(`Passager : ${passagerNom}`);
         if (telPassager) notesParts.push(`Téléphone passager : ${telPassager}`);
         if (refusAdresseEl.checked) {
-          notesParts.push("Adresse passager : non communiquée (refus)");
+          notesParts.push("Adresse : non communiquée (refus)");
         } else if (adresseEl.value.trim()) {
-          notesParts.push(`Adresse passager : ${adresseEl.value.trim()}`);
+          notesParts.push(`Adresse : ${adresseEl.value.trim()}`);
         }
         if (photoVideoEl && !photoVideoEl.disabled && photoVideoEl.checked) {
           notesParts.push("Option ajoutée : Photo/Vidéo du vol (+25 €)");
         }
+        if (groupPlanText) notesParts.push(groupPlanText);
         if (waitlist) notesParts.push("LISTE D'ATTENTE pour cette date — aucun créneau libre au moment de la demande");
         if (isFlexibleDate) notesParts.push("Le client laisse le choix de la date et du créneau — à recontacter.");
         if (message) notesParts.push(message);
@@ -894,7 +963,7 @@
           name: "Aravis - " + name,
           phone: phone,
           email: email || undefined,
-          nb_passengers: 1,
+          nb_passengers: nbPassagers,
           weight_info: poids || undefined,
           flight_type: typeVol,
           requested_date: isFlexibleDate ? undefined : volDate,
