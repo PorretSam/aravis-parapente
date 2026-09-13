@@ -451,6 +451,10 @@
             </select>
           </div>
 
+          <p id="offSeasonHint" style="display:none; font-size:0.85rem; color:#666; margin:-0.5rem 0 1rem;">
+            Cette période ne propose pas de créneaux en ligne (remontées mécaniques fermées ou hors saison structurée). Choisissez « je vous laisse me recontacter » ci-dessus, nous reviendrons vers vous pour convenir d'un horaire.
+          </p>
+
           <div id="passengerSlotsContainer"></div>
 
           <div class="form-group">
@@ -584,37 +588,23 @@
       const API_BASE = "https://api.parabooking.app/api/public/aravis";
       const CLIENT_WEEKS_AHEAD = 26; // ~6 mois, pour couvrir toute une saison (utile pour les réservations hiver faites en avance)
 
-      // Durée (en minutes) de chaque formule -> espace les créneaux proposés côté API.
-      // ⚠️ HYPOTHÈSE À VALIDER : l'endpoint /slots ne documentait pas de paramètre
-      // de durée. On lui envoie ici "&duration=20/40" en supposant qu'il en
-      // tient compte pour proposer des créneaux plus ou moins rapprochés selon
-      // la formule (20 min Aiglon, 40 min vols classiques). Si l'API ignore ce
-      // paramètre, tous les vols recevront les mêmes créneaux espacés de 40 min —
-      // à corriger avec qui gère parabooking.app.
-      const DURATION_BY_TYPE = {
-        "L'Aiglon (vidéo incluse) hiver - 35 €": 20
-      };
-      const DEFAULT_DURATION = 40;
-
-      // Règles horaires et de poids par formule.
-      // minTime : aucun créneau avant cette heure pour cette formule.
-      // maxWeight : formule réservée aux passagers strictement en dessous de ce poids.
-      // doubleSlot : la formule occupe 2 créneaux consécutifs de 40 min (1h20 au total) —
-      //   on ne propose donc un départ que si le créneau suivant (+40 min) est lui aussi libre.
-      const FLIGHT_RULES = {
-        "Découverte - 65 €":        { minTime: "09:25", maxWeight: 70 },
-        "Plaisir - 90 €":           { minTime: "10:05" },
-        "Performance - 130 €":      { minTime: "13:10" },
-        "Prestige - 170 €":         { minTime: "16:30" },
-        "Beauregard hiver - 70 €":  { minTime: "09:00" },
-        "Loup hiver - 90 €":        { minTime: "09:00" },
-        "Aiguille hiver - 160 €":   { minTime: "09:00", doubleSlot: true },
-        "L'Aiglon (vidéo incluse) hiver - 35 €": { minTime: "09:00" }
-      };
-
-      const MAX_WEIGHT = 115;         // au-delà : vol impossible, quelle que soit la date/formule
-      const HEAVY_WEIGHT_LIMIT = 80;  // à partir de ce poids, pas de créneau avant 11h en été
-      const HEAVY_WEIGHT_MIN_TIME = "11:00";
+      // ---------------------------------------------------------------
+      // SAISONS ET PÉRIODES
+      // ---------------------------------------------------------------
+      // "hiver"         : du début des vacances de Noël (approximation, à ajuster
+      //                    chaque année si besoin) au 15 avril inclus.
+      // "ete_structure"  : juillet + août en entier, et les weekends de juin/septembre
+      //                    SAUF le 1er weekend de juin et le dernier weekend de
+      //                    septembre (remontées mécaniques fermées ces jours-là).
+      // "sur_demande"    : tout le reste (jours de semaine juin/septembre, 1er weekend
+      //                    de juin, dernier weekend de septembre, et le reste de
+      //                    l'année) — pas de créneaux consultés, contact direct.
+      //
+      // ⚠️ HYPOTHÈSE : le début des vacances de Noël est approximé au 20/12 de
+      // chaque année. Les dates réelles de vacances scolaires (zone A) varient
+      // d'une année sur l'autre de quelques jours — à ajuster ici si besoin.
+      const WINTER_START = "12-20"; // MM-DD, approximation vacances de Noël
+      const WINTER_END = "04-15";   // MM-DD
 
       function isoDate(d){ return d.toISOString().slice(0,10); }
       function addDays(d, n){ const nd = new Date(d); nd.setDate(nd.getDate()+n); return nd; }
@@ -625,10 +615,119 @@
         const m = total % 60;
         return String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0");
       }
-      function isSummer(dateIso){
-        const month = parseInt(dateIso.split("-")[1], 10);
-        return month >= 6 && month <= 9;
+
+      function firstSaturdayOfMonth(year, month /* 1-12 */){
+        const d = new Date(year, month - 1, 1);
+        const offset = (6 - d.getDay() + 7) % 7; // 6 = samedi
+        d.setDate(1 + offset);
+        return d;
       }
+      function lastSundayOfMonth(year, month /* 1-12 */){
+        const d = new Date(year, month, 0); // dernier jour du mois
+        d.setDate(d.getDate() - d.getDay()); // recule jusqu'au dimanche (0)
+        return d;
+      }
+      function isFirstWeekendOfJune(date){
+        const year = date.getFullYear();
+        const sat = firstSaturdayOfMonth(year, 6);
+        const sun = addDays(sat, 1);
+        const iso = isoDate(date);
+        return iso === isoDate(sat) || iso === isoDate(sun);
+      }
+      function isLastWeekendOfSeptember(date){
+        const year = date.getFullYear();
+        const sun = lastSundayOfMonth(year, 9);
+        const sat = addDays(sun, -1);
+        const iso = isoDate(date);
+        return iso === isoDate(sat) || iso === isoDate(sun);
+      }
+
+      function getPeriod(dateIso){
+        const date = new Date(dateIso + "T00:00:00");
+        const monthDay = dateIso.slice(5); // "MM-DD"
+
+        // L'hiver chevauche le changement d'année civile (déc -> avril).
+        if (monthDay >= WINTER_START || monthDay <= WINTER_END) {
+          return "hiver";
+        }
+
+        const month = date.getMonth() + 1; // 1-12
+        const dow = date.getDay(); // 0 = dimanche, 6 = samedi
+        const isWeekend = dow === 0 || dow === 6;
+
+        if (month === 7 || month === 8) return "ete_structure";
+        if (month === 6 && isWeekend && !isFirstWeekendOfJune(date)) return "ete_structure";
+        if (month === 9 && isWeekend && !isLastWeekendOfSeptember(date)) return "ete_structure";
+
+        return "sur_demande";
+      }
+
+      // ---------------------------------------------------------------
+      // GRILLES DE CRÉNEAUX PAR FORMULE
+      // ---------------------------------------------------------------
+      // Été structuré : créneaux fixes, avec bornes de poids par créneau.
+      // minWeight inclusif, maxWeight EXCLUSIF (ex: maxWeight 80 => "moins de 80 kg").
+      const ETE_SCHEDULE = {
+        "Découverte - 65 €": [
+          { time: "09:25", minWeight: 20, maxWeight: 80 }
+        ],
+        "Plaisir - 90 €": [
+          { time: "10:05", minWeight: 20, maxWeight: 80 },
+          { time: "11:10", minWeight: 20, maxWeight: 90 },
+          { time: "12:10", minWeight: 20, maxWeight: 90 },
+          { time: "13:10", minWeight: 30, maxWeight: 110 },
+          { time: "14:25", minWeight: 30, maxWeight: 110 },
+          { time: "15:30", minWeight: 30, maxWeight: 110 },
+          { time: "16:30", minWeight: 30, maxWeight: 110 }
+        ],
+        "Performance - 130 €": [
+          { time: "13:10", minWeight: 30, maxWeight: 105 },
+          { time: "14:25", minWeight: 30, maxWeight: 105 },
+          { time: "15:30", minWeight: 30, maxWeight: 105 },
+          { time: "16:35", minWeight: 30, maxWeight: 105 }
+        ],
+        "Prestige - 170 €": [
+          { time: "16:35", minWeight: 30, maxWeight: 105 }
+        ]
+      };
+
+      // Hiver : créneaux générés à intervalle régulier, pas de restriction de poids
+      // précisée pour l'instant (seul le plafond global MAX_WEIGHT s'applique).
+      const HIVER_FREQUENCIES = {
+        "L'Aiglon (vidéo incluse) hiver - 35 €": { start: "09:20", end: "16:40", stepMinutes: 20 },
+        "Beauregard hiver - 70 €":               { start: "09:20", end: "16:40", stepMinutes: 40 },
+        "Loup hiver - 90 €":                     { start: "09:20", end: "16:40", stepMinutes: 40 },
+        "Aiguille hiver - 160 €":                { start: "12:40", end: "16:40", stepMinutes: 80 }
+      };
+      function generateHiverTimes(type){
+        const freq = HIVER_FREQUENCIES[type];
+        if(!freq) return [];
+        const times = [];
+        let t = freq.start;
+        while(t <= freq.end){
+          times.push({ time: t });
+          t = addMinutes(t, freq.stepMinutes);
+        }
+        return times;
+      }
+
+      // Durée envoyée à l'API pour calculer les trous libres du planning (approximative,
+      // sert seulement à savoir si un horaire donné est libre — pas à générer les horaires
+      // eux-mêmes, qui viennent des grilles fixes ci-dessus).
+      const DURATION_BY_TYPE = {
+        "Découverte - 65 €": 20,
+        "Plaisir - 90 €": 40,
+        "Performance - 130 €": 40,
+        "Prestige - 170 €": 40,
+        "L'Aiglon (vidéo incluse) hiver - 35 €": 20,
+        "Beauregard hiver - 70 €": 40,
+        "Loup hiver - 90 €": 40,
+        "Aiguille hiver - 160 €": 80
+      };
+      const DEFAULT_DURATION = 40;
+
+      const MAX_WEIGHT = 115; // au-delà : vol impossible, quelle que soit la date/formule
+
       const dateFormatter = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
 
       const form = document.getElementById("bookingForm");
@@ -636,6 +735,7 @@
       const errorEl = document.getElementById("bookingFormError");
       const typeVolEl = document.getElementById("typeVol");
       const volDateEl = document.getElementById("volDate");
+      const offSeasonHint = document.getElementById("offSeasonHint");
       const passengerSlotsContainer = document.getElementById("passengerSlotsContainer");
       const passengersContainer = document.getElementById("passengersContainer");
       const adresseEl = document.getElementById("adresse");
@@ -666,7 +766,7 @@
         }
       });
 
-      let currentAvailability = {}; // { "YYYY-MM-DD": ["HH:MM", ...] }
+      let currentAvailability = {}; // { "YYYY-MM-DD": ["HH:MM", ...] } — horaires réellement libres selon l'API
       let selectedTimes = [null];   // une entrée par passager : "HH:MM" | "no_preference" | null
       let waitlist = false;
 
@@ -749,6 +849,7 @@
         waitlist = false;
         selectedTimes = new Array(getPassengerRows().length || 1).fill(null);
         passengerSlotsContainer.innerHTML = "";
+        offSeasonHint.style.display = "none";
       }
 
       function styleChoiceBtn(btn){
@@ -764,50 +865,51 @@
       }
 
       // Calcule, pour UN passager donné (son propre poids), la liste de créneaux valides
-      // pour la date et la formule choisies.
-      function computeTimesForPassenger(dateIso, weight){
-        const type = typeVolEl.value;
-        const rule = FLIGHT_RULES[type] || {};
-        const summer = isSummer(dateIso);
-        let times = (currentAvailability[dateIso] || []).slice();
-        let blocked = null;
+      // pour la date et la formule choisies — en croisant la grille fixe de la saison
+      // avec les horaires réellement libres renvoyés par l'API.
+      function computeTimesForPassenger(dateIso, weight, type){
+        const period = getPeriod(dateIso);
+        let candidates;
+        if(period === "hiver"){
+          candidates = generateHiverTimes(type);
+        } else if(period === "ete_structure"){
+          candidates = ETE_SCHEDULE[type] || [];
+        } else {
+          return { times: [], blocked: "Cette date est hors saison structurée : choisissez « je vous laisse me recontacter » ci-dessus, ou appelez-nous directement." };
+        }
 
-        if(!summer){
-          times = times.filter(function(t){ return t >= "09:00"; });
-        }
-        if(rule.minTime){
-          times = times.filter(function(t){ return t >= rule.minTime; });
-        }
-        if(rule.doubleSlot){
-          const set = new Set(currentAvailability[dateIso] || []);
-          times = times.filter(function(t){ return set.has(addMinutes(t, 40)); });
-        }
-        if(rule.maxWeight && !isNaN(weight) && weight >= rule.maxWeight){
-          blocked = "La formule Découverte est réservée aux passagers de moins de " + rule.maxWeight + " kg.";
-          return { times: [], blocked: blocked };
-        }
-        if(!isNaN(weight) && weight >= HEAVY_WEIGHT_LIMIT && summer){
-          times = times.filter(function(t){ return t >= HEAVY_WEIGHT_MIN_TIME; });
-        }
-        return { times: times, blocked: blocked };
+        const freeSet = new Set(currentAvailability[dateIso] || []);
+        const times = [];
+        candidates.forEach(function(c){
+          if(!freeSet.has(c.time)) return; // créneau déjà pris ou non confirmé libre par l'API
+          if(!isNaN(weight)){
+            if(c.minWeight !== undefined && weight < c.minWeight) return;
+            if(c.maxWeight !== undefined && weight >= c.maxWeight) return;
+          }
+          times.push(c.time);
+        });
+        return { times: times, blocked: null };
       }
 
       // Rend un bloc de sélection de créneau par passager. Le client choisit un horaire
       // pour chacun indépendamment — il peut choisir le même horaire pour plusieurs
       // passagers (2 vols en parallèle si 2 moniteurs sont libres) ou des horaires différents.
-      // ⚠️ HYPOTHÈSE : l'API renvoie une liste d'horaires par date, sans indiquer combien de
-      // moniteurs sont libres à chaque horaire. Choisir deux fois le même horaire pour deux
-      // passagers reste donc une demande à confirmer par téléphone, pas une garantie.
+      // ⚠️ HYPOTHÈSE : l'API renvoie une liste d'horaires libres par date, sans indiquer
+      // combien de moniteurs sont libres à chaque horaire. Choisir deux fois le même horaire
+      // pour deux passagers reste donc une demande à confirmer par téléphone, pas une garantie.
       function renderPassengerSlots(dateIso){
         passengerSlotsContainer.innerHTML = "";
+        offSeasonHint.style.display = "none";
+        const type = typeVolEl.value;
         const nb = getPassengerRows().length || 1;
         selectedTimes = new Array(nb).fill(null);
         waitlist = false;
         let anySlotAnywhere = false;
+        let anyBlocked = false;
 
         for(let i = 0; i < nb; i++){
           const pdata = getPassengerData(i);
-          const result = computeTimesForPassenger(dateIso, pdata.weight);
+          const result = computeTimesForPassenger(dateIso, pdata.weight, type);
 
           const block = document.createElement("div");
           block.className = "passenger-slot-block";
@@ -826,6 +928,7 @@
 
           if(result.blocked){
             hint.textContent = result.blocked;
+            anyBlocked = true;
           } else {
             if(result.times.length > 0) anySlotAnywhere = true;
             result.times.forEach(function(t){
@@ -847,14 +950,18 @@
             area.appendChild(prefBtn);
 
             if(result.times.length === 0){
-              hint.textContent = "Plus aucun créneau ouvert ce jour-là pour cette formule.";
+              hint.textContent = "Plus aucun créneau ouvert ce jour-là pour cette formule (ou poids hors plage horaire).";
             }
           }
 
           passengerSlotsContainer.appendChild(block);
         }
 
-        if(!anySlotAnywhere){
+        if(anyBlocked){
+          offSeasonHint.style.display = "";
+        }
+
+        if(!anySlotAnywhere && !anyBlocked){
           const waitWrap = document.createElement("div");
           waitWrap.className = "passenger-slot-block";
           const waitBtn = styleChoiceBtn(document.createElement("button"));
@@ -880,9 +987,17 @@
           return;
         }
 
+        const expectedPeriod = HIVER_FREQUENCIES[type] ? "hiver" : "ete_structure";
         const duration = DURATION_BY_TYPE[type] || DEFAULT_DURATION;
         currentAvailability = await fetchAvailability(duration);
-        const dates = Object.keys(currentAvailability).sort();
+
+        // On ne propose dans le calendrier que les dates qui tombent dans la
+        // période "structurée" correspondant à la formule choisie. Les dates
+        // "sur demande" ne sont pas listées : seule l'option "je vous laisse
+        // me recontacter" permet de faire une demande sur ces périodes.
+        const dates = Object.keys(currentAvailability)
+          .filter(function(d){ return getPeriod(d) === expectedPeriod; })
+          .sort();
 
         volDateEl.innerHTML = '<option value="">— Choisir une date —</option><option value="__flexible__">Je vous laisse me recontacter</option>';
         dates.forEach(function(d){
@@ -941,24 +1056,11 @@
           return;
         }
 
-        // Contrôle de sécurité final, passager par passager.
+        // Contrôle de sécurité final, passager par passager (plafond global de poids).
         for(let i = 0; i < passengers.length; i++){
           const p = passengers[i];
           if(!isNaN(p.weight) && p.weight > MAX_WEIGHT){
             errorEl.textContent = "Le passager " + (i + 1) + (p.name ? " (" + p.name + ")" : "") + " dépasse " + MAX_WEIGHT + " kg. Pour des raisons de sécurité liées au poids maximal admissible sous la voile, nous ne pouvons malheureusement pas l'accueillir. N'hésitez pas à nous appeler directement.";
-            return;
-          }
-          const t = selectedTimes[i];
-          if(!isFlexibleDate && t && t !== "no_preference" && !isNaN(p.weight) && p.weight >= HEAVY_WEIGHT_LIMIT && isSummer(volDate) && t < HEAVY_WEIGHT_MIN_TIME){
-            errorEl.textContent = "Le créneau choisi pour le passager " + (i + 1) + " n'est plus disponible à partir de " + HEAVY_WEIGHT_LIMIT + " kg en été. Merci de choisir un créneau à partir de 11h.";
-            return;
-          }
-        }
-        const rule = FLIGHT_RULES[typeVol] || {};
-        if (rule.maxWeight){
-          const tooHeavy = passengers.findIndex(function(p){ return !isNaN(p.weight) && p.weight >= rule.maxWeight; });
-          if(tooHeavy !== -1){
-            errorEl.textContent = "La formule Découverte est réservée aux passagers de moins de " + rule.maxWeight + " kg (passager " + (tooHeavy + 1) + "). Merci de choisir une autre formule ou de nous contacter directement.";
             return;
           }
         }
