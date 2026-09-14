@@ -892,9 +892,22 @@
       // avec la capacité réellement libre renvoyée par l'API pour chaque horaire.
       // L'API renvoie maintenant { "HH:MM": capacité } (nombre de places/moniteurs
       // libres à cet horaire), pas juste une liste d'horaires.
+      // Certains horaires de l'API sont décalés de quelques minutes par rapport à
+      // notre grille officielle (ex: 11:05 au lieu de 11:10). Tolérance de ±5 min
+      // pour absorber ces décalages connus, en attendant une correction côté API.
+      function findMatchingApiTime(dayCapacities, officialTime){
+        if(dayCapacities[officialTime] !== undefined) return officialTime;
+        const before = addMinutes(officialTime, -5);
+        const after = addMinutes(officialTime, 5);
+        if(dayCapacities[before] !== undefined) return before;
+        if(dayCapacities[after] !== undefined) return after;
+        return null;
+      }
+
       function remainingCapacity(dateIso, time, excludingPassengerIndex){
         const dayCapacities = currentAvailability[dateIso] || {};
-        const capacity = dayCapacities[time] || 0;
+        const apiTime = findMatchingApiTime(dayCapacities, time);
+        const capacity = apiTime ? (dayCapacities[apiTime] || 0) : 0;
         let usedByOthers = 0;
         selectedTimes.forEach(function(t, idx){
           if(idx !== excludingPassengerIndex && t === time) usedByOthers++;
