@@ -888,8 +888,20 @@
 
       // Calcule, pour UN passager donné (son propre poids), la liste de créneaux valides
       // pour la date et la formule choisies — en croisant la grille fixe de la saison
-      // avec les horaires réellement libres renvoyés par l'API.
-      function computeTimesForPassenger(dateIso, weight, type){
+      // avec la capacité réellement libre renvoyée par l'API pour chaque horaire.
+      // L'API renvoie maintenant { "HH:MM": capacité } (nombre de places/moniteurs
+      // libres à cet horaire), pas juste une liste d'horaires.
+      function remainingCapacity(dateIso, time, excludingPassengerIndex){
+        const dayCapacities = currentAvailability[dateIso] || {};
+        const capacity = dayCapacities[time] || 0;
+        let usedByOthers = 0;
+        selectedTimes.forEach(function(t, idx){
+          if(idx !== excludingPassengerIndex && t === time) usedByOthers++;
+        });
+        return capacity - usedByOthers;
+      }
+
+      function computeTimesForPassenger(dateIso, weight, type, passengerIndex){
         const period = getPeriod(dateIso);
         let candidates;
         if(period === "hiver"){
@@ -900,12 +912,11 @@
           return { times: [], blocked: "Cette date est hors saison structurée : choisissez « je vous laisse me recontacter » ci-dessus, ou appelez-nous directement." };
         }
 
-        const freeSet = new Set(currentAvailability[dateIso] || []);
         const isToday = dateIso === todayIso();
         const minTime = isToday ? minBookableTimeToday() : null;
         const times = [];
         candidates.forEach(function(c){
-          if(!freeSet.has(c.time)) return; // créneau déjà pris ou non confirmé libre par l'API
+          if(remainingCapacity(dateIso, c.time, passengerIndex) <= 0) return; // plus de place libre à cet horaire
           if(isToday && c.time < minTime) return; // créneau déjà passé ou trop proche pour aujourd'hui
           if(!isNaN(weight)){
             if(c.minWeight !== undefined && weight < c.minWeight) return;
@@ -927,14 +938,12 @@
         offSeasonHint.style.display = "none";
         const type = typeVolEl.value;
         const nb = getPassengerRows().length || 1;
-        selectedTimes = new Array(nb).fill(null);
-        waitlist = false;
         let anySlotAnywhere = false;
         let anyBlocked = false;
 
         for(let i = 0; i < nb; i++){
           const pdata = getPassengerData(i);
-          const result = computeTimesForPassenger(dateIso, pdata.weight, type);
+          const result = computeTimesForPassenger(dateIso, pdata.weight, type, i);
 
           const block = document.createElement("div");
           block.className = "passenger-slot-block";
@@ -959,18 +968,20 @@
             result.times.forEach(function(t){
               const btn = styleChoiceBtn(document.createElement("button"));
               btn.textContent = t;
+              if(selectedTimes[i] === t) btn.classList.add("is-selected");
               btn.addEventListener("click", function(){
-                selectChoiceBtn(area, btn);
                 selectedTimes[i] = t;
+                renderPassengerSlots(dateIso); // re-rend tout le monde : la capacité restante change pour les autres passagers
               });
               area.appendChild(btn);
             });
 
             const prefBtn = styleChoiceBtn(document.createElement("button"));
             prefBtn.textContent = "Aucune préférence horaire";
+            if(selectedTimes[i] === "no_preference") prefBtn.classList.add("is-selected");
             prefBtn.addEventListener("click", function(){
-              selectChoiceBtn(area, prefBtn);
               selectedTimes[i] = "no_preference";
+              renderPassengerSlots(dateIso);
             });
             area.appendChild(prefBtn);
 
@@ -1041,6 +1052,8 @@
           resetSlotPicker(); // pas de date précise -> pas de créneau à choisir
           return;
         }
+        selectedTimes = new Array(getPassengerRows().length || 1).fill(null);
+        waitlist = false;
         renderPassengerSlots(dateIso);
       });
 
