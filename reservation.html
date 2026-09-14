@@ -889,14 +889,17 @@
       // L'API renvoie maintenant { "HH:MM": capacité } (nombre de places/moniteurs
       // libres à cet horaire), pas juste une liste d'horaires.
       // Certains horaires de l'API sont décalés de quelques minutes par rapport à
-      // notre grille officielle (ex: 11:05 au lieu de 11:10). Tolérance de ±5 min
-      // pour absorber ces décalages connus, en attendant une correction côté API.
+      // notre grille officielle. Tolérance limitée à des paires précises et connues
+      // (pas une tolérance générique ±5 min, qui ferait sinon confondre 16:30 et
+      // le vrai créneau distinct 16:35 de Plaisir).
+      const KNOWN_TIME_ALIASES = {
+        "11:10": "11:05",
+        "12:10": "12:05"
+      };
       function findMatchingApiTime(dayCapacities, officialTime){
         if(dayCapacities[officialTime] !== undefined) return officialTime;
-        const before = addMinutes(officialTime, -5);
-        const after = addMinutes(officialTime, 5);
-        if(dayCapacities[before] !== undefined) return before;
-        if(dayCapacities[after] !== undefined) return after;
+        const alias = KNOWN_TIME_ALIASES[officialTime];
+        if(alias && dayCapacities[alias] !== undefined) return alias;
         return null;
       }
 
