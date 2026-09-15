@@ -943,6 +943,23 @@
 
       function remainingCapacity(dateIso, candidate, type, excludingPassengerIndex){
         const dayCapacities = currentAvailability[dateIso] || {};
+
+        // Cas particulier : créneau "2e moitié" d'un bloc Aiglon (ex: 10h00 après
+        // 9h40). Ce n'est pas un moniteur EN PLUS, c'est le même moniteur qui
+        // enchaîne — donc sa capacité ne vient pas du bloc API, mais du nombre de
+        // 1ères moitiés déjà prises par d'autres passagers (moins celles déjà
+        // utilisées pour une 2e moitié).
+        if(candidate.requiresPriorTime){
+          const priorTime = candidate.requiresPriorTime;
+          let priorCount = 0, secondCount = 0;
+          selectedTimes.forEach(function(t, idx){
+            if(idx === excludingPassengerIndex) return;
+            if(t === priorTime) priorCount++;
+            if(t === candidate.time) secondCount++;
+          });
+          return priorCount - secondCount;
+        }
+
         const allCandidates = candidatesForTypeAndDate(dateIso, type);
         const byTime = {};
         allCandidates.forEach(function(c){ byTime[c.time] = c; });
@@ -965,7 +982,7 @@
           selectedTimes.forEach(function(t, idx){
             if(idx === excludingPassengerIndex || !t || t === "no_preference") return;
             const otherCandidate = byTime[t];
-            if(otherCandidate && otherCandidate.apiTimes.indexOf(apiTime) !== -1) used++;
+            if(otherCandidate && !otherCandidate.requiresPriorTime && otherCandidate.apiTimes.indexOf(apiTime) !== -1) used++;
           });
           if(used > maxUsed) maxUsed = used;
         });
