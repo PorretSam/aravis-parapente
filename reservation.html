@@ -701,24 +701,58 @@
         ]
       };
 
-      // Hiver : créneaux générés à intervalle régulier, pas de restriction de poids
-      // précisée pour l'instant (seul le plafond global MAX_WEIGHT s'applique).
-      const HIVER_FREQUENCIES = {
-        "L'Aiglon (vidéo incluse) hiver - 35 €": { start: "09:20", end: "16:40", stepMinutes: 20 },
-        "Beauregard hiver - 70 €":               { start: "09:20", end: "16:40", stepMinutes: 40 },
-        "Loup hiver - 90 €":                     { start: "09:20", end: "16:40", stepMinutes: 40 },
-        "Aiguille hiver - 160 €":                { start: "12:40", end: "16:40", stepMinutes: 80 }
-      };
-      function generateHiverTimes(type){
-        const freq = HIVER_FREQUENCIES[type];
-        if(!freq) return [];
-        const times = [];
-        let t = freq.start;
-        while(t <= freq.end){
-          times.push({ time: t });
-          t = addMinutes(t, freq.stepMinutes);
+      // Hiver : grille de base de l'API par blocs de 40 min (observée en conditions
+      // réelles : 09:40 → 16:20). Chaque formule construit ses créneaux à partir de
+      // ces blocs, avec parfois plusieurs créneaux tirés du même bloc (Aiglon) ou un
+      // créneau consommant plusieurs blocs consécutifs (Aiguille).
+      const HIVER_BASE_SLOTS = [
+        "09:40","10:20","11:00","11:40","12:20","13:00","13:40","14:20","15:00","15:40","16:20"
+      ];
+
+      function buildHiverCandidates(type){
+        if(type === "L'Aiglon (vidéo incluse) hiver - 35 €"){
+          // 20 min de vol : 2 créneaux Aiglon par bloc de 40 min de l'API, tirés
+          // de la même capacité partagée (priorité à la 1ère moitié du bloc).
+          const list = [];
+          HIVER_BASE_SLOTS.forEach(function(block){
+            list.push({ time: block, apiTimes: [block] });
+            list.push({ time: addMinutes(block, 20), apiTimes: [block] });
+          });
+          return list;
         }
-        return times;
+        if(type === "Beauregard hiver - 70 €"){
+          return HIVER_BASE_SLOTS.map(function(block){ return { time: block, apiTimes: [block] }; });
+        }
+        if(type === "Loup hiver - 90 €"){
+          // Même durée (40 min) que Beauregard, mais on ne démarre pas avant 11h40
+          // (retour des remontées plus tardif sur ce secteur).
+          return HIVER_BASE_SLOTS
+            .filter(function(block){ return block >= "11:40"; })
+            .map(function(block){ return { time: block, apiTimes: [block] }; });
+        }
+        if(type === "Aiguille hiver - 160 €"){
+          // 1h20 de vol = 2 blocs de 40 min consécutifs bloqués. Seulement 2
+          // rotations fixes par jour (13h00 et 14h20), pas une grille continue.
+          const rotations = [
+            { start: "13:00", next: "13:40" },
+            { start: "14:20", next: "15:00" }
+          ];
+          return rotations.map(function(r){ return { time: r.start, apiTimes: [r.start, r.next] }; });
+        }
+        return [];
+      }
+
+      // Renvoie la liste de créneaux candidats (avec leurs blocs API requis) pour une
+      // formule et une date données, quelle que soit la saison (été structuré ou hiver).
+      function candidatesForTypeAndDate(dateIso, type){
+        const period = getPeriod(dateIso);
+        if(period === "hiver") return buildHiverCandidates(type);
+        if(period === "ete_structure"){
+          return (ETE_SCHEDULE[type] || []).map(function(c){
+            return Object.assign({}, c, { apiTimes: [c.time] });
+          });
+        }
+        return [];
       }
 
       // Durée envoyée à l'API pour calculer les trous libres du planning (approximative,
@@ -903,33 +937,50 @@
         return null;
       }
 
-      function remainingCapacity(dateIso, time, excludingPassengerIndex){
+      function remainingCapacity(dateIso, candidate, type, excludingPassengerIndex){
         const dayCapacities = currentAvailability[dateIso] || {};
-        const apiTime = findMatchingApiTime(dayCapacities, time);
-        const capacity = apiTime ? (dayCapacities[apiTime] || 0) : 0;
-        let usedByOthers = 0;
-        selectedTimes.forEach(function(t, idx){
-          if(idx !== excludingPassengerIndex && t === time) usedByOthers++;
+        const allCandidates = candidatesForTypeAndDate(dateIso, type);
+        const byTime = {};
+        allCandidates.forEach(function(c){ byTime[c.time] = c; });
+
+        // Capacité minimale parmi tous les blocs API requis par ce créneau
+        // (ex: l'Aiguille a besoin de 2 blocs consécutifs libres à la fois).
+        let minCap = Infinity;
+        candidate.apiTimes.forEach(function(apiTime){
+          const matched = findMatchingApiTime(dayCapacities, apiTime);
+          const cap = matched ? (dayCapacities[matched] || 0) : 0;
+          if(cap < minCap) minCap = cap;
         });
-        return capacity - usedByOthers;
+        if(minCap === Infinity) minCap = 0;
+
+        // Usage par les AUTRES passagers sur chacun des blocs requis (un créneau
+        // Aiglon voisin ou une autre rotation Aiguille peut consommer le même bloc).
+        let maxUsed = 0;
+        candidate.apiTimes.forEach(function(apiTime){
+          let used = 0;
+          selectedTimes.forEach(function(t, idx){
+            if(idx === excludingPassengerIndex || !t || t === "no_preference") return;
+            const otherCandidate = byTime[t];
+            if(otherCandidate && otherCandidate.apiTimes.indexOf(apiTime) !== -1) used++;
+          });
+          if(used > maxUsed) maxUsed = used;
+        });
+
+        return minCap - maxUsed;
       }
 
       function computeTimesForPassenger(dateIso, weight, type, passengerIndex){
         const period = getPeriod(dateIso);
-        let candidates;
-        if(period === "hiver"){
-          candidates = generateHiverTimes(type);
-        } else if(period === "ete_structure"){
-          candidates = ETE_SCHEDULE[type] || [];
-        } else {
+        if(period === "sur_demande"){
           return { times: [], blocked: "Cette date est hors saison structurée : choisissez « je vous laisse me recontacter » ci-dessus, ou appelez-nous directement." };
         }
+        const candidates = candidatesForTypeAndDate(dateIso, type);
 
         const isToday = dateIso === todayIso();
         const minTime = isToday ? minBookableTimeToday() : null;
         const times = [];
         candidates.forEach(function(c){
-          if(remainingCapacity(dateIso, c.time, passengerIndex) <= 0) return; // plus de place libre à cet horaire
+          if(remainingCapacity(dateIso, c, type, passengerIndex) <= 0) return; // plus de place libre à cet horaire
           if(isToday && c.time < minTime) return; // créneau déjà passé ou trop proche pour aujourd'hui
           if(!isNaN(weight)){
             if(c.minWeight !== undefined && weight < c.minWeight) return;
@@ -1036,7 +1087,8 @@
           return;
         }
 
-        const expectedPeriod = HIVER_FREQUENCIES[type] ? "hiver" : "ete_structure";
+        const HIVER_TYPES = ["L'Aiglon (vidéo incluse) hiver - 35 €", "Beauregard hiver - 70 €", "Loup hiver - 90 €", "Aiguille hiver - 160 €"];
+        const expectedPeriod = HIVER_TYPES.indexOf(type) !== -1 ? "hiver" : "ete_structure";
         const duration = DURATION_BY_TYPE[type] || DEFAULT_DURATION;
         currentAvailability = await fetchAvailability(duration);
 
