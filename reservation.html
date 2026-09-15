@@ -713,11 +713,14 @@
       function buildHiverCandidates(type){
         if(type === "L'Aiglon (vidéo incluse) hiver - 35 €"){
           // 20 min de vol : 2 créneaux Aiglon par bloc de 40 min de l'API, tirés
-          // de la même capacité partagée (priorité à la 1ère moitié du bloc).
+          // de la même capacité partagée. Le 2e créneau (ex: 10h00) n'est qu'un
+          // enchaînement du même moniteur après le 1er (9h40) — il ne se débloque
+          // que si un passager a déjà pris le créneau précédent du même bloc
+          // (voir requiresPriorTime, vérifié dans computeTimesForPassenger).
           const list = [];
           HIVER_BASE_SLOTS.forEach(function(block){
             list.push({ time: block, apiTimes: [block] });
-            list.push({ time: addMinutes(block, 20), apiTimes: [block] });
+            list.push({ time: addMinutes(block, 20), apiTimes: [block], requiresPriorTime: block });
           });
           return list;
         }
@@ -981,6 +984,14 @@
         const minTime = isToday ? minBookableTimeToday() : null;
         const times = [];
         candidates.forEach(function(c){
+          if(c.requiresPriorTime){
+            // Créneau "2e moitié" (ex: 10h00 après 9h40) : ne s'affiche que si un
+            // AUTRE passager a déjà pris le créneau précédent du même bloc.
+            const unlocked = selectedTimes.some(function(t, idx){
+              return idx !== passengerIndex && t === c.requiresPriorTime;
+            });
+            if(!unlocked) return;
+          }
           if(remainingCapacity(dateIso, c, type, passengerIndex) <= 0) return; // plus de place libre à cet horaire
           if(isToday && c.time < minTime) return; // créneau déjà passé ou trop proche pour aujourd'hui
           if(!isNaN(weight)){
