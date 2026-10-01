@@ -89,7 +89,8 @@ html,body{height:100%;overflow:hidden;background:var(--sky);color:var(--ink);fon
 .vcap{position:absolute;left:50%;bottom:calc(70px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;align-items:center;gap:10px;background:rgba(238,243,245,.95);color:var(--ink);border-radius:999px;padding:6px 16px 6px 6px;font-family:var(--num);font-weight:700;font-size:18px;white-space:nowrap}
 .vcap b,.pip b{background:var(--balise);color:#fff;border-radius:999px;padding:3px 10px;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
 .pip{position:absolute;right:12px;top:calc(196px + env(safe-area-inset-top,0px));bottom:calc(64px + env(safe-area-inset-bottom,0px));width:calc(50% - 20px);display:flex;flex-direction:column;gap:8px;transform:translateX(118%);transition:transform .45s cubic-bezier(.2,.9,.3,1);background:#0b1522;padding:8px;border-radius:12px;box-shadow:0 14px 40px rgba(16,35,58,.45)}
-.pip.on{transform:none}
+.pip:not(.on){visibility:hidden;transition:transform .45s cubic-bezier(.2,.9,.3,1),visibility 0s .45s}
+.pip.on{transform:none;visibility:visible}
 .pip p{position:absolute;left:0;right:0;margin:0;text-align:center;font-family:var(--display);font-weight:900;text-transform:uppercase;color:#fff;font-size:clamp(18px,2.8vw,34px);line-height:1;text-shadow:0 2px 12px rgba(0,0,0,.7);pointer-events:none}
 .pip p:empty{display:none}
 .pip .pt{top:3%;bottom:auto}
