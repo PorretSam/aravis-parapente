@@ -650,7 +650,7 @@ function heartStep(p,dt){if(!HEARTS.length)return;HEARTS.forEach((h,i)=>{const k
   if(p.altBoost>0){const d=Math.min(p.altBoost,dt*40);p.pos.y+=d;p.altBoost-=d}
   if(p.speedT>0){p.speedT-=dt;p.hud.boost.hidden=false;p.hud.boost.textContent='⚡ +10 km/h · '+Math.ceil(Math.max(0,p.speedT))+' s'}else if(!p.hud.boost.hidden)p.hud.boost.hidden=true}
 function donateCard(p){const h=p.hud.el;let d=h.querySelector('.donate');if(!d){d=document.createElement('div');d.className='donate';h.appendChild(d)}
-  d.innerHTML=`<span>💙 <b>Bonus d'Oriane !</b> Soutiens Oriane, ski alpin U16 · 66 % du don déductible des impôts</span><a href="https://www.soutienstonsportif.fr/s/KNpVGK" target="_blank" rel="noopener">Soutenir ↗</a>`;d.classList.add('on');clearTimeout(d._t);d._t=setTimeout(()=>d.classList.remove('on'),6000)}
+  d.innerHTML=`<span>💙 <b>Bonus d'Oriane !</b> Soutiens ton sportif : Oriane, ski alpin de compétition de haut niveau (U16) · 66 % du don déductible des impôts</span><a href="https://www.soutienstonsportif.fr/s/KNpVGK" target="_blank" rel="noopener">Soutenir ↗</a>`;d.classList.add('on');clearTimeout(d._t);d._t=setTimeout(()=>d.classList.remove('on'),6000)}
 function buildGates(){const subs=CP.map((c,i)=>i===LZ?(LV.lzSub||'Posé · 10 route de Plattuy'):'Balise '+i+' · cylindre '+Math.round(c.R)+' m');
   for(let i=1;i<CP.length;i++){const c=CP[i],gy=groundY(c.x,c.z),top=3600,h=top-gy+80;
     const mat=new THREE.MeshBasicMaterial({color:'#ff5b1f',map:stripeTex,transparent:true,opacity:.2,side:THREE.DoubleSide,depthWrite:false});
@@ -915,8 +915,14 @@ function updatePlayer(p,dt){
     else if(p.acroOn&&p.acroState!=='bail'&&(p.pos.y<gA+280||dB>ACRO.box.R*1.35)){p.tum=null;acroEnd(p,p.pos.y<gA+280?'Trop bas pour continuer':'Sorti de la zone acro')}
     placeGlider(p,dt);return}
   if(p.route==='acro'&&!p.acroDone&&ACRO&&!p.reserve&&Math.hypot(p.pos.x-ACRO.box.x,p.pos.z-ACRO.box.z)<ACRO.box.R&&p.pos.y>groundY(p.pos.x,p.pos.z)+450){p.acroOn=true;p.acroState='wo';p.combo=1;p.woA=0;p.th=0;p.om=0;p.spiral=0;p.prevView=p.view;p.view=2;if(numPlayers===1)document.body.classList.add('acroing');showMsg(p,'Zone acro !<small>Renvoie la voile à la verticale : wing over · virage tenu : SAT · V pour changer de vue</small>',2.6)}
-  if(p.reserve){p.vario+=(-5.5-p.vario)*Math.min(1,dt*2);p.pos.x+=WIND.x*dt*3;p.pos.z+=WIND.z*dt*3;p.pos.y+=p.vario*dt;p.turn*=.9;
-    if(p.pos.y<groundY(p.pos.x,p.pos.z)+.6){p.pos.y=groundY(p.pos.x,p.pos.z)+.6;p.crash=2.8;p.vario=0;showMsg(p,'Posé sous le secours<small>Plus de peur que de mal. '+(p.next?'Retour à la balise '+p.next:'Retour au départ · '+CP[0].name)+'</small>',2.8)}
+  if(p.reserve){const aglR=p.pos.y-groundY(p.pos.x,p.pos.z);
+    // largage de l'aile : chute libre puis parachute automatique ~40 m sol
+    if(!p.ff&&!p.acroOn&&!LV.acroOnly&&aglR>150){if(!I.d)p.ffArm=true;if(!p.ffHint&&p.crash<=0){p.ffHint=true;showMsg(p,'Sous le secours<small>Frein : larguer l\'aile et partir en chute libre</small>',4)}
+      if(p.ffArm&&I.d){p.ff={ph:'fall',t:0};dropDebris(p);showMsg(p,'Aile larguée !<small>Chute libre… le parachute s\'ouvre tout seul près du sol</small>',2.4)}}
+    if(p.ff){const F=p.ff;F.t+=dt;if(F.ph==='fall'){p.vario=Math.max(-50,p.vario-9.8*dt);p.pos.x+=WIND.x*dt;p.pos.z+=WIND.z*dt;if(aglR<30){F.ph='open';F.t=0;showMsg(p,'Parachute ouvert !',1.6);chime()}}
+      else p.vario+=(-5.5-p.vario)*Math.min(1,dt*4);p.pos.y+=p.vario*dt;p.turn*=.9}
+    else{p.vario+=(-5.5-p.vario)*Math.min(1,dt*2);p.pos.x+=WIND.x*dt*3;p.pos.z+=WIND.z*dt*3;p.pos.y+=p.vario*dt;p.turn*=.9}
+    if(p.pos.y<groundY(p.pos.x,p.pos.z)+.6){const wasFF=!!p.ff;p.ff=null;p.ffHint=false;p.ffArm=false;p.pos.y=groundY(p.pos.x,p.pos.z)+.6;p.crash=2.8;p.vario=0;showMsg(p,(wasFF?'Posé sous le parachute':'Posé sous le secours')+'<small>Plus de peur que de mal. '+(p.next?'Retour à la balise '+p.next:'Retour au départ · '+CP[0].name)+'</small>',2.8)}
     placeGlider(p,dt);return}
   if(p.salto>0){p.salto-=dt;p.vario+=(-13-p.vario)*Math.min(1,dt*2);if(p.secretSalto&&p.pos.y<groundY(p.pos.x,p.pos.z)+40)p.salto=Math.min(p.salto,.01);p.pos.y+=p.vario*dt;p.pos.x+=Math.sin(p.h)*5*dt;p.pos.z-=Math.cos(p.h)*5*dt;p.ears=1;
     if(p.salto<=0&&p.secretSalto){p.secretSalto=false;if(ACRO){goAcro(p,'Salto secret du Grand-Bornand !');placeGlider(p,dt);return}
@@ -991,7 +997,7 @@ function updatePlayer(p,dt){
   const G=W.near,m=.3;let out=false;const e=p.pos.x/KM,n=-p.pos.z/KM;
   if(e<G.E0+m){p.pos.x=(G.E0+m)*KM;out=true}if(e>G.E1-m){p.pos.x=(G.E1-m)*KM;out=true}if(n<G.N0+m){p.pos.z=-(G.N0+m)*KM;out=true}if(n>G.N1-m){p.pos.z=-(G.N1-m)*KM;out=true}p.out=out;
   if(p.next<NB){const c=CP[p.next+1];if(Math.hypot(p.pos.x-c.x,p.pos.z-c.z)<c.R){p.next++;p.splits.push(simT);addPts(p,200,'Balise '+p.next);
-    showMsg(p,`Balise ${p.next} validée · +200<small>${c.name} · ${fmt(simT)} de vol</small>`,2.6);chime();if(ACRO&&LV.acroChoice&&p.next===NB&&!p.route)startChoice(p)}}
+    p.heartsN=(p.heartsN||0)+1;showMsg(p,`Balise ${p.next} validée · +200<small>${c.name} · ${fmt(simT)} de vol · 💙 +1 cœur d'Oriane</small>`,2.8);chime();if(ACRO&&LV.acroChoice&&p.next===NB&&!p.route)startChoice(p)}}
   if(!p.sawBeau&&winterAt(p.pos.x,p.pos.z)>.2){p.sawBeau=true;pip(p,'assets/video-beauregard.mp4','Déco de Beauregard, en hiver',20,['Déco Beauregard','Déco Aiglon'])}
   if(!p.sawConfins&&Math.hypot(p.pos.x-CONFINS.x,p.pos.z-CONFINS.z)<1000){p.sawConfins=true;pip(p,'assets/video-confins.mp4','Au-dessus du lac des Confins',5)}
   if(LV.crossFinish&&p.next===NB&&p.route!=='acro'&&Math.hypot(p.pos.x-CP[LZ].x,p.pos.z-CP[LZ].z)<CP[LZ].R&&p.pos.y>groundY(p.pos.x,p.pos.z)+1){p.finished=true;p.ftime=simT;p.splits.push(simT);addPts(p,300,'Triangle bouclé · balise '+CP[LZ].name+' traversée');
@@ -1026,7 +1032,7 @@ function placeGlider(p,dt){const g=p.glider,u=g.userData;g.position.copy(p.pos);
   u.acroWing=!!(p.acroOn||WX.school);u.twist=!!p.twist;
   {const tw=p.twist?Math.PI:0;u.pilot.rotation.y+=(tw-u.pilot.rotation.y)*Math.min(1,dt*5);u.pax.rotation.y=u.pilot.rotation.y}
   const bl=p.acroOn&&p.acroState==='bail'&&p.bail?p.bail:null,wScale=bl&&bl.ph==='open'?.25+.75*sstep(0,1,bl.t):1;
-  u.top.visible=u.bot.visible=u.lines.visible=!p.reserve&&!(bl&&bl.ph==='fall');u.res.visible=!!p.reserve||!!(bl&&bl.ph==='resOpen');
+  u.top.visible=u.bot.visible=u.lines.visible=!p.reserve&&!(bl&&bl.ph==='fall');u.res.visible=(!!p.reserve&&!(p.ff&&p.ff.ph==='fall'))||!!(bl&&bl.ph==='resOpen');{const rs=p.ff&&p.ff.ph==='open'?.25+.75*sstep(0,.5,p.ff.t):1;if(u.res.scale.x!==rs)u.res.scale.setScalar(rs)}
   if(u.top.scale.x!==wScale){u.top.scale.setScalar(wScale);u.bot.scale.setScalar(wScale);u.lines.scale.setScalar(wScale)}
   const I=mode==='race'&&!p.finished?inputOf(p):{};const tb=I.d?.8:0;
   u.ears=p.ears;u.bl=clamp(tb+(p.turn<0?-p.turn:0)*.9,0,1.2);u.br=clamp(tb+(p.turn>0?p.turn:0)*.9,0,1.2);
@@ -1257,7 +1263,7 @@ function showResults(){const done=players.filter(p=>p.finished).sort((a,b)=>b.sc
   document.getElementById('resTitle').textContent=numPlayers>1&&done.length?`Victoire J${done[0].id+1}`:done.length?done[0].score+' points':'Abandon';
   const rows=players.slice().sort((a,b)=>b.score-a.score).map((p,ri)=>`<tr><td><span class="tag" style="background:${STYLES[p.id].col};color:#fff;padding:2px 7px;border-radius:5px;font-family:var(--display);font-weight:900">J${p.id+1}</span>${ri===0&&numPlayers>1&&p.finished?'<span class="win">1er</span>':''}</td><td class="big">${p.score}</td><td>${p.finished?fmt(p.ftime):'—'}</td><td style="white-space:normal;min-width:220px">${p.log.map(l=>`${l[0]} <b>${l[1]>0?'+':''}${l[1]}</b>`).join(' · ')}</td></tr>`).join('');
   document.getElementById('resTable').innerHTML=`<thead><tr><th>Pilote</th><th>Points</th><th>Temps de vol</th><th>Détail</th></tr></thead><tbody>${rows}</tbody>`;
-  {const n=players.reduce((a,p)=>a+(p.heartsN||0),0);document.getElementById('donTxt').innerHTML=(n?`💙 Tu as attrapé <b>${n} cœur${n>1?'s':''} d'Oriane</b> !`:`💙 Pas de cœur d'Oriane cette fois…`)+`<br>Soutiens Oriane, ski alpin U16 : 66 % du don déductible des impôts.`}
+  {const n=players.reduce((a,p)=>a+(p.heartsN||0),0);document.getElementById('donTxt').innerHTML=(n?`💙 Tu as attrapé <b>${n} cœur${n>1?'s':''} d'Oriane</b> !`:`💙 Pas de cœur d'Oriane cette fois…`)+`<br>Soutiens ton sportif : <b>Oriane, ski alpin de compétition de haut niveau</b> (U16). 66 % du don est déductible des impôts.`}
   results.hidden=false;document.getElementById('touch').hidden=true;renderBest()}
 function toMenu(){clearFlight();applyWX({});mode='menu';menu.hidden=false;results.hidden=true;cd.hidden=true;document.getElementById('touch').hidden=true;muteBtn.hidden=true;
   players.forEach(p=>p.hud.el.style.display='none');document.getElementById('minimap').hidden=true;numPlayers=1;layout()}
