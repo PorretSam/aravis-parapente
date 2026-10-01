@@ -1,3 +1,7 @@
+<!doctype html>
+<html lang="fr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Vol acro · Aravis Parapente</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -264,6 +268,25 @@ table.res td.big{font-size:26px;font-weight:700}
 #loading{position:fixed;inset:0;z-index:90;display:grid;place-items:center;background:#fff;color:#16181b;font-family:var(--num);font-size:20px;font-weight:600;letter-spacing:.04em;text-align:center;padding:16px}
 #loading b{display:block;font-family:var(--display);font-size:44px;font-weight:900;text-transform:uppercase}
 @media (prefers-reduced-motion:reduce){.msg{transition:none}}
+/* téléphone en vertical : touches qui tiennent dans la largeur, son en icône, balise lisible */
+@media (orientation:portrait) and (max-width:520px){
+#touch{padding-inline:10px}
+#touch button{width:min(58px,calc((100vw - 56px)/6));height:min(58px,calc((100vw - 56px)/6))}
+body[data-layout=solo-compact] .btn-float{padding:6px 10px;font-size:17px}
+body[data-layout=solo-compact] .hud.compact .next{max-width:calc(100% - 84px)}
+body.racing[data-layout=solo-compact] #brand{top:calc(178px + env(safe-area-inset-top,0px))}
+.hud.compact .next .dist{font-size:16px}
+.hud.compact .next b{font-size:15px}
+body.canfs #fsBtn{display:none!important}
+#touch button{font-size:12px!important}
+}
+/* téléphone en horizontal : tout l'affichage réduit pour laisser la place au vol */
+@media (orientation:landscape) and (max-height:500px){
+.hud-top,.hud .next,.hud .air,.hud .instr,.hud .lives,#touch,#minimap,.btn-float{zoom:.72}
+body.racing[data-layout=solo-compact] #brand{zoom:.8;top:auto;right:auto;left:50%;transform:translateX(-50%);bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+}
+#fsBtn{display:none}
+body.racing[data-layout=solo-compact].canfs #fsBtn{display:block;right:calc(12px + var(--mw,52px))}
 </style>
 
 <div id="stage"></div>
@@ -272,7 +295,7 @@ table.res td.big{font-size:26px;font-weight:700}
 <div id="minimap" hidden><canvas id="mm" width="420" height="340"></canvas></div>
 <div id="countdown" hidden></div>
 <div id="vidFull"><video id="vfBack" muted playsinline preload="auto"></video><video id="vfFront" muted playsinline preload="auto"></video><div class="vcap"><b>Vrai vol</b><span id="vfCap"></span></div><div id="vfBig" hidden>Game over<small>Posé en décrochage</small></div></div>
-<button class="btn-float" id="muteBtn" hidden>Vario sonore : oui</button>
+<button class="btn-float" id="fsBtn" aria-label="Plein écran">⛶</button><button class="btn-float" id="muteBtn" hidden>Vario sonore : oui</button>
 <a id="brand" href="https://aravis-parapente.com" target="_blank" rel="noopener"><b>Aravis Parapente</b><span>Réserver un vrai vol</span></a>
 
 <div id="touch" hidden>
@@ -1068,7 +1091,7 @@ function layout(){const Wd=innerWidth,Hh=innerHeight;renderer.setSize(Wd,Hh);con
   players.forEach((p,i)=>{const v=VP[i]||VP[0];p.cam.aspect=v.w/v.h;p.cam.updateProjectionMatrix();
     Object.assign(p.hud.el.style,{left:v.x+'px',top:v.y+'px',width:v.w+'px',height:v.h+'px'});p.hud.el.classList.toggle('compact',v.w<760);p.hud.el.classList.toggle('mirror',i===1&&VP.length>1&&Wd>=Hh);p.hud.el.classList.toggle('duo',VP.length>1)});
   const duo=numPlayers>1&&mode!=='menu',small=!duo&&Wd<760;const mmEl=document.getElementById('minimap');mmEl.classList.toggle('duo',duo);mmEl.classList.toggle('small',small);
-  document.body.dataset.layout=duo?'duo':small?'solo-compact':'solo';document.body.classList.toggle('racing',mode!=='menu');muteBtn.textContent=(small?'Son : ':'Vario sonore : ')+(muted?'non':'oui')}
+  document.body.dataset.layout=duo?'duo':small?'solo-compact':'solo';document.body.classList.toggle('racing',mode!=='menu');muteBtn.textContent=small?(muted?'🔇':'🔊'):'Vario sonore : '+(muted?'non':'oui');muteBtn.setAttribute('aria-label','Vario sonore : '+(muted?'non':'oui'));document.body.style.setProperty('--mw',(muteBtn.offsetWidth?muteBtn.offsetWidth+8:52)+'px')}
 addEventListener('resize',()=>{if(mode!=='loading')layout()});
 function applyView(p){players.forEach(o=>{const hide=o===p&&p.view===1;o.glider.userData.pilot.visible=!hide;o.glider.userData.gear.forEach(m=>m.visible=!hide);o.glider.userData.pole.visible=o===p&&p.view===2});if(snowPts){const w=winterAt(p.cam.position.x,p.cam.position.z);snowPts.visible=w>.15;if(snowPts.visible){snowPts.position.copy(p.cam.position);snowPts.material.opacity=.9*w}}
   if(p.front)p.front.visible=p.inGB;if(p.frontLabel)p.frontLabel.visible=p.inGB;gates.forEach((g,i)=>{const st=i<p.next?'done':i===p.next?'next':'todo';
@@ -1100,7 +1123,8 @@ function varioSound(dt){if(!actx)return;const p=players[0];let g=0,f=600;
   if(!muted&&mode==='race'&&p&&!p.finished&&p.crash<=0){const v=p.vario;if(v>.2){beepPh+=dt*(1.6+v*1.1);g=(beepPh%1)<.5?.06:0;f=560+v*130}else if(v<-2.6){g=.022;f=Math.max(170,300+v*14)}}
   gain.gain.setTargetAtTime(g,actx.currentTime,.012);osc.frequency.setTargetAtTime(f,actx.currentTime,.02)}
 function chime(big){if(!actx||muted)return;const t=actx.currentTime;[0,.12,big?.24:null].forEach((d,i)=>{if(d===null)return;const o=actx.createOscillator(),g=actx.createGain();o.type='triangle';o.frequency.value=[784,1047,1319][i];g.gain.setValueAtTime(0,t+d);g.gain.linearRampToValueAtTime(.12,t+d+.02);g.gain.exponentialRampToValueAtTime(.001,t+d+.4);o.connect(g);g.connect(actx.destination);o.start(t+d);o.stop(t+d+.45)})}
-const muteBtn=document.getElementById('muteBtn');muteBtn.addEventListener('click',()=>{muted=!muted;layout();muteBtn.blur()});
+const muteBtn=document.getElementById('muteBtn');
+{const fb=document.getElementById('fsBtn'),de=document.documentElement,touchDev=matchMedia('(pointer: coarse)').matches;if(touchDev&&document.fullscreenEnabled&&de.requestFullscreen)document.body.classList.add('canfs');fb.addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});else de.requestFullscreen({navigationUI:'hide'}).catch(()=>{});fb.blur()});document.addEventListener('fullscreenchange',()=>{fb.textContent=document.fullscreenElement?'✕':'⛶';setTimeout(()=>{if(mode!=='loading')layout()},300)})}muteBtn.addEventListener('click',()=>{muted=!muted;layout();muteBtn.blur()});
 
 // ================= Vidéos du vrai vol =================
 const MP4OK=!!document.createElement('video').canPlayType('video/mp4; codecs="avc1.4D401E"');const vsrc=u=>MP4OK?u:u.replace('.mp4','.webm');
