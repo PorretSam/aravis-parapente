@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jeu de parapente · Aravis Parapente</title>
+<meta name="description" content="Jeu gratuit de parapente biplace en 3D dans les Aravis : Tour de La Clusaz, Grand Tour des Aravis et Méga triangle de Jojo.">
+<link rel="canonical" href="https://aravis-parapente.com/jeu/">
+<link rel="icon" href="assets/logo.png">
+<style>
+:root{--blue:#005a9c;--blue-dark:#004080;--orange:#ff6600;--orange-dark:#d95500;--muted:#66727d;--border:#d9e1e7;--bg:#f4f6f8;--surface:#fff;--radius:12px}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:#1d2730;line-height:1.5}
+.hero{position:relative;min-height:46vh;display:flex;align-items:flex-end;color:#fff;background:#0b2a44 url(assets/menu.jpg) center/cover no-repeat}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,30,60,.15),rgba(0,30,60,.75))}
+.hero .in{position:relative;width:100%;max-width:1080px;margin:0 auto;padding:28px 16px}
+.top{position:absolute;top:0;left:0;right:0;max-width:1080px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.top img{height:54px;width:auto;background:rgba(255,255,255,.92);border-radius:50%;padding:4px}
+.top a{color:#fff;text-decoration:none;font-weight:600;font-size:.95rem;background:rgba(0,0,0,.3);padding:6px 12px;border-radius:999px}
+h1{margin:0 0 6px;font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.1}
+.hero p{margin:0;max-width:640px;opacity:.95}
+main{max-width:1080px;margin:0 auto;padding:24px 16px 40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.lv{font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--orange-dark)}
+.card h2{margin:4px 0 8px;font-size:1.3rem;color:var(--blue-dark)}
+.card p{margin:0 0 16px;color:var(--muted);flex:1}
+.btn{display:inline-block;text-align:center;background:var(--orange);color:#fff;text-decoration:none;font-weight:700;padding:11px 18px;border-radius:8px}
+.btn:hover{background:var(--orange-dark)}
+.btn.blue{background:var(--blue)}.btn.blue:hover{background:var(--blue-dark)}
+.tips{margin-top:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px}
+.tips h3{margin:0 0 6px;color:var(--blue-dark);font-size:1.05rem}
+.tips ul{margin:0;padding-left:20px;color:var(--muted)}
+.don{margin-top:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:#eaf4fb;border-radius:var(--radius);padding:18px 20px}
+.don p{margin:0;max-width:640px}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 30px}
+footer a{color:var(--blue)}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="top"><img src="assets/logo.png" alt="Aravis Parapente"><a href="/">← Le site</a></div>
+  <div class="in">
+    <h1>Le jeu de parapente des Aravis</h1>
+    <p>Pilote un biplace en 3D au-dessus de La Clusaz, des Aravis et du lac d'Annecy. Gratuit, sur ordinateur et sur téléphone.</p>
+  </div>
+</header>
+<main>
+  <div class="grid">
+    <div class="card"><span class="lv">Niveau 1</span><h2>Vol performance · Tour de La Clusaz</h2><p>Du Crêt du Merle au Trou de la Mouche, la Tête du Danay et Beauregard, puis posé au Cortibot.</p><a class="btn" href="tour-la-clusaz.html">Jouer</a></div>
+    <div class="card"><span class="lv">Niveau 2</span><h2>Vol prestige · Grand Tour des Aravis</h2><p>Le grand tour de la chaîne, puis de l'acro au-dessus du lac d'Annecy et posé à Doussard.</p><a class="btn" href="grand-tour-aravis.html">Jouer</a></div>
+    <div class="card"><span class="lv">Niveau 3</span><h2>Méga triangle de Jojo</h2><p>Col des Aravis, Chamonix, Chambéry, Annecy… et retour à La Giettaz avant la fin de la journée.</p><a class="btn" href="mega-triangle.html">Jouer</a></div>
+  </div>
+  <div class="tips">
+    <h3>Pour bien jouer</h3>
+    <ul>
+      <li>Ordinateur : flèches du clavier. Téléphone : boutons à l'écran.</li>
+      <li>Attrape les cœurs d'Oriane en vol : altitude, vitesse ou secours en plus.</li>
+      <li>Si le jeu est lent sur ordinateur, réduis la fenêtre ou vérifie que l'accélération graphique du navigateur est activée.</li>
+    </ul>
+  </div>
+  <div class="don">
+    <p>💙 <b>Soutiens Oriane</b>, skieuse alpine U16. 66 % du don est déductible des impôts.</p>
+    <a class="btn blue" href="https://www.soutienstonsportif.fr/s/KNpVGK" target="_blank" rel="noopener">Soutenir Oriane ↗</a>
+  </div>
+</main>
+<footer>© Aravis Parapente · <a href="/">aravis-parapente.com</a> · <a href="/reservation.html">Réserver un vol biplace</a></footer>
+</body>
+</html>
