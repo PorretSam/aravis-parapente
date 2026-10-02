@@ -3,7 +3,7 @@
 
   <url>
     <loc>https://aravis-parapente.com/</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <priority>1.00</priority>
   </url>
 
@@ -42,11 +42,54 @@
     <lastmod>2026-06-30</lastmod>
     <priority>0.70</priority>
   </url>
-  
-<url>
-  <loc>https://aravis-parapente.com/ecole-parapente-la-clusaz.html</loc>
-  <lastmod>2026-07-08</lastmod>
-  <priority>0.85</priority>
-</url>
-  
+
+  <url>
+    <loc>https://aravis-parapente.com/ecole-parapente-la-clusaz.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Jeu de parapente 3D -->
+  <url>
+    <loc>https://aravis-parapente.com/jeu/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <priority>0.60</priority>
+  </url>
+
+  <url>
+    <loc>https://aravis-parapente.com/jeu/premier-vol.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <priority>0.40</priority>
+  </url>
+
+  <url>
+    <loc>https://aravis-parapente.com/jeu/tour-la-clusaz.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <priority>0.40</priority>
+  </url>
+
+  <url>
+    <loc>https://aravis-parapente.com/jeu/grand-tour-aravis.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <priority>0.40</priority>
+  </url>
+
+  <url>
+    <loc>https://aravis-parapente.com/jeu/mega-triangle.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <priority>0.40</priority>
+  </url>
+
+  <url>
+    <loc>https://aravis-parapente.com/jeu/vol-aiglon.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <priority>0.40</priority>
+  </url>
+
+  <url>
+    <loc>https://aravis-parapente.com/jeu/vol-acro.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <priority>0.40</priority>
+  </url>
+
 </urlset>
