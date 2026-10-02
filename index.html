@@ -1,73 +1,439 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Jeu de parapente · Aravis Parapente</title>
-<meta name="description" content="Jeu gratuit de parapente biplace en 3D dans les Aravis : premier vol, Tour de La Clusaz, Grand Tour des Aravis, Méga triangle de Jojo, speed riding à Beauregard et acro sur le lac d'Annecy, seul ou en ligne.">
-<link rel="canonical" href="https://aravis-parapente.com/jeu/">
-<link rel="icon" href="assets/logo.png">
-<style>
-:root{--blue:#005a9c;--blue-dark:#004080;--orange:#ff6600;--orange-dark:#d95500;--muted:#66727d;--border:#d9e1e7;--bg:#f4f6f8;--surface:#fff;--radius:12px}
-*{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:#1d2730;line-height:1.5}
-.hero{position:relative;min-height:56vh;display:flex;align-items:flex-end;color:#fff;background:#0b2a44 url(/image/aravis-parapente-bapteme-giettaz-mont-blanc.jpg) center 35%/cover no-repeat}
-.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,30,60,0) 45%,rgba(0,30,60,.7))}
-.hero .in{position:relative;width:100%;max-width:1080px;margin:0 auto;padding:28px 16px}
-.top{position:absolute;top:0;left:0;right:0;max-width:1080px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
-.top img{height:108px;width:auto;background:rgba(255,255,255,.92);border-radius:50%;padding:4px}
-.top a{color:#fff;text-decoration:none;font-weight:600;font-size:.95rem;background:rgba(0,0,0,.3);padding:6px 12px;border-radius:999px}
-h1{margin:0 0 6px;font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.1}
-.hero p{margin:0;max-width:640px;opacity:.95}
-main{max-width:1080px;margin:0 auto;padding:24px 16px 40px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.lv{font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--orange-dark)}
-.card h2{margin:4px 0 8px;font-size:1.3rem;color:var(--blue-dark)}
-.card p{margin:0 0 16px;color:var(--muted);flex:1}
-.btn{display:inline-block;text-align:center;background:var(--orange);color:#fff;text-decoration:none;font-weight:700;padding:11px 18px;border-radius:8px}
-.btn:hover{background:var(--orange-dark)}
-.btn.blue{background:var(--blue)}.btn.blue:hover{background:var(--blue-dark)}
-.tips{margin-top:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px}
-.tips h3{margin:0 0 6px;color:var(--blue-dark);font-size:1.05rem}
-.tips ul{margin:0;padding-left:20px;color:var(--muted)}
-.don{margin-top:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:#eaf4fb;border-radius:var(--radius);padding:18px 20px}
-.don p{margin:0;max-width:640px}
-footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 30px}
-footer a{color:var(--blue)}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Parapente à La Clusaz – Baptêmes en biplace été et hiver | Aravis Parapente</title>
+  <meta name="description" content="Découvrez les baptêmes de parapente à La Clusaz avec Aravis Parapente : vols biplace, bons cadeaux et réservation en ligne.">
+  <meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Aravis Parapente">
+
+<meta property="og:title"
+      content="Parapente à La Clusaz | Aravis Parapente">
+
+<meta property="og:description"
+      content="Découvrez nos baptêmes de parapente biplace, bons cadeaux et réservations à La Clusaz.">
+
+<meta property="og:url"
+      content="https://aravis-parapente.com/">
+
+<meta property="og:image"
+      content="https://aravis-parapente.com/image/aravis-parapente.jpg">
+
+<meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://aravis-parapente.com/">
+  <link
+  rel="alternate"
+  hreflang="fr"
+  href="https://aravis-parapente.com/"
+>
+
+<link
+  rel="alternate"
+  hreflang="en"
+  href="https://aravis-parapente.com/paragliding-la-clusaz.html"
+>
+
+<link
+  rel="alternate"
+  hreflang="x-default"
+  href="https://aravis-parapente.com/"
+>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS6K6Q3WMB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "G-LS6K6Q3WMB");
+  </script>
+
+  <!-- Données structurées SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsActivityLocation",
+    "@id": "https://aravis-parapente.com/#localbusiness",
+    "name": "Aravis Parapente",
+    "url": "https://aravis-parapente.com/",
+    "logo": "https://aravis-parapente.com/image/logo-aravis.jpg",
+    "image": "https://aravis-parapente.com/image/aravis-parapente.jpg",
+    "description": "Aravis Parapente propose des baptêmes de parapente biplace à La Clusaz et dans le massif des Aravis avec des moniteurs diplômés.",
+    "telephone": "+33688070472",
+    "priceRange": "€€",
+    "address": {
+      "@type": "PostalAddress",
+      "name": "S'Pub / Pizza Roma - Aravis Parapente",
+      "streetAddress": "91 Chemin de la Croix",
+      "addressLocality": "La Clusaz",
+      "postalCode": "74220",
+      "addressCountry": "FR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 45.905,
+      "longitude": 6.424
+    },
+    "areaServed": [
+      "La Clusaz",
+      "La Giettaz",
+      "Massif des Aravis",
+      "Haute-Savoie",
+      "Savoie"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "name": "Sam Porret",
+        "telephone": "+33688070472",
+        "contactType": "Réservation",
+        "availableLanguage": ["fr", "en"]
+      },
+      {
+        "@type": "ContactPoint",
+        "name": "Julien Wirtz",
+        "telephone": "+33682958542",
+        "contactType": "Réservation",
+        "availableLanguage": ["fr", "en"]
+      }
+    ],
+    "sameAs": [
+      "https://www.instagram.com/aravisparapente",
+      "https://g.page/r/CVukl9vLK1wyEBM"
+    ]
+  }
+  </script>
 </head>
-<body>
-<header class="hero">
-  <div class="top"><img src="assets/logo.png" alt="Aravis Parapente"><a href="/">← Le site</a></div>
-  <div class="in">
-    <h1>Le jeu de parapente des Aravis</h1>
-    <p>Pilote un biplace en 3D au-dessus de La Clusaz, des Aravis et du lac d'Annecy. Gratuit, sur ordinateur et sur téléphone.</p>
+
+<body id="top">
+
+  <header class="site-header accueil">
+    <nav class="site-nav" aria-label="Navigation principale">
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="menu-principal"
+      >
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span>Menu</span>
+      </button>
+
+      <div class="nav-links" id="menu-principal">
+        <a href="/" class="nav-btn" aria-current="page">Accueil</a>
+        <a href="bapteme-parapente-la-clusaz.html" class="nav-btn">Vols / Bon cadeau</a>
+        <a href="galerie.html" class="nav-btn">Galerie</a>
+        <a href="reservation.html" class="nav-btn">Réservation</a>
+        <a href="blog.html" class="nav-btn">Blog</a>
+        <a href="/jeu/" class="nav-btn">Jeu 3D</a>
+        <a
+  href="/paragliding-la-clusaz.html"
+  class="nav-btn"
+  lang="en"
+>
+  English
+</a>
+      </div>
+    </nav>
+
+    <div class="header-content">
+      <div class="header-box">
+        <h1>Parapente à La Clusaz : vols biplace été et hiver</h1>
+        <p>Survolez La Clusaz et le massif des Aravis à proximité de Saint jean de Sixt, le Grand Bornand, Manigod, Annecy, la Giettaz, accompagné par un moniteur diplômé. Aravis Parapente propose des baptêmes en parapente biplace pour tous les niveaux, en été comme en hiver, ainsi que des demi-journées découverte et des bons cadeaux.
+</p>
+        <a href="reservation.html" class="hero-btn">Réserver un vol</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <img
+      src="image/flyer2025.png"
+      alt="Flyer Aravis Parapente présentant les vols biplace"
+      class="fullwidth-image"
+      loading="lazy"
+    >
+
+    <section class="content-section">
+      <h2>Bienvenue chez Aravis Parapente</h2>
+      <p>
+        Envie d’un <strong>baptême de l’air en parapente à La Clusaz</strong> ?
+        Aravis Parapente vous propose des vols biplace au cœur des montagnes des
+        Aravis, entre sensations fortes et paysages exceptionnels.
+      </p>
+      <p>
+        Découvrez également nos <strong>bons cadeaux parapente</strong>, parfaits
+        pour offrir une expérience inoubliable dans les Alpes.
+      </p>
+    </section>
+
+    <section class="content-section">
+      <h2>Pourquoi choisir Aravis Parapente ?</h2>
+      <p>
+        Depuis La Clusaz, nous proposons des baptêmes de parapente accessibles
+        aux débutants. Vous volez avec un moniteur diplômé d’État, dans des
+        conditions de sécurité optimales.
+      </p>
+      <p>
+        Plusieurs formules sont disponibles, du premier vol tout en douceur à
+        l’expérience plus sportive. Les décollages offrent une vue exceptionnelle
+        sur La Clusaz, Le Grand-Bornand, la chaîne des Aravis et le Mont-Blanc.
+      </p>
+      <p>
+        Les vols sont accessibles aux adultes, aux adolescents et aux enfants
+        selon leur poids et les conditions météorologiques.
+      </p>
+    </section>
+
+    <section class="content-section">
+      <h2>Une expérience inoubliable dans les Aravis</h2>
+      <p>
+        Le parapente est l’une des plus belles activités à découvrir pendant vos
+        vacances en Haute-Savoie. En quelques pas, vous décollez en douceur pour
+        admirer les montagnes depuis le ciel.
+      </p>
+      <p>
+        Nous accueillons les visiteurs séjournant à La Clusaz, au Grand-Bornand,
+        à Manigod, à Thônes, à La Giettaz ou autour du lac d’Annecy.
+      </p>
+    </section>
+
+    <section id="reservation" class="content-section reservation-section">
+      <h2>Réservation et contact</h2>
+
+      <div class="contact-cards">
+        <a href="tel:+33688070472" class="contact-card">
+          <strong>Sam Porret</strong>
+          <span>06 88 07 04 72</span>
+        </a>
+
+        <a href="tel:+33682958542" class="contact-card">
+          <strong>Julien Wirtz</strong>
+          <span>06 82 95 85 42</span>
+        </a>
+      </div>
+
+      <p style="text-align:center; margin-top:1.25rem;">
+        <a href="reservation.html" class="hero-btn">Réserver un vol en ligne</a>
+      </p>
+    </section>
+
+    <section id="faq" class="content-section">
+      <h2>Questions fréquentes</h2>
+
+      <details>
+        <summary>Peut-on avoir le vertige ?</summary>
+        <p>
+          Le vertige est généralement lié au contact visuel avec le sol depuis
+          un point fixe. En parapente, cette sensation est habituellement absente.
+        </p>
+      </details>
+
+      <details>
+        <summary>À partir de quel âge peut-on voler ?</summary>
+        <p>
+          Les enfants peuvent voler à partir d’environ 20 kg, selon leur
+          motivation et les conditions météorologiques.
+        </p>
+      </details>
+
+      <details>
+        <summary>Combien dure un baptême ?</summary>
+        <p>
+          Selon la formule, le vol dure de quelques minutes à environ une heure.
+          Prévoyez entre une heure et une heure trente sur place.
+        </p>
+      </details>
+
+      <details>
+        <summary>Comment faut-il s’habiller ?</summary>
+        <p>
+          Prévoyez une tenue de sport, une veste adaptée à la saison et des
+          chaussures fermées.
+        </p>
+      </details>
+
+      <details>
+        <summary>Que se passe-t-il en cas de mauvais temps ?</summary>
+        <p>
+          Lorsque les conditions ne permettent pas de voler en sécurité, le vol
+          est reporté ou annulé.
+        </p>
+      </details>
+
+      <details>
+  <summary>Puis-je offrir un vol ?</summary>
+  <p>
+    Oui, vous pouvez offrir un baptême de parapente grâce à nos bons cadeaux,
+    disponibles toute l’année.
+    <a href="bapteme-parapente-la-clusaz.html">
+      Découvrir les bons cadeaux
+    </a>
+  </p>
+</details>
+      
+</section>
+    
+      <section id="partenaires" class="content-section partners-section">
+  <h2>Nos partenaires et liens utiles</h2>
+
+  <ul>
+    <li>
+      <a
+        href="https://www.laclusaz.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Office de tourisme de La Clusaz
+      </a>
+    </li>
+
+    <li>
+      <a
+        href="https://www.spub-laclusaz.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        S'Pub Pizza Roma
+      </a>
+    </li>
+
+    <li>
+      <a
+        href="https://federation.ffvl.fr/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Fédération Française de Vol Libre
+      </a>
+    </li>
+
+    
+  </ul>
+</section>
+
+<section class="avis-image-section">
+  <h2>Ils ont volé avec nous</h2>
+
+  <a
+    href="https://www.google.com/maps/search/?api=1&amp;query=Aravis%20Parapente%20Clusaz%20Vol%20biplace&amp;query_place_id=ChIJJc71GK7xi0cRW6SX28srXDI"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="avis-image-link"
+    aria-label="Voir les avis Google d’Aravis Parapente à La Clusaz"
+  >
+    <img
+      src="image/avis-google-aravis.png"
+      alt="Avis des clients d’Aravis Parapente à La Clusaz"
+      class="avis-image"
+      width="1491"
+      height="1055"
+      loading="lazy"
+    >
+  </a>
+
+  <p class="avis-google-text">
+    ⭐ <strong>Plus de 300 avis Google</strong>
+  </p>
+
+  <a
+    href="https://www.google.com/maps/search/?api=1&amp;query=Aravis%20Parapente%20Clusaz%20Vol%20biplace&amp;query_place_id=ChIJJc71GK7xi0cRW6SX28srXDI"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="avis-google-button"
+  >
+    Voir tous nos avis Google
+  </a>
+</section>
+    
+  </main>
+
+  <section class="section-localisation" aria-labelledby="localisation-title">
+    <div class="section-inner">
+      <h2 id="localisation-title">Nous trouver à La Clusaz</h2>
+
+      <div class="map-container">
+        <iframe
+          title="Localisation d'Aravis Parapente à La Clusaz"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2776.383415988334!2d6.42416230157471!3d45.903643557618786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478bf1ae18f5ce25%3A0x325c2bcbdb97a45b!2sAravis%20Parapente%20Clusaz%20Vol%20biplace!5e0!3m2!1sfr!2sfr!4v1710000000000!5m2!1sfr!2sfr"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>© Aravis Parapente — La Clusaz</p>
+    <p>
+      <a href="#top">Retour en haut</a>
+      ·
+      <a href="https://www.instagram.com/aravisparapente" target="_blank" rel="noopener noreferrer">
+        Instagram
+      </a>
+    </p>
+  </footer>
+
+  <div class="fixed-cta" aria-label="Actions rapides">
+    <a href="tel:+33688070472" class="call-btn">Appeler</a>
+    <a href="reservation.html" class="book-btn">Réserver</a>
   </div>
-</header>
-<main>
-  <div class="grid">
-    <div class="card"><span class="lv">Niveau 0 · Rookie</span><h2>Premier vol au Crêt du Merle</h2><p>Ton tout premier vol avec une petite voile d'école : quelques virages au-dessus de La Clusaz, puis l'approche et le posé au Cortibot.</p><a class="btn" href="premier-vol.html">Jouer</a></div>
-    <div class="card"><span class="lv">Niveau 1</span><h2>Vol performance · Tour de La Clusaz</h2><p>Du Crêt du Loup au Trou de la Mouche, la Tête du Danay, le Grand-Bornand et Beauregard, puis posé au Cortibot.</p><a class="btn" href="tour-la-clusaz.html">Jouer</a></div>
-    <div class="card"><span class="lv">Niveau 2</span><h2>Vol prestige · Grand Tour des Aravis</h2><p>Pointe Percée, le Lachat, Annecy et le Roc des Bœufs, puis retour au Cortibot : près de 90 km de cross.</p><a class="btn" href="grand-tour-aravis.html">Jouer</a></div>
-    <div class="card"><span class="lv">Niveau 3</span><h2>Méga triangle de Jojo</h2><p>Col des Aravis, Chamonix, Chambéry, Annecy… et retour à La Giettaz avant la fin de la journée.</p><a class="btn" href="mega-triangle.html">Jouer</a></div>
-    <div class="card"><span class="lv">Hiver · Speed riding</span><h2>Vol L'Aiglon à Beauregard</h2><p>Décollage à ski, petite voile rapide : slalome entre les drapeaux, évite sapins, pylônes et skieurs, et pose-toi sur le replat.</p><a class="btn" href="vol-aiglon.html">Jouer</a></div>
-    <div class="card"><span class="lv">Niveau Acro</span><h2>Vol acro au-dessus du lac d'Annecy</h2><p>Wing over, SAT, tumbling, hélico : 10 minutes de séance au-dessus du lac, puis posé à Doussard.</p><a class="btn" href="vol-acro.html">Jouer</a></div>
-  </div>
-  <div class="tips">
-    <h3>Pour bien jouer</h3>
-    <ul>
-      <li>Ordinateur : flèches du clavier. Téléphone : boutons à l'écran.</li>
-      <li>Jouer à plusieurs : bouton « En ligne » au menu de chaque niveau, puis partage le code de la partie (jusqu'à 4 joueurs, chacun sur son téléphone ou son ordinateur).</li>
-      <li>Attrape les cœurs d'Oriane en vol : altitude, vitesse ou secours en plus.</li>
-      <li>Si le jeu est lent sur ordinateur, réduis la fenêtre ou vérifie que l'accélération graphique du navigateur est activée.</li>
-    </ul>
-  </div>
-  <div class="don">
-    <p>💙 Soutiens ton sportif : <b>Oriane, ski alpin de compétition de haut niveau</b> (U16). 66 % du don est déductible des impôts.</p>
-    <a class="btn blue" href="https://www.soutienstonsportif.fr/s/KNpVGK" target="_blank" rel="noopener">Soutenir Oriane ↗</a>
-  </div>
-</main>
-<footer>© Aravis Parapente · <a href="/">aravis-parapente.com</a> · <a href="/reservation.html">Réserver un vol biplace</a></footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const navigation = document.querySelector(".site-nav");
+      const menuButton = document.querySelector(".menu-toggle");
+      const menuLinks = document.querySelectorAll(".nav-links a");
+
+      if (!navigation || !menuButton) {
+        return;
+      }
+
+      function closeMenu() {
+        navigation.classList.remove("is-open");
+        menuButton.setAttribute("aria-expanded", "false");
+      }
+
+      menuButton.addEventListener("click", function () {
+        const isOpen = navigation.classList.toggle("is-open");
+        menuButton.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      menuLinks.forEach(function (link) {
+        link.addEventListener("click", closeMenu);
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closeMenu();
+          menuButton.focus();
+        }
+      });
+
+      document.addEventListener("click", function (event) {
+        if (
+          navigation.classList.contains("is-open") &&
+          !navigation.contains(event.target)
+        ) {
+          closeMenu();
+        }
+      });
+
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 768) {
+          closeMenu();
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>
