@@ -282,6 +282,9 @@ table.res{width:100%;border-collapse:collapse;font-family:var(--num);font-varian
 .res-wrap{overflow-x:auto}
 table.res th{text-align:left;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;padding:6px 8px;border-bottom:2px solid var(--ink)}
 table.res td{padding:8px;border-bottom:1px solid var(--paper-2);white-space:nowrap}
+.res td.rdet{white-space:normal;min-width:220px;font-size:15px;line-height:1.45}.mres+.mres{margin-top:6px}
+.restop{margin-top:12px}.restop .btn{padding:10px 18px;font-size:19px}
+@media (max-width:640px){.res thead{display:none}.res tr{display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:10px;border-bottom:1px solid var(--paper-2);padding:6px 0}.res td{border:0;padding:4px 2px}.res td.rdet{grid-column:1/-1;min-width:0;white-space:normal}.res-wrap{overflow-x:visible}}
 table.res td.big{font-size:26px;font-weight:700}
 .win{display:inline-block;background:var(--sun);border-radius:5px;padding:1px 7px;font-size:13px;font-weight:700;margin-left:6px}
 #loading{position:fixed;inset:0;z-index:90;display:grid;place-items:center;background:#fff;color:#16181b;font-family:var(--num);font-size:20px;font-weight:600;letter-spacing:.04em;text-align:center;padding:16px}
@@ -502,6 +505,7 @@ body[data-layout=solo-compact] .hud.compact .pip>div{white-space:normal;font-siz
     <div>
       <div class="eyebrow" id="resEyebrow">Posé au Cortibot</div>
       <h1 id="resTitle" style="font-size:clamp(40px,8vw,76px)">Bravo</h1>
+      <div class="play restop"><button class="btn" id="again2">Rejouer</button><button class="btn alt" id="toMenu2">Menu</button></div>
     </div>
     <div class="res-row"><div class="res-wrap"><table class="res" id="resTable"></table></div>
     <a class="resv" href="https://aravis-parapente.com/reservation.html" target="_blank" rel="noopener"><img src="assets/logo.png" alt="Aravis Parapente"><b>Réserve ton vrai vol biplace</b><span>avec Aravis Parapente</span><i>Réserver ↗</i></a></div>
@@ -1618,12 +1622,20 @@ function recSend(){const box=document.getElementById('recBox');if(box.hidden||bo
   fetch('https://ntfy.sh/'+REC_TOPIC,{method:'POST',body:line,headers:{'Title':'Nouveau record : '+nm,'Tags':'trophy'}}).catch(()=>{});
   const btn=document.getElementById('recSend');btn.disabled=true;btn.textContent='Publié ✓'}
 document.getElementById('recSend').addEventListener('click',recSend);
+function logSum(log){const out=[];let cur=null,man=[],mTot=0,mN=0;const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  const key=l=>/^Porte \d+/.test(l[0])?'Portes':/^Balise \d+/.test(l[0])&&!/test/.test(l[0])?'Balises':l[0].replace(/\s*\(\d+\s*m\)/,'');
+  const flush=()=>{if(cur)out.push(cur);cur=null};const groups=[];let g={};const order=[];
+  const parts=[[]];log.forEach(l=>{if(/^— Manche/.test(l[0]))parts.push([]);else parts[parts.length-1].push(l)});
+  const fmtPart=L=>{const m=new Map();L.forEach(l=>{if(!l[1]&&!/record|Record/.test(l[0]))return;const k=key(l);const e=m.get(k)||{n:0,v:0,lab:k};e.n++;e.v+=l[1];m.set(k,e)});
+    return [...m.values()].map(e=>`${esc(e.lab)}${e.n>1?' ×'+e.n:''} <b>${e.v>0?'+':''}${e.v}</b>`).join(' · ')};
+  if(parts.length>1)return parts.map((L,i)=>{const s=L.reduce((a,l)=>a+l[1],0);return `<div class="mres"><b>Manche ${i+1} : ${s} pts</b><br>${fmtPart(L)}</div>`}).join('');
+  return fmtPart(parts[0])}
 function showResults(){const done=players.filter(p=>p.finished).sort((a,b)=>b.score-a.score);saveBest(done);
   document.getElementById('resEyebrow').textContent=done.length?(done[0].route==='acro'?'Posé à Doussard':(LV.crossFinish?'Arrivée ':'Posé ')+(LV.lzAt||'au Cortibot')):(players.some(p=>p.gameover)?'Game over : l\'hélico est venu te chercher':players.some(p=>p.night)?'La nuit est tombée':'Vol interrompu');
   document.getElementById('resTitle').textContent=numPlayers>1&&done.length?`Victoire J${done[0].id+1}`:done.length?done[0].score+' points':'Abandon';
   if(NET.on){const L=netResultsRows(),me=L.find(x=>x.isMe),rank=L.indexOf(me)+1;document.getElementById('resTitle').textContent=me.score+' points · '+rank+(rank===1?'er':'e')+' / '+L.length;
-    document.getElementById('resTable').innerHTML='<thead><tr><th>Pilote</th><th>Points</th><th>Temps de vol</th><th>Détail</th></tr></thead><tbody>'+L.map((x,ri)=>`<tr><td><span class="tag" style="background:${netCol(x.r.slot).col};color:#fff;padding:2px 7px;border-radius:5px;font-family:var(--display);font-weight:900">${netEsc(x.r.name)}</span>${ri===0&&!x.flying?'<span class="win">1er</span>':''}</td><td class="big">${x.score}</td><td>${x.ft!=null?fmt(x.ft):(x.flying&&!x.isMe?'en vol…':'—')}</td><td style="white-space:normal;min-width:220px">${x.log?x.log.map(l=>`${l[0]} <b>${l[1]>0?'+':''}${l[1]}</b>`).join(' · '):(x.flying?'Encore en vol':(x.fin?'Posé':'Vol terminé'))}</td></tr>`).join('')+'</tbody>'}
-  else{const rows=players.slice().sort((a,b)=>b.score-a.score).map((p,ri)=>`<tr><td><span class="tag" style="background:${STYLES[p.id].col};color:#fff;padding:2px 7px;border-radius:5px;font-family:var(--display);font-weight:900">J${p.id+1}</span>${ri===0&&numPlayers>1&&p.finished?'<span class="win">1er</span>':''}</td><td class="big">${p.score}</td><td>${p.finished?fmt(p.ftime):'—'}</td><td style="white-space:normal;min-width:220px">${p.log.map(l=>`${l[0]} <b>${l[1]>0?'+':''}${l[1]}</b>`).join(' · ')}</td></tr>`).join('');
+    document.getElementById('resTable').innerHTML='<thead><tr><th>Pilote</th><th>Points</th><th>Temps de vol</th><th>Détail</th></tr></thead><tbody>'+L.map((x,ri)=>`<tr><td><span class="tag" style="background:${netCol(x.r.slot).col};color:#fff;padding:2px 7px;border-radius:5px;font-family:var(--display);font-weight:900">${netEsc(x.r.name)}</span>${ri===0&&!x.flying?'<span class="win">1er</span>':''}</td><td class="big">${x.score}</td><td>${x.ft!=null?fmt(x.ft):(x.flying&&!x.isMe?'en vol…':'—')}</td><td class="rdet">${x.log?logSum(x.log):(x.flying?'Encore en vol':(x.fin?'Posé':'Vol terminé'))}</td></tr>`).join('')+'</tbody>'}
+  else{const rows=players.slice().sort((a,b)=>b.score-a.score).map((p,ri)=>`<tr><td><span class="tag" style="background:${STYLES[p.id].col};color:#fff;padding:2px 7px;border-radius:5px;font-family:var(--display);font-weight:900">J${p.id+1}</span>${ri===0&&numPlayers>1&&p.finished?'<span class="win">1er</span>':''}</td><td class="big">${p.score}</td><td>${p.finished?fmt(p.ftime):'—'}</td><td class="rdet">${logSum(p.log)}</td></tr>`).join('');
   document.getElementById('resTable').innerHTML=`<thead><tr><th>Pilote</th><th>Points</th><th>Temps de vol</th><th>Détail</th></tr></thead><tbody>${rows}</tbody>`}
   {const n=players.reduce((a,p)=>a+(p.heartsN||0),0);document.getElementById('donTxt').innerHTML=(n?`💙 Tu as attrapé <b>${n} cœur${n>1?'s':''} d'Oriane</b> !`:`💙 Pas de cœur d'Oriane cette fois…`)+`<br>Soutiens ton sportif : <b>Oriane, ski alpin de compétition de haut niveau</b> (U16). 66 % du don est déductible des impôts.`}
   results.hidden=false;document.getElementById('touch').hidden=true;renderBest();if(NET.on)netRank();recCheck()}
@@ -1871,7 +1883,7 @@ function pickDay(n){const el=document.getElementById('dayPick'),list=el.querySel
   menu.hidden=true;el.hidden=false}
 document.getElementById('dayBack').onclick=()=>{document.getElementById('dayPick').hidden=true;menu.hidden=false};
 document.getElementById('again').addEventListener('click',()=>{recSend();if(NET.on){results.hidden=true;toMenu();netOpen()}else go(numPlayers)});
-document.getElementById('toMenu').addEventListener('click',toMenu);
+document.getElementById('toMenu').addEventListener('click',toMenu);document.getElementById('toMenu2').addEventListener('click',toMenu);document.getElementById('again2').addEventListener('click',()=>document.getElementById('again').click());
 addEventListener('keydown',e=>{if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;if(!document.body.classList.contains('kb'))document.body.classList.add('kb');if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space'].includes(e.code)&&menu.hidden&&results.hidden)e.preventDefault();KEYS.add(e.code);
   if((e.code==='Escape'||e.code==='KeyP')&&mode==='race'){setPause(!paused);return}
   if(e.code==='Escape'&&(mode==='countdown'||mode==='intro'||mode==='done')){players.forEach(p=>{if(!p.finished)p.dnf=true});toMenu()}});
