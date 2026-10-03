@@ -1,0 +1,4 @@
+# Records du jeu de parapente Aravis Parapente
+# Pour ajouter un record : colle ici, sur une nouvelle ligne, le texte reçu dans la notification ntfy.
+# Format : date | niveau | points | prénom
+# Les lignes qui commencent par # sont ignorées.

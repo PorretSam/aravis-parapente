@@ -218,6 +218,8 @@ body.storm #rainfx{z-index:41}   /* la pluie reste devant la vidéo de l'hélico
 .hud .donate a{flex:none;background:#1e7bff;color:#fff;text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px}
 .donbox{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:#e8f1ff;border:2px solid #b9d4ff;border-radius:12px;padding:12px 14px;font-size:15px;color:#16181b}
 .donbox .btn{flex:none}
+.recbox{display:grid;gap:8px;background:#fff6e0;border:2px solid #ffc23a;border-radius:12px;padding:12px 14px;color:#16181b}.recbox b{font:900 22px var(--display);text-transform:uppercase}.recbox small{color:var(--ink-soft)}
+.recrow{display:flex;gap:10px}.recrow input{flex:1;min-width:0;font:800 18px var(--num);padding:9px 12px;border:2px solid #e3c98a;border-radius:10px}.recrow .btn{padding:10px 18px;font-size:20px}
 .lvhead{display:flex;align-items:center;justify-content:space-between;gap:clamp(12px,3vw,28px)}
 .lvlogo{width:clamp(86px,19vw,170px);height:auto;flex:none}
 .jojo{position:absolute;inset:0;z-index:48;display:grid;place-items:center;background:rgba(12,24,40,.55);opacity:0;transition:opacity .5s;pointer-events:none;padding:12px}
@@ -502,6 +504,9 @@ body[data-layout=solo-compact] .hud.compact .pip>div{white-space:normal;font-siz
     </div>
     <div class="res-row"><div class="res-wrap"><table class="res" id="resTable"></table></div>
     <a class="resv" href="https://aravis-parapente.com/reservation.html" target="_blank" rel="noopener"><img src="assets/logo.png" alt="Aravis Parapente"><b>Réserve ton vrai vol biplace</b><span>avec Aravis Parapente</span><i>Réserver ↗</i></a></div>
+    <div class="recbox" id="recBox" hidden><b>🏆 Nouveau record du jeu !</b><span id="recTxt"></span>
+      <div class="recrow"><input id="recName" maxlength="14" placeholder="Ton prénom (facultatif)" autocomplete="nickname"><button class="btn" id="recSend">Publier</button></div>
+      <small>Le meilleur score de chaque niveau est publié sur aravis-parapente.com (prénom ou « Anonyme »).</small></div>
     <div class="donbox" id="donBox"><span id="donTxt"></span><a class="btn" href="https://www.soutienstonsportif.fr/s/KNpVGK" target="_blank" rel="noopener" style="text-decoration:none;background:#1e7bff;box-shadow:0 6px 0 #1459c4">Soutenir Oriane ↗</a></div>
     <div class="play">
       <button class="btn" id="again">Rejouer</button>
@@ -1558,7 +1563,7 @@ const menu=document.getElementById('menu'),results=document.getElementById('resu
 if(coarse){document.getElementById('play2').disabled=true;document.getElementById('touchNote').hidden=false}
 let raceSeed=1;
 const SAVEK='vol-'+LV.id+'-'+(LV.acroOnly?'acro':'n');
-function saveFlight(){if(mode!=='race'||numPlayers!==1)return;const p=players[0];if(!p||p.finished||p.gameover||p.dnf){clearFlight();return}
+function saveFlight(){if(mode!=='race'||numPlayers!==1)return;if(typeof NET!=='undefined'&&NET.on){clearFlight();return}const p=players[0];if(!p||p.finished||p.gameover||p.dnf){clearFlight();return}
   const d={t:Date.now(),x:p.pos.x,y:p.pos.y,z:p.pos.z,h:p.h,next:p.next,score:p.score,log:p.log,splits:p.splits,simT,route:p.route||null,acroDone:!!p.acroDone,acroScore:p.acroScore||0,day:WX.dayI,jojo:!!p.jojoCafe,beau:!!p.sawBeau,conf:!!p.sawConfins,view:p.view};
   try{sessionStorage.setItem(SAVEK,JSON.stringify(d))}catch(e){}}
 function clearFlight(){try{sessionStorage.removeItem(SAVEK)}catch(e){}}
@@ -1594,6 +1599,24 @@ function startRace(n,jump){W.warnNight=0;initAudio();if(actx&&actx.state==='susp
   menu.hidden=true;results.hidden=true;document.getElementById('minimap').hidden=false;muteBtn.hidden=false;
   document.getElementById('touch').hidden=!(coarse&&n===1);layout()}
 function checkEnd(){if(LV.ski&&SKI.manche===1)return;if(players.every(p=>p.finished||p.dnf)){clearFlight();setTimeout(showResults,numPlayers===1?(LV.landVid?5000:4200):2200);mode='done'}}
+// ===== Records du jeu : si le meilleur score publié est battu, notification ntfy à Aravis Parapente =====
+const REC_TOPIC='aravis-records-f6b2e1d696',REC_LV={0:'Premier vol',1:'Tour de La Clusaz',2:'Grand Tour des Aravis',3:'Méga triangle de Jojo',4:'Vol acro',5:"Vol L'Aiglon"};
+let REC=null;
+function recBestLocal(){try{return +localStorage.getItem('recBest-'+LV.id)||0}catch(_){return 0}}
+function recLoad(){if(REC!=null)return Promise.resolve(REC);return fetch('records.txt',{cache:'no-store'}).then(r=>r.ok?r.text():'').catch(()=>'').then(tx=>{let b=0;const nm=REC_LV[LV.id];tx.split('\n').forEach(l=>{if(/^\s*#/.test(l))return;const c=l.split('|').map(s=>s.trim());if(c.length>=4&&c[1]===nm)b=Math.max(b,+c[2].replace(/\D/g,'')||0)});REC=b;return b})}
+recLoad();
+function recCheck(){const box=document.getElementById('recBox');box.hidden=true;if(LV.test&&!LV.net)return;const done=players.filter(p=>p.finished);if(!done.length)return;const best=done.reduce((a,p)=>p.score>a.score?p:a);
+  recLoad().then(pub=>{const ref=Math.max(pub||0,recBestLocal());if(best.score<=ref)return;
+    const nm=REC_LV[LV.id]||'Jeu';document.getElementById('recTxt').textContent=nm+' · '+best.score+' points'+(ref?' (ancien record : '+ref+')':'');
+    const inp=document.getElementById('recName');try{inp.value=(typeof NET!=='undefined'&&NET.on&&NET.name)||localStorage.getItem('netName')||''}catch(_){}
+    box.hidden=false;box.dataset.sent='';box.dataset.score=best.score;const btn=document.getElementById('recSend');btn.disabled=false;btn.textContent='Publier'})}
+function recSend(){const box=document.getElementById('recBox');if(box.hidden||box.dataset.sent)return;box.dataset.sent='1';
+  const name=(document.getElementById('recName').value||'').replace(/[^\p{L}\p{N} '\-]/gu,'').trim().slice(0,14)||'Anonyme',sc=+box.dataset.score,d=new Date(),date=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  const nm=REC_LV[LV.id]||'Jeu',line=date+' | '+nm+' | '+sc+' | '+name;
+  try{localStorage.setItem('recBest-'+LV.id,String(sc))}catch(_){}REC=Math.max(REC||0,sc);
+  fetch('https://ntfy.sh/'+REC_TOPIC,{method:'POST',body:line,headers:{'Title':'Nouveau record : '+nm,'Tags':'trophy'}}).catch(()=>{});
+  const btn=document.getElementById('recSend');btn.disabled=true;btn.textContent='Publié ✓'}
+document.getElementById('recSend').addEventListener('click',recSend);
 function showResults(){const done=players.filter(p=>p.finished).sort((a,b)=>b.score-a.score);saveBest(done);
   document.getElementById('resEyebrow').textContent=done.length?(done[0].route==='acro'?'Posé à Doussard':(LV.crossFinish?'Arrivée ':'Posé ')+(LV.lzAt||'au Cortibot')):(players.some(p=>p.gameover)?'Game over : l\'hélico est venu te chercher':players.some(p=>p.night)?'La nuit est tombée':'Vol interrompu');
   document.getElementById('resTitle').textContent=numPlayers>1&&done.length?`Victoire J${done[0].id+1}`:done.length?done[0].score+' points':'Abandon';
@@ -1602,8 +1625,8 @@ function showResults(){const done=players.filter(p=>p.finished).sort((a,b)=>b.sc
   else{const rows=players.slice().sort((a,b)=>b.score-a.score).map((p,ri)=>`<tr><td><span class="tag" style="background:${STYLES[p.id].col};color:#fff;padding:2px 7px;border-radius:5px;font-family:var(--display);font-weight:900">J${p.id+1}</span>${ri===0&&numPlayers>1&&p.finished?'<span class="win">1er</span>':''}</td><td class="big">${p.score}</td><td>${p.finished?fmt(p.ftime):'—'}</td><td style="white-space:normal;min-width:220px">${p.log.map(l=>`${l[0]} <b>${l[1]>0?'+':''}${l[1]}</b>`).join(' · ')}</td></tr>`).join('');
   document.getElementById('resTable').innerHTML=`<thead><tr><th>Pilote</th><th>Points</th><th>Temps de vol</th><th>Détail</th></tr></thead><tbody>${rows}</tbody>`}
   {const n=players.reduce((a,p)=>a+(p.heartsN||0),0);document.getElementById('donTxt').innerHTML=(n?`💙 Tu as attrapé <b>${n} cœur${n>1?'s':''} d'Oriane</b> !`:`💙 Pas de cœur d'Oriane cette fois…`)+`<br>Soutiens ton sportif : <b>Oriane, ski alpin de compétition de haut niveau</b> (U16). 66 % du don est déductible des impôts.`}
-  results.hidden=false;document.getElementById('touch').hidden=true;renderBest();if(NET.on)netRank()}
-function toMenu(){clearFlight();applyWX({});mode='menu';menu.hidden=false;results.hidden=true;cd.hidden=true;document.getElementById('touch').hidden=true;muteBtn.hidden=true;
+  results.hidden=false;document.getElementById('touch').hidden=true;renderBest();if(NET.on)netRank();recCheck()}
+function toMenu(){recSend();clearFlight();applyWX({});mode='menu';menu.hidden=false;results.hidden=true;cd.hidden=true;document.getElementById('touch').hidden=true;muteBtn.hidden=true;
   players.forEach(p=>p.hud.el.style.display='none');document.getElementById('minimap').hidden=true;numPlayers=1;layout();if(typeof netBackBtn==='function')netBackBtn()}
 const BKEY='tour-la-clusaz-best-v2';
 function loadBest(){try{return JSON.parse(localStorage.getItem(BKEY)||'[]')}catch(e){return []}}
@@ -1632,7 +1655,7 @@ function netStatus(t,err){const s=netEl('netStatus');s.textContent=t||'';s.class
 function netView(v){['netStart','netHostV','netGuestV'].forEach(id=>netEl(id).hidden=id!==v)}
 function netTlIdx(){if(!LV.test)return null;try{return +(sessionStorage.getItem('testLv')||0)}catch(_){return 0}}
 // session mémorisée : permet de revenir dans la partie après une coupure ou un rechargement
-function netSave(){if(!NET.on)return;try{localStorage.setItem('netSess',JSON.stringify({code:NET.code,name:NET.name,host:NET.host,lv:LV.id,t:Date.now()}))}catch(_){}}
+function netSave(){if(!NET.on)return;try{localStorage.setItem('netSess',JSON.stringify({code:NET.code,name:NET.name,host:NET.host,lv:LV.id,t:Date.now(),r:(mode==='race'||mode==='intro')&&NET.seed!=null,sd:NET.seed,dy:NET.day,mc:LV.ski&&typeof SKI!=='undefined'?SKI.manche:0}))}catch(_){}}
 function netSess(){try{const s=JSON.parse(localStorage.getItem('netSess')||'null');if(s&&s.lv===LV.id&&Date.now()-s.t<30*60000)return s}catch(_){}return null}
 function netForget(){try{localStorage.removeItem('netSess')}catch(_){}}
 function netBackBtn(){const b=netEl('playBack');if(!b)return;const s=!NET.on&&(LV.net||LV.test)?netSess():null;b.hidden=!s;if(s)b.textContent='Revenir dans la partie '+s.code}
@@ -1699,7 +1722,7 @@ function netRecv(P,m){
         if(s==null){netSendTo(P,{t:'full'});return}
         r={slot:s,name,uid};NET.roster.push(r)}
       P.slot=r.slot;P.name=name;P.uid=uid;
-      netSendTo(P,{t:'welcome',slot:r.slot,roster:NET.roster,race:NET.racing?{seed:NET.seed,day:NET.day}:null,fin:NET.fin});netRosterOut();
+      netSendTo(P,{t:'welcome',slot:r.slot,roster:NET.roster,race:NET.racing?{seed:NET.seed,day:NET.day,mc:LV.ski?SKI.manche:0}:null,fin:NET.fin});netRosterOut();
       netStatus(name+(back?' est revenu dans la partie':' a rejoint la partie'));if(back&&players[0]&&mode==='race')showMsg(players[0],netEsc(name)+' est de retour',1.6)}
     else if(m.t==='s'&&P.slot!=null){m.k=P.slot;netGhostState(m);netBroadcast(m,P)}
     else if(m.t==='end'&&P.slot!=null){m.k=P.slot;netEnd(m);netBroadcast(m,P)}}
@@ -1709,7 +1732,7 @@ function netRecvGuest(m){{
       netEl('netGCode').textContent=NET.code;
       if(mode==='race'||mode==='intro'){if(wasLost&&players[0])showMsg(players[0],'De retour dans la partie',1.6)}
       else if(mode==='done'){}
-      else if(m.race){netGo(m.race.seed,m.race.day,true);Object.assign(NET.fin,m.fin||{})}
+      else if(m.race){netGo(m.race.seed,m.race.day,true,m.race.mc);Object.assign(NET.fin,m.fin||{})}
       else if(NET.srv&&NET.org){netEl('netHCode').textContent=NET.code;netView('netHostV');netStatus('Donne ce code à tes amis. Lance le vol quand tout le monde est là.');netRenderLobby()}
       else{netView('netGuestV');netStatus('Connecté ! En attente du départ…');netRenderLobby()}}
     else if(m.t==='roster'){NET.roster=m.roster;netRenderLobby();Object.keys(NET.ghosts).forEach(k=>{if(!m.roster.some(r=>r.slot===+k&&!r.off))netGhostDel(+k)})}
@@ -1758,16 +1781,17 @@ async function netJoin(code){const n=netName();if(!n)return;code=String(code||ne
   netReset(true);NET.name=n;NET.code=code;netEl('netJoin').disabled=true;netStatus('Connexion à la partie '+code+'…');
   if(NET.srv){const r=await srvOpen(code);netEl('netJoin').disabled=false;if(r==='nogame'){netStatus('Partie introuvable : vérifie le code.',true);netReset(false)}else if(r==='net'){netStatus('Serveur de jeu injoignable. Vérifie ta connexion internet.',true);netReset(false)}return}
   if(!await netConnectGuest(code)){netStatus('Connexion au serveur impossible. Vérifie ta connexion internet.',true);netEl('netJoin').disabled=false;netReset(true);return}
-  setTimeout(()=>{if(!NET.on&&!NET.host&&NET.code===code&&NET.ws){netStatus('Pas de réponse : vérifie le code, ou le réseau bloque la connexion directe (4G d\'entreprise, Wi-Fi public…).',true);netReset(false)}},15000)}
+  setTimeout(()=>{if(!NET.on&&!NET.host&&NET.code===code&&NET.ws){netStatus('Pas de réponse : vérifie le code, ou le réseau bloque la connexion directe (4G d\'entreprise, Wi-Fi public…).',true);netReset(false)}},25000)}
 // « Revenir dans la partie » : même code, même prénom
 async function netComeBack(){const s=netSess();if(!s)return;netOpen();netEl('netName').value=s.name;
-  if(s.host&&!NET.srv){NET.name=s.name;netStatus('Réouverture de la partie '+s.code+'…');for(let a=0;a<6;a++){try{await netHostOpen(s.code,s.name);if(mode==='race'||mode==='intro'){NET.racing=true;NET.seed=raceSeed;NET.day=WX.dayI||0;netEl('netOv').hidden=true}return}catch(e){if(e!=='taken'){netStatus('Connexion au serveur impossible. Vérifie ta connexion internet.',true);netReset(true);return}await new Promise(r=>setTimeout(r,5000))}}netStatus('La partie n\'a pas pu être rouverte : crée une nouvelle partie.',true);netReset(false)}
+  if(s.host&&!NET.srv){NET.name=s.name;netStatus('Réouverture de la partie '+s.code+'…');for(let a=0;a<6;a++){try{await netHostOpen(s.code,s.name);if(mode==='race'||mode==='intro'){NET.racing=true;NET.seed=raceSeed;NET.day=WX.dayI||0;netEl('netOv').hidden=true}else if(s.r&&s.sd!=null){NET.racing=true;netGo(s.sd,s.dy||0,true,s.mc)}return}catch(e){if(e!=='taken'){netStatus('Connexion au serveur impossible. Vérifie ta connexion internet.',true);netReset(true);return}await new Promise(r=>setTimeout(r,5000))}}netStatus('La partie n\'a pas pu être rouverte : crée une nouvelle partie.',true);netReset(false)}
   else netJoin(s.code)}
 function netLaunch(){if(NET.srv){if(NET.org)srvSend({t:'start',day:LV.days?Math.floor(Math.random()*LV.days.length):0});return}if(!NET.host)return;NET.seed=(Date.now()%100000)|0;NET.day=LV.days?Math.floor(Math.random()*LV.days.length):0;NET.racing=true;netBroadcast({t:'start',seed:NET.seed,day:NET.day});netGo(NET.seed,NET.day)}
-function netGo(seed,day,late){NET.seed=seed;NET.day=day;NET.sentEnd=false;NET.fin={};Object.values(NET.ghosts).forEach(G=>{G.fin=false;G.score=0;G.next=0});
+function netGo(seed,day,late,mc){NET.seed=seed;NET.day=day;NET.sentEnd=false;NET.fin={};Object.values(NET.ghosts).forEach(G=>{G.fin=false;G.score=0;G.next=0});
   netEl('netOv').hidden=true;
   if(LV.days&&LV.days[day]){applyWX(LV.days[day].wx);WX.dayI=day}
   startRace(1);if(LV.acroOnly&&ACRO){const w=setInterval(()=>{if(mode==='race'&&players.length){clearInterval(w);players.forEach(p=>goAcro(p,'Vol acro'))}},200)}
+  if(late&&LV.ski&&mc===2)setTimeout(()=>{if(SKI.manche===1)skiNextManche()},300);
   if(late&&players[0])setTimeout(()=>{if(players[0])showMsg(players[0],'Tu rejoins le vol en cours<small>Départ du déco · les autres sont déjà en l\'air</small>',3)},400);
   netEl('netRank').hidden=false;netRank()}
 function netEnd(m){if(LV.ski&&m.mc&&m.mc!==SKI.manche)return;const had=NET.fin[m.k];NET.fin[m.k]={score:m.sc,ft:m.ft,ok:m.ok,mc:m.mc};if(had)return;const G=NET.ghosts[m.k];if(G){G.fin=true;G.score=m.sc}
@@ -1823,8 +1847,9 @@ netEl('netJoin').addEventListener('click',()=>netJoin());
 netEl('netCode').addEventListener('keydown',e=>{if(e.key==='Enter')netJoin()});
 netEl('netLaunch').addEventListener('click',netLaunch);
 ['netBack','netQuitH','netQuitG'].forEach(id=>netEl(id).addEventListener('click',()=>{if(id!=='netBack'){netReset(false);netForget()}netEl('netOv').hidden=true;menu.hidden=false;netBackBtn()}));
-addEventListener('beforeunload',()=>{netSave();try{NET.ws&&NET.ws.close()}catch(_){}try{NET.sock&&NET.sock.close()}catch(_){}});
+addEventListener('beforeunload',()=>{recSend();netSave();try{NET.ws&&NET.ws.close()}catch(_){}try{NET.sock&&NET.sock.close()}catch(_){}});
 netBackBtn();
+{const s=(LV.net||LV.test)?netSess():null;if(s&&s.r&&Date.now()-s.t<180000){const w=setInterval(()=>{if(mode==='menu'&&!menu.hidden){clearInterval(w);netComeBack()}},300)}}
 {const h=location.hash.match(/join=(\d{4})/);if(h&&(LV.net||LV.test)){history.replaceState(null,'',location.pathname+location.search);const w=setInterval(()=>{if(mode==='menu'&&!menu.hidden){clearInterval(w);netOpen();netEl('netCode').value=h[1];if(netEl('netName').value)netJoin(h[1])}},300)}}
 
 const WXI={
@@ -1844,7 +1869,7 @@ function pickDay(n){const el=document.getElementById('dayPick'),list=el.querySel
   list.querySelectorAll('.dday').forEach(b=>b.onclick=()=>{const d=LV.days[+b.dataset.i];el.hidden=true;applyWX(d.wx);WX.dayI=+b.dataset.i;startRace(n);players.forEach(p=>showMsg(p,d.day+' '+d.date+'<small>'+d.msg+'</small>',3.5))});
   menu.hidden=true;el.hidden=false}
 document.getElementById('dayBack').onclick=()=>{document.getElementById('dayPick').hidden=true;menu.hidden=false};
-document.getElementById('again').addEventListener('click',()=>{if(NET.on){results.hidden=true;toMenu();netOpen()}else go(numPlayers)});
+document.getElementById('again').addEventListener('click',()=>{recSend();if(NET.on){results.hidden=true;toMenu();netOpen()}else go(numPlayers)});
 document.getElementById('toMenu').addEventListener('click',toMenu);
 addEventListener('keydown',e=>{if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;if(!document.body.classList.contains('kb'))document.body.classList.add('kb');if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space'].includes(e.code)&&menu.hidden&&results.hidden)e.preventDefault();KEYS.add(e.code);
   if((e.code==='Escape'||e.code==='KeyP')&&mode==='race'){setPause(!paused);return}
@@ -1856,7 +1881,7 @@ document.querySelectorAll('#touch button').forEach(b=>{const k=b.dataset.k;const
 const menuCam=new THREE.PerspectiveCamera(55,1,1,200000);
 function menuFly(t){const a=t*.02,cx=2.2*KM,cz=-.6*KM;menuCam.position.set(cx+Math.sin(a)*5200,2900,cz+Math.cos(a)*5200);menuCam.lookAt(cx,1500,cz);menuCam.aspect=innerWidth/innerHeight;menuCam.updateProjectionMatrix()}
 
-let last=performance.now(),frameN=0,prAcc=0,prN=0,PR=Math.min(devicePixelRatio||1,coarse?1:1.25),PRMAX=PR;renderer.setPixelRatio(PR);
+let last=performance.now(),frameN=0,prAcc=0,prN=0,PR=Math.min(devicePixelRatio||1,coarse?(LV.ski?.8:1):1.25),PRMAX=PR;renderer.setPixelRatio(PR);
 // carte graphique non utilisée (rendu logiciel) : on baisse la résolution pour rester fluide
 try{const gl=renderer.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info'),rn=ext?String(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL)):'';if(/SwiftShader|Basic Render|llvmpipe|softpipe|Software/i.test(rn)){PR=PRMAX=.55;renderer.setPixelRatio(PR);window.__lowGfx=rn}}catch(_){}
 function frame(now){if(paused){last=now;requestAnimationFrame(frame);return}const rdt=(now-last)/1000;const dt=Math.min(.05,rdt);last=now;time+=dt;
