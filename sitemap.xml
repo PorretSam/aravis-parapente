@@ -92,4 +92,10 @@
     <priority>0.40</priority>
   </url>
 
+  <url>
+    <loc>https://aravis-parapente.com/jeu/records.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <priority>0.40</priority>
+  </url>
+
 </urlset>
