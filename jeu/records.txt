@@ -20,3 +20,5 @@ Sat Oct 03 23:33:16 GMT+02:00 2026
 Sun Oct 04 09:12:46 GMT+02:00 2026
 2026-10-04 | Grand Tour des Aravis | 1300 | Anonyme
 Sun Oct 04 15:26:09 GMT+02:00 2026
+2026-10-04 | Vol L'Aiglon | 2688 | Anonyme
+Sun Oct 04 23:26:26 GMT+02:00 2026
