@@ -22,3 +22,5 @@ Sun Oct 04 09:12:46 GMT+02:00 2026
 Sun Oct 04 15:26:09 GMT+02:00 2026
 2026-10-04 | Vol L'Aiglon | 2688 | Anonyme
 Sun Oct 04 23:26:26 GMT+02:00 2026
+2026-10-05 | Tour de La Clusaz | 1570 | Florent
+Mon Oct 05 21:35:48 GMT+02:00 2026
