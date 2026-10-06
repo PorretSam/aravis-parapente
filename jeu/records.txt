@@ -24,3 +24,5 @@ Sun Oct 04 15:26:09 GMT+02:00 2026
 Sun Oct 04 23:26:26 GMT+02:00 2026
 2026-10-05 | Tour de La Clusaz | 1570 | Florent
 Mon Oct 05 21:35:48 GMT+02:00 2026
+2026-10-06 | Grand Tour des Aravis | 1952 | Sandy
+Tue Oct 06 07:50:58 GMT+02:00 2026
