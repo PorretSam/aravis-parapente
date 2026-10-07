@@ -1,28 +1,18 @@
 # Records du jeu de parapente Aravis Parapente
-# Pour ajouter un record : colle ici, sur une nouvelle ligne, le texte reçu dans la notification ntfy.
+# Pour ajouter un score : colle ici, sur une nouvelle ligne, le texte reçu dans la notification ntfy.
 # Format : date | niveau | points | prénom
-# Les lignes qui commencent par # sont ignorées.
+# Les lignes qui commencent par # sont ignorées. La page affiche les 10 meilleurs de chaque niveau.
+# « Vol acro ancienne version » = scores faits avant la nouvelle acro du 05/10 (affichés à part).
 2026-10-03 | Premier vol | 957 | Sam
-Sat Oct 03 18:49:48 GMT+02:00 2026
-2026-10-03 | Vol acro | 7410 | Gab
-Sat Oct 03 19:03:26 GMT+02:00 2026
+2026-10-03 | Vol acro ancienne version | 7410 | Gab
 2026-10-03 | Tour de La Clusaz | 1088 | Sam concepteur
-Sat Oct 03 19:05:16 GMT+02:00 2026
-2026-10-03 | Vol acro | 8340 | Damiano
-Sat Oct 03 19:22:24 GMT+02:00 2026
-2026-10-03 | Vol acro | 8815 | Anonyme
-2026-10-03 | Vol acro | 9815 | Anonyme
-2026-10-03 | Vol acro | 12360 | Gaelll
-Sat Oct 03 21:50:46 GMT+02:00 2026
+2026-10-03 | Vol acro ancienne version | 8340 | Damiano
+2026-10-03 | Vol acro ancienne version | 8815 | Anonyme
+2026-10-03 | Vol acro ancienne version | 9815 | Anonyme
+2026-10-03 | Vol acro ancienne version | 12360 | Gaelll
 2026-10-03 | Vol L'Aiglon | 2332 | Le fab
-Sat Oct 03 23:33:16 GMT+02:00 2026
 2026-10-04 | Vol L'Aiglon | 2473 | Anonyme
-Sun Oct 04 09:12:46 GMT+02:00 2026
 2026-10-04 | Grand Tour des Aravis | 1300 | Anonyme
-Sun Oct 04 15:26:09 GMT+02:00 2026
 2026-10-04 | Vol L'Aiglon | 2688 | Anonyme
-Sun Oct 04 23:26:26 GMT+02:00 2026
 2026-10-05 | Tour de La Clusaz | 1570 | Florent
-Mon Oct 05 21:35:48 GMT+02:00 2026
 2026-10-06 | Grand Tour des Aravis | 1952 | Sandy
-Tue Oct 06 07:50:58 GMT+02:00 2026

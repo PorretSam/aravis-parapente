@@ -26,8 +26,11 @@ main{max-width:960px;margin:0 auto;padding:22px 16px 40px}
 .champ .pts{font-size:2rem;font-weight:800;color:#1d2730;font-variant-numeric:tabular-nums}
 .champ .who{font-weight:700}
 .champ .cup{font-size:1.6rem}
-ol{margin:0;padding-left:22px;color:var(--muted);font-size:.95rem}
-ol li{padding:2px 0}ol li b{color:#1d2730;font-variant-numeric:tabular-nums}
+ol{margin:0;padding:0;list-style:none;color:var(--muted);font-size:.95rem}
+ol li{padding:3px 0;display:flex;gap:8px;align-items:baseline;border-bottom:1px dashed var(--border)}ol li:last-child{border-bottom:0}ol li b{color:#1d2730;font-variant-numeric:tabular-nums}
+ol li .rk{min-width:2.2em;font-weight:700;color:#1d2730}
+h3.old{margin:30px 0 12px;font-size:1.05rem;color:var(--muted)}
+.card.old{opacity:.85;background:#fbfcfd}
 .empty{color:var(--muted);font-style:italic;margin:8px 0}
 .play{display:inline-block;margin-top:12px;background:var(--orange);color:#fff;text-decoration:none;font-weight:700;padding:8px 14px;border-radius:8px}
 .play:hover{background:var(--orange-dark)}
@@ -40,11 +43,12 @@ footer a{color:var(--blue)}
 <header><div class="in">
   <div class="top"><a href="./" style="background:none;padding:0"><img src="assets/logo.png" alt="Aravis Parapente"></a><a href="./">← Le jeu</a></div>
   <h1>🏆 Records du jeu</h1>
-  <p>Les meilleurs pilotes du jeu de parapente 3D des Aravis. Bats un record et ton prénom apparaît ici.</p>
+  <p>Les 10 meilleurs pilotes de chaque niveau du jeu de parapente 3D des Aravis. Entre dans le top 10 et ton prénom apparaît ici.</p>
 </div></header>
 <main>
   <div class="grid" id="grid"><p class="empty">Chargement des records…</p></div>
-  <p class="note">Les records sont vérifiés puis publiés par Aravis Parapente. Un score qui bat le record d'un niveau est proposé à la publication à la fin du vol.</p>
+  <div id="oldWrap" hidden><h3 class="old">Anciennes versions du jeu</h3><div class="grid" id="old"></div></div>
+  <p class="note">Les records sont vérifiés puis publiés par Aravis Parapente. Un score qui entre dans le top 10 d'un niveau est proposé à la publication à la fin du vol.</p>
 </main>
 <footer>© Aravis Parapente · <a href="/">aravis-parapente.com</a> · <a href="/reservation.html">Réserver un vrai vol biplace</a></footer>
 <script>
@@ -53,10 +57,14 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 const fmtD=d=>{const m=d.match(/(\d{4})-(\d{2})-(\d{2})/);return m?m[3]+'/'+m[2]+'/'+m[1]:d};
 fetch('records.txt',{cache:'no-store'}).then(r=>r.ok?r.text():'').catch(()=>'').then(tx=>{
   const by={};tx.split('\n').forEach(l=>{if(/^\s*#/.test(l)||!l.trim())return;const c=l.split('|').map(s=>s.trim());if(c.length<4)return;const pts=+c[2].replace(/\D/g,'');if(!pts)return;(by[c[1]]=by[c[1]]||[]).push({d:c[0],pts,who:c[3]||'Anonyme'})});
-  document.getElementById('grid').innerHTML=LEVELS.map(([nm,url])=>{const L=(by[nm]||[]).sort((a,b)=>b.pts-a.pts);const best=L[0];
-    return `<div class="card"><h2>${esc(nm)}</h2>${best?`<div class="champ"><span class="cup">🏆</span><span class="pts">${best.pts.toLocaleString('fr-FR')}</span><span class="who">${esc(best.who)}</span></div>
-      ${L.length>1?`<ol>${L.slice(0,10).map(r=>`<li><b>${r.pts.toLocaleString('fr-FR')}</b> · ${esc(r.who)} · ${fmtD(esc(r.d))}</li>`).join('')}</ol>`:`<p class="empty" style="margin:0">Record établi le ${fmtD(esc(best.d))}</p>`}`:`<p class="empty">Pas encore de record. À toi de jouer !</p>`}
-      <a class="play" href="${url}">Jouer</a></div>`}).join('')});
+  const MED=['🥇','🥈','🥉'];
+  const card=(nm,L,url,old)=>{L=L.sort((a,b)=>b.pts-a.pts).slice(0,10);const best=L[0];
+    return `<div class="card${old?' old':''}"><h2>${esc(nm)}</h2>${best?`<div class="champ"><span class="cup">🏆</span><span class="pts">${best.pts.toLocaleString('fr-FR')}</span><span class="who">${esc(best.who)}</span></div>
+      ${L.length>1?`<ol>${L.map((r,i)=>`<li><span class="rk">${MED[i]||(i+1)+'.'}</span><span><b>${r.pts.toLocaleString('fr-FR')}</b> · ${esc(r.who)} · ${fmtD(esc(r.d))}</span></li>`).join('')}</ol>`:`<p class="empty" style="margin:0">Record établi le ${fmtD(esc(best.d))}</p>`}`:`<p class="empty">Pas encore de score. À toi de jouer !</p>`}
+      ${url?`<a class="play" href="${url}">Jouer</a>`:''}</div>`};
+  document.getElementById('grid').innerHTML=LEVELS.map(([nm,url])=>card(nm,by[nm]||[],url,false)).join('');
+  const olds=Object.keys(by).filter(k=>!LEVELS.some(l=>l[0]===k));
+  if(olds.length){document.getElementById('oldWrap').hidden=false;document.getElementById('old').innerHTML=olds.map(k=>card(k,by[k],null,true)).join('')}});
 </script>
 </body>
 </html>
