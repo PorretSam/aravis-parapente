@@ -1977,7 +1977,7 @@ function netLaunch(){if(NET.srv){if(NET.org)srvSend({t:'start',day:LV.days?Math.
 function netGo(seed,day,late,mc){NET.seed=seed;NET.day=day;NET.sentEnd=false;NET.fin={};Object.values(NET.ghosts).forEach(G=>{G.fin=false;G.score=0;G.next=0});
   netEl('netOv').hidden=true;
   if(LV.days&&LV.days[day]){applyWX(LV.days[day].wx);WX.dayI=day}
-  startRace(1);if(LV.acroOnly&&ACRO){const w=setInterval(()=>{if(mode==='race'&&players.length){clearInterval(w);players.forEach(p=>goAcro(p,'Vol acro'))}},200)}
+  startRace(1);if(LV.raid&&late&&typeof raidTryResume==='function')raidTryResume(true);if(LV.acroOnly&&ACRO){const w=setInterval(()=>{if(mode==='race'&&players.length){clearInterval(w);players.forEach(p=>goAcro(p,'Vol acro'))}},200)}
   if(late&&LV.ski&&mc===2)setTimeout(()=>{if(SKI.manche===1)skiNextManche()},300);
   if(late&&players[0])setTimeout(()=>{if(players[0])showMsg(players[0],'Tu rejoins le vol en cours<small>Départ du déco · les autres sont déjà en l\'air</small>',3)},400);
   netEl('netRank').hidden=false;netRank()}
@@ -2051,7 +2051,7 @@ if(RAID){
       lv:{ski:true,wingScale:.6,vMul:1.45,sinkMul:1.05,turnMul:1.7,liftMul:0,camBack:13,camUp:4.5,camLook:-4,spawnH:4,noValleyWind:true,crossFinish:false,HS:1,lzSub:'Posé dans la cible',lzAt:'au replat'}},
     {key:'fly',num:3,name:'Vol vers la Dent de Lanfon',cps:[C('Beauregard',-1.15,-2.18),C('Dent de Lanfon',-14.2,-4.4,.5),C('Acro sur le lac',-15.75,-10.3,1)],
       lv:{ski:false,wingScale:1,vMul:1.39,sinkMul:1.15,turnMul:1,liftMul:1,camBack:0,camUp:0,camLook:null,spawnH:650,noValleyWind:true,crossFinish:false,HS:18,acroTime:75}},
-    {key:'boat',num:5,name:'Ski nautique',cps:[],lv:{ski:true,wingScale:.6,vMul:1.45,sinkMul:1.05,turnMul:1.7,liftMul:0,camBack:22,camUp:16,camLook:-1,spawnH:2,noValleyWind:true,crossFinish:false,HS:1,lzSub:'Arrivée sur la plage',lzAt:'sur la plage de Doussard'}}];
+    {key:'boat',num:5,name:'Ski nautique',cps:[],lv:{ski:true,wingScale:.6,vMul:2.03,sinkMul:1.05,turnMul:1.7,liftMul:0,camBack:22,camUp:16,camLook:-1,spawnH:2,noValleyWind:true,crossFinish:false,HS:1,lzSub:'Arrivée sur la plage',lzAt:'sur la plage de Doussard'}}];
   RAID.S.forEach(S=>S.cps.forEach(c=>{c.x=c.e*KM;c.z=-c.n*KM;c.R=(c.r||0)*KM}));
   {const a=RAID.S[1].cps;SKI.A=a[0];SKI.B=a[1]}
   RAID.lzt=[RAID.S[1].cps[1]];   // cible du replat (le radeau a sa propre cible peinte)
@@ -2135,8 +2135,24 @@ function raidNext(p){const s=++p.raidStage,S=RAID.S[s];raidStageCfg(s);
   if(S.key==='ski')showMsg(p,'Speed riding !<small>Slalom entre les oriflammes · pose-toi dans la cible du replat'+bn+'</small>',2.6);
   else if(S.key==='fly')showMsg(p,'Grande voile !<small>Cap sur la Dent de Lanfon · en ligne droite ça file'+bn+'</small>',2.6);
   else if(S.key==='boat'){raidBoatStart(p);showMsg(p,'Ski nautique !<small>Comme en speed riding : passe entre les bouées, pose-toi sur la plage'+bn+'</small>',3.2)}}
+function raidSaveKey(){return 'raidSave'}
+function raidSave(){const p=players[0];if(!p||numPlayers!==1||mode!=='race'||RAID.over||p.raidStage==null)return;const on=typeof NET!=='undefined'&&NET.on;
+  const d={t:Date.now(),seed:raceSeed,net:on?NET.code:null,st:p.raidStage,x:p.pos.x,y:p.pos.y,z:p.pos.z,h:p.h,score:p.score,log:p.log,next:p.next,bN:p.bN||0,balN:p.balN||0,balOk:p.balOk||0,wMis:p.wMis,wMine:p.wMine,wGun:isFinite(p.wGun)?p.wGun:-1,rank:RAID.rank,simT,route:p.route||null,acroDone:!!p.acroDone,acroScore:p.acroScore||0};
+  try{sessionStorage.setItem(raidSaveKey(),JSON.stringify(d))}catch(_){}}
+function raidLoadSave(){try{const d=JSON.parse(sessionStorage.getItem(raidSaveKey())||'null');if(d&&Date.now()-d.t<20*60000)return d}catch(_){}return null}
+function raidClearSave(){try{sessionStorage.removeItem(raidSaveKey())}catch(_){}}
+function raidTryResume(online){const d=raidLoadSave();if(!d)return false;const on=typeof NET!=='undefined'&&NET.on;
+  if(online?!(on&&d.net===NET.code&&d.seed===raceSeed):(on||d.net))return false;
+  const p=players[0];if(!p)return false;mode='race';const cd=document.getElementById('countdown');if(cd){cd.hidden=true;cd.innerHTML=''}
+  raidJump(p,d.st);simT=d.simT||simT;RAID.rank=d.rank||RAID.rank;
+  Object.assign(p,{score:d.score||0,log:d.log||[],next:d.next||0,bN:d.bN||0,balN:d.balN||0,balOk:d.balOk||0,wMis:d.wMis,wMine:d.wMine,wGun:d.wGun<0?Infinity:d.wGun,acroScore:d.acroScore||0});
+  const S=RAID.S[d.st];
+  if(S.key==='fly'&&d.route==='acro'){if(d.acroDone){p.route='acro';p.acroDone=true;p.next=NB}else{goAcro(p,'Raid repris');return true}}
+  p.pos.set(d.x,d.y,d.z);p.h=d.h;p.snap=true;p.camH=d.h;p.crash=0;p.respawnWait=0;
+  if(S.key==='boat'&&p.bpos){p.bpos.set(p.pos.x+Math.sin(p.h)*32,RAID.lakeY,p.pos.z-Math.cos(p.h)*32);p.bh=p.h}
+  showMsg(p,'Raid repris<small>Étape '+(d.st+1)+' · '+S.name+' · '+(d.score||0)+' pts</small>',2.6);return true}
 function raidJump(p,s){p.raidStage=s-1;raidNext(p);if(s===0)showMsg(p,'Cross (test)<small>Crêt du Loup → Danay ≥ 1850 m → Beauregard</small>',2);RAID.rank=RAID.rank.map((v,i)=>i>=s?0:v);
-  RAID.bots.forEach((b,i)=>{Object.assign(b,{stage:s,ph:'go',done:false,finished:false,hitT:0,reserve:false,acroOn:false,acroState:'wo',wait:.6+i*.7,wMis:1,wMine:s===3?2:s===1?1:0});raidBotPath(b);const q=b.path[0];b.pos.set(q.x+(i-1)*40,q.y,q.z+30)})}
+  RAID.bots.forEach((b,i)=>{Object.assign(b,{stage:s,ph:'go',done:false,finished:false,hitT:0,reserve:false,acroOn:false,acroState:'wo',wait:.6+i*.7,wMis:1,wMine:s===3?2:s===1?1:0,wGun:s===0?5:Infinity});raidBotPath(b);const q=b.path[0];b.pos.set(q.x+(i-1)*40,q.y,q.z+30)})}
 function raidSkierMesh(st){const g=new THREE.Group(),O=st.outfit,M=c=>new THREE.MeshLambertMaterial({color:c});
   [[O.pilot,-.42],[O.pax,.42]].forEach(([o,x])=>{const ski=new THREE.Mesh(new THREE.BoxGeometry(.17,.05,1.7),M(o.skis||'#e8e8e8'));ski.position.set(x,.03,-.1);g.add(ski);
     [-.1,.1].forEach(d=>{const l=new THREE.Mesh(new THREE.BoxGeometry(.13,.75,.15),M(o.pants));l.position.set(x+d,.42,0);l.rotation.x=.25;g.add(l)});
@@ -2234,10 +2250,10 @@ function raidBotPath(b){const s=b.stage,R=b.R,P=(x,z,y)=>({x,z,y}),gyp=(x,z,dy)=
   if(s===0){const c=RAID.S[0].cps;pts=[P(c[0].x,c[0].z,gyp(c[0].x,c[0].z,30)),P(LV.extraTherm[0].e*KM,-LV.extraTherm[0].n*KM,1900),P(c[1].x+(R()-.5)*300,c[1].z+(R()-.5)*300,1960),P(c[2].x,c[2].z,gyp(c[2].x,c[2].z,25))];spd=88}
   else if(s===1){pts=[P(SKI.A.x,SKI.A.z,0)].concat(SKI.sets[0].map(g=>P(g.x+(R()-.5)*6,g.z+(R()-.5)*6,0)),[P(SKI.B.x,SKI.B.z,0)]);spd=18.4}
   else if(s===2){const c=RAID.S[2].cps;b.balMiss=RAID.balloons.map(()=>R()<.15);pts=[P(c[0].x,c[0].z,gyp(c[0].x,c[0].z,650))].concat(RAID.balloons.map((g,k)=>{const o=(b.balMiss[k]?(R()<.5?-1:1)*(90+R()*60):(R()-.5)*110);return P(g.x+g.nx*o,g.z+g.nz*o,g.y)}),[P(c[1].x+(R()-.5)*400,c[1].z+(R()-.5)*400,2000),P(ACRO.box.x+(R()-.5)*300,ACRO.box.z+(R()-.5)*300,1900)]);spd=184}
-  else if(s===3){const L=RAID.raft;pts=[P(L.x,L.z,RAID.lakeY)].concat(RAID.buoys.map(g=>P(g.x+g.nx*(R()-.5)*14,g.z+g.nz*(R()-.5)*14,RAID.lakeY)),[P(RAID.finish.x,RAID.finish.z,RAID.lakeY)]);spd=17}
+  else if(s===3){const L=RAID.raft;pts=[P(L.x,L.z,RAID.lakeY)].concat(RAID.buoys.map(g=>P(g.x+g.nx*(R()-.5)*14,g.z+g.nz*(R()-.5)*14,RAID.lakeY)),[P(RAID.finish.x,RAID.finish.z,RAID.lakeY)]);spd=23.8}
   b.path=pts;b.u=0;b.spd=spd*b.skill*(s===0?1:.9)*(s===0||s===2?1.39:1);if(s===0){b.alt=pts[0].y;b.climbed=false;b.top=1950+R()*60;b.altD=null;b.cr=130+R()*70;pts[1].y=pts[0].y}b.L=[0];for(let i=1;i<pts.length;i++)b.L.push(b.L[i-1]+Math.hypot(pts[i].x-pts[i-1].x,pts[i].z-pts[i-1].z))}
 function raidBotAt(b,u){const P=b.path,L=b.L;let i=1;while(i<P.length-1&&L[i]<u)i++;const a=P[i-1],c=P[i],t=clamp((u-L[i-1])/Math.max(1,L[i]-L[i-1]),0,1);return [a.x+(c.x-a.x)*t,a.y+(c.y-a.y)*t,a.z+(c.z-a.z)*t,Math.atan2(c.x-a.x,-(c.z-a.z))]}
-function raidBotTick(b,dt){if(b.done)return;if(b.hitT>0){b.hitT-=dt;const fl=b.stage===0||b.stage===2;if(b.spin&&fl){b.reserve=false;b.h+=2.513*dt;b.turn=-1;b.pos.y=Math.max(groundY(b.pos.x,b.pos.z)+1,b.pos.y-12*dt);if(b.hitT<=0)b.spin=false}else{b.reserve=fl&&b.hitT>0;if(fl){b.pos.y=Math.max(groundY(b.pos.x,b.pos.z)+1,b.pos.y-2.5*dt)}}raidBotDraw(b,dt);return}if(b.wait>0){b.wait-=dt;if(b.wait<=0&&b.ph==='next'){b.stage++;b.ph='go';raidBotPath(b);b.wMis=1;b.wMine=b.stage===3?2:b.stage===1?1:0}else{raidBotDraw(b,dt);return}}
+function raidBotTick(b,dt){if(b.done)return;if(b.hitT>0){b.hitT-=dt;const fl=b.stage===0||b.stage===2;if(b.spin&&fl){b.reserve=false;b.h+=2.513*dt;b.turn=-1;b.pos.y=Math.max(groundY(b.pos.x,b.pos.z)+1,b.pos.y-12*dt);if(b.hitT<=0)b.spin=false}else{b.reserve=fl&&b.hitT>0;if(fl){b.pos.y=Math.max(groundY(b.pos.x,b.pos.z)+1,b.pos.y-2.5*dt)}}raidBotDraw(b,dt);return}if(b.wait>0){b.wait-=dt;if(b.wait<=0&&b.ph==='next'){b.stage++;b.ph='go';raidBotPath(b);b.wMis=1;b.wMine=b.stage===3?2:b.stage===1?1:0;b.wGun=Infinity}else{raidBotDraw(b,dt);return}}
   const s=b.stage,R=b.R;if(s===0&&b.alt!=null)b.alt=Math.min(b.alt,b.pos.y+.01);
   if(s===0&&b.ph==='therm'){const T=LV.extraTherm[0],tx=T.e*KM,tz=-T.n*KM,rb=raidRubber(b,dt),w=6.2832/11;b.ca+=w*dt;b.alt+=3.4*b.skill*rb*dt;b.pos.set(tx+Math.cos(b.ca)*b.cr,b.alt,tz+Math.sin(b.ca)*b.cr);b.h=b.ca+Math.PI;b.turn=lerp(b.turn,-1,Math.min(1,dt*3));b.va=10.6;
     if(b.alt>=b.top){b.ph='go';b.climbed=true}raidBotDraw(b,dt);return}
@@ -2255,13 +2271,13 @@ function raidBotTick(b,dt){if(b.done)return;if(b.hitT>0){b.hitT-=dt;const fl=b.s
     raidStageDone(b,s);if(s===3){b.done=true;b.finished=true;return}b.ph='next';b.wait=.05}
   raidBotDraw(b,dt)}
 function raidBotDraw(b,dt){const boat=b.stage===3&&(b.ph==='go'||b.done||b.ph==='next');b.glider.visible=true;b.boat.visible=boat;if(boat){b.wsc=.6;b.pos.y=RAID.lakeY+SKI_H}
-  if(boat){const fx=Math.sin(b.h),fz=-Math.cos(b.h);b.boat.position.set(b.pos.x+fx*32,RAID.lakeY+Math.sin(time*2.1+b.id)*.06,b.pos.z+fz*24);b.boat.rotation.set(-.1,-b.h,-b.turn*.15,'YXZ');b.va=17;placeGlider(b,dt);b.puffT=(b.puffT||0)-dt;if(b.puffT<=0&&b.ph==='go'){b.puffT=.08;skiPuff(b.pos.x+Math.sin(b.h)*19.6,RAID.lakeY+.4,b.pos.z-Math.cos(b.h)*19.6,1.6)}}
+  if(boat){const fx=Math.sin(b.h),fz=-Math.cos(b.h);b.boat.position.set(b.pos.x+fx*32,RAID.lakeY+Math.sin(time*2.1+b.id)*.06,b.pos.z+fz*24);b.boat.rotation.set(-.1,-b.h,-b.turn*.15,'YXZ');b.va=23.8;placeGlider(b,dt);b.puffT=(b.puffT||0)-dt;if(b.puffT<=0&&b.ph==='go'){b.puffT=.08;skiPuff(b.pos.x+Math.sin(b.h)*19.6,RAID.lakeY+.4,b.pos.z-Math.cos(b.h)*19.6,1.6)}}
   else{b.wsc=b.stage===1?.6:1;b.finished=b.ph==='next'&&b.stage!==2;placeGlider(b,dt)}
   b.lab.position.set(b.pos.x,b.pos.y+(boat?5:10),b.pos.z)}
 // ---------- armement : viseur (F), missile (R), mine (M) ----------
 if(RAID){const t=document.getElementById('touch');if(t){const g=document.createElement('div');g.className='grp';g.id='raidWpn';
     g.innerHTML='<button data-k="wf" aria-label="Tirer">🎯</button><button data-k="wr" aria-label="Missile">🚀</button><button data-k="wm" aria-label="Mine">💣</button>';t.appendChild(g)}}
-function raidWInit(p){p.wCd=0;p.wLock=0;p.wTgt=null;p.wMis=1;p.wMine={boat:2,ski:1}[(RAID.S[p.raidStage]||{}).key]||0;
+function raidWInit(p){p.wCd=0;p.wLock=0;p.wTgt=null;p.wMis=1;p.wGun=(p.raidStage||0)===0?5:Infinity;p.wMine={boat:2,ski:1}[(RAID.S[p.raidStage]||{}).key]||0;
   if(!p.hud.ret){const r=document.createElement('div');r.className='raidret';r.innerHTML='<span class="rn"></span>';p.hud.el.appendChild(r);p.hud.ret=r;const w=document.createElement('div');w.className='raidw';p.hud.el.appendChild(w);p.hud.wpn=w}}
 function raidRacerPos(r){return r.bot?r.pos:(r.raidStage===3&&r.bpos?r.pos:r.pos)}
 function raidRacers(){return players.concat(RAID.bots,raidGhosts())}
@@ -2290,7 +2306,7 @@ function raidFxInit(){if(!RAID.fireT){RAID.fireT=raidFireTex('rgba(255,240,160,1
 function raidBlast(pos,sz){raidFxInit();if(typeof raidDuck==='function'&&sz>8){raidDuck();raidSfx('boom',pos)}const s=new THREE.Sprite(new THREE.SpriteMaterial({map:RAID.fireT,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));s.position.copy(pos);s.position.y+=2;s.scale.setScalar(sz);scene.add(s);RAID.fx.push({s,t:0,life:.6,kind:'blast',sz})}
 function raidTracer(a,b){const l=new THREE.Line(new THREE.BufferGeometry().setFromPoints([a.clone().add(new THREE.Vector3(0,2,0)),b.clone().add(new THREE.Vector3(0,2,0))]),new THREE.LineBasicMaterial({color:'#ffe066',transparent:true}));scene.add(l);RAID.fx.push({s:l,t:0,life:.15,kind:'line'})}
 function raidFire(sh,kind){const S=RAID.S[sh.bot?sh.stage:sh.raidStage]||{};
-  if(kind==='gun'){if(sh.wCd>0)return;const tg=sh.bot?sh.botTgt:(sh.wTgt);sh.wCd=2;raidSfx('gun',sh.bot?sh.pos:null);if(!tg){if(!sh.bot)showMsg(sh,'Personne dans le viseur',.9);return}raidTracer(sh.pos,tg.pos);if(tg.ghost)raidNetSend({a:'gun',to:tg.k});if(tg.balloon||!sh.bot||Math.random()<.75)raidHit(tg,sh,'gun');return}
+  if(kind==='gun'){if(sh.wCd>0)return;if(sh.wGun!=null&&sh.wGun<=0){if(!sh.bot)showMsg(sh,'Plus de munitions<small>5 tirs max sur le cross · rechargé pour la grande voile</small>',1.4);return}if(sh.wGun!=null)sh.wGun--;const tg=sh.bot?sh.botTgt:(sh.wTgt);sh.wCd=2;raidSfx('gun',sh.bot?sh.pos:null);if(!tg){if(!sh.bot)showMsg(sh,'Personne dans le viseur',.9);return}raidTracer(sh.pos,tg.pos);if(tg.ghost)raidNetSend({a:'gun',to:tg.k});if(tg.balloon||!sh.bot||Math.random()<.75)raidHit(tg,sh,'gun');return}
   if(kind==='missile'){if(!(sh.wMis>0))return;const tg=sh.bot?sh.botTgt:(sh.wLock>=1?sh.wTgt:null);if(!tg){if(!sh.bot)showMsg(sh,'Missile : garde la cible 1 s dans le viseur',1.2);return}sh.wMis--;
 raidMissile(sh,tg);if(tg.ghost)raidNetSend({a:'mis',to:tg.k});if(!sh.bot)showMsg(sh,'Missile lancé sur '+(tg.name||'la cible')+' !',1.2);else if(!tg.bot)showMsg(tg,'⚠ Missile de '+sh.name+' !',1.4);return}
   if(kind==='mine'){if(!(sh.wMine>0)||(S.key!=='boat'&&S.key!=='ski'))return;sh.wMine--;const bx=sh.pos.x-Math.sin(sh.h)*8,bz=sh.pos.z+Math.cos(sh.h)*8,by=S.key==='boat'?RAID.lakeY+.4:groundY(bx,bz)+.8;const id=(typeof NET!=='undefined'&&NET.on)?NET.slot*100000+(RAID.mineN=(RAID.mineN||0)+1):null;raidMineMesh(sh,bx,by,bz,id);if(id!=null&&!sh.bot)raidNetSend({a:'mine',id,x:bx,y:by,z:bz});if(!sh.bot)showMsg(sh,'Mine posée !',1)}}
@@ -2318,9 +2334,9 @@ function raidWeapons(dt){if(!RAID.mis)RAID.mis=[];if(!RAID.mines)RAID.mines=[];c
     const tg=ok&&!noW?raidTargetOf(p):null;if(tg!==p.wTgt){p.wTgt=tg;p.wLock=0}else if(tg)p.wLock+=dt;
     const R=p.hud.ret;if(tg){const v=tg.pos.clone();v.y+=3;v.project(p.cam);if(v.z<1&&Math.abs(v.x)<1.2&&Math.abs(v.y)<1.2){R.style.display='block';R.style.left=((v.x+1)/2*100)+'%';R.style.top=((1-v.y)/2*100)+'%';R.classList.toggle('lock',p.wLock>=1&&p.wMis>0);{const lk=p.wLock>=1&&p.wMis>0,d=Math.round(Math.hypot(tg.pos.x-p.pos.x,tg.pos.z-p.pos.z)),txt=(tg.name||raidNameOf(tg))+' · '+d+' m'+(lk?' · VERROUILLÉ':'');const sp=R.firstChild;if(sp.textContent!==txt)sp.textContent=txt}}else R.style.display='none'}else R.style.display='none';
     const I=ok?inputOf(p):{},k=n=>KEYS.has(n)||!!touch[n==='KeyF'?'wf':n==='KeyR'?'wr':'wm'];['KeyF','KeyR','KeyM'].forEach((n,i)=>{const d=k(n),pk='wk'+i;if(d&&!p[pk]&&ok&&!(noW&&i<2))raidFire(p,['gun','missile','mine'][i]);p[pk]=d});
-    const S=RAID.S[p.raidStage]||{},mine=S.key==='boat'||S.key==='ski';const txt=noW?'🎿 Speed riding · 💣 M ×'+(p.wMine||0):'🎯 F'+(p.wCd>0?' '+Math.ceil(p.wCd)+'s':'')+' · 🚀 R ×'+(p.wMis||0)+(mine?' · 💣 M ×'+(p.wMine||0):'');if(p.hud.wpn.textContent!==txt)p.hud.wpn.textContent=txt;p.hud.wpn.hidden=!race});
+    const S=RAID.S[p.raidStage]||{},mine=S.key==='boat'||S.key==='ski';const txt=noW?'🎿 Speed riding · 💣 M ×'+(p.wMine||0):'🎯 F'+(isFinite(p.wGun)?' ×'+p.wGun:'')+(p.wCd>0?' '+Math.ceil(p.wCd)+'s':'')+' · 🚀 R ×'+(p.wMis||0)+(mine?' · 💣 M ×'+(p.wMine||0):'');if(p.hud.wpn.textContent!==txt)p.hud.wpn.textContent=txt;p.hud.wpn.hidden=!race});
   // PNJ : tirent de temps en temps
-  if(race)RAID.bots.forEach(b=>{if(b.done||b.hitT>0||b.wait>0)return;if(b.stage===1){if(b.wMine>0&&b.ph==='go'&&Math.random()<dt*.06)raidFire(b,'mine');return}b.wCd=Math.max(0,(b.wCd==null?6+Math.random()*6:b.wCd)-dt);if(b.wMis==null){b.wMis=1;b.wMine=0}
+  if(race)RAID.bots.forEach(b=>{if(b.done||b.hitT>0||b.wait>0)return;if(b.stage===1){if(b.wMine>0&&b.ph==='go'&&Math.random()<dt*.06)raidFire(b,'mine');return}b.wCd=Math.max(0,(b.wCd==null?6+Math.random()*6:b.wCd)-dt);if(b.wMis==null){b.wMis=1;b.wMine=0}if(b.wGun==null)b.wGun=b.stage===0?5:Infinity;
     if(b.wCd<=0){const tg=raidTargetOf(b,380);if(tg){b.botTgt=tg;if(b.wMis>0&&Math.random()<.3)raidFire(b,'missile');else raidFire(b,'gun')}b.wCd=8+Math.random()*8}
     if(b.stage===3&&b.wMine>0&&Math.random()<dt*.06)raidFire(b,'mine')});
   // missiles
@@ -2414,7 +2430,7 @@ function raidTick(dt){if(!RAID||mode==='menu'||mode==='loading')return;
   if(RAID.balloons)RAID.balloons.forEach((b,k)=>b.pair.forEach((g,i)=>{if(g.dead)return;g.position.y=b.y-44+Math.sin(time*.35+k*1.7+i)*5;g.rotation.y=time*.05*(i?1:-1)}));raidFx(dt);
   players.forEach(p=>{const hi=p.raidStage===2&&!p.route;if(p.hud.el.classList.contains('msghi')!==hi)p.hud.el.classList.toggle('msghi',hi)});
   if(mode==='race')RAID.bots.forEach(b=>raidBotTick(b,dt));else RAID.bots.forEach(b=>raidBotDraw(b,dt));
-  raidWeapons(dt);if(mode==='race'&&actx&&!RAIDM.timer)raidMusicStart();
+  raidWeapons(dt);if(mode==='race'&&actx&&!RAIDM.timer)raidMusicStart();RAID.svT=(RAID.svT||0)-dt;if(RAID.svT<=0){RAID.svT=2;raidSave()}
   players.forEach(p=>{if(p.raidStage==null)raidStart(p);const S=RAID.S[p.raidStage];
     if(p.finished&&S.key==='boat'&&mode==='race')raidBoatFinish(p);
     if(S.key==='boat'&&mode==='race')raidTow(p,dt);
@@ -2424,7 +2440,7 @@ function raidRanking(){const on=typeof NET!=='undefined'&&NET.on;const L=players
     // les PNJ pas encore arrivés terminent leurs étapes (score estimé, sans bonus de classement)
     let sc=b.score;if(!b.done){const R=b.R;for(let s=b.stage+(b.ph==='next'?1:0);s<4;s++)sc+=s===0?500:s===1?600:s===2?1600:600+Math.round(R()*100)}return {name:b.name,col:b.col,score:sc}}));
   return L.sort((a,b)=>b.score-a.score)}
-function raidEnd(){if(RAID.over)return;RAID.over=true;setTimeout(raidMusicStop,6500);mode='done';clearFlight();const L=raidRanking();RAID.final=L;
+function raidEnd(){if(RAID.over)return;RAID.over=true;raidClearSave();setTimeout(raidMusicStop,6500);mode='done';clearFlight();const L=raidRanking();RAID.final=L;
   const host=document.body,d=document.createElement('div');d.className='jojo';const st=[L[1],L[0],L[2]];const H=[118,160,92],M=['🥈','🥇','🥉'];
   d.innerHTML=`<div class="card" style="max-width:640px"><div style="background:linear-gradient(180deg,#5fb2ea,#d9f0fb);padding:22px 16px 0;display:flex;justify-content:center;align-items:flex-end;gap:10px">${st.map((r,i)=>r?`<div style="text-align:center;flex:1;max-width:170px"><div style="font:900 clamp(20px,4vw,30px) var(--display);color:#10233a">${M[i]} ${netEsc(r.name)}</div><div style="font:700 17px var(--num);color:#10233a;margin-bottom:6px">${r.score.toLocaleString('fr-FR')} pts</div><div style="height:${H[i]}px;background:${r.col};border-radius:10px 10px 0 0;display:grid;place-items:center;font:900 48px var(--display);color:#fff;box-shadow:inset 0 -10px 0 rgba(0,0,0,.15)">${i===1?1:i===0?2:3}</div></div>`:'').join('')}</div>
     <div class="cap"><b>Aravis X Raid terminé !</b><span>${L.slice(3).map((r,i)=>(i+4)+'. '+netEsc(r.name)+' · '+r.score.toLocaleString('fr-FR')+' pts').join(' · ')||'Podium sur la plage de Doussard'}</span></div></div>`;
@@ -2557,7 +2573,8 @@ async function boot(){
     document.getElementById('lvCourse').innerHTML=LV.course.map(c=>`<li class="${c[0]}"><span class="n">${c[1]}</span><div><b>${c[2]}</b><span>${c[3]}</span></div><em>${c[4]}</em></li>`).join('');
     (LV.links||[]).forEach(l=>{const a=document.getElementById('lvLink').cloneNode();a.id='';a.href=l.url;a.textContent=l.label;a.hidden=false;document.getElementById('lvLink').parentNode.appendChild(a)})
     setTimeout(()=>{document.getElementById('loading').hidden=true},Math.max(0,3000-(Date.now()-(window.__T0||0))));testPanel();mode='menu';menu.hidden=!!LV.gate;if(LV.gate)openGate();renderBest();
-    {const sv=loadFlight();let gOk=!LV.gate;try{gOk=gOk||sessionStorage.getItem('acroGate')===LV.gate}catch(e){}if(sv&&gOk){menu.hidden=true;document.getElementById('gate').hidden=true;setTimeout(()=>resumeFlight(sv),50)}}layout();requestAnimationFrame(frame);
+    {const sv=loadFlight();let gOk=!LV.gate;try{gOk=gOk||sessionStorage.getItem('acroGate')===LV.gate}catch(e){}if(sv&&gOk){menu.hidden=true;document.getElementById('gate').hidden=true;setTimeout(()=>resumeFlight(sv),50)}}
+    if(LV.raid&&typeof raidLoadSave==='function'){const d=raidLoadSave();const ns=typeof netSess==='function'?netSess():null;if(d&&!d.net&&!(ns&&ns.r)){menu.hidden=true;setTimeout(()=>{startRace(1,true);if(!raidTryResume(false))raidClearSave()},80)}}layout();requestAnimationFrame(frame);
     if(ACRO&&/acro/.test(location.hash+location.search)){startRace(1);const w=setInterval(()=>{if(mode==='race'&&players[0]){clearInterval(w);goAcro(players[0],'Arrivée par le raccourci secret')}},200)}
     window.__t={groundY,players,CP,THERM,W,HEARTS,renderer,scene,upd:updatePlayer,get mode(){return mode},startRace,get simT(){return simT},KEYS,get time(){return time},set time(v){time=v},showResults,SKI,get RAID(){return RAID},raidTick:dt=>raidTick(dt),raidNext:p=>raidNext(p),get mode2(){return mode},set mode(v){mode=v}};
   }catch(err){document.getElementById('loading').innerHTML='<div><b>Oups</b>Le relief n\'a pas pu se charger. Recharge la page.</div>';console.error(err)}}
