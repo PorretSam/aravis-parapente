@@ -16,3 +16,31 @@
 2026-10-04 | Vol L'Aiglon | 2688 | Anonyme
 2026-10-05 | Tour de La Clusaz | 1570 | Florent
 2026-10-06 | Grand Tour des Aravis | 1952 | Sandy
+2026-10-08 | Premier vol | 93 | Anonyme
+Thu Oct 08 09:05:25 GMT+02:00 2026
+2026-10-08 | Vol acro | 1302 | Anonyme
+Thu Oct 08 09:15:32 GMT+02:00 2026
+2026-10-08 | Premier vol | 790 | Martin
+Thu Oct 08 11:57:32 GMT+02:00 2026
+2026-10-08 | Premier vol | 440 | Anonyme | v1.2
+Thu Oct 08 14:07:12 GMT+02:00 2026
+2026-10-08 | Tour de La Clusaz | 1600 | Anonyme | v1.2
+2026-10-08 | Vol L'Aiglon | 3079 | Anonyme | v1.2
+Thu Oct 08 15:33:31 GMT+02:00 2026
+2026-10-08 | Vol acro | 840 | Anonyme | v1.2
+Thu Oct 08 15:38:53 GMT+02:00 2026
+2026-10-08 | Aravis X Raid | 8843 | Gab | v1.2
+Thu Oct 08 17:02:43 GMT+02:00 2026
+2026-10-08 | Premier vol | 733 | David | v1.2
+Thu Oct 08 18:34:15 GMT+02:00 2026
+2026-10-08 | Premier vol | 238 | Anonyme | v1.2
+Thu Oct 08 19:11:43 GMT+02:00 2026
+Thu Oct 08 15:28:09 GMT+02:00 2026
+2026-10-08 | Premier vol | 238 | Anonyme | v1.2
+Thu Oct 08 19:11:43 GMT+02:00 2026
+2026-10-08 | Premier vol | 680 | Anonyme | v1.2
+Thu Oct 08 19:14:45 GMT+02:00 2026
+2026-10-08 | Premier vol | 723 | Anonyme | v1.2
+Thu Oct 08 19:25:58 GMT+02:00 2026
+2026-10-08 | Premier vol | 833 | Clem | v1.2
+Thu Oct 08 19:50:14 GMT+02:00 2026
