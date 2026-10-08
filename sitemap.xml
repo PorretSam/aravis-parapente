@@ -93,8 +93,14 @@
   </url>
 
   <url>
+    <loc>https://aravis-parapente.com/jeu/aravis-x-raid.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.40</priority>
+  </url>
+
+  <url>
     <loc>https://aravis-parapente.com/jeu/records.html</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <priority>0.40</priority>
   </url>
 
