@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Test VR · Aravis Parapente</title>
+<title>Test · Aravis Parapente</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Barlow:wght@400;600&family=Barlow+Condensed:wght@500;600;700&display=swap">
@@ -63,6 +63,13 @@ html,body{height:100%;overflow:hidden;background:var(--sky);color:var(--ink);fon
 .pill.bad{background:var(--down);color:#fff}
 .msg{position:absolute;left:50%;top:32%;transform:translate(-50%,-50%);font-family:var(--display);font-weight:900;font-size:clamp(28px,5vw,54px);color:#fff;text-align:center;text-shadow:0 3px 18px rgba(16,35,58,.6);letter-spacing:.02em;line-height:1.05;opacity:0;transition:opacity .25s;width:92%}
 .msg.on{opacity:1}
+#countdown .rcd{display:grid;justify-items:center;gap:6px;background:rgba(16,35,58,.55);padding:22px 34px;border-radius:22px}#countdown .rcd img{width:min(36vw,170px);height:min(36vw,170px);background:#fff;border-radius:50%;padding:6px}#countdown .rcd b{font:900 min(9vw,56px) var(--display);letter-spacing:.04em;color:#fff}#countdown .rcd span{font:900 min(24vw,170px) var(--display);line-height:.9;color:#ffd23f}
+@media (orientation:portrait) and (max-width:520px){#raidWpn{position:fixed;right:10px;bottom:calc(158px + env(safe-area-inset-bottom,0px));flex-direction:column}.hud .raidw{bottom:auto!important;right:auto!important;left:12px;top:calc(182px + env(safe-area-inset-top,0px));font-size:13px;padding:4px 10px}}
+.hud .raidret{position:absolute;width:54px;height:54px;margin:-27px 0 0 -27px;border:3px solid #ffd23f;border-radius:50%;box-shadow:0 0 0 2px rgba(0,0,0,.35);display:none;pointer-events:none;transition:border-color .2s}
+.hud .raidret::before,.hud .raidret::after{content:'';position:absolute;left:50%;top:50%;background:#ffd23f;transform:translate(-50%,-50%)}.hud .raidret::before{width:70px;height:2px}.hud .raidret::after{width:2px;height:70px}
+.hud .raidret.lock{border-color:#ff3b30;animation:rlock .4s infinite alternate}.hud .raidret .rn{position:absolute;top:66px;left:50%;transform:translateX(-50%);font:800 14px var(--num);color:#ffd23f;text-shadow:0 1px 3px #000;white-space:nowrap}.hud .raidret.lock .rn{color:#ff3b30}@keyframes rlock{to{transform:scale(.8)}}
+.hud .raidw{position:absolute;right:12px;bottom:calc(64px + env(safe-area-inset-bottom,0px));background:rgba(16,35,58,.85);color:#fff;font:700 15px var(--num);padding:6px 12px;border-radius:999px;pointer-events:none}
+.hud.msghi .msg{top:calc(118px + env(safe-area-inset-top,0px));transform:translate(-50%,0);font-size:clamp(22px,3.6vw,38px)}
 .msg small{display:block;font-family:var(--num);font-weight:600;font-size:.42em;letter-spacing:.04em;margin-top:8px}
 .hud.compact .chrono{font-size:22px} .hud.compact .pts{font-size:16px} .hud.compact .cell span{font-size:22px} .hud.compact .cell{min-width:48px;padding:0 5px}
 .hud.compact .next b{font-size:17px} .hud.compact .next .dist{font-size:18px}
@@ -524,7 +531,7 @@ body[data-layout=solo-compact] .hud.compact .pip>div{white-space:normal;font-siz
   </div>
 </div>
 
-<script>window.LEVEL=(function(){var L=[{"id": 1, "heartAt": {"0": {"merle": true, "deco": true}}, "extraHearts": [{"e": 6.2, "n": 3.08, "y": 2064, "leg": 0, "kind": "alt", "boost": 100}], "hearts": 4, "gbBalise": true, "ceil": {"after": 1, "alt": 2500}, "extraTherm": [{"e": 6.2, "n": 3.08, "s": 4.7, "r": 320, "fixed": true, "gy": 1600}], "pose360": true, "json": "assets/monde.json", "texNear": "assets/sol-proche.jpg", "texMid": "assets/sol-large.jpg", "HS": 14, "gb": true, "bonusT": 600, "cps": [{"name": "Crêt du Loup", "e": 2.307, "n": -1.433}, {"name": "Trou de la Mouche", "e": 6.947, "n": 1.329, "r": 0.4}, {"name": "Tête du Danay", "e": 1.962, "n": 2.026, "r": 0.4}, {"name": "Grand-Bornand", "e": 0.4, "n": 4.1, "r": 0.4}, {"name": "Retenue de Beauregard", "e": -1.034, "n": -0.554, "r": 0.4}, {"name": "Cortibot", "e": 0.697, "n": 0.222, "r": 0.3, "landing": true}], "eyebrow": "PAGE TEST · Niveau 1 · Vol performance · relief réel des Aravis", "title": "Tour de<br>La Clusaz", "lede": "Décolle du Crêt du Loup, enroule les thermiques pour monter, passe les quatre balises et pose-toi au Cortibot. Au soleil ça monte, à l'ombre des nuages ça descend. Un gros thermique se cache pas loin du déco pour faire le plein : à toi de le trouver. Plus tu montes, plus il tire.", "note": "Balise = cylindre de 400 m de rayon, à n'importe quelle hauteur. Le vario est en temps réel : +3 m/s, c'est 3 mètres gagnés par seconde. Bonus : 1 point par seconde sous les 10 minutes.", "course": [["", "D", "Crêt du Loup", "Décollage, puis cherche de quoi faire le plein", "1 858 m"], ["b", "1", "Trou de la Mouche", "L'arche dans la chaîne des Aravis · +200 pts", "2 453 m"], ["b", "2", "Tête du Danay", "Au-dessus des Confins · +200 pts", "1 731 m"], ["b", "3", "Grand-Bornand", "Ça descend fort : rentre par la vallée de Saint-Jean-de-Sixt · +200 pts, vaché là-bas = −100 pts", "≈ 950 m"], ["b", "4", "Retenue de Beauregard", "Montagne de Beauregard en mode hiver · +200 pts", "≈ 1 350 m"], ["l", "P", "Posé au Cortibot", "10 route de Plattuy · +300 pts, +200 si pile dans la cible, +300 en posé 360 (3 tours à 0,5 m)", "≈ 1 065 m"], ["", "↑", "Plafond à 2 100 m", "Après le Trou de la Mouche, les thermiques ne montent plus au-dessus", ""]], "links": []}, {"id": 2, "heartAt": {"0": {"merle": true, "deco": true}}, "twist": true, "hearts": 6, "json": "assets/monde-niveau2.json", "texNear": "assets/sol-niveau2.jpg", "texMid": null, "HS": 14, "sinkMul": 1.35, "gb": false, "bonusT": 1800, "cps": [{"name": "Crêt du Loup", "e": 2.307, "n": -1.433}, {"name": "Pointe Percée", "e": 10.275, "n": 5.763, "r": 0.5}, {"name": "Lachat du Grand-Bornand", "e": 4.175, "n": 6.02, "r": 0.5}, {"name": "Annecy", "e": -22.705, "n": -0.556, "r": 0.6}, {"name": "Roc des Bœufs", "e": -20.3, "n": -16.66, "r": 0.5}, {"name": "Cortibot", "e": 0.697, "n": 0.222, "r": 0.3, "landing": true}], "eyebrow": "PAGE TEST · Niveau 2 · Vol prestige · des Aravis au lac d'Annecy", "title": "Grand Tour<br>des Aravis", "lede": "Du Crêt du Loup à la Pointe Percée, puis le Lachat du Grand-Bornand, Annecy, le Roc des Bœufs et retour au Cortibot : près de 90 km de cross. Fais le plein en partant, enroule chaque thermique, choisis tes crêtes au soleil et traverse le lac bien haut.", "note": "Balises = cylindres de 500 m, 600 m pour Annecy. Au-dessus du lac d'Annecy, pas de thermique : traverse haut ou c'est la baignade (−100). Bonus : 1 point par seconde sous les 30 minutes.", "course": [["", "D", "Crêt du Loup", "Décollage, fais le plein avant de partir", "1 858 m"], ["b", "1", "Pointe Percée", "Le toit des Aravis · +200 pts", "2 750 m"], ["b", "2", "Lachat du Grand-Bornand", "Le déco du Grand-Bornand · +200 pts", "2 100 m"], ["b", "3", "Annecy", "Au-dessus de la vieille ville et du lac · +200 pts", "447 m"], ["b", "4", "Roc des Bœufs", "Dans les Bauges, au sud du lac · +200 pts", "1 774 m"], ["l", "P", "Retour au Cortibot", "10 route de Plattuy · +300 pts, +200 si pile dans la cible", "≈ 1 065 m"]], "acro": {"box": {"e": -15.75, "n": -10.3, "r": 1.0, "name": "Acro sur le lac"}, "lz": {"e": -15.4635, "n": -10.994, "r": 0.016, "name": "Plage de Doussard"}, "beaches": [{"id": "off", "x0": 462, "x1": 472, "y0": 27, "y1": 37}, {"id": "pub", "x0": 427, "x1": 447, "y0": 37, "y1": 50}]}, "decal": {"src": "assets/doussard.jpg", "e0": -16.603, "e1": -14.763, "nTop": -10.916, "nBot": -12.643}, "links": []}, {"id": 3, "twist": true, "hearts": 8, "json": "assets/monde-niveau3.json", "texNear": "assets/sol-niveau3.jpg", "texMid": null, "HS": 14, "sinkMul": 1.15, "thermMul": 1.5, "gb": false, "bonusT": 5400, "bonusDiv": 3, "extraTherm": [{"e": 3.95, "n": -3.55, "s": 8.5, "r": 420, "fe": 1, "fn": 0}, {"e": 5.2, "n": -2.4, "s": 4.0, "r": 260, "fe": 0.9, "fn": 0.3}], "day": {"start": 9.5, "rate": 6, "end": 21.0}, "intro": {"src": "assets/video-giettaz.mp4", "cap": "Décollage, face est, 9h30"}, "boost": {"e": 5.6, "n": -3.9, "r": 4.0, "mul": 1.8}, "lzAt": "à La Giettaz", "heartAt": {"1": {"e": 21.46, "n": 3.78}}, "crossFinish": true, "acro": {"box": {"e": -19.6, "n": -5.5, "r": 2.4, "name": "Acro sur le lac"}, "lz": {"e": -15.9, "n": -13.4, "r": 0.5, "name": "Doussard"}}, "accel": {"v1": 55, "v2": 72, "t": 5}, "days": [{"day": "mer", "date": "30/09", "icon": "cloud", "pct": "12%", "tmax": 24, "tmin": 15, "wind": "→ 2 m/s", "rain": "–", "sun": "0 h", "msg": "Voile d'école : pas de soleil, ça ne tire pas fort", "wx": {"school": true, "grey": true, "therm": 0.55}}, {"day": "jeu", "date": "01/10", "icon": "storm", "pct": "85%", "tmax": 19, "tmin": 15, "wind": "↗ 2 m/s", "rain": "5-10 mm", "sun": "0 h", "msg": "Ciel noir sur les Aravis…", "wx": {"storm": true, "grey": true}}, {"day": "ven", "date": "02/10", "icon": "suncloud", "pct": "2%", "tmax": 22, "tmin": 13, "wind": "↓ 2 m/s", "rain": "–", "sun": "3 h", "msg": "Du soleil, mais une inversion bloque les plafonds", "wx": {"ceil": 1700}}, {"day": "sam", "date": "03/10", "icon": "sun", "pct": "23%", "tmax": 24, "tmin": 12, "wind": "calme", "rain": "–", "sun": "journée", "msg": "Journée parfaite : à toi le triangle !", "wx": {}}], "lzSub": "Arrivée · traverse la balise", "cps": [{"name": "Col des Aravis", "e": 3.238, "n": -3.469}, {"name": "Chamonix", "e": 34.58, "n": 2.191, "r": 1.0}, {"name": "Chambéry", "e": -35.866, "n": -36.585, "r": 1.5}, {"name": "Annecy", "e": -22.774, "n": -0.556, "r": 0.8}, {"name": "La Giettaz", "e": 5.686, "n": -4.871, "r": 0.8, "landing": true}], "eyebrow": "PAGE TEST · Niveau 3 · une journée entière", "title": "Méga triangle<br>de Jojo", "jojo": true, "lede": "Départ du Col des Aravis, face est, qui marche le matin. Chamonix, Chambéry, Annecy, puis retour à La Giettaz : traverse la balise et c'est gagné : près de 180 km. La journée défile : l'horloge avance 6 fois plus vite que le jeu, et les thermiques suivent le soleil. Faces est le matin, sud à midi, ouest en fin de journée. À la nuit (21h), le vol s'arrête.", "note": "Balises : Chamonix 1 km, Chambéry 1,5 km, Annecy 800 m. Regarde l'heure et le soleil en haut : choisis les faces qui chauffent. 2 h de jeu maximum = 12 h de vol. Bonus : 1 point toutes les 3 secondes sous 1 h 30 de jeu.", "course": [["", "D", "Col des Aravis", "Décollage face est, à prendre le matin", "1 486 m"], ["b", "1", "Chamonix", "Au pied du Mont-Blanc · +200 pts", "1 035 m"], ["b", "2", "Chambéry", "Au bout des Bauges · +200 pts", "≈ 270 m"], ["b", "3", "Annecy", "Le lac et la vieille ville · +200 pts", "447 m"], ["l", "P", "Arrivée La Giettaz", "Traverse la balise (800 m), à n'importe quelle hauteur · +300 pts", "≈ 1 060 m"]], "links": []}, {"id": 4, "heartAt": {"0": {"merle": true, "deco": true}}, "twist": true, "hearts": 6, "json": "assets/monde-niveau2.json", "texNear": "assets/sol-niveau2.jpg", "texMid": null, "HS": 14, "sinkMul": 1.35, "gb": false, "bonusT": 0, "cps": [{"name": "Crêt du Loup", "e": 2.307, "n": -1.433}, {"name": "Pointe Percée", "e": 10.275, "n": 5.763, "r": 0.5}, {"name": "Lachat du Grand-Bornand", "e": 4.175, "n": 6.02, "r": 0.5}, {"name": "Annecy", "e": -22.705, "n": -0.556, "r": 0.6}, {"name": "Roc des Bœufs", "e": -20.3, "n": -16.66, "r": 0.5}, {"name": "Cortibot", "e": 0.697, "n": 0.222, "r": 0.3, "landing": true}], "eyebrow": "PAGE TEST · Niveau Acro · Lac d'Annecy", "title": "Vol<br>acro", "lede": "Direct au-dessus du lac d'Annecy : wing over, SAT, tumbling, hélico. 5 minutes de séance, jusqu'à 150 m au-dessus de l'eau, puis posé sur la plage de Doussard face à la brise d'Annecy (10 km/h). Après la séance : figures libres sans points jusqu'au posé. Petite plage officielle : points. Grande plage : sans points. Dans l'eau : game over.", "note": "Wing over : renvoie la voile quand elle passe à la verticale. Virage tenu : 360 puis SAT. Après 3 tours de SAT, inverse : tumbling (2 tours stables, puis garde l'axe avec ← →, sortie : frein quand la voile est au-dessus, en parachutale prête pour l'hélico). Freins sous 23 km/h : décrochage, petites touches d'un côté au rythme d'une par seconde : hélico. Wing over au max : ↑ en haut = looping (tiens le côté), ↓ en haut = asymétrique, ↓ en fin de tour = Infinity, ↑ en fin de tour = looping. En fin de looping : ↑ encore un, ↓ asymétrique. Côté tenu : virage de plus en plus engagé jusqu'à la SAT. En SAT : ↑ = Misty Flip (2 enchaînés maximum : au 3e sans autre figure entre deux, tu tombes dans la voile), renfonce le côté une fois par seconde = Rythmic SAT. Varie les figures : la même 3 fois de suite ne rapporte plus rien.", "course": [["", "A", "Zone acro", "Au-dessus du bout du lac · 5 min · jusqu'à 150 m", ""], ["l", "P", "Posé plage de Doussard", "Petite plage officielle : +300 et précision · grande plage : 0 pt · dans l'eau : game over", "447 m"]], "acro": {"box": {"e": -15.75, "n": -10.3, "r": 1.0, "name": "Acro sur le lac"}, "lz": {"e": -15.4635, "n": -10.994, "r": 0.016, "name": "Plage de Doussard"}, "beaches": [{"id": "off", "x0": 462, "x1": 472, "y0": 27, "y1": 37}, {"id": "pub", "x0": 427, "x1": 447, "y0": 37, "y1": 50}]}, "decal": {"src": "assets/doussard.jpg", "e0": -16.603, "e1": -14.763, "nTop": -10.916, "nBot": -12.643}, "links": [], "acroOnly": true}, {"id": 0, "rookie": true, "tuto": true, "json": "assets/monde.json", "texNear": "assets/sol-proche.jpg", "texMid": "assets/sol-large.jpg", "HS": 3, "gb": false, "bonusT": 400, "hearts": 0, "wingScale": 0.55, "sinkMul": 1.58, "liftMul": 0.45, "ceil": {"after": 0, "alt": 1650}, "cps": [{"name": "Crêt du Merle", "e": 1.45, "n": -0.55}, {"name": "Cortibot", "e": 0.697, "n": 0.222, "r": 0.3, "landing": true}], "eyebrow": "PAGE TEST · Niveau 0 · Vol découverte · Rookie", "title": "Premier vol<br>au Crêt du Merle", "lede": "Ton tout premier vol : décollage du Crêt du Merle avec une petite voile d'école, quelques virages au-dessus de La Clusaz, puis l'approche et le posé au Cortibot. Pas de balise : juste le plaisir de voler et un beau posé.", "note": "Petite voile : elle colle au relief et ne monte presque pas. Suis les conseils à l'écran, puis fais ta PTU (vent arrière, base, finale) et freine au dernier moment.", "course": [["", "D", "Crêt du Merle", "Décollage, petite voile d'école", "≈ 1 430 m"], ["l", "P", "Posé au Cortibot", "PTU, cible sur la croix, arrondi", "≈ 1 065 m"]], "links": []}, {"id": 5, "ski": true, "lzAt": "sur le replat sous les Aiglons", "lzSub": "Posé sur le plat · vise la cible", "landVid": {"src": "assets/video-aiglon-pose.mp4", "cap": "Posé à ski sur le replat", "dur": 4}, "intro": {"src": "assets/video-beauregard.mp4", "cap": "Décollage à ski · Beauregard"}, "json": "assets/monde.json", "texNear": "assets/sol-proche.jpg", "texMid": "assets/sol-large.jpg", "HS": 1, "gb": false, "bonusT": 150, "hearts": 0, "wingScale": 0.6, "vMul": 1.45, "sinkMul": 1.05, "turnMul": 1.7, "liftMul": 0, "spawnH": 4, "noValleyWind": true, "camBack": 13, "camUp": 4.5, "camLook": -4, "cps": [{"name": "Sommet des Aiglons", "e": -2.25, "n": -2.0}, {"name": "Replat sous les Aiglons", "e": -1.15, "n": -2.18, "r": 0.12, "landing": true}], "eyebrow": "PAGE TEST · Hiver · Beauregard · speed riding", "title": "Vol<br>L'Aiglon", "lede": "Décollage à ski au sommet du téléski des Aiglons, petite voile rapide : slalome entre les portes, rase la neige, évite sapins, pylônes et skieurs, longe le téléski, pose-toi dans la cible du replat. Deux manches : un vol court, puis un vol long avec chicane ; les points s'additionnent.", "note": "Petite voile : 55 km/h et ça plonge, 70 km/h à l'accélérateur (et ça chute bien plus), jusqu'à 100 km/h avec les cœurs d'Oriane (+15 km/h chacun). Oreilles en virage : stabilo, la voile se couche et frotte la neige ; posé au stabilo = +100. Frein ↓ au ras de la neige pour rebondir. Porte = +50, touch & go = +100 (3 max). Sapin, pylône ou câble = −50 et retour à la dernière porte ; skieur frôlé = −50, tu continues.", "course": [["", "D", "Sommet des Aiglons", "Décollage à ski", "≈ 1 690 m"], ["b", "1", "Manche 1 · vol court", "10 portes, +50 chacune", ""], ["b", "2", "Manche 2 · vol long", "18 portes, chicane au milieu · départ 10 s après le premier posé", ""], ["l", "P", "Replat sous les Aiglons", "Posé dans la cible, posé stabilo +100", "≈ 1 460 m"]], "links": []}];var i=0;try{i=+sessionStorage.getItem('testLv')||0}catch(e){}var o=L[i]||L[0];o.test=true;o.vr=true;o.testIdx=i;o.testNames=["Niv. 1", "Niv. 2", "Niv. 3", "Acro", "Rookie", "Aiglon"];return o})();</script>
+<script>window.LEVEL=(function(){var L=[{"id": 1, "heartAt": {"0": {"merle": true, "deco": true}}, "extraHearts": [{"e": 6.2, "n": 3.08, "y": 2064, "leg": 0, "kind": "alt", "boost": 100}], "hearts": 4, "gbBalise": true, "ceil": {"after": 1, "alt": 2500}, "extraTherm": [{"e": 6.2, "n": 3.08, "s": 4.7, "r": 320, "fixed": true, "gy": 1600}], "pose360": true, "json": "assets/monde.json", "texNear": "assets/sol-proche.jpg", "texMid": "assets/sol-large.jpg", "HS": 14, "gb": true, "bonusT": 600, "cps": [{"name": "Crêt du Loup", "e": 2.307, "n": -1.433}, {"name": "Trou de la Mouche", "e": 6.947, "n": 1.329, "r": 0.4}, {"name": "Tête du Danay", "e": 1.962, "n": 2.026, "r": 0.4}, {"name": "Grand-Bornand", "e": 0.4, "n": 4.1, "r": 0.4}, {"name": "Retenue de Beauregard", "e": -1.034, "n": -0.554, "r": 0.4}, {"name": "Cortibot", "e": 0.697, "n": 0.222, "r": 0.3, "landing": true}], "eyebrow": "PAGE TEST · Niveau 1 · Vol performance · relief réel des Aravis", "title": "Tour de<br>La Clusaz", "lede": "Décolle du Crêt du Loup, enroule les thermiques pour monter, passe les quatre balises et pose-toi au Cortibot. Au soleil ça monte, à l'ombre des nuages ça descend. Un gros thermique se cache pas loin du déco pour faire le plein : à toi de le trouver. Plus tu montes, plus il tire.", "note": "Balise = cylindre de 400 m de rayon, à n'importe quelle hauteur. Le vario est en temps réel : +3 m/s, c'est 3 mètres gagnés par seconde. Bonus : 1 point par seconde sous les 10 minutes.", "course": [["", "D", "Crêt du Loup", "Décollage, puis cherche de quoi faire le plein", "1 858 m"], ["b", "1", "Trou de la Mouche", "L'arche dans la chaîne des Aravis · +200 pts", "2 453 m"], ["b", "2", "Tête du Danay", "Au-dessus des Confins · +200 pts", "1 731 m"], ["b", "3", "Grand-Bornand", "Ça descend fort : rentre par la vallée de Saint-Jean-de-Sixt · +200 pts, vaché là-bas = −100 pts", "≈ 950 m"], ["b", "4", "Retenue de Beauregard", "Montagne de Beauregard en mode hiver · +200 pts", "≈ 1 350 m"], ["l", "P", "Posé au Cortibot", "10 route de Plattuy · +300 pts, +200 si pile dans la cible, +300 en posé 360 (3 tours à 0,5 m)", "≈ 1 065 m"], ["", "↑", "Plafond à 2 100 m", "Après le Trou de la Mouche, les thermiques ne montent plus au-dessus", ""]], "links": []}, {"id": 2, "heartAt": {"0": {"merle": true, "deco": true}}, "twist": true, "hearts": 6, "json": "assets/monde-niveau2.json", "texNear": "assets/sol-niveau2.jpg", "texMid": null, "HS": 14, "sinkMul": 1.35, "gb": false, "bonusT": 1800, "cps": [{"name": "Crêt du Loup", "e": 2.307, "n": -1.433}, {"name": "Pointe Percée", "e": 10.275, "n": 5.763, "r": 0.5}, {"name": "Lachat du Grand-Bornand", "e": 4.175, "n": 6.02, "r": 0.5}, {"name": "Annecy", "e": -22.705, "n": -0.556, "r": 0.6}, {"name": "Roc des Bœufs", "e": -20.3, "n": -16.66, "r": 0.5}, {"name": "Cortibot", "e": 0.697, "n": 0.222, "r": 0.3, "landing": true}], "eyebrow": "PAGE TEST · Niveau 2 · Vol prestige · des Aravis au lac d'Annecy", "title": "Grand Tour<br>des Aravis", "lede": "Du Crêt du Loup à la Pointe Percée, puis le Lachat du Grand-Bornand, Annecy, le Roc des Bœufs et retour au Cortibot : près de 90 km de cross. Fais le plein en partant, enroule chaque thermique, choisis tes crêtes au soleil et traverse le lac bien haut.", "note": "Balises = cylindres de 500 m, 600 m pour Annecy. Au-dessus du lac d'Annecy, pas de thermique : traverse haut ou c'est la baignade (−100). Bonus : 1 point par seconde sous les 30 minutes.", "course": [["", "D", "Crêt du Loup", "Décollage, fais le plein avant de partir", "1 858 m"], ["b", "1", "Pointe Percée", "Le toit des Aravis · +200 pts", "2 750 m"], ["b", "2", "Lachat du Grand-Bornand", "Le déco du Grand-Bornand · +200 pts", "2 100 m"], ["b", "3", "Annecy", "Au-dessus de la vieille ville et du lac · +200 pts", "447 m"], ["b", "4", "Roc des Bœufs", "Dans les Bauges, au sud du lac · +200 pts", "1 774 m"], ["l", "P", "Retour au Cortibot", "10 route de Plattuy · +300 pts, +200 si pile dans la cible", "≈ 1 065 m"]], "acro": {"box": {"e": -15.75, "n": -10.3, "r": 1.0, "name": "Acro sur le lac"}, "lz": {"e": -15.4635, "n": -10.994, "r": 0.016, "name": "Plage de Doussard"}, "beaches": [{"id": "off", "x0": 462, "x1": 472, "y0": 27, "y1": 37}, {"id": "pub", "x0": 427, "x1": 447, "y0": 37, "y1": 50}]}, "decal": {"src": "assets/doussard.jpg", "e0": -16.603, "e1": -14.763, "nTop": -10.916, "nBot": -12.643}, "links": []}, {"id": 3, "twist": true, "hearts": 8, "json": "assets/monde-niveau3.json", "texNear": "assets/sol-niveau3.jpg", "texMid": null, "HS": 14, "sinkMul": 1.15, "thermMul": 1.5, "gb": false, "bonusT": 5400, "bonusDiv": 3, "extraTherm": [{"e": 3.95, "n": -3.55, "s": 8.5, "r": 420, "fe": 1, "fn": 0}, {"e": 5.2, "n": -2.4, "s": 4.0, "r": 260, "fe": 0.9, "fn": 0.3}], "day": {"start": 9.5, "rate": 6, "end": 21.0}, "intro": {"src": "assets/video-giettaz.mp4", "cap": "Décollage, face est, 9h30"}, "boost": {"e": 5.6, "n": -3.9, "r": 4.0, "mul": 1.8}, "lzAt": "à La Giettaz", "heartAt": {"1": {"e": 21.46, "n": 3.78}}, "crossFinish": true, "acro": {"box": {"e": -19.6, "n": -5.5, "r": 2.4, "name": "Acro sur le lac"}, "lz": {"e": -15.9, "n": -13.4, "r": 0.5, "name": "Doussard"}}, "accel": {"v1": 55, "v2": 72, "t": 5}, "days": [{"day": "mer", "date": "30/09", "icon": "cloud", "pct": "12%", "tmax": 24, "tmin": 15, "wind": "→ 2 m/s", "rain": "–", "sun": "0 h", "msg": "Voile d'école : pas de soleil, ça ne tire pas fort", "wx": {"school": true, "grey": true, "therm": 0.55}}, {"day": "jeu", "date": "01/10", "icon": "storm", "pct": "85%", "tmax": 19, "tmin": 15, "wind": "↗ 2 m/s", "rain": "5-10 mm", "sun": "0 h", "msg": "Ciel noir sur les Aravis…", "wx": {"storm": true, "grey": true}}, {"day": "ven", "date": "02/10", "icon": "suncloud", "pct": "2%", "tmax": 22, "tmin": 13, "wind": "↓ 2 m/s", "rain": "–", "sun": "3 h", "msg": "Du soleil, mais une inversion bloque les plafonds", "wx": {"ceil": 1700}}, {"day": "sam", "date": "03/10", "icon": "sun", "pct": "23%", "tmax": 24, "tmin": 12, "wind": "calme", "rain": "–", "sun": "journée", "msg": "Journée parfaite : à toi le triangle !", "wx": {}}], "lzSub": "Arrivée · traverse la balise", "cps": [{"name": "Col des Aravis", "e": 3.238, "n": -3.469}, {"name": "Chamonix", "e": 34.58, "n": 2.191, "r": 1.0}, {"name": "Chambéry", "e": -35.866, "n": -36.585, "r": 1.5}, {"name": "Annecy", "e": -22.774, "n": -0.556, "r": 0.8}, {"name": "La Giettaz", "e": 5.686, "n": -4.871, "r": 0.8, "landing": true}], "eyebrow": "PAGE TEST · Niveau 3 · une journée entière", "title": "Méga triangle<br>de Jojo", "jojo": true, "lede": "Départ du Col des Aravis, face est, qui marche le matin. Chamonix, Chambéry, Annecy, puis retour à La Giettaz : traverse la balise et c'est gagné : près de 180 km. La journée défile : l'horloge avance 6 fois plus vite que le jeu, et les thermiques suivent le soleil. Faces est le matin, sud à midi, ouest en fin de journée. À la nuit (21h), le vol s'arrête.", "note": "Balises : Chamonix 1 km, Chambéry 1,5 km, Annecy 800 m. Regarde l'heure et le soleil en haut : choisis les faces qui chauffent. 2 h de jeu maximum = 12 h de vol. Bonus : 1 point toutes les 3 secondes sous 1 h 30 de jeu.", "course": [["", "D", "Col des Aravis", "Décollage face est, à prendre le matin", "1 486 m"], ["b", "1", "Chamonix", "Au pied du Mont-Blanc · +200 pts", "1 035 m"], ["b", "2", "Chambéry", "Au bout des Bauges · +200 pts", "≈ 270 m"], ["b", "3", "Annecy", "Le lac et la vieille ville · +200 pts", "447 m"], ["l", "P", "Arrivée La Giettaz", "Traverse la balise (800 m), à n'importe quelle hauteur · +300 pts", "≈ 1 060 m"]], "links": []}, {"id": 4, "heartAt": {"0": {"merle": true, "deco": true}}, "twist": true, "hearts": 6, "json": "assets/monde-niveau2.json", "texNear": "assets/sol-niveau2.jpg", "texMid": null, "HS": 14, "sinkMul": 1.35, "gb": false, "bonusT": 0, "cps": [{"name": "Crêt du Loup", "e": 2.307, "n": -1.433}, {"name": "Pointe Percée", "e": 10.275, "n": 5.763, "r": 0.5}, {"name": "Lachat du Grand-Bornand", "e": 4.175, "n": 6.02, "r": 0.5}, {"name": "Annecy", "e": -22.705, "n": -0.556, "r": 0.6}, {"name": "Roc des Bœufs", "e": -20.3, "n": -16.66, "r": 0.5}, {"name": "Cortibot", "e": 0.697, "n": 0.222, "r": 0.3, "landing": true}], "eyebrow": "PAGE TEST · Niveau Acro · Lac d'Annecy", "title": "Vol<br>acro", "lede": "Direct au-dessus du lac d'Annecy : wing over, SAT, tumbling, hélico. 5 minutes de séance, jusqu'à 150 m au-dessus de l'eau, puis posé sur la plage de Doussard face à la brise d'Annecy (10 km/h). Après la séance : figures libres sans points jusqu'au posé. Petite plage officielle : points. Grande plage : sans points. Dans l'eau : game over.", "note": "Wing over : renvoie la voile quand elle passe à la verticale. Virage tenu : 360 puis SAT. Après 3 tours de SAT, inverse : tumbling (2 tours stables, puis garde l'axe avec ← →, sortie : frein quand la voile est au-dessus, en parachutale prête pour l'hélico). Freins sous 23 km/h : décrochage, petites touches d'un côté au rythme d'une par seconde : hélico. Wing over au max : ↑ en haut = looping (tiens le côté), ↓ en haut = asymétrique, ↓ en fin de tour = Infinity, ↑ en fin de tour = looping. En fin de looping : ↑ encore un, ↓ asymétrique. Côté tenu : virage de plus en plus engagé jusqu'à la SAT. En SAT : ↑ = Misty Flip (2 enchaînés maximum : au 3e sans autre figure entre deux, tu tombes dans la voile), renfonce le côté une fois par seconde = Rythmic SAT. Varie les figures : la même 3 fois de suite ne rapporte plus rien.", "course": [["", "A", "Zone acro", "Au-dessus du bout du lac · 5 min · jusqu'à 150 m", ""], ["l", "P", "Posé plage de Doussard", "Petite plage officielle : +300 et précision · grande plage : 0 pt · dans l'eau : game over", "447 m"]], "acro": {"box": {"e": -15.75, "n": -10.3, "r": 1.0, "name": "Acro sur le lac"}, "lz": {"e": -15.4635, "n": -10.994, "r": 0.016, "name": "Plage de Doussard"}, "beaches": [{"id": "off", "x0": 462, "x1": 472, "y0": 27, "y1": 37}, {"id": "pub", "x0": 427, "x1": 447, "y0": 37, "y1": 50}]}, "decal": {"src": "assets/doussard.jpg", "e0": -16.603, "e1": -14.763, "nTop": -10.916, "nBot": -12.643}, "links": [], "acroOnly": true}, {"id": 0, "rookie": true, "tuto": true, "json": "assets/monde.json", "texNear": "assets/sol-proche.jpg", "texMid": "assets/sol-large.jpg", "HS": 3, "gb": false, "bonusT": 400, "hearts": 0, "wingScale": 0.55, "sinkMul": 1.58, "liftMul": 0.45, "ceil": {"after": 0, "alt": 1650}, "cps": [{"name": "Crêt du Merle", "e": 1.45, "n": -0.55}, {"name": "Cortibot", "e": 0.697, "n": 0.222, "r": 0.3, "landing": true}], "eyebrow": "PAGE TEST · Niveau 0 · Vol découverte · Rookie", "title": "Premier vol<br>au Crêt du Merle", "lede": "Ton tout premier vol : décollage du Crêt du Merle avec une petite voile d'école, quelques virages au-dessus de La Clusaz, puis l'approche et le posé au Cortibot. Pas de balise : juste le plaisir de voler et un beau posé.", "note": "Petite voile : elle colle au relief et ne monte presque pas. Suis les conseils à l'écran, puis fais ta PTU (vent arrière, base, finale) et freine au dernier moment.", "course": [["", "D", "Crêt du Merle", "Décollage, petite voile d'école", "≈ 1 430 m"], ["l", "P", "Posé au Cortibot", "PTU, cible sur la croix, arrondi", "≈ 1 065 m"]], "links": []}, {"id": 5, "ski": true, "lzAt": "sur le replat sous les Aiglons", "lzSub": "Posé sur le plat · vise la cible", "landVid": {"src": "assets/video-aiglon-pose.mp4", "cap": "Posé à ski sur le replat", "dur": 4}, "intro": {"src": "assets/video-beauregard.mp4", "cap": "Décollage à ski · Beauregard"}, "json": "assets/monde.json", "texNear": "assets/sol-proche.jpg", "texMid": "assets/sol-large.jpg", "HS": 1, "gb": false, "bonusT": 150, "hearts": 0, "wingScale": 0.6, "vMul": 1.45, "sinkMul": 1.05, "turnMul": 1.7, "liftMul": 0, "spawnH": 4, "noValleyWind": true, "camBack": 13, "camUp": 4.5, "camLook": -4, "cps": [{"name": "Sommet des Aiglons", "e": -2.25, "n": -2.0}, {"name": "Replat sous les Aiglons", "e": -1.15, "n": -2.18, "r": 0.12, "landing": true}], "eyebrow": "PAGE TEST · Hiver · Beauregard · speed riding", "title": "Vol<br>L'Aiglon", "lede": "Décollage à ski au sommet du téléski des Aiglons, petite voile rapide : slalome entre les portes, rase la neige, évite sapins, pylônes et skieurs, longe le téléski, pose-toi dans la cible du replat. Deux manches : un vol court, puis un vol long avec chicane ; les points s'additionnent.", "note": "Petite voile : 55 km/h et ça plonge, 70 km/h à l'accélérateur (et ça chute bien plus), jusqu'à 100 km/h avec les cœurs d'Oriane (+15 km/h chacun). Oreilles en virage : stabilo, la voile se couche et frotte la neige ; posé au stabilo = +100. Frein ↓ au ras de la neige pour rebondir. Porte = +50, touch & go = +100 (3 max). Sapin, pylône ou câble = −50 et retour à la dernière porte ; skieur frôlé = −50, tu continues.", "course": [["", "D", "Sommet des Aiglons", "Décollage à ski", "≈ 1 690 m"], ["b", "1", "Manche 1 · vol court", "10 portes, +50 chacune", ""], ["b", "2", "Manche 2 · vol long", "18 portes, chicane au milieu · départ 10 s après le premier posé", ""], ["l", "P", "Replat sous les Aiglons", "Posé dans la cible, posé stabilo +100", "≈ 1 460 m"]], "links": []}, {"id": 6, "raid": true, "json": "assets/monde.json", "json2": "assets/monde-niveau2.json", "texNear": "assets/sol-proche.jpg", "texMid": "assets/sol-niveau2.jpg", "HS": 10, "sinkMul": 1.15, "gb": false, "hearts": 0, "bonusT": 0, "crossFinish": true, "extraTherm": [{"e": 2.05, "n": 1.45, "s": 4.5, "r": 320, "fixed": true, "gy": 1300}], "cps": [{"name": "Crêt du Loup", "e": 2.307, "n": -1.433}, {"name": "Tête du Danay", "e": 1.962, "n": 2.026, "r": 0.4}, {"name": "Beauregard", "e": -2.25, "n": -2.0, "r": 0.35, "landing": true}], "acro": {"box": {"e": -15.75, "n": -10.3, "r": 1.0, "name": "Acro sur le lac"}, "lz": {"e": -15.6, "n": -9.9, "r": 0.011, "name": "Radeau Aravis Parapente"}, "beaches": [{"id": "off", "x0": 462, "x1": 472, "y0": 27, "y1": 37}, {"id": "pub", "x0": 427, "x1": 447, "y0": 37, "y1": 50}]}, "decal": {"src": "assets/doussard.jpg", "e0": -16.603, "e1": -14.763, "nTop": -10.916, "nBot": -12.643}, "eyebrow": "PAGE TEST · Niveau 6 · toutes les disciplines", "title": "Aravis X<br>Raid", "lede": "Cinq disciplines enchaînées sans pause : cross du Crêt du Loup à Beauregard par la balise du Danay (à passer au-dessus de 1 850 m), descente en speed riding, changement d'aile et vol express entre les montgolfières jusqu'à la Dent de Lanfon, acro au-dessus du lac et posé sur le radeau, puis ski nautique tracté par le bateau entre les bouées Aravis Parapente jusqu'au podium de la plage de Doussard. Seul contre trois pilotes de l'ordinateur, ou en ligne entre amis.", "note": "Les points s'additionnent d'une étape à l'autre, avec un bonus à chaque changement de discipline pour les premiers arrivés (1er +150, 2e +100, 3e +50). Armement : F tir, R missile (garde la cible 1 s dans le viseur), M mine en speed riding et sur le lac. N coupe la musique.", "course": [["", "1", "Cross", "Crêt du Loup → balise Danay → Beauregard", ""], ["b", "2", "Speed riding", "Slalom des Aiglons, posé dans la cible du replat", ""], ["b", "3", "Vol express", "Changement d'aile, balise Dent de Lanfon", ""], ["b", "4", "Acro + radeau", "Séance d'acro sur le lac, posé sur le radeau", ""], ["l", "5", "Ski nautique", "Bouées Aravis Parapente jusqu'à la plage de Doussard", "447 m"]], "links": []}];var i=0;try{i=+sessionStorage.getItem('testLv')||0}catch(e){}var o=L[i]||L[0];o.test=true;o.vr=true;o.testIdx=i;o.testNames=["Niv. 1", "Niv. 2", "Niv. 3", "Acro", "Rookie", "Aiglon", "Raid"];return o})();</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function(){
@@ -538,7 +545,7 @@ function rnd(seed){let s=seed>>>0;return()=>{s=Math.imul(s^(s>>>15),2246822519)+
 // Repère : x = est (m), z = sud (m), y = altitude (m). Origine 45.904 N, 6.423 E (La Clusaz).
 const KM=1000;
 const CP=LV.cps.map(c=>Object.assign({},c));
-const NB=CP.length-2,LZ=CP.length-1;   // nombre de balises, index du posé
+let NB=CP.length-2,LZ=CP.length-1;   // nombre de balises, index du posé
 const BEAU={x:-1034,z:554},TDM={x:6947,z:-1329};
 CP.forEach(c=>{c.x=c.e*KM;c.z=-c.n*KM;c.R=(c.r||0)*KM});
 // Zone du Grand-Bornand : au nord de la crête du Danay
@@ -699,7 +706,7 @@ function thermalLift(x,y,z){let l=0;for(const t of THERM){const dx=x-t.x-WIND.x*
 // ================= Décor =================
 function buildProps(){
   // Épicéas depuis la vue satellite
-  const tr=W.trees,N=Math.min(tr.length/2,coarse?2000:7000);const SK=LV.ski?skiBox():null;
+  const tr=W.trees,N=Math.min(tr.length/2,coarse?2000:7000);const SK=(LV.ski||LV.raid)?skiBox():null;
   const merged=spruceGeo(19,false);
   const trees=new THREE.InstancedMesh(merged,new THREE.MeshLambertMaterial({color:0xffffff,vertexColors:true}),N);const ND=Math.ceil(N/40),dead=new THREE.InstancedMesh(deadGeo(),new THREE.MeshLambertMaterial({color:'#8d8b86'}),ND);let nd=0;
   const m=new THREE.Matrix4(),q=new THREE.Quaternion(),s=new THREE.Vector3(),p=new THREE.Vector3(),c=new THREE.Color(),R=rnd(5);
@@ -757,6 +764,7 @@ function makeBird(span){const g=new THREE.Group();const wg=new THREE.BufferGeome
 let snowPts=null;let birds=[],gbBirds=[],gbLabel=null,merleLabel=null,merleCu=null;
 function buildBirds(){birds.forEach(b=>scene.remove(b.g));birds=[];const r=rnd(21);
   THERM.forEach((t,i)=>{if(i%2||t.fixed)return;const g=makeBird(r()>.5?2.6:1.2);g.scale.setScalar(2.2);birds.push({g,t,ph:r()*6.28,alt:t.gy+250+r()*500,rad:40+r()*30})});
+  if(LV.raid)THERM.filter(t=>t.fixed).forEach(t=>{for(let k=0;k<4;k++){const g=makeBird(2.6);g.scale.setScalar(2.6);birds.push({g,t,ph:k*1.57,alt:1650+k*70,rad:60+k*15})}});
   gbBirds.forEach(b=>scene.remove(b.g));gbBirds=[];
   for(let i=0;i<3;i++){const g=makeBird(2.4);g.scale.setScalar(2.4);gbBirds.push({g,ph:i*2.1,alt:1450+i*60,rad:70+i*25})}
   if(!gbLabel){gbLabel=textSprite('On vole sur le dos pour ne pas voir la misère','#10233a','rgba(255,244,208,.95)');scene.add(gbLabel)}
@@ -872,12 +880,12 @@ function buildGates(){const subs=CP.map((c,i)=>i===LZ?(LV.lzSub||'Posé · 10 ro
     const cyl=new THREE.Mesh(new THREE.CylinderGeometry(c.R,c.R,h,72,1,true),mat);cyl.position.set(c.x,gy-80+h/2,c.z);cyl.renderOrder=5;scene.add(cyl);
     const sm=new THREE.SpriteMaterial({map:labelTex(i===LZ?'P':String(i),c.name,subs[i]),depthTest:false,transparent:true,sizeAttenuation:false});
     const sp=new THREE.Sprite(sm);sp.scale.set(.26,.061,1);sp.position.set(c.x,gy+450,c.z);sp.renderOrder=20;scene.add(sp);gates.push({cyl,mat,sp,sm})}
-  if(ACRO){const c=ACRO.lz,gy=groundY(c.x,c.z),h=3200;const mat=new THREE.MeshBasicMaterial({color:'#1f9d5c',map:stripeTex,transparent:true,opacity:.3,side:THREE.DoubleSide,depthWrite:false});
+  if(ACRO&&!acroGate){const c=ACRO.lz,gy=groundY(c.x,c.z),h=3200;const mat=new THREE.MeshBasicMaterial({color:'#1f9d5c',map:stripeTex,transparent:true,opacity:.3,side:THREE.DoubleSide,depthWrite:false});
     const cyl=new THREE.Mesh(new THREE.CylinderGeometry(Math.max(c.R,120),Math.max(c.R,120),h,48,1,true),mat);cyl.position.set(c.x,gy-80+h/2,c.z);cyl.renderOrder=5;cyl.visible=false;scene.add(cyl);
     const sm=new THREE.SpriteMaterial({map:labelTex('P',c.name,LV.acro?'Pose-toi face à la brise':'Atterrissage · accélère 10 s vers moi'),depthTest:false,transparent:true,sizeAttenuation:false});
     const sp=new THREE.Sprite(sm);sp.scale.set(.26,.061,1);sp.position.set(c.x,gy+700,c.z);sp.renderOrder=20;sp.visible=false;scene.add(sp);acroGate={cyl,mat,sp}}}
 let acroGate=null;
-function lzTargets(){const L=[];if(!LV.crossFinish&&!LV.acroOnly)L.push(CP[LZ]);if(ACRO)L.push(ACRO.lz);return L}
+function lzTargets(){if(LV.raid)return RAID?RAID.lzt:[];const L=[];if(!LV.crossFinish&&!LV.acroOnly)L.push(CP[LZ]);if(ACRO)L.push(ACRO.lz);return L}
 const WUP=WIND.clone().setY(0).normalize(),WSIDE=new THREE.Vector3(-WUP.z,0,WUP.x);   // vent de vallée (vers l'ENE) et côté sud de la PTU
 // Cortibot d'après la carte de Samuel (échelle 50 m = 117 px, croix en 293,510) : terrain, route, tennis
 const CORTI_MPX=50/117,CORTI={field:[[293,440],[352,535],[165,655],[103,508]],road:[[15,512],[200,466],[300,416],[440,360],[520,332],[645,290]],tennis:[[268,300],[375,258],[410,335],[305,378]]};
@@ -891,8 +899,8 @@ let PTU=[];
 // ---------- Aiglon : speed riding (portes, sapins, pylônes et câble du téléski, skieurs, touch & go)
 const SKI={gates:[],trees:[],pylons:[],cables:[],skiers:[],crowd:[],hearts:[],puffs:[],pi:0,line:null};
 const SKI_H=1.45;function skiGround(p){const f=Math.sin(p.h),g=-Math.cos(p.h);let m=groundY(p.pos.x,p.pos.z);for(const [a,b] of [[1.6,0],[-1.2,0],[0,1],[0,-1]]){const x=p.pos.x+f*a+g*b,z=p.pos.z+g*a-f*b;m=Math.max(m,groundY(x,z))}return m}
-function skiBox(){const A=CP[0],B=CP[LZ];return [Math.min(A.x,B.x)-350,Math.max(A.x,B.x)+350,Math.min(A.z,B.z)-350,Math.max(A.z,B.z)+350]}
-function buildSki(){const A=CP[0],B=CP[LZ],dx=B.x-A.x,dz=B.z-A.z,L=Math.hypot(dx,dz),ux=dx/L,uz=dz/L,nx=-uz,nz=ux,R=rnd(11);SKI.dir={ux,uz,nx,nz,L,h:Math.atan2(ux,-uz)};
+function skiBox(){const A=SKI.A||CP[0],B=SKI.B||CP[LZ];return [Math.min(A.x,B.x)-350,Math.max(A.x,B.x)+350,Math.min(A.z,B.z)-350,Math.max(A.z,B.z)+350]}
+function buildSki(){const A=SKI.A||CP[0],B=SKI.B||CP[LZ],dx=B.x-A.x,dz=B.z-A.z,L=Math.hypot(dx,dz),ux=dx/L,uz=dz/L,nx=-uz,nz=ux,R=rnd(11);SKI.dir={ux,uz,nx,nz,L,h:Math.atan2(ux,-uz)};
   // oriflammes Aravis Parapente (voile « plume » sur mât courbe), bleu / orange en alternance
   const pole=new THREE.CylinderGeometry(.07,.09,5.6,6);pole.translate(0,2.8,0);const poleM=new THREE.MeshLambertMaterial({color:'#dfe4e8'});
   const fsh=new THREE.Shape();fsh.moveTo(0,.7);fsh.lineTo(0,5.4);fsh.quadraticCurveTo(.2,5.75,1.35,5.2);fsh.quadraticCurveTo(1.55,3,1.15,.95);fsh.lineTo(0,.7);
@@ -953,7 +961,7 @@ function buildSki(){const A=CP[0],B=CP[LZ],dx=B.x-A.x,dz=B.z-A.z,L=Math.hypot(dx
   for(let i=0;i<10;i++){const m=skier(SKO[i%SKO.length],false);SKI.skiers.push({g:m.g,L:m.L,sp:m.sp,t:R(),o:(R()-.5)*50,v:(.012+R()*.01)*Math.min(1,550/L),ph:R()*6.28})}
   // petit groupe du club à l'arrêt au bord de la piste, près des premières portes
   {const t0=.2,side=34;for(let i=0;i<5;i++){const o=side+(i%3)*1.4,tt=t0+i*.004,x=A.x+dx*tt+nx*o,z=A.z+dz*tt+nz*o;const m=skier(SKO[(i+2)%SKO.length],true);m.g.position.set(x,groundY(x,z),z);m.g.rotation.y=-SKI.dir.h+Math.PI/2+(R()-.5)*.9;SKI.crowd.push({x,z})}}}
-function updateSkiers(dt){if(!SKI.skiers.length)return;const A=CP[0],B=CP[LZ];SKI.skiers.forEach(s=>{s.t+=s.v*dt;if(s.t>1)s.t-=1;const w=Math.sin(s.t*40+s.ph)*14,o=s.o+w,x=A.x+(B.x-A.x)*s.t+SKI.dir.nx*o,z=A.z+(B.z-A.z)*s.t+SKI.dir.nz*o;s.x=x;s.z=z;s.g.position.set(x,groundY(x,z)+.02,z);const ph=s.t*40+s.ph;s.g.rotation.y=-SKI.dir.h+Math.cos(ph)*.5;if(s.L){const lean=-Math.cos(ph)*.55;s.L.rotation.z=lean;s.sp.material.opacity=Math.max(0,Math.abs(lean)-.25)*1.6;s.sp.position.x=-Math.sign(lean)*.5}})}
+function updateSkiers(dt){if(!SKI.skiers.length)return;const A=SKI.A||CP[0],B=SKI.B||CP[LZ];SKI.skiers.forEach(s=>{s.t+=s.v*dt;if(s.t>1)s.t-=1;const w=Math.sin(s.t*40+s.ph)*14,o=s.o+w,x=A.x+(B.x-A.x)*s.t+SKI.dir.nx*o,z=A.z+(B.z-A.z)*s.t+SKI.dir.nz*o;s.x=x;s.z=z;s.g.position.set(x,groundY(x,z)+.02,z);const ph=s.t*40+s.ph;s.g.rotation.y=-SKI.dir.h+Math.cos(ph)*.5;if(s.L){const lean=-Math.cos(ph)*.55;s.L.rotation.z=lean;s.sp.material.opacity=Math.max(0,Math.abs(lean)-.25)*1.6;s.sp.position.x=-Math.sign(lean)*.5}})}
 function skiHit(p){const x=p.pos.x,y=p.pos.y,z=p.pos.z,gy=groundY(x,z),agl=y-gy;
   for(const t of SKI.trees){if(Math.abs(t.x-x)<4&&Math.abs(t.z-z)<4&&Math.hypot(t.x-x,t.z-z)<2.8+.12*(t.h-agl)&&agl<t.h)return 'un sapin'}
   for(const q of SKI.pylons)if(Math.hypot(q.x-x,q.z-z)<1.8&&y<q.y+9.5)return 'un pylône du téléski';
@@ -963,7 +971,7 @@ function skiNextManche(){SKI.manche=2;SKI.nextT=null;SKI.sets[0].forEach(g=>g.g.
   players.forEach(p=>{Object.keys(p).forEach(k=>{if(/^(g|sh)\d+$/.test(k))delete p[k]});p.finished=false;p.tg=0;p.skiLast=null;p.snowT=0;p.apprLatch=false;p.apprA=0;p.apprMsg=false;p.flare=false;p.ptu=0;p.skiBoost=null;p.next=0;p.respawnWait=0;
     addPts(p,0,'— Manche 2 · vol long —');spawn(p,0,true);showMsg(p,'Manche 2 · vol long<small>18 portes, chicane au milieu · go !</small>',3)});
   if(typeof NET!=='undefined'&&NET.on){NET.sentEnd=false;NET.fin={};Object.values(NET.ghosts).forEach(G=>{G.fin=false})}chime(true)}
-function skiManches(dt){if(!LV.ski||SKI.manche!==1||mode!=='race')return;
+function skiManches(dt){if(!LV.ski||LV.raid||SKI.manche!==1||mode!=='race')return;
   if(SKI.nextT==null){const any=players.some(p=>p.finished)||(typeof NET!=='undefined'&&NET.on&&Object.values(NET.fin||{}).some(f=>f.ok&&f.mc===1));if(any)SKI.nextT=10}
   else{const s0=Math.ceil(SKI.nextT);SKI.nextT-=dt;const s1=Math.ceil(SKI.nextT);if(s1!==s0&&s1>0)players.forEach(p=>{if(p.finished||s1<=5)showMsg(p,'Manche 2 dans '+s1+' s<small>Vol long · 18 portes</small>',1.1)});if(SKI.nextT<=0)skiNextManche()}}
 function skiPuff(x,y,z,sz){const P=SKI.puffs[SKI.pi++%SKI.puffs.length];if(!P)return;P.s.position.set(x,y,z);P.life=.6;P.sz=sz;P.s.visible=true}
@@ -1151,7 +1159,7 @@ const STYLES=[{main:'#f0469a',dark:'#c3125f',light:'#f4f1f8',col:'#e8388f',outfi
 const players=[];
 const KEYS=new Set();const touch={l:0,r:0,u:0,d:0,e:0};
 const BIND=[{l:['ArrowLeft'],r:['ArrowRight'],u:['ArrowUp'],d:['ArrowDown'],e:['ShiftRight'],v:['ControlRight']},{l:['KeyA'],r:['KeyD'],u:['KeyW'],d:['KeyS'],e:['KeyQ'],v:['KeyE']}];
-let numPlayers=1,mode='loading',simT=0,cdT=0,time=0;const SIM=1,HS=LV.HS;   // HS : la voile avance 14× plus vite à l'horizontale, les altitudes restent en temps réel
+let numPlayers=1,mode='loading',simT=0,cdT=0,time=0;const SIM=1;let HS=LV.HS;   // HS : la voile avance 14× plus vite à l'horizontale, les altitudes restent en temps réel
 const hudRoot=document.getElementById('hudRoot');
 function makeHud(i){const el=document.createElement('div');el.className='hud p'+(i+1);
   el.innerHTML=`<div class="hud-top panel"><span class="tag">J${i+1}</span><span class="chrono">0:00</span><span class="pts">0 pts</span><span class="clock" style="font-size:20px;font-weight:700;color:var(--ink-soft)"></span></div>
@@ -1177,7 +1185,7 @@ const tmpV=new THREE.Vector3();
 // ================= Acro (niveau 2) =================
 const BRZU={x:.568,z:.823},BRZ={x:BRZU.x*2.78,z:BRZU.z*2.78};   // brise de 10 km/h venant d'Annecy
 const ACRO=LV.acro?{box:{x:LV.acro.box.e*KM,z:-LV.acro.box.n*KM,R:LV.acro.box.r*KM,name:LV.acro.box.name},lz:{x:LV.acro.lz.e*KM,z:-LV.acro.lz.n*KM,R:LV.acro.lz.r*KM,name:LV.acro.lz.name,landing:true}}:null;
-function goalOf(p){if(p.route==='acro'&&ACRO)return p.acroDone?ACRO.lz:ACRO.box;return CP[Math.min(p.next+1,LZ)]}
+function goalOf(p){if(LV.raid&&RAID&&p.raidStage===2&&!p.route&&RAID.balloons){const g=RAID.balloons[p.balN||0];if(g)return g}if(LV.raid&&RAID&&p.raidStage===3&&RAID.buoys){const b=RAID.buoys[p.bN||0];if(b)return {name:'Bouée '+((p.bN||0)+1),x:b.x,z:b.z,R:12}}if(p.route==='acro'&&ACRO)return p.acroDone?ACRO.lz:ACRO.box;return CP[Math.min(p.next+1,LZ)]}
 // variété : la même figure 3 fois de suite ne rapporte plus rien ; misty flip : 2 enchaînés maximum
 function acroFig(p,name){if(name===p.figLast)p.figRep=(p.figRep||1)+1;else{p.figLast=name;p.figRep=1}p.zeroPts=p.figRep>2&&!p.landMode;if(name!=='Misty Flip'&&name!=='SAT')p.mistyN=0;
   if(p.zeroPts)showMsg(p,'Varie tes figures !<small>'+name+' '+p.figRep+' fois de suite : 0 point</small>',1.6)}
@@ -1198,10 +1206,10 @@ function pickRoute(p,r){if(!p.choice)return;p.choice=0;p.hud.choice.hidden=true;
 function acroEnd(p,why){p.landMode=true;p.prevView=null;p.view=0;p.snap=true;p.acroDone=true;if(!p.tum&&p.acroState==='tumble')p.acroState='wo';document.body.classList.remove('acroing');
   showMsg(p,'Fin de la session acro<small>'+why+' · '+(p.acroScore||0)+' pts acro · mode atterrissage : figures libres sans points · pose-toi sur la plage face à la brise d\'Annecy</small>',4.5)}
 function acroStep(p,dt,I){p.ears+=((I.e?1:0)-p.ears)*Math.min(1,dt*2.2);
-  p.acroT=(p.acroT||0)+dt;if(!p.landMode&&p.acroT>300){p.tum=null;acroEnd(p,'5 minutes de session');return}
+  p.acroT=(p.acroT||0)+dt;if(!p.landMode&&p.acroT>(LV.acroTime||300)){p.tum=null;acroEnd(p,LV.acroTime?Math.round(LV.acroTime)+' s de séance':'5 minutes de session');return}
   const tIn=(I.r?1:0)-(I.l?1:0);p.turn+=(tIn-p.turn)*Math.min(1,dt*4);
   p.pitch=lerp(p.pitch||0,I.u?-.45:I.d?.4:0,Math.min(1,dt*3));
-  let sink=1.4,yaw=0,hs=1.1;const SKF=p.landMode?1:2;const st=p.acroState||'wo';const prevT=p.tapPrev||0;p.tapPrev=tIn;const tap=tIn!==0&&tIn!==prevT;const uTap=I.u&&!p.uPrev,dTap=I.d&&!p.dPrev;p.uPrev=I.u;p.dPrev=I.d;
+  let sink=1.4,yaw=0,hs=1.1;const SKF=p.landMode?1:(LV.raid&&(p.acroState||'wo')!=='wo'?4:2);const st=p.acroState||'wo';const prevT=p.tapPrev||0;p.tapPrev=tIn;const tap=tIn!==0&&tIn!==prevT;const uTap=I.u&&!p.uPrev,dTap=I.d&&!p.dPrev;p.uPrev=I.u;p.dPrev=I.d;
   if(st==='bail'){const B=p.bail;B.t+=dt;let sk;
     if(B.ph==='tangle'){sk=12;p.h+=4*dt;if(B.t>4.7){B.ph='resOpen';B.t=0;showMsg(p,'Le secours s\'ouvre… emmêlé à la voile !<small>Freine pour le libérer</small>',99);chime()}}
     else if(B.ph==='resOpen'){sk=lerp(12,7,sstep(0,1.5,B.t));p.h+=1.4*dt;if(B.t>1.2)showMsg(p,'Freine pour libérer le secours emmêlé à la voile !<small>↓ frein</small>',99);
@@ -1297,11 +1305,12 @@ function updatePlayer(p,dt){
   if(p.twist)I=Object.assign({},I,{l:I.r,r:I.l});if(I.v&&!p.vLatch){p.view=(p.view+1)%3;p.snap=true}p.vLatch=I.v;
   if(p.finished||p.gameover){placeGlider(p,dt);return}
   if(mode!=='race'){placeGlider(p,dt);return}
-  if(p.crash>0){p.crash-=dt;p.ears=Math.min(1,p.ears+dt);p.glider.rotation.x=lerp(p.glider.rotation.x,1.1,.03);p.glider.userData.ears=p.ears;shapeGlider(p.glider);if(p.crash<=0){spawn(p,p.next,false);if(LV.acroOnly&&ACRO){if(!p.acroDone){p.reserve=false;goAcro(p,'On repart')}else{const L=ACRO.lz;p.pos.set(L.x+BRZU.x*350,0,L.z+BRZU.z*350);p.pos.y=groundY(p.pos.x,p.pos.z)+90;p.h=Math.atan2(-BRZU.x,BRZU.z);p.route='acro';p.next=NB;p.snap=true}}p.respawnWait=3.2;if(LV.ski){}else if(numPlayers===1)playFull(LV.jojo?'assets/video-col-mega.mp4':'assets/video-col.mp4',LV.jojo?'Posé au col, on regonfle et on repart !':'Nouveau gonflage, on repart !',null,LV.jojo?10:undefined);else pip(p,'assets/video-col.mp4','Nouveau gonflage, on repart !',3.2)}return}
+  if(LV.raid&&raidPre(p,dt))return;
+  if(p.crash>0){if(LV.raid&&!p.crashPos)p.crashPos=p.pos.clone();p.crash-=dt;p.ears=Math.min(1,p.ears+dt);p.glider.rotation.x=lerp(p.glider.rotation.x,1.1,.03);p.glider.userData.ears=p.ears;shapeGlider(p.glider);if(p.crash<=0){spawn(p,p.next,false);if(LV.raid&&!LV.ski&&p.crashPos){p.pos.set(p.crashPos.x,0,p.crashPos.z);p.pos.y=groundY(p.pos.x,p.pos.z)+200;p.snap=true}p.crashPos=null;if(LV.acroOnly&&ACRO){if(!p.acroDone){p.reserve=false;goAcro(p,'On repart')}else{const L=ACRO.lz;p.pos.set(L.x+BRZU.x*350,0,L.z+BRZU.z*350);p.pos.y=groundY(p.pos.x,p.pos.z)+90;p.h=Math.atan2(-BRZU.x,BRZU.z);p.route='acro';p.next=NB;p.snap=true}}p.respawnWait=3.2;if(LV.ski||LV.raid){}else if(numPlayers===1)playFull(LV.jojo?'assets/video-col-mega.mp4':'assets/video-col.mp4',LV.jojo?'Posé au col, on regonfle et on repart !':'Nouveau gonflage, on repart !',null,LV.jojo?10:undefined);else pip(p,'assets/video-col.mp4','Nouveau gonflage, on repart !',3.2)}return}
   if(p.respawnWait>0){p.respawnWait-=dt;placeGlider(p,dt);return}
   const dts=dt,dty=dt;
   if(p.choice>0){p.choice-=dt;if(!I.l&&!I.r)p.choiceArm=true;p.hud.choiceT.textContent='Choisis avec ← ou → · '+Math.ceil(p.choice)+' s';const arm=p.choiceKind!=='bored'||p.choiceArm;if(arm&&I.l)pickRoute(p,'home');else if(arm&&I.r)pickRoute(p,'acro');else if(p.choice<=0){p.choice=.01;pickRoute(p,'home')}}
-  if(ACRO&&p.route==='acro'&&!p.finished&&!p.reserve&&!(p.collapse>0)&&(!p.acroOn||(p.acroState||'wo')==='wo')){const L=ACRO.lz,dx=L.x-p.pos.x,dz=L.z-p.pos.z,dd=Math.hypot(dx,dz);
+  if(ACRO&&!LV.raid&&p.route==='acro'&&!p.finished&&!p.reserve&&!(p.collapse>0)&&(!p.acroOn||(p.acroState||'wo')==='wo')){const L=ACRO.lz,dx=L.x-p.pos.x,dz=L.z-p.pos.z,dd=Math.hypot(dx,dz);
     const aligned=dd>1500&&(Math.sin(p.h)*dx-Math.cos(p.h)*dz)/dd>Math.cos(.4);
     if(I.u&&aligned){p.lzRush=(p.lzRush||0)+dt;const left=Math.ceil(10-p.lzRush);if(left!==p.lzRushShown){p.lzRushShown=left;if(left>0)showMsg(p,'Cap sur Doussard<small>Garde l\'accélérateur · '+left+' s</small>',1.1)}}else{p.lzRush=0;p.lzRushShown=null}
     if(p.lzRush>=10){p.lzRush=0;if(p.acroOn){p.tum=null;acroEnd(p,'Direction l\'atterro')}p.pos.set(L.x+BRZU.x*350,0,L.z+BRZU.z*350);p.pos.y=groundY(p.pos.x,p.pos.z)+90;p.h=Math.atan2(-BRZU.x,BRZU.z);p.vario=0;p.spiral=0;p.snap=true;showMsg(p,'Approche finale<small>Pose-toi sur la plage, face à la brise d\'Annecy</small>',3);chime()}}
@@ -1314,7 +1323,9 @@ function updatePlayer(p,dt){
   if(p.route==='acro'&&!p.acroDone&&ACRO&&!p.reserve&&Math.hypot(p.pos.x-ACRO.box.x,p.pos.z-ACRO.box.z)<ACRO.box.R&&p.pos.y>groundY(p.pos.x,p.pos.z)+450){p.acroOn=true;p.acroState='wo';p.combo=1;p.figLast=null;p.figRep=0;p.mistyN=0;p.zeroPts=false;p.woA=0;p.th=0;p.om=0;p.spiral=0;p.prevView=null;if(numPlayers===1)document.body.classList.add('acroing');showMsg(p,'Zone acro !<small>Renvoie la voile à la verticale : wing over · virage tenu : SAT · au max ↑ looping, ↓ asymétrique · V pour changer de vue</small>',3.2)}
   if(p.reserve){const aglR=p.pos.y-groundY(p.pos.x,p.pos.z);
     // largage de l'aile : chute libre puis parachute automatique ~40 m sol
-    if(!p.ff&&!p.acroOn&&!LV.acroOnly&&aglR>150){if(!I.d)p.ffArm=true;if(!p.ffHint&&p.crash<=0){p.ffHint=true;showMsg(p,'Sous le secours<small>Frein : larguer l\'aile et partir en chute libre</small>',4)}
+    if(LV.raid&&!p.ff){if(aglR>60){if(!I.d)p.ffArm=true;if(!p.ffHint&&p.crash<=0){p.ffHint=true;showMsg(p,'Sous le secours<small>Frein : libérer la voile et repartir</small>',4)}
+      if(p.ffArm&&I.d){p.reserve=false;p.ffArm=false;p.ffHint=false;p.raidHit=2;p.raidRefill=true;p.raidHitFlight=true;showMsg(p,'Voile libérée !<small>Elle se regonfle… tu repars</small>',2);placeGlider(p,dt);return}}}
+    else if(!p.ff&&!p.acroOn&&!LV.acroOnly&&aglR>150){if(!I.d)p.ffArm=true;if(!p.ffHint&&p.crash<=0){p.ffHint=true;showMsg(p,'Sous le secours<small>Frein : larguer l\'aile et partir en chute libre</small>',4)}
       if(p.ffArm&&I.d){p.ff={ph:'fall',t:0};dropDebris(p);showMsg(p,'Aile larguée !<small>Chute libre… le parachute s\'ouvre tout seul près du sol</small>',2.4)}}
     if(p.ff){const F=p.ff;F.t+=dt;if(F.ph==='fall'){p.vario=Math.max(-50,p.vario-9.8*dt);p.pos.x+=WIND.x*dt;p.pos.z+=WIND.z*dt;if(aglR<30){F.ph='open';F.t=0;showMsg(p,'Parachute ouvert !',1.6);chime()}}
       else p.vario+=(-5.5*(p.route==='acro'?3:1)-p.vario)*Math.min(1,dt*4);p.pos.y+=p.vario*dt;p.turn*=.9}
@@ -1394,26 +1405,27 @@ function updatePlayer(p,dt){
   const vx=Math.sin(p.h)*p.va+wx,vz=-Math.cos(p.h)*p.va+wz;p.gs=Math.hypot(vx,vz);
   p.hsF=lerp(p.hsF||1,1-.72*clamp(Math.max(0,tl)/2.5,0,1),Math.min(1,dt*1.5));   // dans le thermique la voile ralentit pour pouvoir l'enrouler
   const GL=goalOf(p),dLZ=Math.hypot(p.pos.x-GL.x,p.pos.z-GL.z),lzF=!LV.crossFinish&&p.next===NB&&(GL.landing||GL===CP[LZ])?.12+.88*sstep(300,1800,dLZ):1;   // au-dessus du Cortibot on ralentit pour ne pas dépasser le terrain
-  const hs=1+(HS-1)*sstep(20,220,agl)*p.hsF*lzF*(gb&&LV.gbBalise?.4:1);p.hsNow=hs;   // près du sol on revient à la vitesse réelle pour pouvoir se poser
+  const hs=1+(HS-1)*sstep(20,220,agl)*p.hsF*lzF*(gb&&LV.gbBalise?.4:1)*(LV.raid?(p.rStr=lerp(p.rStr==null?1:p.rStr,at<.25?1:.3,Math.min(1,dt*1.5))):1);   // raid : la voile file en ligne droitep.hsNow=hs;   // près du sol on revient à la vitesse réelle pour pouvoir se poser
   p.pos.x+=vx*hs*dts;p.pos.z+=vz*hs*dts;p.pos.y+=p.vario*dts;
   p.low360=false;
   if(lz360){const gg=groundY(p.pos.x,p.pos.z);p.low360=at>.9&&p.pos.y<gg+25&&!p.pose360;if(at>.9&&p.pos.y<gg+25){p.h+=p.turn*.6*dts;p.lowSpin=(p.lowSpin||0)+Math.abs(p.turn)*dts*(I.d?1.9:1.6)}else if(p.pos.y>gg+30)p.lowSpin=0;
     if(at>.9&&!p.pose360&&p.pos.y<gg+.65){p.pos.y=gg+.65;p.vario=Math.max(p.vario,0)}   // on enroule au ras du sol
     if(!p.pose360&&(p.lowSpin||0)>=18.85){p.pose360=true;showMsg(p,'3 tours à 0,5 m !<small>Posé 360 validé · lâche le virage pour te poser</small>',2.2);chime(true)}
     else if(at>.9&&p.pos.y<gg+3&&!p.pose360)H_.msg.classList.contains('on')||showMsg(p,'Posé 360 · tour '+Math.min(3,1+Math.floor((p.lowSpin||0)/6.283))+' / 3',.5)}
-  const G=W.near,m=.3;let out=false;const e=p.pos.x/KM,n=-p.pos.z/KM;
+  const G=LV.raid?W.mid:W.near,m=.3;let out=false;const e=p.pos.x/KM,n=-p.pos.z/KM;
   if(e<G.E0+m){p.pos.x=(G.E0+m)*KM;out=true}if(e>G.E1-m){p.pos.x=(G.E1-m)*KM;out=true}if(n<G.N0+m){p.pos.z=-(G.N0+m)*KM;out=true}if(n>G.N1-m){p.pos.z=-(G.N1-m)*KM;out=true}p.out=out;
-  if(p.next<NB){const c=CP[p.next+1];if(Math.hypot(p.pos.x-c.x,p.pos.z-c.z)<c.R){p.next++;p.splits.push(simT);addPts(p,200,'Balise '+p.next);
+  if(p.next<NB){const c=CP[p.next+1];const inC=Math.hypot(p.pos.x-c.x,p.pos.z-c.z)<c.R;if(inC&&c.minAlt&&p.pos.y<c.minAlt){if(!(p.minAltMsg>time)){p.minAltMsg=time+3;showMsg(p,'Trop bas pour la balise !<small>Monte à '+c.minAlt.toLocaleString('fr-FR')+' m minimum · enroule le thermique</small>',2.6)}}else if(inC){p.next++;p.splits.push(simT);addPts(p,200,'Balise '+p.next);
     p.heartsN=(p.heartsN||0)+1;showMsg(p,`Balise ${p.next} validée · +200<small>${c.name} · ${fmt(simT)} de vol · 💙 +1 cœur d'Oriane</small>`,2.8);chime();if(LV.gbBalise&&c.name==='Grand-Bornand')setTimeout(()=>{if(mode==='race'&&p.next<NB+1)showMsg(p,'Traverse la vallée<small>Ça remonte sur les Arces, sous le Lachat (≈ 1 600 m)</small>',3.5)},3000);if(ACRO&&LV.acroChoice&&p.next===NB&&!p.route)startChoice(p)}}
   if(!p.sawBeau&&!LV.ski&&winterAt(p.pos.x,p.pos.z)>.2){p.sawBeau=true;pip(p,'assets/video-beauregard.mp4','Déco de Beauregard, en hiver',10,['Déco Beauregard','Déco Aiglon'])}
   if(!p.sawConfins&&Math.hypot(p.pos.x-CONFINS.x,p.pos.z-CONFINS.z)<1000){p.sawConfins=true;pip(p,'assets/video-vautours.mp4','Au-dessus du lac des Confins, avec les vautours',10)}
   if(!p.sawMerle&&!p.pipOn){const T=THERM.find(t=>t.fixed);if(T&&Math.hypot(p.pos.x-T.x,p.pos.z-T.z)<T.r){p.sawMerle=true;pip(p,'assets/video-merle.mp4','Dans le thermique du Crêt du Merle',10)}}
   if(!p.sawSpectre&&!p.pipOn&&Math.hypot(p.pos.x-(-300),p.pos.z-(-1800))<1300){p.sawSpectre=true;pip(p,'assets/video-spectre.mp4','Spectre de Brocken, entre Beauregard et le Grand-Bornand',10)}
-  if(LV.crossFinish&&p.next===NB&&p.route!=='acro'&&Math.hypot(p.pos.x-CP[LZ].x,p.pos.z-CP[LZ].z)<CP[LZ].R&&p.pos.y>groundY(p.pos.x,p.pos.z)+1){p.finished=true;p.ftime=simT;p.splits.push(simT);addPts(p,300,'Triangle bouclé · balise '+CP[LZ].name+' traversée');
-    const tb=Math.max(0,Math.round((LV.bonusT-simT)/(LV.bonusDiv||1)));if(tb)addPts(p,tb,'Bonus de temps');showMsg(p,`Triangle bouclé !<small>${fmt(simT)} de vol · ${p.score} points</small>`,99);chime(true);if(LV.jojo)jojoScene(p,true);clearFlight();checkEnd();placeGlider(p,dt);return}
+  if(LV.crossFinish&&p.next===NB&&p.route!=='acro'&&Math.hypot(p.pos.x-CP[LZ].x,p.pos.z-CP[LZ].z)<CP[LZ].R&&p.pos.y>groundY(p.pos.x,p.pos.z)+1){p.finished=true;p.ftime=simT;p.splits.push(simT);addPts(p,300,(LV.raid?'':'Triangle bouclé · ')+'balise '+CP[LZ].name+' traversée');
+    const tb=Math.max(0,Math.round((LV.bonusT-simT)/(LV.bonusDiv||1)));if(tb)addPts(p,tb,'Bonus de temps');showMsg(p,LV.raid?`Beauregard !<small>`:`Triangle bouclé !<small>${fmt(simT)} de vol · ${p.score} points</small>`,99);chime(true);if(LV.jojo)jojoScene(p,true);clearFlight();checkEnd();placeGlider(p,dt);return}
   skiStep(p,dt);
   if(LV.tuto&&!p.finished&&p.crash<=0){p.tt=(p.tt||0)+dt;const T=[[2,'Vol découverte<small>← → pour tourner, doucement</small>'],[13,'Le frein ↓<small>Ralentit la voile · trop de frein = décrochage</small>'],[25,'L\'accélérateur ↑<small>Plus vite, mais ça descend plus</small>'],[37,'Cap sur le Cortibot<small>Repère la manche à air et le carré du terrain</small>']];T.forEach(([t,m],k)=>{if(p.tt>=t&&(p.tuto||0)<=k){p.tuto=k+1;showMsg(p,m,6);p.hud.msg.classList.add('tuto')}})}
   const gy2=groundY(p.pos.x,p.pos.z),L=BEAU,inLake=Math.hypot(p.pos.x-L.x,p.pos.z-L.z)<50&&p.pos.y<W.lakeY+.5;
+  if(LV.raid&&p.raidStage===2&&raidRaft(p,gy2,dt))return;
   if(p.pos.y<gy2+.6&&!inLake&&p.stallT>1.2&&(WX.storm||(p.flyT||0)>8)){gameOver(p,gy2);placeGlider(p,dt);return}
   if(p.pos.y<gy2+.6&&p.route==='acro'&&ACRO){
     if(inAnnecy(p.pos.x,p.pos.z)){lakeOver(p);placeGlider(p,dt);return}
@@ -1428,7 +1440,7 @@ function updatePlayer(p,dt){
       const R=C.rings||[10,25,50],prec=offF?0:dC<=R[0]?200:dC<=R[1]?100:dC<=R[2]?50:0;if(prec)addPts(p,prec,(dC<=R[0]?'Dans le mille':'Cible '+(dC<=R[1]?R[1]:R[2])+' m')+' ('+Math.round(dC)+' m)');if(!offF&&C===CP[LZ]&&PTU.length&&(p.ptu||0)>=3)addPts(p,150,'PTU réussie');if(LV.ski&&SKI.manche===2){let b=null;try{b=+localStorage.getItem('aiglonBest')||null}catch(_){}if(!b||simT<b){try{localStorage.setItem('aiglonBest',String(simT))}catch(_){}addPts(p,0,'Nouveau record : '+fmt(simT))}else addPts(p,0,'Record : '+fmt(b))}
       if(!offF&&p.flare&&p.vario>-2)addPts(p,100,'Posé en douceur (arrondi)');if(!offF){const up=WIND.clone().setY(0).normalize().negate();if(Math.sin(p.h)*up.x-Math.cos(p.h)*up.z>.7)addPts(p,50,'Posé face au vent')}
       const tb=Math.max(0,Math.round((LV.bonusT-simT)/(LV.bonusDiv||1)));if(tb)addPts(p,tb,'Bonus de temps');
-      showMsg(p,`Posé !<small>${fmt(simT)} de vol · ${p.score} points</small>`,99);chime(true);if(p.route==='acro'&&ACRO&&C===ACRO.lz){jojoScene(p,'doussard')}else if(LV.jojo){jojoScene(p,true)}else if(numPlayers===1)setTimeout(()=>playFull(LV.landVid?LV.landVid.src:'assets/video-cortibot.mp4',LV.landVid?LV.landVid.cap:'Posé '+(LV.lzAt||'au Cortibot'),null,LV.landVid?LV.landVid.dur:undefined),700);else pip(p,LV.landVid?LV.landVid.src:'assets/video-cortibot.mp4',LV.landVid?LV.landVid.cap:'Posé '+(LV.lzAt||'au Cortibot'));checkEnd();placeGlider(p,dt);return}
+      showMsg(p,`Posé !<small>${fmt(simT)} de vol · ${p.score} points</small>`,99);chime(true);if(p.route==='acro'&&ACRO&&C===ACRO.lz){jojoScene(p,'doussard')}else if(LV.jojo){jojoScene(p,true)}else if(LV.raid){}else if(numPlayers===1)setTimeout(()=>playFull(LV.landVid?LV.landVid.src:'assets/video-cortibot.mp4',LV.landVid?LV.landVid.cap:'Posé '+(LV.lzAt||'au Cortibot'),null,LV.landVid?LV.landVid.dur:undefined),700);else pip(p,LV.landVid?LV.landVid.src:'assets/video-cortibot.mp4',LV.landVid?LV.landVid.cap:'Posé '+(LV.lzAt||'au Cortibot'));checkEnd();placeGlider(p,dt);return}
     if(p.route==='acro'&&inAnnecy(p.pos.x,p.pos.z)){lakeOver(p);placeGlider(p,dt);return}
     p.pos.y=Math.max(gy2+.6,inLake?W.lakeY:0);p.crash=2.6;p.vario=0;
     if(!inLake&&inAnnecy(p.pos.x,p.pos.z)){addPts(p,-100,'Plouf dans le lac d\'Annecy');showMsg(p,'Plouf dans le lac d\'Annecy ! −100 points<small>Les pédalos t\'ont repêché. Retour à la balise '+(p.next||'de départ')+'</small>',3)}
@@ -1460,8 +1472,8 @@ function placeGlider(p,dt){const g=p.glider,u=g.userData;g.position.copy(p.pos);
   {const tw=p.twist?Math.PI:0;u.pilot.rotation.y+=(tw-u.pilot.rotation.y)*Math.min(1,dt*5);u.pax.rotation.y=u.pilot.rotation.y}
   const bl=p.acroOn&&p.acroState==='bail'&&p.bail?p.bail:null,wScale=bl&&bl.ph==='open'?.25+.75*sstep(0,1,bl.t):1;
   u.top.visible=u.bot.visible=u.lines.visible=!p.reserve&&!(bl&&bl.ph==='fall');u.res.visible=(!!p.reserve&&!(p.ff&&p.ff.ph==='fall'))||!!(bl&&bl.ph==='resOpen');{const rs=p.ff&&p.ff.ph==='open'?.25+.75*sstep(0,.5,p.ff.t):1;if(u.res.scale.x!==rs)u.res.scale.setScalar(rs)}
-  {const ws=wScale*(LV.wingScale||1);if(u.top.scale.x!==ws){u.top.scale.setScalar(ws);u.bot.scale.setScalar(ws);u.lines.scale.setScalar(ws)}}
-  const I=mode==='race'&&!p.finished?inputOf(p):{};const tb=I.d?.8:0;
+  {const ws=wScale*(p.wsc||LV.wingScale||1);if(u.top.scale.x!==ws){u.top.scale.setScalar(ws);u.bot.scale.setScalar(ws);u.lines.scale.setScalar(ws)}}
+  const I=mode==='race'&&!p.finished&&!p.bot?inputOf(p):{};const tb=I.d?.8:0;
   u.ears=p.ears;u.bl=clamp(tb+(p.turn<0?-p.turn:0)*.9,0,1.2);u.br=clamp(tb+(p.turn>0?p.turn:0)*.9,0,1.2);
   // Aiglon : en approche finale, les oreilles deviennent un stabilo (un seul côté)
   if(LV.ski&&p.ears>.05){u.stab=p.turn<-.05?-1:p.turn>.05?1:(u.stab||1);u.ears=Math.min(1,p.ears*1.3);if(p.ears>.5)p.stabLast=time}else u.stab=0;   // Aiglon : stabilo visible tout le long du parcours
@@ -1499,7 +1511,7 @@ function frameGlider(p,dt){const cam=p.cam,tc=document.getElementById('touch');i
   p.camOy=p.camOy==null?oy:lerp(p.camOy,oy,Math.min(1,dt*6));if(Math.abs(p.camOy)>1)cam.setViewOffset(W,H,0,p.camOy,W,H)}
 function fmt(t){const m=Math.floor(t/60),s=Math.floor(t-m*60);return m+':'+(s<10?'0':'')+s}
 const nf=(x,d)=>x.toFixed(d).replace('.',',');
-function beachPanel(p,h){const L=ACRO.lz,d=Math.hypot(L.x-p.pos.x,L.z-p.pos.z);h.nl.textContent='Distance plage';h.nn.textContent='Plage de Doussard';h.dist.textContent=d>=1000?nf(d/1000,1)+' km':Math.round(d/10)*10+' m';
+function beachPanel(p,h){const L=LV.raid&&!p.acroDone?ACRO.box:ACRO.lz,d=Math.hypot(L.x-p.pos.x,L.z-p.pos.z);h.nl.textContent=LV.raid?(p.acroDone?'Atterrissage':'Zone acro'):'Distance plage';h.nn.textContent=LV.raid?L.name:'Plage de Doussard';h.dist.textContent=d>=1000?nf(d/1000,1)+' km':Math.round(d/10)*10+' m';
   let rel=headingTo(p.pos,L)-p.h;rel=Math.atan2(Math.sin(rel),Math.cos(rel));h.arrow.style.transform=`rotate(${rel}rad)`}
 function updateHud(p){{const ap=(p.apprA||0)>.5;if(p.hud.el.classList.contains('appr')!==ap)p.hud.el.classList.toggle('appr',ap)}const h=p.hud;{const on=p.route==='acro'&&p.acroDone&&!p.finished&&!p.gameover&&mode==='race';if(!h.aglEl){const d=document.createElement('div');d.className='aglbig';h.el.appendChild(d);h.aglEl=d}h.aglEl.style.display=on?'block':'none';if(on){const a=Math.max(0,Math.round(p.pos.y-groundY(p.pos.x,p.pos.z)));h.aglEl.innerHTML=a+'<small>m sol</small>';h.aglEl.style.color=a<15?'#ff6b6b':a<40?'#ffc23a':'#fff'}}if(h.el.classList.contains('gopro')!==(p.view>0))h.el.classList.toggle('gopro',p.view>0);
   h.el.classList.toggle('acro',!!p.acroOn);
@@ -1511,7 +1523,7 @@ function updateHud(p){{const ap=(p.apprA||0)>.5;if(p.hud.el.classList.contains('
   {const e=sstep(3,6,p.spiral),show=p.salto>0||e>.15;h.gbig.style.opacity=show?Math.min(1,p.salto>0?1:e*1.6):0;if(show)h.gbig.innerHTML=(p.salto>0?'SALTO':nf(1+2.8*e+(Math.hypot(p.pos.x-CP[LZ].x,p.pos.z-CP[LZ].z)<1500?.9*e:0),1)+' G')+'<small>'+(p.salto>0?'secours !':Math.round(-p.vario)+' m/s')+'</small>'}
   h.chrono.textContent=fmt(p.finished?p.ftime:simT);h.pts.textContent=p.score+' pts';
   if(DAY){h.clock.textContent='· '+fmtH(dayH);if(!h.sunp){h.sunp=document.createElement('div');h.sunp.className='pill sun';h.air.parentNode.insertBefore(h.sunp,h.air)}const nd=dayH>20.3;h.sunp.textContent=nd?'Crépuscule · plus de thermiques':'Soleil '+sunDirName()+' · faces '+sunDirName()+' qui chauffent';h.sunp.className='pill '+(nd?'shade':'sun')}
-  const tgt=(p.route==='acro'&&ACRO)?ACRO.lz:goalOf(p);h.nl.textContent=(p.route==='acro'&&ACRO)?'Distance plage':p.next<NB?`Balise ${p.next+1} / ${NB}`:(LV.crossFinish?'Arrivée':'Atterrissage');h.nn.textContent=(p.route==='acro'&&ACRO)?'Plage de Doussard':p.next<NB?tgt.name:(tgt.name||'Atterrissage');
+  const tgt=(p.route==='acro'&&ACRO)?ACRO.lz:goalOf(p);h.nl.textContent=LV.raid&&RAID&&p.raidStage===2&&!p.route&&RAID.balloons[p.balN||0]?`Montgolfières · ${(p.balN||0)+1} / ${RAID.balloons.length}`:LV.raid&&RAID&&p.raidStage===3?`Ski nautique · bouée ${Math.min((p.bN||0)+1,RAID.buoys.length)} / ${RAID.buoys.length}`:(p.route==='acro'&&ACRO)?'Distance plage':p.next<NB?`Balise ${p.next+1} / ${NB}`:(LV.crossFinish?'Arrivée':'Atterrissage');h.nn.textContent=(p.route==='acro'&&ACRO)?'Plage de Doussard':p.next<NB?tgt.name:(tgt.name||'Atterrissage');
   const d=Math.hypot(tgt.x-p.pos.x,tgt.z-p.pos.z);h.dist.textContent=d>=1000?nf(d/1000,1)+' km':Math.round(d/10)*10+' m';
   let rel=headingTo(p.pos,tgt)-p.h;rel=Math.atan2(Math.sin(rel),Math.cos(rel));h.arrow.style.transform=`rotate(${rel}rad)`;if(p.route==='acro'&&ACRO)beachPanel(p,h);
   h.alt.innerHTML=Math.round(p.pos.y).toLocaleString('fr-FR')+'<i>m</i>';h.agl.innerHTML=Math.max(0,Math.round(p.pos.y-groundY(p.pos.x,p.pos.z))).toLocaleString('fr-FR')+'<i>m</i>';
@@ -1546,13 +1558,13 @@ function applyView(p){players.forEach(o=>{const hide=o===p&&p.view===1;o.glider.
   g.mat.color.set(st==='next'?(i===NB?'#1f9d5c':'#ff5b1f'):st==='done'?'#1f9d5c':'#ffffff');g.mat.opacity=(st==='next'?(LV.ski?.07:.24):.06)*(i===NB?1-.85*(p.apprA||0):1);g.sm.opacity=(st==='next'?1:st==='done'?.3:.55)*(i===NB?1-.8*(p.apprA||0):1)});
   HEARTS.forEach((h,i)=>{h.sp.visible=!p['h'+i]&&heartOn(p,h);if(h.lb)h.lb.visible=h.sp.visible&&!!h.lt&&!!h.near});
   if(p.hud.lives){const on=!!p.acroOn;p.hud.lives.hidden=!on;if(on)p.hud.lives.textContent='🪂 × '+(p.res==null?2:p.res)}
-  if(acroGate){const on=p.route==='acro';acroGate.cyl.visible=false;acroGate.sp.visible=on;acroGate.mat.opacity=p.acroDone?.32:.18}
+  if(acroGate){const on=p.route==='acro'&&!LV.raid;acroGate.cyl.visible=false;acroGate.sp.visible=on;acroGate.mat.opacity=p.acroDone?.32:.18}
 }
 
 // Mini-carte
 const mm=document.getElementById('mm'),mg=mm.getContext('2d');let mmImg=null;
-function toMM(x,z){const G=W.near;return [(x/KM-G.E0)/(G.E1-G.E0)*mm.width,(G.N1+z/KM)/(G.N1-G.N0)*mm.height]}
-function drawMinimap(){const G=W.near;if(mmImg)mg.drawImage(mmImg,0,0,mm.width,mm.height);else{mg.fillStyle='#4a6a3a';mg.fillRect(0,0,mm.width,mm.height)}
+function toMM(x,z){const G=LV.raid?W.mid:W.near;return [(x/KM-G.E0)/(G.E1-G.E0)*mm.width,(G.N1+z/KM)/(G.N1-G.N0)*mm.height]}
+function drawMinimap(){const G=LV.raid?W.mid:W.near;if(mmImg)mg.drawImage(mmImg,0,0,mm.width,mm.height);else{mg.fillStyle='#4a6a3a';mg.fillRect(0,0,mm.width,mm.height)}
   const sx=mm.width/((G.E1-G.E0)*KM);
   mg.fillStyle='rgba(40,52,70,.35)';cloudU.forEach(u=>{const p=toMM(u.x,u.y);mg.beginPath();mg.arc(p[0],p[1],u.z*.8*sx,0,6.3);mg.fill()});
   if(LV.gb){mg.fillStyle='rgba(217,67,75,.22)';mg.beginPath();[[-3,6.5],[-3,3],[.8,3],[6,4.82],[6,6.5]].forEach((q,i)=>{const p=toMM(q[0]*KM,-q[1]*KM);i?mg.lineTo(p[0],p[1]):mg.moveTo(p[0],p[1])});mg.fill();}
@@ -1561,6 +1573,8 @@ function drawMinimap(){const G=W.near;if(mmImg)mg.drawImage(mmImg,0,0,mm.width,m
   CP.forEach((c,i)=>{const p=toMM(c.x,c.z);if(i){mg.strokeStyle=i===LZ?'#1f9d5c':'#ff5b1f';mg.lineWidth=3;mg.beginPath();mg.arc(p[0],p[1],Math.max(6,c.R*sx),0,6.3);mg.stroke()}
     mg.fillStyle=i===0?'#10233a':i===LZ?'#1f9d5c':'#ff5b1f';mg.beginPath();mg.arc(p[0],p[1],10,0,6.3);mg.fill();mg.fillStyle='#fff';mg.font='700 13px "Barlow Condensed",sans-serif';mg.textAlign='center';mg.textBaseline='middle';mg.fillText(i===0?'D':i===LZ?'P':i,p[0],p[1]+.5)})}
   if(NET.on)Object.entries(NET.ghosts).forEach(([k,G])=>{if(!G.seen||performance.now()/1000-G.t>6)return;const q=toMM(G.pos.x,G.pos.z);mg.save();mg.translate(q[0],q[1]);mg.rotate(G.h);mg.fillStyle=netCol(k).col;mg.strokeStyle='#fff';mg.lineWidth=2;mg.beginPath();mg.moveTo(0,-9);mg.lineTo(7,8);mg.lineTo(0,3);mg.lineTo(-7,8);mg.closePath();mg.fill();mg.stroke();mg.restore()});
+  if(LV.raid&&RAID&&RAID.balloons)RAID.balloons.forEach(b=>{b.pair.forEach((g,i)=>{const q=toMM(g.position.x,g.position.z);mg.fillStyle=i?'#1e5bd8':'#ff6a1a';mg.beginPath();mg.arc(q[0],q[1],4,0,6.3);mg.fill()})});
+  if(LV.raid&&RAID)RAID.bots.forEach(b=>{const q=toMM(b.pos.x,b.pos.z);mg.fillStyle=b.col;mg.strokeStyle='#fff';mg.lineWidth=2;mg.beginPath();mg.arc(q[0],q[1],6,0,6.3);mg.fill();mg.stroke()});
   players.forEach((p,i)=>{const q=toMM(p.pos.x,p.pos.z);mg.save();mg.translate(q[0],q[1]);mg.rotate(p.h);mg.fillStyle=NET.on?netCol(NET.slot).col:STYLES[i].col;mg.strokeStyle='#fff';mg.lineWidth=2;
     mg.beginPath();mg.moveTo(0,-11);mg.lineTo(8,9);mg.lineTo(0,4);mg.lineTo(-8,9);mg.closePath();mg.fill();mg.stroke();mg.restore()})}
 
@@ -1570,7 +1584,7 @@ function initAudio(){if(actx)return;try{actx=new (window.AudioContext||window.we
 function varioSound(dt){if(!actx)return;const p=players[0];let g=0,f=600;
   if(!muted&&mode==='race'&&p&&!p.finished&&p.crash<=0){const v=p.vario;if(v>.2){beepPh+=dt*(1.6+v*1.1);g=(beepPh%1)<.5?.06:0;f=560+v*130}else if(v<-2.6){g=.022;f=Math.max(170,300+v*14)}}
   gain.gain.setTargetAtTime(g,actx.currentTime,.012);osc.frequency.setTargetAtTime(f,actx.currentTime,.02)}
-function chime(big){if(!actx||muted)return;const t=actx.currentTime;[0,.12,big?.24:null].forEach((d,i)=>{if(d===null)return;const o=actx.createOscillator(),g=actx.createGain();o.type='triangle';o.frequency.value=[784,1047,1319][i];g.gain.setValueAtTime(0,t+d);g.gain.linearRampToValueAtTime(.12,t+d+.02);g.gain.exponentialRampToValueAtTime(.001,t+d+.4);o.connect(g);g.connect(actx.destination);o.start(t+d);o.stop(t+d+.45)})}
+function chime(big){if(!actx||muted)return;const t=actx.currentTime;[0,.16,big?.32:null].forEach((d,i)=>{if(d===null)return;const o=actx.createOscillator(),g=actx.createGain(),f=actx.createBiquadFilter();o.type='sine';o.frequency.value=[523,659,784][i];f.type='lowpass';f.frequency.value=1400;g.gain.setValueAtTime(0,t+d);g.gain.linearRampToValueAtTime(.055,t+d+.06);g.gain.exponentialRampToValueAtTime(.001,t+d+1.1);o.connect(f);f.connect(g);g.connect(actx.destination);o.start(t+d);o.stop(t+d+1.15)})}   // carillon doux
 let paused=false;function setPause(v){v=!!v&&mode==='race';if(v===paused)return;paused=v;document.getElementById('pauseOv').hidden=!v;document.getElementById('pauseMain').hidden=false;document.getElementById('pauseAsk').hidden=true;document.getElementById('pauseBtn').textContent=v?'▶':'⏸';KEYS.clear();
   try{if(gain)gain.gain.setTargetAtTime(0,actx.currentTime,.01)}catch(_){}document.querySelectorAll('video').forEach(x=>{if(v){if(!x.paused){x._pz=1;x.pause()}}else if(x._pz){x._pz=0;x.play().catch(()=>{})}});if(v)saveFlight()}
 document.getElementById('pauseBtn').addEventListener('click',e=>{setPause(!paused);e.currentTarget.blur()});
@@ -1693,7 +1707,7 @@ function fabSVG(){
 function fabScene(p){const host=numPlayers===1?document.body:p.hud.el;const d=document.createElement('div');d.className='jojo';
   d.innerHTML=`<div class="card">${fabSVG()}<div class="cap"><b>Plouf ! Game over</b><span>Posé dans le lac d'Annecy · le bateau de Fab vient te chercher</span></div></div>`;
   host.appendChild(d);requestAnimationFrame(()=>d.classList.add('on'));setTimeout(()=>{d.classList.remove('on');setTimeout(()=>d.remove(),600)},6500)}
-function lakeOver(p){if(p.gameover)return;p.gameover=true;p.dnf=true;p.lakeOver=true;p.reserve=false;p.ff=null;p.acroOn=false;document.body.classList.remove('acroing');
+function lakeOver(p){if(LV.raid){raidPlouf(p);return}if(p.gameover)return;p.gameover=true;p.dnf=true;p.lakeOver=true;p.reserve=false;p.ff=null;p.acroOn=false;document.body.classList.remove('acroing');
   p.pos.y=groundY(p.pos.x,p.pos.z)+.3;p.vario=0;p.va=0;p.crash=0;p.stallT=0;addPts(p,-200,'Posé dans le lac d\'Annecy');
   showMsg(p,'GAME OVER<small>Posé dans le lac… le bateau de Fab arrive</small>',99);chime();fabScene(p);setTimeout(checkEnd,6800)}
 function acroGameOver(p){p.bail=null;p.acroState='wo';p.acroOn=false;p.acroDone=true;document.body.classList.remove('acroing');if(p.prevView!=null){p.view=p.prevView;p.prevView=null}
@@ -1719,7 +1733,7 @@ const menu=document.getElementById('menu'),results=document.getElementById('resu
 if(coarse){document.getElementById('play2').disabled=true;document.getElementById('touchNote').hidden=false}
 let raceSeed=1;
 const SAVEK='vol-'+LV.id+'-'+(LV.acroOnly?'acro':'n');
-function saveFlight(){if(mode!=='race'||numPlayers!==1)return;if(typeof NET!=='undefined'&&NET.on){clearFlight();return}const p=players[0];if(!p||p.finished||p.gameover||p.dnf){clearFlight();return}
+function saveFlight(){if(LV.raid)return;if(mode!=='race'||numPlayers!==1)return;if(typeof NET!=='undefined'&&NET.on){clearFlight();return}const p=players[0];if(!p||p.finished||p.gameover||p.dnf){clearFlight();return}
   const d={t:Date.now(),x:p.pos.x,y:p.pos.y,z:p.pos.z,h:p.h,next:p.next,score:p.score,log:p.log,splits:p.splits,simT,route:p.route||null,acroDone:!!p.acroDone,acroScore:p.acroScore||0,day:WX.dayI,jojo:!!p.jojoCafe,beau:!!p.sawBeau,conf:!!p.sawConfins,view:p.view};
   try{sessionStorage.setItem(SAVEK,JSON.stringify(d))}catch(e){}}
 function clearFlight(){try{sessionStorage.removeItem(SAVEK)}catch(e){}}
@@ -1731,7 +1745,7 @@ function testPanel(){if(!LV.test)return;const d=document.createElement('div');d.
   const names=LV.testNames||[];const B=(id,t)=>`<button data-a="${id}">${t}</button>`;
   d.innerHTML=`<button class="tt" data-a="toggle">🛠 Test</button><div class="tb" hidden>
     <div class="tl">${names.map((n,i)=>`<button data-lv="${i}" class="${i===LV.testIdx?'on':''}">${n}</button>`).join('')}</div>
-    ${B('bal','✓ Valider la balise')}${DAY?B('h1','+1 h')+B('hm','−1 h'):''}${B('up','+500 m')}${B('lz','→ Approche atterro')}${ACRO?B('acro','→ Zone acro')+B('acroEnd','Fin séance acro'):''}${B('hnext','→ Cœur suivant')}${B('hgrab','💙 Attraper un cœur')}${B('end','🏁 Fin de partie')}<small>Solo conseillé · la page reste privée</small></div>`;
+    ${B('bal','✓ Valider la balise')}${DAY?B('h1','+1 h')+B('hm','−1 h'):''}${B('up','+500 m')}${B('lz','→ Approche atterro')}${ACRO?B('acro','→ Zone acro')+B('acroEnd','Fin séance acro'):''}${LV.raid?'<div class="tl">'+B('r0','① Cross')+B('r1','② Speed riding')+B('r2','③ Grande voile + acro')+B('r3','④ Ski nautique')+'</div>':''}${B('hnext','→ Cœur suivant')}${B('hgrab','💙 Attraper un cœur')}${B('end','🏁 Fin de partie')}<small>Solo conseillé · la page reste privée</small></div>`;
   document.body.appendChild(d);
   d.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
     if(b.dataset.lv!=null){try{sessionStorage.setItem('testLv',b.dataset.lv)}catch(_){}clearFlight();location.reload();return}
@@ -1745,18 +1759,19 @@ function testPanel(){if(!LV.test)return;const d=document.createElement('div');d.
       else if(a==='hnext'||a==='hgrab'){const i=HEARTS.findIndex((h,i)=>!p['h'+i]&&heartOn(p,h));if(i<0){showMsg(p,'Pas de cœur sur cette étape',1.5);return}const h=HEARTS[i];
         if(a==='hgrab'){p.pos.set(h.x,h.y,h.z)}else{const ang=Math.atan2(h.x-p.pos.x,-(h.z-p.pos.z));p.pos.set(h.x-Math.sin(ang)*400,h.y,h.z+Math.cos(ang)*400);p.h=ang;showMsg(p,'Cœur droit devant (test)',1.4)}}
       else if(a==='end'){if(p.acroOn){p.tum=null;acroEnd(p,'Test')}p.finished=true;p.ftime=simT;p.splits.push(simT);showMsg(p,'Fin de partie (test)',99);checkEnd()}
+      else if(/^r\d$/.test(a)&&LV.raid){if(p===players[0]||true)raidJump(p,+a[1])}
       else if(a==='acro'&&ACRO){goAcro(p,'Test')}
       else if(a==='acroEnd'&&p.acroOn){p.tum=null;acroEnd(p,'Test')}})});}
 function startRace(n,jump){W.warnNight=0;initAudio();if(actx&&actx.state==='suspended')actx.resume();
-  numPlayers=n;players.forEach(p=>{scene.remove(p.glider);p.hud.el.remove()});players.length=0;
+  numPlayers=n;players.forEach(p=>{scene.remove(p.glider);if(p.boat)scene.remove(p.boat);if(p.skier){scene.remove(p.skier);scene.remove(p.rope)}p.hud.el.remove()});players.length=0;if(LV.raid)raidReset();
   for(let i=0;i<n;i++){const p=newPlayer(i);players.push(p);spawn(p,0,true)}
   raceSeed=NET.on&&NET.seed!=null?NET.seed:(Date.now()%100000)|0;makeClouds(raceSeed);simT=0;updateClouds(0);mode='intro';cdT=3;
-  if(jump){mode='race';cd.hidden=true}else playFull((LV.intro||{}).src||'assets/video-deco-loup.mp4',(LV.intro||{}).cap||'Décollage au Crêt du Loup',()=>{if(mode==='intro'){mode='race';cd.textContent='Décollage !';cd.style.fontSize='min(14vw,120px)';cd.hidden=false;setTimeout(()=>{if(mode!=='intro'){cd.hidden=true;cd.style.fontSize=''}},800)}});
+  if(jump){mode='race';cd.hidden=true}else if(LV.raid){mode='countdown';cdT=3.9}else playFull((LV.intro||{}).src||'assets/video-deco-loup.mp4',(LV.intro||{}).cap||'Décollage au Crêt du Loup',()=>{if(mode==='intro'){mode='race';cd.textContent='Décollage !';cd.style.fontSize='min(14vw,120px)';cd.hidden=false;setTimeout(()=>{if(mode!=='intro'){cd.hidden=true;cd.style.fontSize=''}},800)}});
   menu.hidden=true;results.hidden=true;document.getElementById('minimap').hidden=false;muteBtn.hidden=false;
   document.getElementById('touch').hidden=!(coarse&&n===1);layout()}
-function checkEnd(){if(LV.ski&&SKI.manche===1)return;if(players.every(p=>p.finished||p.dnf)){clearFlight();setTimeout(showResults,numPlayers===1?(LV.landVid?5000:4200):2200);mode='done'}}
+function checkEnd(){if(LV.raid)return;if(LV.ski&&SKI.manche===1)return;if(players.every(p=>p.finished||p.dnf)){clearFlight();setTimeout(showResults,numPlayers===1?(LV.landVid?5000:4200):2200);mode='done'}}
 // ===== Records du jeu : si le meilleur score publié est battu, notification ntfy à Aravis Parapente =====
-const REC_TOPIC='aravis-records-f6b2e1d696',REC_LV={0:'Premier vol',1:'Tour de La Clusaz',2:'Grand Tour des Aravis',3:'Méga triangle de Jojo',4:'Vol acro',5:"Vol L'Aiglon"};
+const GAME_VER='v1.2',REC_TOPIC='aravis-records-f6b2e1d696',REC_LV={0:'Premier vol',1:'Tour de La Clusaz',2:'Grand Tour des Aravis',3:'Méga triangle de Jojo',4:'Vol acro',5:"Vol L'Aiglon",6:'Aravis X Raid'};
 let REC=null;   // scores publiés pour ce niveau (du meilleur au moins bon)
 // top 10 par niveau : une notification dès qu'un score entre dans les 10 meilleurs publiés (records.txt)
 function recLast(){try{return +localStorage.getItem('recSent2-'+LV.id)||0}catch(_){return 0}}
@@ -1775,7 +1790,7 @@ document.getElementById('recName').addEventListener('input',recArm);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)recSend()});
 function recSend(){const box=document.getElementById('recBox');if(box.hidden||box.dataset.sent)return;box.dataset.sent='1';clearTimeout(recTimer);
   const name=(document.getElementById('recName').value||'').replace(/[^\p{L}\p{N} '\-]/gu,'').trim().slice(0,14)||'Anonyme',sc=+box.dataset.score,d=new Date(),date=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-  const nm=REC_LV[LV.id]||'Jeu',line=date+' | '+nm+' | '+sc+' | '+name;
+  const nm=REC_LV[LV.id]||'Jeu',line=date+' | '+nm+' | '+sc+' | '+name+' | '+GAME_VER;
   try{localStorage.setItem('recSent2-'+LV.id,String(sc))}catch(_){}if(REC){REC.push(sc);REC.sort((a,b)=>b-a)}const rk=+box.dataset.rank||0;
   fetch('https://ntfy.sh/'+REC_TOPIC,{method:'POST',body:line,keepalive:true,headers:{'Title':(rk===1?'Nouveau record : ':'Top 10 ('+rk+'e) : ')+nm,'Tags':'trophy'}}).catch(()=>{});
   const btn=document.getElementById('recSend');btn.disabled=true;btn.textContent='Publié ✓'}
@@ -1896,7 +1911,8 @@ function netRecv(P,m){
       netSendTo(P,{t:'welcome',slot:r.slot,roster:NET.roster,race:NET.racing?{seed:NET.seed,day:NET.day,mc:LV.ski?SKI.manche:0}:null,fin:NET.fin});netRosterOut();
       netStatus(name+(back?' est revenu dans la partie':' a rejoint la partie'));if(back&&players[0]&&mode==='race')showMsg(players[0],netEsc(name)+' est de retour',1.6)}
     else if(m.t==='s'&&P.slot!=null){m.k=P.slot;netGhostState(m);netBroadcast(m,P)}
-    else if(m.t==='end'&&P.slot!=null){m.k=P.slot;netEnd(m);netBroadcast(m,P)}}
+    else if(m.t==='end'&&P.slot!=null){m.k=P.slot;netEnd(m);netBroadcast(m,P)}
+    else if(m.t==='rw'&&P.slot!=null){m.k=P.slot;if(typeof netRaidRecv==='function')netRaidRecv(m);netBroadcast(m,P)}}
   else netRecvGuest(m)}
 function netRecvGuest(m){{
     if(m.t==='welcome'){const wasLost=NET.lost;NET.slot=m.slot;NET.roster=m.roster;NET.on=true;NET.lost=false;clearTimeout(NET.rt);netLostUI(false);Object.assign(NET.fin,m.fin||{});netSave();netBackBtn();
@@ -1911,7 +1927,8 @@ function netRecvGuest(m){{
     else if(m.t==='full'){netStatus('La partie est complète ('+NET.max+' joueurs).',true);netReset(false)}
     else if(m.t==='start')netGo(m.seed,m.day)
     else if(m.t==='s')netGhostState(m)
-    else if(m.t==='end')netEnd(m)}}
+    else if(m.t==='end')netEnd(m)
+    else if(m.t==='rw'&&typeof netRaidRecv==='function')netRaidRecv(m)}}
 function netDrop(id,P){if(NET.peers[id]!==P||!P)return;delete NET.peers[id];try{P.pc.close()}catch(_){}
   if(NET.host){if(P.slot!=null&&!Object.values(NET.peers).some(Q=>Q.slot===P.slot)){const r=NET.roster.find(r=>r.slot===P.slot);if(r)r.off=true;netGhostDel(P.slot);netRosterOut();netStatus((P.name||'Un joueur')+' s\'est déconnecté')}}
   else if(NET.on)netLost()}
@@ -1976,22 +1993,23 @@ function netGhost(k){let G=NET.ghosts[k];if(G)return G;const g=null;
   const c=document.createElement('canvas');c.width=256;c.height=64;const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c),depthTest:false,transparent:true,sizeAttenuation:false}));sp.scale.set(.16,.04,1);sp.renderOrder=22;scene.add(sp);
   G=NET.ghosts[k]={g,dot,sp,c,name:'',near:false,farT:0,pos:new THREE.Vector3(),tgt:new THREE.Vector3(),vel:new THREE.Vector3(),h:0,th:0,b:0,tb:0,next:0,score:0,fin:false,t:0,seen:false};return G}
 function netGhostFree(G){if(!G.g)return;scene.remove(G.g);G.g.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material)(Array.isArray(o.material)?o.material:[o.material]).forEach(x=>{if(x.map&&x.map!==NET_DOT)x.map.dispose&&0;x.dispose()})});G.g=null}
-function netGhostDel(k){const G=NET.ghosts[k];if(!G)return;netGhostFree(G);scene.remove(G.dot);scene.remove(G.sp);delete NET.ghosts[k]}
+function netGhostDel(k){const G=NET.ghosts[k];if(!G)return;netGhostFree(G);if(G.boat)scene.remove(G.boat);scene.remove(G.dot);scene.remove(G.sp);delete NET.ghosts[k]}
 function netGhostState(m){if(m.k===NET.slot||mode==='menu')return;const G=netGhost(m.k),now=performance.now()/1000;
   const nt=new THREE.Vector3(m.x,m.y,m.z);if(G.seen&&now-G.t<2&&nt.distanceTo(G.tgt)<200){const d=Math.max(.05,now-G.t);G.vel.copy(nt).sub(G.tgt).divideScalar(d);if(G.vel.length()>60)G.vel.set(0,0,0)}else{G.pos.copy(nt);G.h=m.h;G.vel.set(0,0,0)}
-  G.k=m.k;G.tgt.copy(nt);G.t=now;G.th=m.h;G.tb=m.b;G.next=m.n;G.score=m.sc;G.seen=true;G.res=m.r;
+  G.k=m.k;G.tgt.copy(nt);G.t=now;G.th=m.h;G.tb=m.b;G.next=m.n;G.score=m.sc;G.seen=true;G.res=m.r;G.st=m.st||0;G.pg=m.pg||0;G.rh=m.rh||0;
   const r=NET.roster.find(r=>r.slot===m.k),nm=r?r.name:'Pilote';if(nm!==G.name){G.name=nm;const q=G.c.getContext('2d');q.clearRect(0,0,256,64);q.fillStyle=netCol(m.k).col;rr(q,4,6,248,52,16);q.fill();q.fillStyle='#fff';q.font='800 34px "Barlow Condensed","Arial Narrow",sans-serif';q.textAlign='center';q.textBaseline='middle';q.fillText(nm,128,33);G.sp.material.map.needsUpdate=true}}
 function netTick(dt){if(!NET.on||mode==='menu')return;const p=players[0];
   if(p&&(mode==='race'||mode==='intro'||mode==='done')){NET.sendT-=dt;if(NET.sendT<=0){NET.sendT=NET.srv?.2:.1;
-      const m={t:'s',k:NET.slot,x:+p.pos.x.toFixed(1),y:+p.pos.y.toFixed(1),z:+p.pos.z.toFixed(1),h:+p.h.toFixed(3),b:+(p.bank||0).toFixed(2),n:p.next,sc:p.score,r:p.reserve?1:0};
+      const m={t:'s',k:NET.slot,x:+p.pos.x.toFixed(1),y:+p.pos.y.toFixed(1),z:+p.pos.z.toFixed(1),h:+p.h.toFixed(3),b:+(p.bank||0).toFixed(2),n:p.next,sc:p.score,r:p.reserve?1:0};if(LV.raid&&RAID){m.st=p.raidStage||0;m.pg=+raidProgP(p).toFixed(3);m.rh=p.raidHit>0?1:0}
       if(NET.host)netBroadcast(m);else netToHost(m)}
-    if((p.finished||p.dnf||p.gameover)&&!NET.sentEnd){NET.sentEnd=true;NET.fin[NET.slot]={score:p.score,ft:p.ftime||simT,ok:!!p.finished,mc:LV.ski?SKI.manche:0}}
+    if((LV.raid?(RAID&&RAID.over)||p.dnf||p.gameover:(p.finished||p.dnf||p.gameover))&&!NET.sentEnd){NET.sentEnd=true;NET.fin[NET.slot]={score:p.score,ft:p.ftime||simT,ok:!!p.finished,mc:LV.ski?SKI.manche:0}}
     // le résultat est renvoyé régulièrement : un joueur qui revient après une coupure le reçoit aussi
     if(NET.sentEnd&&frameN%60===0){const f=NET.fin[NET.slot];if(f){const m={t:'end',k:NET.slot,sc:f.score,ft:f.ft,ok:f.ok,mc:f.mc,rep:1};if(NET.host)netBroadcast(m);else netToHost(m)}}}
-  const now=performance.now()/1000,ws=LV.wingScale||1;
+  const now=performance.now()/1000,ws0=LV.wingScale||1;
   Object.values(NET.ghosts).forEach(G=>{if(!G.seen)return;const ex=Math.min(.5,now-G.t);_t2.copy(G.tgt).addScaledVector(G.vel,ex);G.pos.lerp(_t2,1-Math.exp(-dt*8));
     let d=G.th-G.h;d=Math.atan2(Math.sin(d),Math.cos(d));G.h+=d*Math.min(1,dt*8);G.b+=(G.tb-G.b)*Math.min(1,dt*6);
-    const live=now-G.t<6;
+    const live=now-G.t<6,ws=LV.raid?(G.st===1||G.st===3?.6:1):ws0;
+    if(LV.raid&&RAID){const on=live&&G.st===3;if(on&&!G.boat){G.boat=raidBoatMesh(netCol(G.k));}if(G.boat){G.boat.visible=on;if(on){const fx=Math.sin(G.h),fz=-Math.cos(G.h);G.boat.position.set(G.pos.x+fx*32,RAID.lakeY,G.pos.z+fz*32);G.boat.rotation.set(-.1,-G.h,0,'YXZ')}}}
     if(G.near&&live){if(!G.g){G.g=makeGlider(netCol(G.k));scene.add(G.g)}const g=G.g,u=g.userData;g.position.copy(G.pos);g.rotation.set(0,-G.h,-G.b);u.ears=0;u.bl=G.b<0?Math.min(1.2,-G.b*.9):0;u.br=G.b>0?Math.min(1.2,G.b*.9):0;
       if(u.top.scale.x!==ws){u.top.scale.setScalar(ws);u.bot.scale.setScalar(ws);u.lines.scale.setScalar(ws)}u.top.visible=u.bot.visible=u.lines.visible=!G.res;u.res.visible=!!G.res;if(G.dd<1500||frameN%3===0)shapeGlider(g);g.visible=true;G.farT=0}
     else if(G.g){G.g.visible=false;G.farT+=dt}
@@ -2002,15 +2020,15 @@ function netTick(dt){if(!NET.on||mode==='menu')return;const p=players[0];
     const kept=L.filter(G=>G.g);if(kept.length>14)kept.filter(G=>!G.near&&G.farT>10).sort((a,b)=>b.farT-a.farT).slice(0,kept.length-14).forEach(netGhostFree)}
   if(frameN%15===0)netRank()}
 function netRank(){const el=netEl('netRank');if(!NET.on||!results.hidden||!(mode==='race'||mode==='intro'||mode==='done')){el.hidden=true;return}el.hidden=false;const p=players[0];
-  const rows=NET.roster.map(r=>{const me=r.slot===NET.slot,G=NET.ghosts[r.slot],f=NET.fin&&NET.fin[r.slot];return {r,me,n:me?(p?p.next:0):(G?G.next:0),sc:f?f.score:me?(p?p.score:0):(G?G.score:0),fin:!!f}}).sort((a,b)=>(b.fin-a.fin)||(b.n-a.n)||(b.sc-a.sc));
+  const rows=NET.roster.map(r=>{const me=r.slot===NET.slot,G=NET.ghosts[r.slot],f=NET.fin&&NET.fin[r.slot];return {r,me,n:LV.raid&&RAID?(me?(p?raidProgP(p):0):(G?G.pg||0:0)):me?(p?p.next:0):(G?G.next:0),sc:f?f.score:me?(p?p.score:0):(G?G.score:0),fin:!!f}}).sort((a,b)=>(b.fin-a.fin)||(b.n-a.n)||(b.sc-a.sc));
   const meI=rows.findIndex(x=>x.me),show=rows.length<=6?rows.map((x,i)=>[x,i]):rows.slice(0,5).map((x,i)=>[x,i]).concat(meI>=5?[[rows[meI],meI]]:[[rows[5],5]]);
-  el.innerHTML=show.map(([x,i])=>`<li${x.me?' class="me"':''}${x.r.off&&!x.fin?' style="opacity:.5"':''}><i style="background:${netCol(x.r.slot).col}"></i><span>${rows.length>4?(i+1)+'. ':''}${netEsc(x.r.name)}</span><b>${x.fin?'🏁 ':x.r.off?'absent · ':'B'+x.n+' · '}${x.sc}</b></li>`).join('');
+  el.innerHTML=show.map(([x,i])=>`<li${x.me?' class="me"':''}${x.r.off&&!x.fin?' style="opacity:.5"':''}><i style="background:${netCol(x.r.slot).col}"></i><span>${rows.length>4?(i+1)+'. ':''}${netEsc(x.r.name)}</span><b>${x.fin?'🏁 ':x.r.off?'absent · ':(LV.raid?'É'+Math.min(5,Math.floor(x.n)+1):'B'+x.n)+' · '}${x.sc}</b></li>`).join('');
   const mm=netEl('minimap').getBoundingClientRect();el.style.top=(mm.height?mm.bottom+46:60)+'px'}
 function netResultsRows(){const p=players[0];
   return NET.roster.map(r=>{const isMe=r.slot===NET.slot,f=NET.fin[r.slot];return {r,isMe,score:isMe?p.score:(f?f.score:(NET.ghosts[r.slot]||{}).score||0),ft:isMe&&p.finished?p.ftime:(f?f.ft:null),fin:isMe?!!p.finished:(f?f.ok:false),flying:isMe?false:!f,log:isMe?p.log:null}}).sort((a,b)=>b.score-a.score)}
 function netOpen(){menu.hidden=true;netEl('netOv').hidden=false;netEl('netEyebrow').textContent='Jusqu\'à '+NET.max+' joueurs · chacun sur son téléphone ou son ordinateur';if(NET.on&&mode!=='race'&&mode!=='intro'){if(NET.srv&&NET.org)srvSend({t:'lobby'});if(NET.host)NET.racing=false}try{netEl('netName').value=netEl('netName').value||localStorage.getItem('netName')||''}catch(_){}
   if(NET.on){netView(NET.host||(NET.srv&&NET.org)?'netHostV':'netGuestV');netRenderLobby();netStatus(NET.host||(NET.srv&&NET.org)?'Relance un vol quand tout le monde est prêt.':(NET.lost?'Reconnexion…':'En attente du départ…'))}else{netView('netStart');netStatus('')}}
-netEl('playNet').hidden=!(LV.net||LV.test);if(LV.test)window.__net=NET;
+netEl('playNet').hidden=!(LV.net||LV.test);if(LV.test){window.__net=NET;window.__nt={netGhostState,netRank,recv:m=>netRaidRecv(m)}}
 netEl('playNet').addEventListener('click',netOpen);
 netEl('playBack').addEventListener('click',netComeBack);
 netEl('netGo').addEventListener('click',netCreate);
@@ -2022,6 +2040,397 @@ addEventListener('beforeunload',()=>{recSend();netSave();try{NET.ws&&NET.ws.clos
 netBackBtn();
 {const s=(LV.net||LV.test)?netSess():null;if(s&&s.r&&Date.now()-s.t<180000){const w=setInterval(()=>{if(mode==='menu'&&!menu.hidden){clearInterval(w);netComeBack()}},300)}}
 {const h=location.hash.match(/join=(\d{4})/);if(h&&(LV.net||LV.test)){history.replaceState(null,'',location.pathname+location.search);const w=setInterval(()=>{if(mode==='menu'&&!menu.hidden){clearInterval(w);netOpen();netEl('netCode').value=h[1];if(netEl('netName').value)netJoin(h[1])}},300)}}
+// ===RAID-BEGIN===
+// ================= Le Raid des Aravis (niveau 6) : cross, speed riding, vol, acro, bateau =================
+const RAID=LV.raid?{stage:0,bots:[],buoys:[],fx:[],rank:[0,0,0,0],over:false,raft:null,lakeY:445,lzt:[],S:null}:null;
+if(RAID){
+  const C=(name,e,n,r,o)=>Object.assign({name,e,n},r?{r}:{},o||{});
+  RAID.S=[
+    {key:'cross',num:1,name:'Cross',cps:[C('Crêt du Loup',2.307,-1.433),C('Tête du Danay',1.962,2.026,.4,{minAlt:1850}),C('Beauregard',-2.25,-2.0,.35,{landing:true})],
+      lv:{ski:false,wingScale:1,vMul:1.39,sinkMul:1.15,turnMul:1,liftMul:1,camBack:0,camUp:0,camLook:null,spawnH:18,noValleyWind:false,crossFinish:true,HS:10,lzSub:'Arrivée · traverse la balise'}},
+    {key:'ski',num:2,name:'Speed riding',cps:[C('Sommet des Aiglons',-2.25,-2.0),C('Replat sous les Aiglons',-1.15,-2.18,.12,{landing:true})],
+      lv:{ski:true,wingScale:.6,vMul:1.45,sinkMul:1.05,turnMul:1.7,liftMul:0,camBack:13,camUp:4.5,camLook:-4,spawnH:4,noValleyWind:true,crossFinish:false,HS:1,lzSub:'Posé dans la cible',lzAt:'au replat'}},
+    {key:'fly',num:3,name:'Vol vers la Dent de Lanfon',cps:[C('Beauregard',-1.15,-2.18),C('Dent de Lanfon',-14.2,-4.4,.5),C('Acro sur le lac',-15.75,-10.3,1)],
+      lv:{ski:false,wingScale:1,vMul:1.39,sinkMul:1.15,turnMul:1,liftMul:1,camBack:0,camUp:0,camLook:null,spawnH:650,noValleyWind:true,crossFinish:false,HS:18,acroTime:75}},
+    {key:'boat',num:5,name:'Ski nautique',cps:[],lv:{ski:true,wingScale:.6,vMul:1.45,sinkMul:1.05,turnMul:1.7,liftMul:0,camBack:22,camUp:16,camLook:-1,spawnH:2,noValleyWind:true,crossFinish:false,HS:1,lzSub:'Arrivée sur la plage',lzAt:'sur la plage de Doussard'}}];
+  RAID.S.forEach(S=>S.cps.forEach(c=>{c.x=c.e*KM;c.z=-c.n*KM;c.R=(c.r||0)*KM}));
+  {const a=RAID.S[1].cps;SKI.A=a[0];SKI.B=a[1]}
+  RAID.lzt=[RAID.S[1].cps[1]];   // cible du replat (le radeau a sa propre cible peinte)
+  const p2=document.getElementById('play2');if(p2)p2.hidden=true;
+}
+const RAID_BONUS=[150,100,50,0];
+function raidStageCfg(s){const S=RAID.S[s];Object.assign(LV,S.lv);HS=LV.HS;
+  if(S.cps.length){CP.length=0;S.cps.forEach(c=>CP.push(c));NB=CP.length-2;LZ=CP.length-1}
+  gates.forEach(g=>{scene.remove(g.cyl);scene.remove(g.sp);g.cyl.geometry.dispose();g.mat.dispose();g.sm.dispose()});gates.length=0;
+  if(S.key!=='boat'&&S.key!=='ski')buildGates();
+  if(S.key==='fly'&&gates[LZ-1]){gates[LZ-1].cyl.visible=gates[LZ-1].sp.visible=false}
+  RAID.lzt=S.key==='ski'?[CP[LZ]]:[]}
+// ---------- décor du lac : radeau, bouées, bateaux ----------
+function raidBanner(w,h,bg){const c=document.createElement('canvas');c.width=w;c.height=h;const q=c.getContext('2d');q.fillStyle=bg;q.fillRect(0,0,w,h);q.fillStyle='#fff';q.font='800 '+Math.round(h*.62)+'px "Barlow Condensed","Arial Narrow",sans-serif';q.textAlign='center';q.textBaseline='middle';const s='ARAVIS PARAPENTE',tw=q.measureText(s).width;q.save();q.translate(w/2,h/2+2);if(tw>w*.92)q.scale(w*.92/tw,1);q.fillText(s,0,0);q.restore();return new THREE.CanvasTexture(c)}
+function raidOriflamme(col,sc){if(!RAID.ofl){const fsh=new THREE.Shape();fsh.moveTo(0,.7);fsh.lineTo(0,5.4);fsh.quadraticCurveTo(.2,5.75,1.35,5.2);fsh.quadraticCurveTo(1.55,3,1.15,.95);fsh.lineTo(0,.7);
+    const flag=new THREE.ShapeGeometry(fsh,10);{const u=flag.attributes.uv,ps=flag.attributes.position;for(let k=0;k<u.count;k++)u.setXY(k,ps.getX(k)/1.55,(ps.getY(k)-.7)/5.05)}
+    const pole=new THREE.CylinderGeometry(.07,.09,5.6,6);pole.translate(0,2.8,0);RAID.ofl={flag,pole,poleM:new THREE.MeshLambertMaterial({color:'#dfe4e8'}),tex:{}}}
+  const O=RAID.ofl;if(!O.tex[col]){const c=document.createElement('canvas');c.width=128;c.height=512;const q=c.getContext('2d');q.fillStyle=col;q.fillRect(0,0,128,512);q.fillStyle='rgba(255,255,255,.95)';q.fillRect(0,0,10,512);
+    q.save();q.translate(70,256);q.rotate(-Math.PI/2);q.fillStyle='#fff';q.font='800 50px "Barlow Condensed","Arial Narrow",sans-serif';q.textAlign='center';q.textBaseline='middle';const s='ARAVIS PARAPENTE',w=q.measureText(s).width;if(w>430)q.scale(430/w,1);q.fillText(s,0,-4);q.restore();
+    O.tex[col]=new THREE.MeshLambertMaterial({map:new THREE.CanvasTexture(c),side:THREE.DoubleSide})}
+  const g=new THREE.Group();const p=new THREE.Mesh(O.pole,O.poleM);p.scale.set(1.3,1.5,1.3);g.add(p);const f=new THREE.Mesh(O.flag,O.tex[col]);f.scale.set(1.5,1.5,1.5);g.add(f);g.scale.setScalar(sc||1);return g}
+function raidBuoyTex(col){const c=document.createElement('canvas');c.width=64;c.height=256;const q=c.getContext('2d');for(let i=0;i<8;i++){q.fillStyle=i%2?'#ffffff':col;q.fillRect(0,i*32,64,32)}return new THREE.CanvasTexture(c)}
+function raidBuoy(col){const g=new THREE.Group();const base=new THREE.Mesh(new THREE.SphereGeometry(2.2,16,10,0,6.2832,0,1.7),new THREE.MeshLambertMaterial({color:col}));base.scale.y=.6;base.position.y=.2;g.add(base);
+  const cone=new THREE.Mesh(new THREE.ConeGeometry(1.9,4.6,16,1,true),new THREE.MeshLambertMaterial({map:raidBuoyTex(col),side:THREE.DoubleSide}));cone.position.y=2.6;g.add(cone);
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(2.1,.18,6,18),new THREE.MeshLambertMaterial({color:'#1b2430'}));ring.rotation.x=Math.PI/2;ring.position.y=.55;g.add(ring);
+  const of=raidOriflamme(col==='#ff6a1a'?'#ff6a1a':'#1e5bd8',.9);of.position.y=4.6;g.add(of);return g}
+function raidBuildLake(){const L=ACRO.lz;RAID.lakeY=groundY(L.x,L.z);const y0=RAID.lakeY;
+  // radeau : plateforme en bois, cible peinte, drapeau Aravis Parapente
+  const g=new THREE.Group();const c=document.createElement('canvas');c.width=c.height=256;{const q=c.getContext('2d');q.fillStyle='#b98a55';q.fillRect(0,0,256,256);q.strokeStyle='rgba(80,50,20,.35)';q.lineWidth=3;for(let i=0;i<256;i+=21){q.beginPath();q.moveTo(i,0);q.lineTo(i,256);q.stroke()}
+    [[110,'#ffffff'],[80,'#ff5b1f'],[50,'#ffffff'],[22,'#e0262e']].forEach(([r,col])=>{q.beginPath();q.arc(128,128,r,0,6.2832);q.fillStyle=col;q.fill()})}
+  const deck=new THREE.Mesh(new THREE.BoxGeometry(28,.6,28),[0,1,2,3,4,5].map(i=>new THREE.MeshLambertMaterial(i===2?{map:new THREE.CanvasTexture(c)}:{color:'#8a6238'})));deck.position.y=.55;g.add(deck);
+  const fl=new THREE.MeshLambertMaterial({color:'#e8e8e8'});[[-11,-4],[11,-4],[-11,4],[11,4],[0,4]].forEach(([x,z])=>{const b=new THREE.Mesh(new THREE.CylinderGeometry(1.1,1.1,27,10),fl);b.rotation.x=Math.PI/2;b.position.set(x,-.45,0);if(z>0)g.add(b)});
+  [[-13,-13,'#1e5bd8'],[13,-13,'#ff6a1a'],[-13,13,'#ff6a1a'],[13,13,'#1e5bd8']].forEach(([x,z,col])=>{const o=raidOriflamme(col,1.1);o.position.set(x,.8,z);o.rotation.y=Math.atan2(-BRZU.z,BRZU.x);g.add(o)});
+  g.position.set(L.x,y0,L.z);scene.add(g);RAID.raft={x:L.x,z:L.z,top:y0+.8,g};windsock(L.x+18,L.z+18,Math.atan2(-BRZU.z,BRZU.x));
+  // parcours de bouées du radeau à la petite plage officielle
+  const B=LV.acro.beaches.find(b=>b.id==='off'),cx=(B.x0+B.x1)/2;const [fx,fz]=pxToWorld(cx,shoreY(cx)-2);RAID.finish={x:fx,z:fz};
+  const N=8,dx=fx-L.x,dz=fz-L.z,len=Math.hypot(dx,dz),ux=dx/len,uz=dz/len,nx=-uz,nz=ux;RAID.buoys=[];
+    for(let k=0;k<N;k++){const t=(k+1)/(N+1);let off=(k%2?1:-1)*110*Math.sin(Math.PI*t);
+    const ok=o=>[-20,20].every(s=>{const x=L.x+dx*t+nx*(o+s),z=L.z+dz*t+nz*(o+s);return inAnnecy(x,z)});
+    while(Math.abs(off)>5&&!ok(off))off*=.7;
+    const x=L.x+dx*t+nx*off,z=L.z+dz*t+nz*off;
+    const gg=new THREE.Group();[0,1].forEach(i=>gg.add(raidBuoy(i?'#1e5bd8':'#ff6a1a')));
+    gg.position.set(x,y0,z);scene.add(gg);RAID.buoys.push({x,z,ux,uz,nx,nz,g:gg})}
+  // la direction de chaque porte suit le tracé
+  RAID.buoys.forEach((b,k)=>{const a=k?RAID.buoys[k-1]:{x:L.x,z:L.z},c=RAID.buoys[k+1]||RAID.finish,vx=c.x-a.x,vz=c.z-a.z,l=Math.hypot(vx,vz);b.ux=vx/l;b.uz=vz/l;b.nx=-b.uz;b.nz=b.ux;b.side=k%2?1:-1;b.g.children.forEach((m,i)=>{const s=i?12:-12;m.position.x=b.nx*s;m.position.z=b.nz*s;m.rotation.y=-Math.atan2(b.ux,-b.uz)})});
+  RAID.boatPath=RAID.buoys.map(b=>({x:b.x,z:b.z})).concat([RAID.finish]);
+  RAID.S[3].cps=[{name:'Radeau',x:L.x,z:L.z,R:0},{name:'Plage de Doussard',x:fx,z:fz,R:35,landing:true}]}
+function raidBoatMesh(st,crew){const g=new THREE.Group(),M=(c,o)=>new THREE.MeshLambertMaterial(Object.assign({color:c},o||{}));
+  const hullShape=(w,l)=>{const sh=new THREE.Shape();sh.moveTo(0,-l*.62);sh.bezierCurveTo(w*.42,-l*.42,w*.5,-l*.12,w*.5,l*.1);sh.lineTo(w*.48,l*.38);sh.lineTo(-w*.48,l*.38);sh.lineTo(-w*.5,l*.1);sh.bezierCurveTo(-w*.5,-l*.12,-w*.42,-l*.42,0,-l*.62);return sh};
+  const ext=(sh,d,mat,y)=>{const ge=new THREE.ExtrudeGeometry(sh,{depth:d,bevelEnabled:true,bevelThickness:.08,bevelSize:.08,bevelSegments:2,curveSegments:10});ge.rotateX(Math.PI/2);const m=new THREE.Mesh(ge,mat);m.position.y=y;g.add(m);return m};
+  ext(hullShape(2.6,8),1.05,M('#f6f6f4'),1.05);   // coque
+  ext(hullShape(2.66,8.08),.22,M(st.col||'#ff5b1f'),.72);   // liseré de couleur
+  ext(hullShape(2.62,8.04),.2,M('#1b2a3a'),.2);   // flottaison sombre
+  ext(hullShape(2.2,7.2),.06,M('#c99a64'),1.12);   // pont en bois
+  // flancs : ARAVIS PARAPENTE
+  [-1,1].forEach(sd=>{const p=new THREE.Mesh(new THREE.PlaneGeometry(3.6,.5),new THREE.MeshBasicMaterial({map:raidBanner(512,72,st.col||'#ff6a1a'),transparent:true}));p.position.set(sd*1.33,.78,-.2);p.rotation.y=sd*Math.PI/2;g.add(p)});
+  // console, pare-brise, siège
+  const con=new THREE.Mesh(new THREE.BoxGeometry(1,.9,.8),M('#e9ecef'));con.position.set(.35,1.55,-.6);g.add(con);
+  const ws=new THREE.Mesh(new THREE.CylinderGeometry(1.1,1.1,.55,16,1,true,-.9,1.8),M('#9cd3ef',{transparent:true,opacity:.55,side:THREE.DoubleSide}));ws.rotation.y=Math.PI;ws.position.set(.35,2.1,-.15);ws.scale.set(.75,1,.5);g.add(ws);
+  const seat=new THREE.Mesh(new THREE.BoxGeometry(2,.5,.7),M('#1f6f96'));seat.position.set(0,1.38,1.6);g.add(seat);
+  // moteur hors-bord
+  const mot=new THREE.Mesh(new THREE.BoxGeometry(.7,1.1,.8),M('#16181c'));mot.position.set(0,1.45,3.55);g.add(mot);
+  const cap=new THREE.Mesh(new THREE.BoxGeometry(.72,.18,.82),M(st.col||'#ff5b1f'));cap.position.set(0,2.05,3.55);g.add(cap);
+  const leg=new THREE.Mesh(new THREE.BoxGeometry(.2,1.2,.3),M('#2b2f36'));leg.position.set(0,.5,3.7);g.add(leg);
+  const O=(st.outfit||STYLES[0].outfit);(crew===1?[[O.pilot,.35]]:[[O.pilot,-.45],[O.pax,.45]]).forEach(([o,x])=>{const b=new THREE.Mesh(new THREE.BoxGeometry(.5,.7,.4),M(o.jacket));b.position.set(x,1.85,crew===1?.1:.6);g.add(b);
+    const h=new THREE.Mesh(new THREE.SphereGeometry(.19,10,8),M('#e0b394'));h.position.set(x,2.4,crew===1?.1:.6);g.add(h);
+    const hm=new THREE.Mesh(new THREE.SphereGeometry(.21,10,6,0,6.2832,0,1.6),M(o.helmet));hm.position.set(x,2.45,crew===1?.1:.6);g.add(hm)});
+  g.visible=false;scene.add(g);return g}
+// ---------- étapes d'un joueur ----------
+function raidStyle(p,s){return typeof NET!=='undefined'&&NET.on?netCol(NET.slot):s>=1?STYLES[1]:STYLES[p.id%STYLES.length]}
+function raidStart(p){p.raidStage=0;raidWInit(p);p.raidT=null;p.sawBeau=p.sawConfins=p.sawMerle=p.sawSpectre=true}
+const RAID_ARR=['à Beauregard','au replat','au radeau','à la plage'];
+function raidStageDone(r,s){const k=RAID.rank[s]++;if(!r.bot)raidNetSend({a:'rs',s});const b=RAID_BONUS[Math.min(k,3)];if(r.bot){r.score+=b}else if(b)addPts(r,b,(k+1)+(k?'e':'er')+' arrivé '+RAID_ARR[s]);return k+1}
+function raidNext(p){const s=++p.raidStage,S=RAID.S[s];raidStageCfg(s);
+  Object.keys(p).forEach(k=>{if(/^(g|sh|h)\d+$/.test(k))delete p[k]});
+  if(p.rope)p.rope.visible=false;Object.assign(p,{raidEnded:false,bN:0,finished:false,next:0,route:null,acroDone:false,landMode:false,acroOn:false,gameover:false,dnf:false,crash:0,reserve:false,ff:null,skiLast:null,tg:0,pose360:false,apprLatch:false,apprA:0,apprMsg:false,flare:false,ptu:0,skiBoost:null,lzRush:0,raidT:null,raidSwim:0,raidLand:false,balN:0,balPrev:null,balOk:0,acroT:0,acroScore:0,acroLog:null,twist:false});
+  document.body.classList.remove('acroing');raidWInit(p);p.raidHit=0;
+  if(S.key!=='boat'){const ng=makeGlider(raidStyle(p,s));scene.remove(p.glider);p.glider=ng;if(p.boat)p.boat.visible=false;spawn(p,0,true)}
+  const solo=numPlayers===1&&!(typeof NET!=='undefined'&&NET.on);
+  const bn=p.raidBonus?' · +'+p.raidBonus:'';p.raidBonus=0;
+  if(S.key==='ski')showMsg(p,'Speed riding !<small>Slalom entre les oriflammes · pose-toi dans la cible du replat'+bn+'</small>',2.6);
+  else if(S.key==='fly')showMsg(p,'Grande voile !<small>Cap sur la Dent de Lanfon · en ligne droite ça file'+bn+'</small>',2.6);
+  else if(S.key==='boat'){raidBoatStart(p);showMsg(p,'Ski nautique !<small>Comme en speed riding : passe entre les bouées, pose-toi sur la plage'+bn+'</small>',3.2)}}
+function raidJump(p,s){p.raidStage=s-1;raidNext(p);if(s===0)showMsg(p,'Cross (test)<small>Crêt du Loup → Danay ≥ 1850 m → Beauregard</small>',2);RAID.rank=RAID.rank.map((v,i)=>i>=s?0:v);
+  RAID.bots.forEach((b,i)=>{Object.assign(b,{stage:s,ph:'go',done:false,finished:false,hitT:0,reserve:false,acroOn:false,acroState:'wo',wait:.6+i*.7,wMis:1,wMine:s===3?2:s===1?1:0});raidBotPath(b);const q=b.path[0];b.pos.set(q.x+(i-1)*40,q.y,q.z+30)})}
+function raidSkierMesh(st){const g=new THREE.Group(),O=st.outfit,M=c=>new THREE.MeshLambertMaterial({color:c});
+  [[O.pilot,-.42],[O.pax,.42]].forEach(([o,x])=>{const ski=new THREE.Mesh(new THREE.BoxGeometry(.17,.05,1.7),M(o.skis||'#e8e8e8'));ski.position.set(x,.03,-.1);g.add(ski);
+    [-.1,.1].forEach(d=>{const l=new THREE.Mesh(new THREE.BoxGeometry(.13,.75,.15),M(o.pants));l.position.set(x+d,.42,0);l.rotation.x=.25;g.add(l)});
+    const t=new THREE.Mesh(new THREE.BoxGeometry(.42,.62,.28),M(o.jacket));t.position.set(x,1.08,.12);t.rotation.x=.35;g.add(t);
+    const h=new THREE.Mesh(new THREE.SphereGeometry(.17,10,8),M(o.helmet));h.position.set(x,1.5,.02);g.add(h)});
+  const bar=new THREE.Mesh(new THREE.CylinderGeometry(.03,.03,1.5,6),M('#222'));bar.rotation.z=Math.PI/2;bar.position.set(0,1.05,-.42);g.add(bar);
+  g.visible=false;scene.add(g);return g}
+function raidBoatStart(p){const R=RAID.raft,b0=RAID.buoys[0];if(!p.boat)p.boat=raidBoatMesh(raidStyle(p,0),1);p.boat.visible=true;p.glider.visible=true;
+  if(!p.rope){p.rope=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3()]),new THREE.LineBasicMaterial({color:'#ffd23f'}));scene.add(p.rope)}p.rope.visible=true;
+  const h=Math.atan2(b0.x-R.x,-(b0.z-R.z));p.h=h;p.pos.set(R.x+Math.sin(h)*20,RAID.lakeY+SKI_H,R.z-Math.cos(h)*20);p.va=10;p.vario=0;p.turn=0;p.snap=true;p.camH=h;p.view=0;p.bN=0;p.bPrev=null;
+  p.bpos=new THREE.Vector3(p.pos.x+Math.sin(h)*32,RAID.lakeY,p.pos.z-Math.cos(h)*32);p.bh=h}
+// le bateau devant, au bout de la corde, qui suit la trajectoire de la voile
+function raidTow(p,dt){if(!p.boat||!p.bpos)return;const fx=Math.sin(p.h),fz=-Math.cos(p.h),tx=p.pos.x+fx*32,tz=p.pos.z+fz*32;p.bpos.x=lerp(p.bpos.x,tx,Math.min(1,dt*3));p.bpos.z=lerp(p.bpos.z,tz,Math.min(1,dt*3));
+  const dh=Math.atan2(Math.sin(p.h-p.bh),Math.cos(p.h-p.bh));p.bh+=dh*Math.min(1,dt*3);
+  p.boat.position.set(p.bpos.x,RAID.lakeY+Math.sin(time*2.3+p.id)*.06,p.bpos.z);p.boat.rotation.set(-.1,-p.bh,-dh*.3,'YXZ');
+  const a=p.rope.geometry.attributes.position;a.setXYZ(0,p.bpos.x-Math.sin(p.bh)*3.9,RAID.lakeY+2,p.bpos.z+Math.cos(p.bh)*3.9);a.setXYZ(1,p.pos.x+fx*.5,p.pos.y-.2,p.pos.z+fz*.5);a.needsUpdate=true;
+  p.puffT2=(p.puffT2||0)-dt;if(p.puffT2<=0){p.puffT2=.05;skiPuff(p.bpos.x-Math.sin(p.bh)*4.4,RAID.lakeY+.4,p.bpos.z+Math.cos(p.bh)*4.4,1.8)}}
+// portes de bouées (passer entre les deux, avec la voile sur les skis)
+function raidBuoyStep(p){const k=p.bN||0,b=RAID.buoys[k];if(!b)return;const qx=p.pos.x-b.x,qz=p.pos.z-b.z,s=qx*b.ux+qz*b.uz,lat=qx*b.nx+qz*b.nz;
+  if(p.bPrev!=null&&p.bPrev<0&&s>=0){p.bN=k+1;if(Math.abs(lat)<12){addPts(p,50,'Bouée '+(k+1));showMsg(p,'Bouée '+(k+1)+' ✓<small>+50 · '+p.bN+' / '+RAID.buoys.length+'</small>',1.1);chime()}else showMsg(p,'Bouée '+(k+1)+' manquée',1.1)}
+  p.bPrev=p.bN===k?s:null}
+// ---------- avant la physique du parapente ----------
+function raidPre(p,dt){const S=RAID.S[p.raidStage];if(!S)return false;
+  if(raidHitStep(p,dt))return true;
+  if(p.raidSwim>0){p.raidSwim-=dt;if(!p.raidLand)p.pos.y=RAID.lakeY+.2;if(p.raidSwim<=0){p.finished=true}placeGlider(p,dt);return true}
+  if(S.key==='boat'){raidBuoyStep(p);const F=RAID.finish;if(!raidWater(p.pos.x,p.pos.z)&&Math.hypot(p.pos.x-F.x,p.pos.z-F.z)>70){p.h+=Math.PI*.9;p.pos.x+=Math.sin(p.h)*6;p.pos.z-=Math.cos(p.h)*6;p.va*=.5;if(!(p.shoreMsg>time)){p.shoreMsg=time+3;showMsg(p,'Attention au rivage !',1.2)}}return false}
+  if(S.key==='fly'){if(!p.route)raidBalloonStep(p);if(p.next>=NB&&!p.route){p.route='acro';showMsg(p,'Dent de Lanfon validée !<small>Direction la zone acro au-dessus du lac</small>',2.6)}
+    if(p.route==='acro'&&!p.acroOn&&!p.acroDone&&Math.hypot(p.pos.x-ACRO.box.x,p.pos.z-ACRO.box.z)<ACRO.box.R){p.pos.y=RAID.lakeY+1200;p.vario=0;p.snap=true}}   // l'acro commence toujours à la même hauteur
+  return false}
+// posé sur le radeau, dans l'eau ou à terre (étape vol + acro)
+function raidRaft(p,gy,dt){const R=RAID.raft;if(!R)return false;const d=Math.hypot(p.pos.x-R.x,p.pos.z-R.z);
+  if(d<25&&p.pos.y<R.top+.6&&p.vario<=0){p.pos.y=R.top+.6;p.finished=true;p.ftime=simT;addPts(p,300,'Posé sur le radeau');const prec=Math.round(200*clamp(1-d/22,0,1));if(prec)addPts(p,prec,'Précision ('+Math.round(d)+' m)');
+    showMsg(p,'Posé sur le radeau !',1.5);chime(true);placeGlider(p,dt);return true}
+  if(p.pos.y<gy+.6){if(inAnnecy(p.pos.x,p.pos.z)){p.acroOn=false;document.body.classList.remove('acroing');raidPlouf(p);placeGlider(p,dt);return true}
+    if(d<3000){p.acroOn=false;document.body.classList.remove('acroing');p.pos.y=gy+.6;p.vario=0;p.va=0;p.raidSwim=3;p.raidLand=true;addPts(p,-100,'Radeau raté');showMsg(p,'Radeau raté · −100<small>3 s et on repart en ski nautique</small>',3);placeGlider(p,dt);return true}}
+  return false}
+function raidPlouf(p){if(p.raidSwim>0||p.finished)return;p.acroOn=false;p.reserve=false;p.ff=null;document.body.classList.remove('acroing');p.pos.y=RAID.lakeY+.2;p.vario=0;p.va=0;p.raidSwim=3;
+  addPts(p,-100,'Plouf dans le lac');showMsg(p,'Plouf ! −100<small>3 s et on repart en ski nautique</small>',3);chime()}
+// ---------- bateau ----------
+function raidWater(x,z){return inAnnecy(x,z)&&groundY(x,z)<=446.5}
+
+function raidBoatFinish(p){if(p.raidEnded)return;p.raidEnded=true;const rk=raidStageDone(p,3);
+  showMsg(p,'Arrivée à la plage de Doussard !<small>'+rk+(rk===1?'er':'e')+' · '+p.score+' points</small>',99);chime(true);raidEnd()}
+// ---------- slalom de montgolfières (Beauregard → Dent de Lanfon) ----------
+function raidBalloonTex(col){const c=document.createElement('canvas');c.width=1024;c.height=512;const q=c.getContext('2d');
+  for(let i=0;i<16;i++){q.fillStyle=i%2?'#ffffff':col;q.fillRect(i*64,0,64,512)}
+  q.fillStyle=col;q.fillRect(0,200,1024,112);q.fillStyle='#fff';q.font='800 84px "Barlow Condensed","Arial Narrow",sans-serif';q.textAlign='center';q.textBaseline='middle';
+  [256,768].forEach(x=>{q.save();q.translate(x,258);const s='ARAVIS PARAPENTE',w=q.measureText(s).width;if(w>480)q.scale(480/w,1);q.fillText(s,0,0);q.restore()});return new THREE.CanvasTexture(c)}
+function raidBalloon(col){const g=new THREE.Group();const env=new THREE.Mesh(new THREE.SphereGeometry(14,24,16),new THREE.MeshLambertMaterial({map:raidBalloonTex(col)}));env.scale.set(1,1.18,1);env.position.y=22;g.add(env);
+  const sk=new THREE.Mesh(new THREE.CylinderGeometry(5.5,2.2,7,16,1,true),new THREE.MeshLambertMaterial({color:col,side:THREE.DoubleSide}));sk.position.y=7.5;g.add(sk);
+  const bk=new THREE.Mesh(new THREE.BoxGeometry(3,2.4,3),new THREE.MeshLambertMaterial({color:'#9a6a3a'}));bk.position.y=1.2;g.add(bk);
+  const rp=[];[[-1.4,-1.4],[1.4,-1.4],[-1.4,1.4],[1.4,1.4]].forEach(([x,z])=>{rp.push(new THREE.Vector3(x,2.4,z),new THREE.Vector3(x*1.6,4.2,z*1.6))});g.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(rp),new THREE.LineBasicMaterial({color:'#3a2a1a'})));
+  g.scale.setScalar(2);scene.add(g);return g}
+function raidBuildBalloons(){const c=RAID.S[2].cps,A=c[0],B=c[1],dx=B.x-A.x,dz=B.z-A.z,L=Math.hypot(dx,dz),ux=dx/L,uz=dz/L,nx=-uz,nz=ux;RAID.balloons=[];
+  for(let k=0;k<6;k++){const t=.14+.13*k,off=(k%2?1:-1)*380,x=A.x+dx*t+nx*off,z=A.z+dz*t+nz*off,y=Math.max(groundY(x,z)+200,groundY(A.x,A.z)+650-Math.hypot(x-A.x,z-A.z)/185*1.75-12);
+    const pair=[raidBalloon('#ff6a1a'),raidBalloon('#1e5bd8')];RAID.balloons.push({name:'Montgolfière '+(k+1),x,z,y,R:75,pair,ux,uz,nx,nz})}
+  RAID.balloons.forEach((b,k)=>{const a=k?RAID.balloons[k-1]:A,c2=RAID.balloons[k+1]||B,vx=c2.x-a.x,vz=c2.z-a.z,l=Math.hypot(vx,vz);b.ux=vx/l;b.uz=vz/l;b.nx=-b.uz;b.nz=b.ux;
+    b.pair.forEach((g,i)=>{const s=i?75:-75;g.position.set(b.x+b.nx*s,b.y-44,b.z+b.nz*s)})})}
+function raidFireTex(a,b){const c=document.createElement('canvas');c.width=c.height=64;const q=c.getContext('2d'),gr=q.createRadialGradient(32,32,2,32,32,30);gr.addColorStop(0,a);gr.addColorStop(1,b);q.fillStyle=gr;q.fillRect(0,0,64,64);return new THREE.CanvasTexture(c)}
+function raidBoom(g){if(g.dead)return;raidDuck();raidSfx('boom',g.position);g.dead=true;g.vy=0;g.spin=(Math.random()-.5)*1.2;if(!RAID.fireT){RAID.fireT=raidFireTex('rgba(255,240,160,1)','rgba(255,90,0,0)');RAID.smokeT=raidFireTex('rgba(70,70,70,.8)','rgba(60,60,60,0)')}
+  const p0=g.position.clone().add(new THREE.Vector3(0,22,0));const fl=new THREE.Sprite(new THREE.SpriteMaterial({map:RAID.fireT,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));fl.position.copy(p0);fl.scale.setScalar(10);scene.add(fl);RAID.fx.push({s:fl,t:0,life:.9,kind:'flash'});g.children[0].material.color.set('#552a10');chime(true)}
+function raidFx(dt){if(!RAID.fx)RAID.fx=[];
+  RAID.balloons&&RAID.balloons.forEach(b=>b.pair.forEach(g=>{if(!g.dead||g.gone)return;g.vy=Math.min(45,g.vy+9.8*dt*.6);g.position.y-=g.vy*dt;g.rotation.z+=g.spin*dt;g.children[0].scale.y=Math.max(.35,g.children[0].scale.y-dt*.25);
+    g.fT=(g.fT||0)-dt;if(g.fT<=0){g.fT=.07;const k=Math.random()<.65;const s=new THREE.Sprite(new THREE.SpriteMaterial({map:k?RAID.fireT:RAID.smokeT,transparent:true,depthWrite:false,blending:k?THREE.AdditiveBlending:THREE.NormalBlending}));s.position.copy(g.position).add(new THREE.Vector3((Math.random()-.5)*14,14+Math.random()*20,(Math.random()-.5)*14));s.scale.setScalar(k?6:9);scene.add(s);RAID.fx.push({s,t:0,life:k?.8:2.4,kind:k?'fire':'smoke'})}
+    if(g.position.y<groundY(g.position.x,g.position.z)){g.gone=true;g.visible=false}}));
+  for(let i=RAID.fx.length-1;i>=0;i--){const f=RAID.fx[i];f.t+=dt;const k=f.t/f.life;if(k>=1){scene.remove(f.s);f.s.material.dispose();if(f.s.geometry)f.s.geometry.dispose();RAID.fx.splice(i,1);continue}
+    if(f.kind==='blast'){f.s.scale.setScalar(f.sz*(1+2.5*k));f.s.material.opacity=1-k}else if(f.kind==='line'){f.s.material.opacity=1-k}else if(f.kind==='flash'){f.s.scale.setScalar(10+70*k);f.s.material.opacity=1-k}else if(f.kind==='fire'){f.s.position.y+=6*dt;f.s.scale.setScalar(6+8*k);f.s.material.opacity=1-k}else{f.s.position.y+=4*dt;f.s.scale.setScalar(9+20*k);f.s.material.opacity=.7*(1-k)}}}
+function raidBalloonHit(p){if(!RAID.balloons)return;for(const b of RAID.balloons)for(const g of b.pair){if(g.dead)continue;const dx=p.pos.x-g.position.x,dy=p.pos.y-(g.position.y+44),dz=p.pos.z-g.position.z;
+    if(dx*dx+dz*dz<34*34&&Math.abs(dy)<40){raidBoom(g);addPts(p,-50,'Montgolfière percutée');if(!(p.raidHit>0))raidHit(p,null,'gun');showMsg(p,'BOUM ! Montgolfière en flammes !<small>−50 · fermeture : un tour et ça repart</small>',2.4);return}}}
+function raidBalloonStep(p){raidBalloonHit(p);const k=p.balN||0,b=RAID.balloons[k];if(!b)return;const rx=p.pos.x-b.x,rz=p.pos.z-b.z,s=rx*b.ux+rz*b.uz,lat=rx*b.nx+rz*b.nz;
+  if(p.balPrev!=null&&p.balPrev<0&&s>=0){p.balN=k+1;if(Math.abs(lat)<75){addPts(p,100,b.name);showMsg(p,b.name+' ✓<small>+100 · '+(p.balOk=(p.balOk||0)+1)+' / '+RAID.balloons.length+'</small>',1.3);chime()}else showMsg(p,b.name+' manquée',1.2)}
+  p.balPrev=p.balN===k?s:null}
+// ---------- progression (pour l'élastique des PNJ) ----------
+function raidSegLeft(pts,x,z,i0){let d=Math.hypot(pts[i0].x-x,pts[i0].z-z);for(let i=i0;i<pts.length-1;i++)d+=Math.hypot(pts[i+1].x-pts[i].x,pts[i+1].z-pts[i].z);return d}
+function raidSegLen(pts){let d=0;for(let i=0;i<pts.length-1;i++)d+=Math.hypot(pts[i+1].x-pts[i].x,pts[i+1].z-pts[i].z);return d}
+function raidProgP(p){const s=p.raidStage||0,S=RAID.S[s];if(!S)return 4;if(p.finished&&s===3)return 4;
+  if(S.key==='cross'){const c=S.cps;return s+clamp(1-raidSegLeft(c.slice(1),p.pos.x,p.pos.z,Math.min(p.next,1))/raidSegLen(c),0,1)}
+  if(S.key==='ski'){const A=SKI.A,B=SKI.B,L=Math.hypot(B.x-A.x,B.z-A.z);return s+clamp(((p.pos.x-A.x)*(B.x-A.x)+(p.pos.z-A.z)*(B.z-A.z))/L/L,0,1)}
+  if(S.key==='fly'){if(p.route==='acro')return s+(p.acroDone?.95:.7+.25*clamp((p.acroT||0)/75,0,1));const c=S.cps;return s+.7*clamp(1-raidSegLeft(c.slice(1),p.pos.x,p.pos.z,Math.min(p.next,1))/raidSegLen(c),0,1)}
+  return s+clamp((p.bN||0)/(RAID.buoys.length+1),0,1)}
+function raidProgB(b){if(b.done)return 4;const s=b.stage;if(b.ph==='next')return s+1;if(b.ph==='circle')return s+.99;if(b.ph==='therm')return s+clamp(b.L[1]/b.L[b.L.length-1],0,1);if(b.ph==='acro')return s+.7+.25*clamp(b.at/75,0,1);if(b.ph==='land')return s+.95;
+  const f=clamp(b.u/b.L[b.L.length-1],0,1);return s+(s===2?.7*f:f)}
+const RAID_DUR=[110,60,170,80];   // durée typique de chaque discipline (s)
+function raidRubber(b,dt){const p=players[0];if(!p||numPlayers>1&&false)return 1;const bp=raidProgB(b),hp=raidProgP(p);const st=Math.min(3,Math.floor(Math.min(bp,hp)));const lead=(bp-hp)*RAID_DUR[st];
+  const want=lead>7?Math.max(.7,1-(lead-7)/40):lead<-7?Math.min(1.3,1+(-lead-7)/40):1;b.rub=lerp(b.rub||1,want,Math.min(1,dt*.8));return b.rub}
+// ---------- pilotes de l'ordinateur ----------
+const RAID_BOTS=[{name:'Gaëlle',col:'#2fbf4a',main:'#2fbf4a',dark:'#1e8a33'},{name:'Damiano',col:'#ffb21e',main:'#ffb21e',dark:'#c27d00'},{name:'Fab',col:'#7a3fd4',main:'#8a4fe4',dark:'#5a2aa8'}];
+function raidBotStyle(o){return Object.assign({},STYLES[0],{main:o.main,dark:o.dark,col:o.col})}
+function raidLabel(o){const c=document.createElement('canvas');c.width=256;c.height=64;const q=c.getContext('2d');q.fillStyle=o.col;rr(q,4,6,248,52,16);q.fill();q.fillStyle='#fff';q.font='800 34px "Barlow Condensed","Arial Narrow",sans-serif';q.textAlign='center';q.textBaseline='middle';q.fillText(o.name+' · PNJ',128,33);
+  const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c),depthTest:false,transparent:true,sizeAttenuation:false}));sp.scale.set(.13,.032,1);sp.renderOrder=22;scene.add(sp);return sp}
+function raidBotsReset(){RAID.bots.forEach(b=>{scene.remove(b.glider);scene.remove(b.boat);scene.remove(b.lab)});RAID.bots=[];if(typeof NET!=='undefined'&&NET.on)return;const R=rnd(raceSeed||7);
+  RAID_BOTS.forEach((o,i)=>{const st=raidBotStyle(o);const b={bot:true,circled:false,rub:1,id:10+i,name:o.name,col:o.col,st,glider:makeGlider(st),boat:raidBoatMesh(st),lab:raidLabel(o),pos:new THREE.Vector3(),h:0,va:10.6,turn:0,bank:0,spiral:0,wo:0,lastSwitch:-9,stallT:0,collapse:0,salto:0,reserve:false,ears:0,acroOn:false,acroState:'wo',satDir:1,finished:false,
+    stage:0,u:0,path:null,skill:.86+R()*.16,score:0,wait:2+i*.8,ph:'go',R};RAID.bots.push(b);raidBotPath(b);const q=b.path[0];b.pos.set(q.x+(i-1)*60,q.y,q.z+40);b.h=Math.atan2(b.path[1].x-q.x,-(b.path[1].z-q.z))})}
+function raidBotPath(b){const s=b.stage,R=b.R,P=(x,z,y)=>({x,z,y}),gyp=(x,z,dy)=>groundY(x,z)+dy;let pts,spd;
+  if(s===0){const c=RAID.S[0].cps;pts=[P(c[0].x,c[0].z,gyp(c[0].x,c[0].z,30)),P(LV.extraTherm[0].e*KM,-LV.extraTherm[0].n*KM,1900),P(c[1].x+(R()-.5)*300,c[1].z+(R()-.5)*300,1960),P(c[2].x,c[2].z,gyp(c[2].x,c[2].z,25))];spd=88}
+  else if(s===1){pts=[P(SKI.A.x,SKI.A.z,0)].concat(SKI.sets[0].map(g=>P(g.x+(R()-.5)*6,g.z+(R()-.5)*6,0)),[P(SKI.B.x,SKI.B.z,0)]);spd=18.4}
+  else if(s===2){const c=RAID.S[2].cps;b.balMiss=RAID.balloons.map(()=>R()<.15);pts=[P(c[0].x,c[0].z,gyp(c[0].x,c[0].z,650))].concat(RAID.balloons.map((g,k)=>{const o=(b.balMiss[k]?(R()<.5?-1:1)*(90+R()*60):(R()-.5)*110);return P(g.x+g.nx*o,g.z+g.nz*o,g.y)}),[P(c[1].x+(R()-.5)*400,c[1].z+(R()-.5)*400,2000),P(ACRO.box.x+(R()-.5)*300,ACRO.box.z+(R()-.5)*300,1900)]);spd=184}
+  else if(s===3){const L=RAID.raft;pts=[P(L.x,L.z,RAID.lakeY)].concat(RAID.buoys.map(g=>P(g.x+g.nx*(R()-.5)*14,g.z+g.nz*(R()-.5)*14,RAID.lakeY)),[P(RAID.finish.x,RAID.finish.z,RAID.lakeY)]);spd=17}
+  b.path=pts;b.u=0;b.spd=spd*b.skill*(s===0?1:.9)*(s===0||s===2?1.39:1);if(s===0){b.alt=pts[0].y;b.climbed=false;b.top=1950+R()*60;b.altD=null;b.cr=130+R()*70;pts[1].y=pts[0].y}b.L=[0];for(let i=1;i<pts.length;i++)b.L.push(b.L[i-1]+Math.hypot(pts[i].x-pts[i-1].x,pts[i].z-pts[i-1].z))}
+function raidBotAt(b,u){const P=b.path,L=b.L;let i=1;while(i<P.length-1&&L[i]<u)i++;const a=P[i-1],c=P[i],t=clamp((u-L[i-1])/Math.max(1,L[i]-L[i-1]),0,1);return [a.x+(c.x-a.x)*t,a.y+(c.y-a.y)*t,a.z+(c.z-a.z)*t,Math.atan2(c.x-a.x,-(c.z-a.z))]}
+function raidBotTick(b,dt){if(b.done)return;if(b.hitT>0){b.hitT-=dt;const fl=b.stage===0||b.stage===2;if(b.spin&&fl){b.reserve=false;b.h+=2.513*dt;b.turn=-1;b.pos.y=Math.max(groundY(b.pos.x,b.pos.z)+1,b.pos.y-12*dt);if(b.hitT<=0)b.spin=false}else{b.reserve=fl&&b.hitT>0;if(fl){b.pos.y=Math.max(groundY(b.pos.x,b.pos.z)+1,b.pos.y-2.5*dt)}}raidBotDraw(b,dt);return}if(b.wait>0){b.wait-=dt;if(b.wait<=0&&b.ph==='next'){b.stage++;b.ph='go';raidBotPath(b);b.wMis=1;b.wMine=b.stage===3?2:b.stage===1?1:0}else{raidBotDraw(b,dt);return}}
+  const s=b.stage,R=b.R;if(s===0&&b.alt!=null)b.alt=Math.min(b.alt,b.pos.y+.01);
+  if(s===0&&b.ph==='therm'){const T=LV.extraTherm[0],tx=T.e*KM,tz=-T.n*KM,rb=raidRubber(b,dt),w=6.2832/11;b.ca+=w*dt;b.alt+=3.4*b.skill*rb*dt;b.pos.set(tx+Math.cos(b.ca)*b.cr,b.alt,tz+Math.sin(b.ca)*b.cr);b.h=b.ca+Math.PI;b.turn=lerp(b.turn,-1,Math.min(1,dt*3));b.va=10.6;
+    if(b.alt>=b.top){b.ph='go';b.climbed=true}raidBotDraw(b,dt);return}
+  if(b.ph==='circle'){const C=RAID.S[0].cps[2],w=6.2832/9;b.ca+=w*dt;b.cTurn+=w*dt;const r=160;b.pos.set(C.x+Math.cos(b.ca)*r,lerp(b.pos.y,groundY(C.x,C.z)+140,Math.min(1,dt)),C.z+Math.sin(b.ca)*r);b.h=b.ca+Math.PI;b.turn=-1;
+    if(b.cTurn>=6.2832*2){b.ph='go';b.u=b.L[b.L.length-1];b.circled=true}else{raidBotDraw(b,dt);return}}
+  if(b.ph==='acro'){b.at+=dt;const k=b.at/75,a=b.at*.25;b.acroOn=true;b.acroState='sat';b.h+=3.2*dt;b.pos.set(ACRO.box.x+Math.cos(a)*260,lerp(b.y0,520,k),ACRO.box.z+Math.sin(a)*260);
+    if(b.at>=75){b.acroOn=false;b.acroState='wo';b.ph='land';b.path=[{x:b.pos.x,z:b.pos.z,y:b.pos.y},{x:RAID.raft.x,z:RAID.raft.z,y:RAID.raft.top+.6}];b.L=[0,Math.hypot(b.path[1].x-b.path[0].x,b.path[1].z-b.path[0].z)];b.u=0;b.spd=28*b.skill}raidBotDraw(b,dt);return}
+  if(b.slowT>0)b.slowT-=dt;b.u+=b.spd*dt*raidRubber(b,dt)*(b.slowT>0?.5:1);const end=b.u>=b.L[b.L.length-1];const [x,y,z,h]=raidBotAt(b,b.u);let yy=y;
+  if(s===0&&b.ph==='go'){if(!b.climbed&&b.u>=b.L[1]-b.cr){const T=LV.extraTherm[0],tx=T.e*KM,tz=-T.n*KM;b.u=Math.min(b.u,b.L[1]);b.ph='therm';b.ca=Math.atan2(b.pos.z-tz,b.pos.x-tx);raidBotDraw(b,dt);return}
+    if(b.u<=b.L[2]){b.alt-=1.25*dt;yy=b.alt}else{if(b.altD==null)b.altD=b.alt;yy=lerp(b.altD,b.path[3].y,clamp((b.u-b.L[2])/Math.max(1,b.L[3]-b.L[2]),0,1))}}
+  if(s===1)yy=groundY(x,z)+SKI_H;else if(s<3&&b.ph==='go'&&b.u<b.L[b.L.length-1]-400)yy=Math.max(yy,groundY(x,z)+60);
+  const dh=Math.atan2(Math.sin(h-b.h),Math.cos(h-b.h));b.turn=lerp(b.turn,clamp(dh*2,-1,1),Math.min(1,dt*3));b.h+=dh*Math.min(1,dt*2.5);b.pos.set(x,yy,z);if(s===0&&b.u<=b.L[2])b.alt=b.pos.y;b.va=s===1?18:10.6;
+  if(end){if(s===2&&b.ph==='go'){b.ph='acro';b.at=0;b.y0=b.pos.y;b.score+=200+100*b.balMiss.filter(m=>!m).length+Math.round(500+R()*900);return}
+    if(s===2){b.score+=R()<.75?300+Math.round(R()*150):-100}else if(s===0)b.score+=500;else if(s===1)b.score+=300+Math.round(10*50*(.6+R()*.4))+(R()<.5?100:0);else if(s===3)b.score+=300+Math.round(RAID.buoys.length*50*(.6+R()*.4));
+    raidStageDone(b,s);if(s===3){b.done=true;b.finished=true;return}b.ph='next';b.wait=.05}
+  raidBotDraw(b,dt)}
+function raidBotDraw(b,dt){const boat=b.stage===3&&(b.ph==='go'||b.done||b.ph==='next');b.glider.visible=true;b.boat.visible=boat;if(boat){b.wsc=.6;b.pos.y=RAID.lakeY+SKI_H}
+  if(boat){const fx=Math.sin(b.h),fz=-Math.cos(b.h);b.boat.position.set(b.pos.x+fx*32,RAID.lakeY+Math.sin(time*2.1+b.id)*.06,b.pos.z+fz*24);b.boat.rotation.set(-.1,-b.h,-b.turn*.15,'YXZ');b.va=17;placeGlider(b,dt);b.puffT=(b.puffT||0)-dt;if(b.puffT<=0&&b.ph==='go'){b.puffT=.08;skiPuff(b.pos.x+Math.sin(b.h)*19.6,RAID.lakeY+.4,b.pos.z-Math.cos(b.h)*19.6,1.6)}}
+  else{b.wsc=b.stage===1?.6:1;b.finished=b.ph==='next'&&b.stage!==2;placeGlider(b,dt)}
+  b.lab.position.set(b.pos.x,b.pos.y+(boat?5:10),b.pos.z)}
+// ---------- armement : viseur (F), missile (R), mine (M) ----------
+if(RAID){const t=document.getElementById('touch');if(t){const g=document.createElement('div');g.className='grp';g.id='raidWpn';
+    g.innerHTML='<button data-k="wf" aria-label="Tirer">🎯</button><button data-k="wr" aria-label="Missile">🚀</button><button data-k="wm" aria-label="Mine">💣</button>';t.appendChild(g)}}
+function raidWInit(p){p.wCd=0;p.wLock=0;p.wTgt=null;p.wMis=1;p.wMine={boat:2,ski:1}[(RAID.S[p.raidStage]||{}).key]||0;
+  if(!p.hud.ret){const r=document.createElement('div');r.className='raidret';r.innerHTML='<span class="rn"></span>';p.hud.el.appendChild(r);p.hud.ret=r;const w=document.createElement('div');w.className='raidw';p.hud.el.appendChild(w);p.hud.wpn=w}}
+function raidRacerPos(r){return r.bot?r.pos:(r.raidStage===3&&r.bpos?r.pos:r.pos)}
+function raidRacers(){return players.concat(RAID.bots,raidGhosts())}
+function raidTargetOf(sh,maxD){let best=null,bd=1e9;const f={x:Math.sin(sh.h),z:-Math.cos(sh.h)};
+  const inSki=o=>o.bot?o.stage===1:(RAID.S[o.raidStage]||{}).key==='ski';
+  const L=raidRacers().filter(o=>!inSki(o));if(!sh.bot&&RAID.balloons)RAID.balloons.forEach(b=>b.pair.forEach(g=>{if(g.dead)return;if(!g.tgt)g.tgt={balloon:g,name:'Montgolfière',pos:new THREE.Vector3()};g.tgt.pos.set(g.position.x,g.position.y+44,g.position.z);L.push(g.tgt)}));
+  L.forEach(o=>{if(o===sh||o.done||(o.bot?o.hitT>0:o.raidHit>0)||(!o.bot&&!o.balloon&&o.finished))return;const P=o.pos,dx=P.x-sh.pos.x,dz=P.z-sh.pos.z,dy=P.y-sh.pos.y,d=Math.hypot(dx,dz,dy*.5);if(d>(o.balloon?800:(maxD||400))||d>bd||d<5)return;
+    const cos=(dx*f.x+dz*f.z)/Math.max(1,Math.hypot(dx,dz));if(cos<Math.cos(.45))return;bd=d;best=o});return best}
+function raidNameOf(o){return o.bot||o.ghost?o.name:(numPlayers>1?'Joueur '+(o.id+1):'toi')}
+function raidHit(tg,by,kind){if(tg.ghost){raidNetSend({a:'hit',to:tg.k,kind});const pts=kind==='missile'?100:50;if(by&&!by.bot&&!by.ghost){addPts(by,pts,(kind==='missile'?'Missile':'Tir')+' sur '+tg.name);showMsg(by,(kind==='missile'?'Missile au but !':'Touché !')+'<small>'+netEsc(tg.name)+' · +'+pts+'</small>',1.6)}raidBlast(tg.pos,kind==='gun'?6:16);return}
+  if(tg.balloon){if(tg.balloon.dead)return;raidBoom(tg.balloon);if(by&&!by.bot){addPts(by,25,'Montgolfière abattue');showMsg(by,'Montgolfière abattue !<small>+25 · elle descend en flammes</small>',1.6)}return}const flight=!(tg.bot?tg.stage===3||tg.stage===1:(RAID.S[tg.raidStage]||{}).key==='boat'||(RAID.S[tg.raidStage]||{}).key==='ski');
+  const spin=flight&&kind==='gun';
+  if(kind==='mine'||!flight){if(tg.bot)tg.slowT=3;else{tg.raidSlow=3;tg.raidSlowV=Math.max(3,(tg.va||10)*.5);showMsg(tg,(kind==='mine'?'Mine !':kind==='missile'?'Missile !':'Touché !')+'<small>'+(by?'par '+raidNameOf(by)+' · ':'')+'ralenti 3 s</small>',2)}}
+  else if(tg.bot){tg.hitT=spin?2.5:3;tg.spin=spin}else{tg.raidHit=spin?2.5:3;tg.raidHitFlight=flight;tg.raidSpin=spin;showMsg(tg,(kind==='missile'?'Missile !':'Touché !')+'<small>'+(by?'par '+raidNameOf(by)+' · ':'')+(spin?'fermeture : un tour et ça repart':flight?'3 s sous le secours':'3 s pour te relever')+'</small>',2.4)}
+  const pts=kind==='missile'?100:50;if(by&&!by.ghost){if(by.bot)by.score+=pts;else{addPts(by,pts,(kind==='missile'?'Missile':kind==='mine'?'Mine':'Tir')+' sur '+raidNameOf(tg));if(tg.bot)showMsg(by,(kind==='missile'?'Missile au but !':kind==='mine'?'Ta mine a explosé !':'Touché !')+'<small>'+tg.name+' · +'+pts+'</small>',1.6)}}
+  raidBlast(tg.pos,kind==='gun'?6:16)}
+function raidSfx(kind,pos){if(!actx||muted)return;const A=actx,t=A.currentTime;if(!RAIDM.noise){const n=A.createBuffer(1,A.sampleRate*2,A.sampleRate),d=n.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;RAIDM.noise=n}
+  const p0=players[0];let v=1;if(pos&&p0){const d=Math.hypot(pos.x-p0.pos.x,pos.y-p0.pos.y,pos.z-p0.pos.z);v=clamp(1.15-d/1500,.12,1)}
+  const out=A.createGain();out.gain.value=v;out.connect(A.destination);
+  const nz=(dur,type,f0,f1,vol,att)=>{const s=A.createBufferSource(),fl=A.createBiquadFilter(),g=A.createGain();s.buffer=RAIDM.noise;fl.type=type;fl.frequency.setValueAtTime(f0,t);fl.frequency.exponentialRampToValueAtTime(f1,t+dur);g.gain.setValueAtTime(att?0:vol,t);if(att)g.gain.linearRampToValueAtTime(vol,t+att);g.gain.exponentialRampToValueAtTime(.0008,t+dur);s.connect(fl);fl.connect(g);g.connect(out);s.start(t,Math.random());s.stop(t+dur+.05)};
+  const tone=(type,f0,f1,dur,vol)=>{const o=A.createOscillator(),g=A.createGain();o.type=type;o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(f1,t+dur);g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.0008,t+dur);o.connect(g);g.connect(out);o.start(t);o.stop(t+dur+.05)};
+  if(kind==='gun'){nz(.09,'highpass',2500,1200,.45);nz(.18,'bandpass',900,300,.25);tone('sine',140,55,.12,.35)}
+  else if(kind==='missile'){nz(1.3,'bandpass',350,3200,.3,.12);nz(.5,'lowpass',600,200,.25);tone('sawtooth',180,700,1.1,.04)}
+  else{nz(1.6,'lowpass',1400,120,.7);nz(.25,'highpass',1800,600,.3);tone('sine',75,28,1.1,.65)}}
+function raidFxInit(){if(!RAID.fireT){RAID.fireT=raidFireTex('rgba(255,240,160,1)','rgba(255,90,0,0)');RAID.smokeT=raidFireTex('rgba(70,70,70,.8)','rgba(60,60,60,0)')}}
+function raidBlast(pos,sz){raidFxInit();if(typeof raidDuck==='function'&&sz>8){raidDuck();raidSfx('boom',pos)}const s=new THREE.Sprite(new THREE.SpriteMaterial({map:RAID.fireT,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));s.position.copy(pos);s.position.y+=2;s.scale.setScalar(sz);scene.add(s);RAID.fx.push({s,t:0,life:.6,kind:'blast',sz})}
+function raidTracer(a,b){const l=new THREE.Line(new THREE.BufferGeometry().setFromPoints([a.clone().add(new THREE.Vector3(0,2,0)),b.clone().add(new THREE.Vector3(0,2,0))]),new THREE.LineBasicMaterial({color:'#ffe066',transparent:true}));scene.add(l);RAID.fx.push({s:l,t:0,life:.15,kind:'line'})}
+function raidFire(sh,kind){const S=RAID.S[sh.bot?sh.stage:sh.raidStage]||{};
+  if(kind==='gun'){if(sh.wCd>0)return;const tg=sh.bot?sh.botTgt:(sh.wTgt);sh.wCd=2;raidSfx('gun',sh.bot?sh.pos:null);if(!tg){if(!sh.bot)showMsg(sh,'Personne dans le viseur',.9);return}raidTracer(sh.pos,tg.pos);if(tg.ghost)raidNetSend({a:'gun',to:tg.k});if(tg.balloon||!sh.bot||Math.random()<.75)raidHit(tg,sh,'gun');return}
+  if(kind==='missile'){if(!(sh.wMis>0))return;const tg=sh.bot?sh.botTgt:(sh.wLock>=1?sh.wTgt:null);if(!tg){if(!sh.bot)showMsg(sh,'Missile : garde la cible 1 s dans le viseur',1.2);return}sh.wMis--;
+raidMissile(sh,tg);if(tg.ghost)raidNetSend({a:'mis',to:tg.k});if(!sh.bot)showMsg(sh,'Missile lancé sur '+(tg.name||'la cible')+' !',1.2);else if(!tg.bot)showMsg(tg,'⚠ Missile de '+sh.name+' !',1.4);return}
+  if(kind==='mine'){if(!(sh.wMine>0)||(S.key!=='boat'&&S.key!=='ski'))return;sh.wMine--;const bx=sh.pos.x-Math.sin(sh.h)*8,bz=sh.pos.z+Math.cos(sh.h)*8,by=S.key==='boat'?RAID.lakeY+.4:groundY(bx,bz)+.8;const id=(typeof NET!=='undefined'&&NET.on)?NET.slot*100000+(RAID.mineN=(RAID.mineN||0)+1):null;raidMineMesh(sh,bx,by,bz,id);if(id!=null&&!sh.bot)raidNetSend({a:'mine',id,x:bx,y:by,z:bz});if(!sh.bot)showMsg(sh,'Mine posée !',1)}}
+function raidMineMesh(by,x,y,z,id){const g=new THREE.Group();const b=new THREE.Mesh(new THREE.SphereGeometry(1.1,12,8),new THREE.MeshLambertMaterial({color:'#1b1d22'}));g.add(b);
+    for(let i=0;i<6;i++){const sp=new THREE.Mesh(new THREE.ConeGeometry(.18,.6,6),new THREE.MeshLambertMaterial({color:'#3a3d44'}));const a=i/6*6.283;sp.position.set(Math.cos(a)*1.1,0,Math.sin(a)*1.1);sp.rotation.z=-Math.PI/2;sp.rotation.y=-a;g.add(sp)}
+    const led=new THREE.Mesh(new THREE.SphereGeometry(.25,8,6),new THREE.MeshBasicMaterial({color:'#ff2020'}));led.position.y=1.1;g.add(led);
+    g.position.set(x,y,z);scene.add(g);const Mn={g,led,by,t:0,id,remote:!!by.ghost};RAID.mines.push(Mn);return Mn}
+function raidMissile(sh,tg,vis){
+    const m=new THREE.Group();const body=new THREE.Mesh(new THREE.CylinderGeometry(.25,.25,2.4,8),new THREE.MeshLambertMaterial({color:'#e8e8e8'}));body.rotation.x=Math.PI/2;m.add(body);const nose=new THREE.Mesh(new THREE.ConeGeometry(.25,.7,8),new THREE.MeshLambertMaterial({color:'#e0262e'}));nose.rotation.x=-Math.PI/2;nose.position.z=-1.5;m.add(nose);
+    raidFxInit();const fl=new THREE.Sprite(new THREE.SpriteMaterial({map:RAID.fireT,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));fl.scale.setScalar(2.2);fl.position.z=1.6;m.add(fl);m.position.copy(sh.pos);m.position.y+=3;scene.add(m);
+    RAID.mis.push({m,tg,by:sh,t:0,vis:!!vis});raidSfx('missile',sh.bot||sh.ghost?sh.pos:null)}
+function raidProxy(k){if(!RAID.gp)RAID.gp={};const G=NET.ghosts[k];if(!G)return null;const o=RAID.gp[k]||(RAID.gp[k]={ghost:true,k});o.pos=G.pos;o.name=G.name||'Pilote';o.raidStage=G.st||0;o.raidHit=G.rh?1:0;o.finished=!!G.fin;o.h=G.h;return o}
+function raidGhosts(){if(typeof NET==='undefined'||!NET.on)return [];const now=performance.now()/1000;return Object.keys(NET.ghosts).filter(k=>{const G=NET.ghosts[k];return G.seen&&now-G.t<6}).map(k=>raidProxy(+k)).filter(Boolean)}
+function raidNetSend(m){if(typeof NET==='undefined'||!NET.on)return;m.t='rw';m.k=NET.slot;if(NET.host)netBroadcast(m);else netToHost(m)}
+function netRaidRecv(m){if(!RAID||m.k===NET.slot)return;const me=players[0],from=raidProxy(m.k);if(!RAID.mines)RAID.mines=[];if(!RAID.mis)RAID.mis=[];
+  if(m.a==='rs'){RAID.rank[m.s]=(RAID.rank[m.s]||0)+1}
+  else if(m.a==='hit'){if(m.to===NET.slot){if(me&&!(me.raidHit>0)&&mode==='race')raidHit(me,from,m.kind)}else{const G=NET.ghosts[m.to];if(G)raidBlast(G.pos,m.kind==='gun'?6:16)}}
+  else if(m.a==='gun'&&from){const tg=m.to===NET.slot?me:raidProxy(m.to);if(tg)raidTracer(from.pos,tg.pos);raidSfx('gun',from.pos)}
+  else if(m.a==='mis'&&from){const tg=m.to===NET.slot?me:raidProxy(m.to);if(tg){raidMissile(from,tg,true);if(tg===me)showMsg(me,'⚠ Missile de '+netEsc(from.name)+' !',1.4)}}
+  else if(m.a==='mine'&&from){if(!RAID.mines.some(x=>x.id===m.id))raidMineMesh(from,m.x,m.y,m.z,m.id)}
+  else if(m.a==='mhit'){const i=RAID.mines.findIndex(x=>x.id===m.id);if(i>=0){raidBlast(RAID.mines[i].g.position,16);scene.remove(RAID.mines[i].g);RAID.mines.splice(i,1)}
+    if(m.owner===NET.slot&&me){addPts(me,50,'Mine sur '+(from?from.name:'un pilote'));showMsg(me,'Ta mine a explosé !<small>'+(from?netEsc(from.name):'')+' · +50</small>',1.6)}}}
+function raidWeapons(dt){if(!RAID.mis)RAID.mis=[];if(!RAID.mines)RAID.mines=[];const race=mode==='race';
+  players.forEach(p=>{if(p.wCd==null)raidWInit(p);if(p.raidSlow>0){p.raidSlow-=dt;if(p.va>p.raidSlowV)p.va=p.raidSlowV}p.wCd=Math.max(0,p.wCd-dt);const noW=(RAID.S[p.raidStage]||{}).key==='ski';const ok=race&&!p.finished&&!(p.raidHit>0)&&!(p.respawnWait>0);
+    const tg=ok&&!noW?raidTargetOf(p):null;if(tg!==p.wTgt){p.wTgt=tg;p.wLock=0}else if(tg)p.wLock+=dt;
+    const R=p.hud.ret;if(tg){const v=tg.pos.clone();v.y+=3;v.project(p.cam);if(v.z<1&&Math.abs(v.x)<1.2&&Math.abs(v.y)<1.2){R.style.display='block';R.style.left=((v.x+1)/2*100)+'%';R.style.top=((1-v.y)/2*100)+'%';R.classList.toggle('lock',p.wLock>=1&&p.wMis>0);{const lk=p.wLock>=1&&p.wMis>0,d=Math.round(Math.hypot(tg.pos.x-p.pos.x,tg.pos.z-p.pos.z)),txt=(tg.name||raidNameOf(tg))+' · '+d+' m'+(lk?' · VERROUILLÉ':'');const sp=R.firstChild;if(sp.textContent!==txt)sp.textContent=txt}}else R.style.display='none'}else R.style.display='none';
+    const I=ok?inputOf(p):{},k=n=>KEYS.has(n)||!!touch[n==='KeyF'?'wf':n==='KeyR'?'wr':'wm'];['KeyF','KeyR','KeyM'].forEach((n,i)=>{const d=k(n),pk='wk'+i;if(d&&!p[pk]&&ok&&!(noW&&i<2))raidFire(p,['gun','missile','mine'][i]);p[pk]=d});
+    const S=RAID.S[p.raidStage]||{},mine=S.key==='boat'||S.key==='ski';const txt=noW?'🎿 Speed riding · 💣 M ×'+(p.wMine||0):'🎯 F'+(p.wCd>0?' '+Math.ceil(p.wCd)+'s':'')+' · 🚀 R ×'+(p.wMis||0)+(mine?' · 💣 M ×'+(p.wMine||0):'');if(p.hud.wpn.textContent!==txt)p.hud.wpn.textContent=txt;p.hud.wpn.hidden=!race});
+  // PNJ : tirent de temps en temps
+  if(race)RAID.bots.forEach(b=>{if(b.done||b.hitT>0||b.wait>0)return;if(b.stage===1){if(b.wMine>0&&b.ph==='go'&&Math.random()<dt*.06)raidFire(b,'mine');return}b.wCd=Math.max(0,(b.wCd==null?6+Math.random()*6:b.wCd)-dt);if(b.wMis==null){b.wMis=1;b.wMine=0}
+    if(b.wCd<=0){const tg=raidTargetOf(b,380);if(tg){b.botTgt=tg;if(b.wMis>0&&Math.random()<.3)raidFire(b,'missile');else raidFire(b,'gun')}b.wCd=8+Math.random()*8}
+    if(b.stage===3&&b.wMine>0&&Math.random()<dt*.06)raidFire(b,'mine')});
+  // missiles
+  for(let i=RAID.mis.length-1;i>=0;i--){const M=RAID.mis[i];M.t+=dt;const T=M.tg.pos,m=M.m.position,dx=T.x-m.x,dy=T.y+2-m.y,dz=T.z-m.z,d=Math.hypot(dx,dy,dz);
+    const sp=Math.max(140,1.8*((M.tg.bot?M.tg.spd:M.tg.gs*(M.tg.hsNow||1))||0))*dt;
+    if(d<Math.max(8,sp)||M.t>8){scene.remove(M.m);RAID.mis.splice(i,1);if(d<Math.max(8,sp)&&!M.vis&&!(M.tg.bot?M.tg.hitT>0:M.tg.raidHit>0))raidHit(M.tg,M.by,'missile');continue}
+    m.x+=dx/d*sp;m.y+=dy/d*sp;m.z+=dz/d*sp;M.m.lookAt(T.x,T.y+2,T.z);M.m.rotateY(Math.PI);
+    M.st=(M.st||0)-dt;if(M.st<=0){M.st=.04;const s2=new THREE.Sprite(new THREE.SpriteMaterial({map:RAID.smokeT,transparent:true,depthWrite:false}));s2.position.copy(m);s2.scale.setScalar(3);scene.add(s2);RAID.fx.push({s:s2,t:0,life:1.4,kind:'smoke'})}}
+  // mines
+  for(let i=RAID.mines.length-1;i>=0;i--){const Mn=RAID.mines[i];Mn.t+=dt;Mn.led.visible=(time*2%1)<.5;
+    const hit=players.concat(RAID.bots).find(o=>(o!==Mn.by||Mn.t>3)&&!o.done&&!(o.bot?o.hitT>0:o.raidHit>0)&&Math.hypot(o.pos.x-Mn.g.position.x,o.pos.z-Mn.g.position.z)<7&&Math.abs(o.pos.y-Mn.g.position.y)<6);
+    if(hit){scene.remove(Mn.g);RAID.mines.splice(i,1);raidHit(hit,hit===Mn.by?null:Mn.by,'mine');if(Mn.id!=null)raidNetSend({a:'mhit',id:Mn.id,owner:Mn.remote&&!hit.bot?Mn.by.k:-1})}}}
+function raidHitStep(p,dt){if(!(p.raidHit>0))return false;p.raidHit-=dt;const S=RAID.S[p.raidStage];
+  if(p.raidSpin||p.raidRefill){p.reserve=false;p.collapse=Math.max(.01,p.raidHit);if(p.raidSpin)p.h+=2.513*dt;p.vario+=(-14-p.vario)*Math.min(1,dt*2);const gy=groundY(p.pos.x,p.pos.z);p.pos.y=Math.max(gy+.6,p.pos.y+p.vario*dt);p.pos.x+=Math.sin(p.h)*4*dt;p.pos.z-=Math.cos(p.h)*4*dt;p.ears=1;if(p.raidHit<=0){p.collapse=0;p.raidSpin=false;p.raidRefill=false;p.ears=0;p.vario=-1}}
+  else if(p.raidHitFlight){p.reserve=true;const gy=groundY(p.pos.x,p.pos.z);p.vario=-2.5;p.pos.y=Math.max(gy+.6,p.pos.y-2.5*dt);p.pos.x+=WIND.x*dt;p.pos.z+=WIND.z*dt;if(p.raidHit<=0){p.reserve=false;p.vario=0}}
+  else{p.va=0;if(p.raidHit<=0)p.va=6}
+  placeGlider(p,dt);return true}
+// ---------- musique originale électro (générée dans le navigateur, sans droits) ----------
+// structure en mesures : intro, montée, refrain, pause orage, refrain 2 ; voix robotique « autotune »
+const RAIDM={on:true,timer:null,out:null,duckT:0,step:0,next:0};
+try{const v=localStorage.getItem('raidMusic');if(v==='0')RAIDM.on=false}catch(_){}
+const RM_BPM=126,RM_16=60/RM_BPM/4;
+const RM_SEC=[['intro',8],['build',8],['drop',16],['storm',8],['drop2',16],['outro',4]];
+const RM_LEN=RM_SEC.reduce((a,s)=>a+s[1],0);
+function rmSection(bar){let b=bar%RM_LEN;for(const [n,l] of RM_SEC){if(b<l)return [n,b,l];b-=l}return ['drop',0,16]}
+const RM_CH=[[57,60,64],[53,57,60],[48,52,55],[55,59,62]];   // La m · Fa · Do · Sol
+const RM_BASS=[45,41,48,43];
+const RM_ARP=[0,1,2,1,0,2,1,2];
+const RM_LEAD=[76,0,74,72,0,72,74,0, 72,0,69,0,72,74,76,0, 77,0,76,74,0,72,74,0, 74,0,72,71,0,67,71,0];
+// voix : syllabes [voyelle, note, durée en 16e, consonne]
+const RM_VOX=[
+  [['a',69,2,''],['a',69,1,'r'],['i',72,3,'v'],['a',72,1,'p'],['a',71,1,'r'],['i',69,2,'gl'],['i',67,4,'d']],   // A-ra-vis pa-ra-gli-ding
+  [['o',72,2,''],['o',72,2,'s'],['e',74,3,'d'],['o',72,1,'f'],['a',71,2,'fl'],['i',69,4,'']],                 // Awe-some day for fly-ing
+  [['a',69,2,''],['a',69,1,'r'],['i',72,3,'v'],['a',72,1,'p'],['a',71,1,'r'],['i',69,2,'gl'],['i',67,4,'d']],
+  [['o',67,2,'s'],['i',69,2,'l'],['o',71,2,''],['u',72,3,'t'],['e',74,2,'br'],['i',72,4,'k']]];               // Soft-ly on tour, brea-king
+const RM_FORM={a:[800,1150,2900],e:[400,2000,2600],i:[300,2300,3000],o:[450,800,2830],u:[325,700,2530]};
+const mtof=m=>440*Math.pow(2,(m-69)/12);
+const RM_CLIPS=[[0.0, 0.7], [0.95, 1.5], [2.7, 1.34], [4.29, 1.65], [6.19, 0.46]];   // phrases chantées (assets/raid-voix.mp3, autotune)
+function raidMusicStart(){if(!RAID||!actx||RAIDM.timer)return;const A=actx;
+  if(!RAIDM.voxReq){RAIDM.voxReq=1;fetch('assets/raid-voix.mp3').then(r=>r.arrayBuffer()).then(b=>new Promise((ok,ko)=>A.decodeAudioData(b,ok,ko))).then(buf=>{RAIDM.vox=buf}).catch(()=>{})}
+  if(!RAIDM.out){RAIDM.out=A.createGain();RAIDM.out.gain.value=0;RAIDM.out.connect(A.destination);
+    const n=A.createBuffer(1,A.sampleRate*2,A.sampleRate),d=n.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;RAIDM.noise=n;
+    // écho pour la voix
+    RAIDM.vbus=A.createGain();RAIDM.vbus.gain.value=1;const dl=A.createDelay(1);dl.delayTime.value=RM_16*3;const fb=A.createGain();fb.gain.value=.26;const wet=A.createGain();wet.gain.value=.45;RAIDM.vbus.connect(RAIDM.out);RAIDM.vbus.connect(dl);dl.connect(fb);fb.connect(dl);dl.connect(wet);wet.connect(RAIDM.out)}
+  if(!RAIDM.trkReq){RAIDM.trkReq=1;fetch('assets/raid-musique.mp3').then(r=>{if(!r.ok)throw 0;return r.arrayBuffer()}).then(b=>new Promise((ok,ko)=>A.decodeAudioData(b,ok,ko))).then(buf=>{const s=A.createBufferSource();s.buffer=buf;s.loop=true;s.loopStart=34.135;s.loopEnd=178.135;const pre=A.createGain();pre.gain.value=1.9;const lim=A.createDynamicsCompressor();lim.threshold.value=-6;lim.knee.value=4;lim.ratio.value=20;lim.attack.value=.003;lim.release.value=.15;s.connect(pre);pre.connect(lim);lim.connect(RAIDM.out);s.start();RAIDM.trkSrc=s}).catch(()=>{RAIDM.trkFail=1})}
+  RAIDM.next=A.currentTime+.1;RAIDM.step=0;RAIDM.timer=setInterval(raidMusicTick,25)}
+function raidMusicStop(){if(RAIDM.timer){clearInterval(RAIDM.timer);RAIDM.timer=null}if(RAIDM.out&&actx)RAIDM.out.gain.setTargetAtTime(0,actx.currentTime,.2)}
+function raidDuck(){RAIDM.duckT=1.4}
+function rmNote(t,f,dur,type,vol,cut,dst){const A=actx,o=A.createOscillator(),g=A.createGain(),fl=A.createBiquadFilter();o.type=type;o.frequency.value=f;fl.type='lowpass';fl.frequency.value=cut||3000;
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.008);g.gain.exponentialRampToValueAtTime(.0008,t+dur);o.connect(fl);fl.connect(g);g.connect(dst||RAIDM.out);o.start(t);o.stop(t+dur+.05)}
+function rmNoise(t,dur,vol,type,f,att){const A=actx,s=A.createBufferSource(),g=A.createGain(),fl=A.createBiquadFilter();s.buffer=RAIDM.noise;s.loop=true;fl.type=type;fl.frequency.value=f;
+  g.gain.setValueAtTime(att?0:vol,t);if(att)g.gain.linearRampToValueAtTime(vol,t+att);g.gain.exponentialRampToValueAtTime(.0008,t+dur);s.connect(fl);fl.connect(g);g.connect(RAIDM.out);s.start(t,Math.random());s.stop(t+dur+.05)}
+function rmKick(t,v){const A=actx,o=A.createOscillator(),g=A.createGain();o.frequency.setValueAtTime(160,t);o.frequency.exponentialRampToValueAtTime(42,t+.13);g.gain.setValueAtTime(v||1,t);g.gain.exponentialRampToValueAtTime(.001,t+.32);o.connect(g);g.connect(RAIDM.out);o.start(t);o.stop(t+.34)}
+function rmThunder(t){rmNoise(t,.35,.9,'highpass',1500);rmNoise(t+.02,4.5,.9,'lowpass',180,.25);rmNoise(t+.4,3.5,.5,'lowpass',90,.6)}
+// voix robotique : dent de scie à note fixe (effet autotune) + 3 filtres de formants + consonnes en bruit
+function rmSyll(t,sy){const A=actx,[v,m,len,c]=sy,dur=len*RM_16,F=RM_FORM[v]||RM_FORM.a;
+  if(c){const nf=/s|f/.test(c)?6500:/t|k|d|p|b/.test(c)?2500:1200;rmNoise(t,.06,.18,'bandpass',nf)}
+  const t0=t+(c?.04:0),mix=A.createGain();mix.gain.setValueAtTime(0,t0);mix.gain.linearRampToValueAtTime(.55,t0+.02);mix.gain.setValueAtTime(.55,t0+dur*.8);mix.gain.linearRampToValueAtTime(0,t0+dur);mix.connect(RAIDM.vbus);
+  [0,7,-7].forEach((det,k)=>{const o=A.createOscillator();o.type='sawtooth';o.frequency.value=mtof(m+12);o.detune.value=det;
+    F.forEach((ff,q)=>{const bp=A.createBiquadFilter();bp.type='bandpass';bp.frequency.value=ff;bp.Q.value=q?9:6;const g=A.createGain();g.gain.value=[.9,.5,.25][q]*(k?.4:1);o.connect(bp);bp.connect(g);g.connect(mix)});
+    o.start(t0);o.stop(t0+dur+.05)})}
+function raidMusicTick(){const A=actx;if(!A||!RAIDM.out)return;RAIDM.duckT=Math.max(0,RAIDM.duckT-.025);
+  const base=RAIDM.on&&mode==='race'&&!paused&&!document.hidden?(RAIDM.trkFail?.32:.5):0;RAIDM.out.gain.setTargetAtTime(base*(RAIDM.duckT>0?.3:1),A.currentTime,RAIDM.duckT>0?.05:.4);
+  if(!RAIDM.trkFail){RAIDM.next=A.currentTime+.05;return}
+  while(RAIDM.next<A.currentTime+.12){const t=RAIDM.next,st=RAIDM.step,bar=Math.floor(st/16),b16=st%16,[sec,sb,sl]=rmSection(bar),ch=Math.floor(sb/2)%4,C=RM_CH[ch];
+    if(base>0){
+      const full=sec==='drop'||sec==='drop2',beat=full||sec==='build'||sec==='outro';
+      // batterie (variations : roulement en fin de montée, pas de kick pendant l'orage)
+      if(beat&&b16%4===0)rmKick(t,sec==='build'?.8:1);if(sec==='intro'&&b16%8===0)rmKick(t,.55);
+      if(sec==='build'&&sb>=6&&b16%2===0)rmNoise(t,.08,.25+.05*b16/16,'bandpass',1800);
+      if(full&&(b16===4||b16===12))rmNoise(t,.18,.4,'bandpass',1900);
+      if(sec!=='storm'&&b16%2===0)rmNoise(t,.04,sec==='intro'?.16:.14,'highpass',7500);
+      if(full&&b16%4===2)rmNoise(t,.12,.1,'highpass',5000);
+      // basse et accords
+      if(beat&&b16%2===0)rmNote(t,mtof(RM_BASS[ch]+(b16%8===6?12:0)),RM_16*1.8,'sawtooth',full?.26:.18,full?700:450);
+      if(b16===0)C.forEach(m=>rmNote(t,mtof(m),RM_16*15,'triangle',sec==='storm'?.09:sec==='intro'?.12:.06,1500));if(sec==='intro'&&b16%4===2)rmNote(t,mtof(C[RM_ARP[(b16/2)%8|0]]+12),RM_16*1.5,'triangle',.07,1800);
+      if(full||sec==='build')rmNote(t,mtof(C[RM_ARP[b16%8]]+12),RM_16*.9,'square',.05,full?2600:1600);
+      if(full&&sb>=8){const L=RM_LEAD[st%32];if(L)rmNote(t,mtof(L),RM_16*1.7,'sawtooth',.07,2800)}
+      // pause : pluie et orage
+      if(sec==='storm'){if(b16===0&&sb===0)rmNoise(t,RM_16*16*8,.22,'bandpass',3500,1.5);if(b16===0&&(sb===2||sb===6))rmThunder(t);if(sb===7&&b16>=8&&b16%2===0)rmKick(t,.5+b16/32)}
+      // voix : une phrase toutes les 2 mesures dans les refrains et l'orage
+      if(RAIDM.vox&&sec==='drop'&&sb===0&&b16===0){const c=RM_CLIPS[1],src=actx.createBufferSource(),g=actx.createGain();src.buffer=RAIDM.vox;g.gain.value=.75;src.connect(g);g.connect(RAIDM.vbus);src.start(t,c[0],c[1])}
+    }
+    RAIDM.next+=RM_16;RAIDM.step++}}
+function raidMusicToggle(){RAIDM.on=!RAIDM.on;try{localStorage.setItem('raidMusic',RAIDM.on?'1':'0')}catch(_){}const b=document.getElementById('musicBtn');if(b)b.textContent='Musique : '+(RAIDM.on?'oui':'non')}
+if(RAID){const pm=document.getElementById('pauseMain');if(pm){const b=document.createElement('button');b.className='btn alt';b.id='musicBtn';b.style.cssText='margin-top:12px;font-size:18px;padding:10px 18px';b.textContent='Musique : '+(RAIDM.on?'oui':'non');b.addEventListener('click',raidMusicToggle);pm.appendChild(b)}
+  addEventListener('keydown',e=>{if(e.code==='KeyN'&&mode==='race'){raidMusicToggle();players.forEach(p=>showMsg(p,'Musique : '+(RAIDM.on?'oui':'non'),1))}})}
+// ---------- boucle, fin et podium ----------
+function raidReset(){(RAID.mines||[]).forEach(m=>scene.remove(m.g));(RAID.mis||[]).forEach(m=>scene.remove(m.m));RAID.mines=[];RAID.mis=[];RAID.over=false;RAID.rank=[0,0,0,0];raidStageCfg(0);if(!RAID.raft){raidBuildLake();raidBuildBalloons()}raidBotsReset()}
+function raidTick(dt){if(!RAID||mode==='menu'||mode==='loading')return;
+  if(RAID.balloons)RAID.balloons.forEach((b,k)=>b.pair.forEach((g,i)=>{if(g.dead)return;g.position.y=b.y-44+Math.sin(time*.35+k*1.7+i)*5;g.rotation.y=time*.05*(i?1:-1)}));raidFx(dt);
+  players.forEach(p=>{const hi=p.raidStage===2&&!p.route;if(p.hud.el.classList.contains('msghi')!==hi)p.hud.el.classList.toggle('msghi',hi)});
+  if(mode==='race')RAID.bots.forEach(b=>raidBotTick(b,dt));else RAID.bots.forEach(b=>raidBotDraw(b,dt));
+  raidWeapons(dt);if(mode==='race'&&actx&&!RAIDM.timer)raidMusicStart();
+  players.forEach(p=>{if(p.raidStage==null)raidStart(p);const S=RAID.S[p.raidStage];
+    if(p.finished&&S.key==='boat'&&mode==='race')raidBoatFinish(p);
+    if(S.key==='boat'&&mode==='race')raidTow(p,dt);
+    if(p.finished&&S.key!=='boat'&&mode==='race'){const sc=p.score;raidStageDone(p,p.raidStage);p.raidBonus=p.score-sc;raidNext(p)}
+    if(p.hud.clock.textContent)p.hud.clock.textContent=''})}
+function raidRanking(){const on=typeof NET!=='undefined'&&NET.on;const L=players.map(p=>({name:numPlayers>1?'Joueur '+(p.id+1):'Toi',col:on?netCol(NET.slot).col:STYLES[p.id].col,score:p.score,me:true})).concat(on?NET.roster.filter(r=>r.slot!==NET.slot).map(r=>{const f=NET.fin[r.slot],G=NET.ghosts[r.slot];return {name:r.name+(f?'':' (en course)'),col:netCol(r.slot).col,score:f?f.score:(G?G.score:0)}}):[],RAID.bots.map(b=>{
+    // les PNJ pas encore arrivés terminent leurs étapes (score estimé, sans bonus de classement)
+    let sc=b.score;if(!b.done){const R=b.R;for(let s=b.stage+(b.ph==='next'?1:0);s<4;s++)sc+=s===0?500:s===1?600:s===2?1600:600+Math.round(R()*100)}return {name:b.name,col:b.col,score:sc}}));
+  return L.sort((a,b)=>b.score-a.score)}
+function raidEnd(){if(RAID.over)return;RAID.over=true;setTimeout(raidMusicStop,6500);mode='done';clearFlight();const L=raidRanking();RAID.final=L;
+  const host=document.body,d=document.createElement('div');d.className='jojo';const st=[L[1],L[0],L[2]];const H=[118,160,92],M=['🥈','🥇','🥉'];
+  d.innerHTML=`<div class="card" style="max-width:640px"><div style="background:linear-gradient(180deg,#5fb2ea,#d9f0fb);padding:22px 16px 0;display:flex;justify-content:center;align-items:flex-end;gap:10px">${st.map((r,i)=>r?`<div style="text-align:center;flex:1;max-width:170px"><div style="font:900 clamp(20px,4vw,30px) var(--display);color:#10233a">${M[i]} ${netEsc(r.name)}</div><div style="font:700 17px var(--num);color:#10233a;margin-bottom:6px">${r.score.toLocaleString('fr-FR')} pts</div><div style="height:${H[i]}px;background:${r.col};border-radius:10px 10px 0 0;display:grid;place-items:center;font:900 48px var(--display);color:#fff;box-shadow:inset 0 -10px 0 rgba(0,0,0,.15)">${i===1?1:i===0?2:3}</div></div>`:'').join('')}</div>
+    <div class="cap"><b>Aravis X Raid terminé !</b><span>${L.slice(3).map((r,i)=>(i+4)+'. '+netEsc(r.name)+' · '+r.score.toLocaleString('fr-FR')+' pts').join(' · ')||'Podium sur la plage de Doussard'}</span></div></div>`;
+  host.appendChild(d);requestAnimationFrame(()=>d.classList.add('on'));setTimeout(()=>{d.classList.remove('on');setTimeout(()=>d.remove(),600);showResults()},7000)}
+// ===RAID-END===
 // ================= Mode VR (WebXR, Meta Quest) : à la place du pilote =================
 const XR={on:false,ok:false,session:null,rig:null,cam:null,panel:null,ctx:null,tex:null,msg:'',msgT:0,lastTxt:''};
 if(LV.vr){
@@ -2108,11 +2517,12 @@ function frame(now){if(paused){last=now;if(!XR.on)requestAnimationFrame(frame);r
   if(DAY&&running){if(dayH>=DAY.end-.5&&!W.warnNight){W.warnNight=1;players.forEach(p=>showMsg(p,'Le jour baisse<small>Il te reste 30 min avant la nuit : pense à rentrer</small>',3))}
     if(dayH>=DAY.end){players.forEach(p=>{if(!p.finished&&!p.dnf){p.dnf=true;p.night=true;showMsg(p,'La nuit tombe<small>Vol terminé</small>',99)}});checkEnd()}}
   if(running&&Date.now()-(W.lastSave||0)>1000){W.lastSave=Date.now();saveFlight()}
-  updateClouds(dts);updateThermals(simT);updateBirds(simT,time);updateDebris(dt);updateSkiers(dt);if(LV.ski){skiPuffs(dt);skiManches(dt)}
+  updateClouds(dts);updateThermals(simT);updateBirds(simT,time);updateDebris(dt);updateSkiers(dt);if(LV.ski||LV.raid)skiPuffs(dt);if(LV.ski)skiManches(dt)
   if(mode==='intro'){cdT-=dt;cd.hidden=false;cd.style.fontSize='';cd.textContent=Math.max(1,Math.ceil(cdT))}
-  if(mode==='countdown'){cdT-=dt;cd.hidden=false;const n=Math.ceil((cdT-.2)/.334);cd.textContent=n>0?n:'Décollage !';cd.style.fontSize=n>0?'':'min(14vw,120px)';if(cdT<=0){mode='race';cd.hidden=true;cd.style.fontSize=''}}
+  if(mode==='countdown'&&LV.raid){cdT-=dt;cd.hidden=false;const n=Math.ceil(cdT-.9);if(!cd.querySelector('.rcd'))cd.innerHTML='<div class="rcd"><img src="assets/logo.png" alt=""><b>ARAVIS X RAID</b><span></span></div>';const sp=cd.querySelector('.rcd span'),tx=n>0?String(n):'GO !';if(sp.textContent!==tx)sp.textContent=tx;if(cdT<=0){mode='race';cd.hidden=true;cd.innerHTML=''}}
+  else if(mode==='countdown'){cdT-=dt;cd.hidden=false;const n=Math.ceil((cdT-.2)/.334);cd.textContent=n>0?n:'Décollage !';cd.style.fontSize=n>0?'':'min(14vw,120px)';if(cdT<=0){mode='race';cd.hidden=true;cd.style.fontSize=''}}
   if(snowPts&&snowPts.visible){const a=snowPts.geometry.attributes.position.array;for(let i=1;i<a.length;i+=3){a[i]-=dt*4;if(a[i]<-80)a[i]+=160}snowPts.geometry.attributes.position.needsUpdate=true}
-  frameN++;players.forEach(p=>{updatePlayer(p,dt);updateCamera(p,dt);if(frameN%3===0)updateHud(p);frontBird(p)});netTick(dt);
+  frameN++;players.forEach(p=>{updatePlayer(p,dt);updateCamera(p,dt);if(frameN%3===0)updateHud(p);frontBird(p)});if(LV.raid)raidTick(dt);netTick(dt);
   if(gbLabel){const near=players.some(p=>Math.hypot(p.pos.x-gbLabel.position.x,p.pos.z-gbLabel.position.z)<3000);gbLabel.visible=false}
   if(merleLabel){merleLabel.visible=mode!=='menu'&&players.some(p=>p.pos.y<2200&&p.next===0&&Math.hypot(p.pos.x-merleLabel.position.x,p.pos.z-merleLabel.position.z)<2500)}
   varioSound(dt);
@@ -2131,16 +2541,18 @@ function frame(now){if(paused){last=now;if(!XR.on)requestAnimationFrame(frame);r
 function loadTex(url){return new Promise((res,rej)=>new THREE.TextureLoader().load(url,t=>{t.anisotropy=renderer.capabilities.getMaxAnisotropy();res(t)},undefined,rej))}
 async function boot(){
   try{
-    const [json,tNear,tMid]=await Promise.all([fetch(LV.json).then(r=>{if(!r.ok)throw new Error('monde');return r.json()}),loadTex(LV.texNear),LV.texMid?loadTex(LV.texMid):Promise.resolve(null)]);
+    const [json,tNear,tMid,json2]=await Promise.all([fetch(LV.json).then(r=>{if(!r.ok)throw new Error('monde');return r.json()}),loadTex(LV.texNear),LV.texMid?loadTex(LV.texMid):Promise.resolve(null),LV.json2?fetch(LV.json2).then(r=>{if(!r.ok)throw new Error('monde2');return r.json()}):Promise.resolve(null)]);
     W.near=Object.assign({},json.near,{hh:decodeU16(json.near.h)});W.mid=json.mid?Object.assign({},json.mid,{hh:decodeU16(json.mid.h)}):null;W.far=Object.assign({},json.far,{hh:decodeU16(json.far.h)});
-    const dam=json.dam||1,sc16=a=>{const f=new Float32Array(a.length);for(let i=0;i<a.length;i++)f[i]=a[i]*dam;return f};W.trees=sc16(decodeI16(json.trees));W.chalets=sc16(decodeI16(json.chalets));W.thermals=json.thermals;
+    const dam=json.dam||1,sc16=(a,d)=>{const f=new Float32Array(a.length);for(let i=0;i<a.length;i++)f[i]=a[i]*(d||dam);return f};W.trees=sc16(decodeI16(json.trees));W.chalets=sc16(decodeI16(json.chalets));W.thermals=json.thermals;
+    if(json2){const d2=json2.dam||1,cat=(a,b)=>{const f=new Float32Array(a.length+b.length);f.set(a);f.set(b,a.length);return f};W.mid=Object.assign({},json2.near,{hh:decodeU16(json2.near.h)});W.far=Object.assign({},json2.far,{hh:decodeU16(json2.far.h)});
+      W.trees=cat(W.trees,sc16(decodeI16(json2.trees),d2));W.chalets=cat(W.chalets,sc16(decodeI16(json2.chalets),d2));W.thermals=(json.thermals||[]).concat(json2.thermals||[])}
     tNear.minFilter=THREE.LinearMipmapLinearFilter;
     buildGrid(W.near,{map:tNear,bright:1.05});
     if(W.mid)buildGrid(W.mid,{map:tMid,cut:rectOf(W.near),bright:1.05});
     buildGrid(W.far,{vcol:true,cut:rectOf(W.mid||W.near),curve:true});
-    mm.height=Math.round(mm.width*(W.near.N1-W.near.N0)/(W.near.E1-W.near.E0));
-    buildThermals();buildRidges();buildProps();buildGates();buildLanding();if(LV.ski)buildSki();buildDecal();buildBeaches();buildHearts();buildBirds();makeClouds(7);
-    {const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=mm.width;c.height=mm.height;c.getContext('2d').drawImage(im,0,0,c.width,c.height);mmImg=c};im.src=LV.texNear}
+    {const G=LV.raid?W.mid:W.near;mm.height=Math.round(mm.width*(G.N1-G.N0)/(G.E1-G.E0))}
+    buildThermals();buildRidges();buildProps();buildGates();buildLanding();if(LV.ski||LV.raid)buildSki();buildDecal();buildBeaches();buildHearts();buildBirds();makeClouds(7);
+    {const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=mm.width;c.height=mm.height;c.getContext('2d').drawImage(im,0,0,c.width,c.height);mmImg=c};im.src=LV.raid?LV.texMid:LV.texNear}
     document.getElementById('menu').style.setProperty('--bgimg',"url('assets/menu.jpg')");
     document.getElementById('lvEyebrow').textContent=LV.eyebrow;document.getElementById('lvTitle').innerHTML=LV.title;document.getElementById('lvLede').textContent=LV.lede;document.getElementById('lvNote').textContent=LV.note;
     document.getElementById('lvCourse').innerHTML=LV.course.map(c=>`<li class="${c[0]}"><span class="n">${c[1]}</span><div><b>${c[2]}</b><span>${c[3]}</span></div><em>${c[4]}</em></li>`).join('');
@@ -2148,7 +2560,7 @@ async function boot(){
     setTimeout(()=>{document.getElementById('loading').hidden=true},Math.max(0,3000-(Date.now()-(window.__T0||0))));testPanel();mode='menu';menu.hidden=!!LV.gate;if(LV.gate)openGate();renderBest();
     {const sv=loadFlight();let gOk=!LV.gate;try{gOk=gOk||sessionStorage.getItem('acroGate')===LV.gate}catch(e){}if(sv&&gOk){menu.hidden=true;document.getElementById('gate').hidden=true;setTimeout(()=>resumeFlight(sv),50)}}layout();requestAnimationFrame(frame);
     if(ACRO&&/acro/.test(location.hash+location.search)){startRace(1);const w=setInterval(()=>{if(mode==='race'&&players[0]){clearInterval(w);goAcro(players[0],'Arrivée par le raccourci secret')}},200)}
-    window.__t={groundY,players,CP,THERM,W,HEARTS,renderer,scene,upd:updatePlayer,get mode(){return mode},startRace,get simT(){return simT},KEYS,get time(){return time},set time(v){time=v},showResults,SKI};
+    window.__t={groundY,players,CP,THERM,W,HEARTS,renderer,scene,upd:updatePlayer,get mode(){return mode},startRace,get simT(){return simT},KEYS,get time(){return time},set time(v){time=v},showResults,SKI,get RAID(){return RAID},raidTick:dt=>raidTick(dt),raidNext:p=>raidNext(p),get mode2(){return mode},set mode(v){mode=v}};
   }catch(err){document.getElementById('loading').innerHTML='<div><b>Oups</b>Le relief n\'a pas pu se charger. Recharge la page.</div>';console.error(err)}}
 const fontsReady=document.fonts&&document.fonts.load?Promise.all([document.fonts.load('900 40px "Big Shoulders Display"'),document.fonts.load('700 40px "Barlow Condensed"')]):Promise.resolve();
 Promise.race([fontsReady,new Promise(r=>setTimeout(r,1500))]).then(boot,boot);

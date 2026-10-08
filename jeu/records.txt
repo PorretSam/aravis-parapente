@@ -1,6 +1,6 @@
 # Records du jeu de parapente Aravis Parapente
 # Pour ajouter un score : colle ici, sur une nouvelle ligne, le texte reçu dans la notification ntfy.
-# Format : date | niveau | points | prénom
+# Format : date | niveau | points | prénom | version (v1.2 = mise à jour du 08/10/2026 ; sans version = v1.1 ou avant)
 # Les lignes qui commencent par # sont ignorées. La page affiche les 10 meilleurs de chaque niveau.
 # « Vol acro ancienne version » = scores faits avant la nouvelle acro du 05/10 (affichés à part).
 2026-10-03 | Premier vol | 957 | Sam
