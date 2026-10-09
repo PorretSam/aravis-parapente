@@ -82,3 +82,28 @@ Fri Oct 09 13:45:26 GMT+02:00 2026
 Fri Oct 09 13:45:26 GMT+02:00 2026
 2026-10-09 | Vol L'Aiglon | 3675 | Gab | v1.2
 Fri Oct 09 13:50:30 GMT+02:00 2026
+2026-10-09 | Tour de La Clusaz | 1420 | Anonyme | v1.2
+Fri Oct 09 14:45:59 GMT+02:00 2026
+2026-10-09 | Tour de La Clusaz | 1420 | Anonyme | v1.2
+2026-10-09 | Premier vol | 847 | Anonyme | v1.2
+Fri Oct 09 14:58:13 GMT+02:00 2026
+2026-10-09 | Premier vol | 922 | Anonyme | v1.2
+Fri Oct 09 15:48:56 GMT+02:00 2026
+2026-10-09 | Vol L'Aiglon | 3202 | Anonyme | v1.2
+Fri Oct 09 15:54:29 GMT+02:00 2026
+2026-10-09 | Vol acro | 1931 | Anonyme | v1.2
+Fri Oct 09 15:55:43 GMT+02:00 2026
+2026-10-09 | Vol acro | 2013 | Anonyme | v1.2
+Fri Oct 09 15:59:19 GMT+02:00 2026
+2026-10-09 | Vol acro | 1054 | Anonyme | v1.2
+Fri Oct 09 15:59:37 GMT+02:00 2026
+2026-10-09 | Premier vol | 950 | Lilian | v1.2
+Fri Oct 09 16:17:41 GMT+02:00 2026
+2026-10-09 | Tour de La Clusaz | 1650 | Anonyme | v1.2
+Fri Oct 09 16:40:12 GMT+02:00 2026
+2026-10-09 | Grand Tour des Aravis | 2863 | Lilian | v1.2
+Fri Oct 09 17:05:48 GMT+02:00 2026
+2026-10-09 | Vol acro | 5110 | Lilian | v1.2
+Fri Oct 09 17:11:24 GMT+02:00 2026
+2026-10-09 | Aravis X Raid | 5700 | Alann | v1.2
+Fri Oct 09 17:54:17 GMT+02:00 2026
