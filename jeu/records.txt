@@ -107,3 +107,9 @@ Fri Oct 09 17:11:24 GMT+02:00 2026
 Fri Oct 09 17:54:17 GMT+02:00 2026
 2026-10-09 | Vol acro | 14405 | Malo-kéo | v1.2
 Fri Oct 09 21:37:26 GMT+02:00 2026
+2026-10-09 | Tour de La Clusaz | 1480 | Dav | v1.2
+Fri Oct 09 22:02:51 GMT+02:00 2026
+2026-10-09 | Tour de La Clusaz | 1480 | Dav | v1.2
+Fri Oct 09 22:02:51 GMT+02:00 2026
+2026-10-09 | Vol L'Aiglon | 2400 | Anonyme | v1.2
+Fri Oct 09 22:06:11 GMT+02:00 2026
