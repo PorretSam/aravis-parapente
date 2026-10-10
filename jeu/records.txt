@@ -126,3 +126,7 @@ Sat Oct 10 16:33:01 GMT+02:00 2026
 2026-10-10 | Aravis X Raid | 8590 | Gab | v1.2
 Sat Oct 10 18:31:42 GMT+02:00 2026
 2026-10-10 | Aravis X Raid | 9425 | Sam | v1.2
+2026-10-10 | Tour de La Clusaz | 1400 | GoeG | v1.2
+Sat Oct 10 21:13:29 GMT+02:00 2026
+2026-10-10 | Tour de La Clusaz | 1410 | GoeG | v1.2
+Sat Oct 10 20:05:01 GMT+02:00 2026
