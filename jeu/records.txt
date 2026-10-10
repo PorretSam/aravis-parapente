@@ -119,3 +119,5 @@ Sat Oct 10 11:57:51 GMT+02:00 2026
 Sat Oct 10 14:42:49 GMT+02:00 2026
 2026-10-10 | Premier vol | 913 | GoeG | v1.2
 Sat Oct 10 15:01:36 GMT+02:00 2026
+2026-10-10 | Grand Tour des Aravis | 1600 | Anonyme | v1.2
+Sat Oct 10 16:33:01 GMT+02:00 2026
