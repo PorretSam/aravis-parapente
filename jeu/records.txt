@@ -130,3 +130,5 @@ Sat Oct 10 18:31:42 GMT+02:00 2026
 Sat Oct 10 21:13:29 GMT+02:00 2026
 2026-10-10 | Tour de La Clusaz | 1410 | GoeG | v1.2
 Sat Oct 10 20:05:01 GMT+02:00 2026
+2026-10-12 | Premier vol | 833 | Crocro | v1.2
+Mon Oct 12 11:23:25 GMT+02:00 2026
